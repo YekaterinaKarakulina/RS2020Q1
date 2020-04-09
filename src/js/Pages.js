@@ -23,7 +23,7 @@ export default class Pages {
     const navBar = document.createElement('div');
     navBar.classList.add('navigation');
     const hamburger = new Hamburger('hamburger');
-    navBar.innerHTML = hamburger.generateHamburgerContent();
+    navBar.innerHTML = hamburger.generateHamburgerElement() + hamburger.generateHamburgerContent();
 
 
     const modeSwitch = document.createElement('div');
