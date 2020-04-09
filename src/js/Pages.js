@@ -1,4 +1,5 @@
 import Hamburger from './Hamburger';
+import Button from './Buttons';
 
 export default class Pages {
   constructor(id, mode, errorsAmount) {
@@ -27,6 +28,8 @@ export default class Pages {
 
     const modeSwitch = document.createElement('div');
     modeSwitch.classList.add('modeSwitch');
+    const switchElement = new Button('switch');
+    modeSwitch.innerHTML = switchElement.generateButtonObject();
     if (this.mode === 'train') {
       modeSwitch.classList.add('train');
     } else if (this.mode === 'play') {
