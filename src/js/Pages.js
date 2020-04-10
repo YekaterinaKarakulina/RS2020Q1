@@ -2,6 +2,7 @@ import Hamburger from './Hamburger';
 import Button from './Buttons';
 import cardsActionA from './cardsData/cardsActionA';
 import Cards from './Cards';
+import cardsMainPage from './cardsData/cardsMainPage';
 
 export default class Pages {
   constructor(id, mode, errorsAmount) {
@@ -42,7 +43,8 @@ export default class Pages {
       cardsWrapper.append((new Cards('sectionCards').generateSectionCards(cardsActionA)));
     } else if (this.id === 'category') {
       console.log('generateCategoryCards');
-      //
+      cardsWrapper.append((new Cards('categoryCards').generateCategoryCards(cardsMainPage)));
+  
     }
 
     header.append(modeSwitch);

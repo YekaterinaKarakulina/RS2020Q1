@@ -1,4 +1,4 @@
 import Pages from './js/Pages';
 
-const page = new Pages('main', 'train', 1);
+const page = new Pages('category', 'train', 1);
 page.generatePage();

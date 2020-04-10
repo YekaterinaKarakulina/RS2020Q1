@@ -16,8 +16,16 @@ export default class Cards {
         // add mode check
     }
 
-    generateCategoryCards() {
+    generateCategoryCards(cardsArray) {
+        let cardsContainer = document.createElement('div');
+        cardsContainer.className = this.className;
+        for(let i=0; i<cardsArray.length; i++) {
+            cardsContainer.append((new Card(cardsArray[i])).generateCard());
+        }
+        console.log(cardsContainer);
+        return cardsContainer;
         // todo generateCard
         // add mode checkk
       }
+      
 }
