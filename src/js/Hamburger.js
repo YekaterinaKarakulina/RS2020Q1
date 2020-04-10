@@ -4,7 +4,7 @@ export default class Hamburger {
     }
 
     generateHamburgerElement() {
-        const element = '<span class="header__hamburger hamburger"><span class="hamburger__line"></span></span>';
+        const element = '<span class="hamburger"><span class="hamburger-line"></span></span>';
         return element;
     }
 

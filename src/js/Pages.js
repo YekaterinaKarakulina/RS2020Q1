@@ -19,12 +19,8 @@ export default class Pages {
     const main = document.createElement('main');
     main.classList.add('main');
 
-
-    const navBar = document.createElement('div');
-    navBar.classList.add('navigation');
     const hamburger = new Hamburger('hamburger');
-    navBar.innerHTML = hamburger.generateHamburgerElement() + hamburger.generateHamburgerContent();
-
+    header.innerHTML = hamburger.generateHamburgerContent() + hamburger.generateHamburgerElement();
 
     const modeSwitch = document.createElement('div');
     modeSwitch.classList.add('modeSwitch');
@@ -45,8 +41,6 @@ export default class Pages {
       cardsWrapper.innerHTML = this.generateCategoryCards();
     }
 
-
-    header.append(navBar);
     header.append(modeSwitch);
     mainPage.append(header);
     main.append(cardsWrapper);

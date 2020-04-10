@@ -1,3 +1,119 @@
+.onoffswitch {
+  position: relative;
+  width: 115px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
 
+.onoffswitch-checkbox {
+  display: none;
+}
+
+.onoffswitch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid #666d89;
+  border-radius: 20px;
+}
+
+.onoffswitch-inner {
+  display: block;
+  width: 200%;
+  margin-left: -100%;
+  transition: margin 0.3s ease-in 0s;
+}
+
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+  display: block;
+  float: left;
+  width: 50%;
+  height: 30px;
+  padding: 0;
+  line-height: 30px;
+  font-size: 14px;
+  color: #FFFFFF;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+.onoffswitch-inner:before {
+  content: "TRAIN";
+  padding-left: 10px;
+  background-color: #7B68EE;
+  color: #FFFFFF;
+}
+
+.onoffswitch-inner:after {
+  content: "PLAY";
+  padding-right: 10px;
+  background-color: #FF69B4;
+  color: #FFFFFF;
+  text-align: right;
+}
+
+.onoffswitch-switch {
+  display: block;
+  width: 46px;
+  margin: 2px;
+  background: #FFFFFF;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 61px;
+  border: 2px solid #666d89;
+  border-radius: 20px;
+  transition: all 0.3s ease-in 0s;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+  margin-left: 0;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+  right: 0px;
+}
+
+.modeSwitch {
+  display: inline-block;
+  float: right;
+}
+
+.hamburger-line, .hamburger::after, .hamburger::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  background-color: #666d89;
+  height: 2.4px;
+  width: 100%;
+}
+
+.hamburger {
+  display: inline-block;
+  position: relative;
+  width: 25px;
+  height: 20px;
+  left: 20px;
+  top: 6px;
+}
+.hamburger::before {
+  top: 0px;
+  left: 0;
+}
+.hamburger::after {
+  bottom: 0px;
+  left: 0;
+}
+
+.hamburger-line {
+  top: calc(50% - 1.2px);
+  left: 0;
+}
+
+.hamburger-container.hidden {
+  display: none;
+}
 
 /*# sourceMappingURL=style.css.map */
