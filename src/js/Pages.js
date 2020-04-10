@@ -1,5 +1,7 @@
 import Hamburger from './Hamburger';
 import Button from './Buttons';
+import cardsActionA from './cardsData/cardsActionA';
+import Cards from './Cards';
 
 export default class Pages {
   constructor(id, mode, errorsAmount) {
@@ -36,9 +38,11 @@ export default class Pages {
     cardsWrapper.classList.add('cardsWrapper');
 
     if (this.id === 'main') {
-      cardsWrapper.innerHTML = this.generateSectionCards();
+      console.log('generateSectionCards');
+      cardsWrapper.append((new Cards('sectionCards').generateSectionCards(cardsActionA)));
     } else if (this.id === 'category') {
-      cardsWrapper.innerHTML = this.generateCategoryCards();
+      console.log('generateCategoryCards');
+      //
     }
 
     header.append(modeSwitch);
@@ -48,22 +52,5 @@ export default class Pages {
     document.body.append(mainPage);
 
     return mainPage;
-  }
-
-
-  generateSectionCards() {
-    console.log('generateSectionCards');
-    const template = '<div>generateSectionCards</div>';
-    // todo generateCard
-    // add mode check
-    return template;
-  }
-
-  generateCategoryCards() {
-    console.log('generateCategoryCards');
-    const template = '<div>generateCategoryCards</div>';
-    // todo generateCard
-    // add mode check
-    return template;
   }
 }
