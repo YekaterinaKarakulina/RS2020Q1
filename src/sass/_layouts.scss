@@ -1,14 +1,11 @@
 .wrapper {
     display: block;
-   // height: 500px;
     width: 100%;
     max-width: 1020px;
     margin: 0 calc(50% - 1020px/2);
-  //  background-color: red;
     @include media-laptop {
         margin: 0 auto;
     }
-    
 }
 
 .cardsWrapper {
@@ -20,4 +17,10 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     margin: 0 20px 0 20px;
+}
+
+.wordDescription {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
 }

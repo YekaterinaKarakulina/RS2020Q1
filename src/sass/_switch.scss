@@ -22,12 +22,12 @@
 .onoffswitch-inner:before {
     content: "TRAIN";
     padding-left: 10px;
-    background-color: $color-switch-firstSide; color: $color-light;
+    background-color: $color-switch-trainMode; color: $color-light;
 }
 .onoffswitch-inner:after {
     content: "PLAY";
     padding-right: 10px;
-    background-color: $color-switch-secondSide; color: $color-light;
+    background-color: $color-switch-playMode; color: $color-light;
     text-align: right;
 }
 .onoffswitch-switch {

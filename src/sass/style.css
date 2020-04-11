@@ -1,3 +1,7 @@
+.iconRotate {
+  width: 40px;
+}
+
 .wrapper {
   display: block;
   width: 100%;
@@ -21,6 +25,12 @@
   margin: 0 20px 0 20px;
 }
 
+.wordDescription {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
 .card {
   display: block;
   position: relative;
@@ -29,8 +39,9 @@
   max-height: 210px;
   height: 20%;
   margin: 20px;
-  background-color: red;
+  background-color: #FFFFFF;
   border-radius: 40px;
+  border: 2px solid #7B68EE;
   box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
   cursor: pointer;
   transition: 0.4s;
@@ -58,7 +69,7 @@
 
 .sectionImage {
   background-position: 30% 57%;
-  background-size: 123.5% 102.3%;
+  background-size: 100% 100%;
   border-radius: 50%;
   border: 5px solid white;
   margin: 10px 0;
@@ -74,6 +85,29 @@
   left: 25%;
   margin-top: 40px;
   line-height: 50px;
+}
+
+.cardImage {
+  background-position: 30% 57%;
+  background-size: 100% 100%;
+  border-radius: 10%;
+  margin: 10px 0;
+  width: 150px;
+  height: 110px;
+  margin: 0 auto;
+  position: relative;
+  top: 20px;
+}
+
+.cardWord {
+  position: relative;
+  left: 25%;
+}
+
+.cardIcon {
+  position: relative;
+  right: 10%;
+  top: -10px;
 }
 
 .onoffswitch {
