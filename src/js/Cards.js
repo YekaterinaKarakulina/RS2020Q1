@@ -5,22 +5,23 @@ export default class Cards {
         this.className = className;
     }
 
-    generateSectionCards(cardsArray) {
+    generateCards(cardsArray) {
         let cardsContainer = document.createElement('div');
         cardsContainer.className = this.className;
         for(let i=0; i<cardsArray.length; i++) {
-            cardsContainer.append((new Card(cardsArray[i])).generateCard());
+            cardsContainer.append((new Card(cardsArray[i])).generateSectionCard());
         }
         console.log(cardsContainer);
         return cardsContainer;
         // add mode check
     }
 
-    generateCategoryCards(cardsArray) {
+    
+    generateTrainCards(cardsArray) {
         let cardsContainer = document.createElement('div');
         cardsContainer.className = this.className;
         for(let i=0; i<cardsArray.length; i++) {
-            cardsContainer.append((new Card(cardsArray[i])).generateCard());
+            cardsContainer.append((new Card(cardsArray[i])).generateTrainCard());
         }
         console.log(cardsContainer);
         return cardsContainer;

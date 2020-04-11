@@ -2,11 +2,21 @@ import Cards from './js/Cards';
 import cardsActionA from './js/cardsData/cardsActionA';
 import cardsMainPage from './js/cardsData/cardsMainPage';
 
-//const cardsWrapper = document.querySelector('.cardsWrapper');
+let mode = 'train';
+const cardsWrapper = document.querySelector('.cardsWrapper');
 
-//const cards = (new Cards('categoryCards')).generateSectionCards(cardsActionA);
-//const cards = (new Cards('sectionCards')).generateSectionCards(cardsMainPage)
+//const cards = (new Cards('sectionCards')).generateCards(cardsMainPage);
+if(mode === 'train') {
+  const cards = (new Cards('trainCards')).generateTrainCards(cardsActionA);
+  cardsWrapper.append(cards);
+}
+
 //cardsWrapper.append(cards);
+
+
+
+
+
 
   
 /*
