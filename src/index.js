@@ -1,4 +1,17 @@
-import Pages from './js/Pages';
+import Cards from './js/Cards';
+import cardsActionA from './js/cardsData/cardsActionA';
 
-const page = new Pages('category', 'train', 1);
-page.generatePage();
+const cardsWrapper = document.querySelector('.cardsWrapper');
+
+const cards = (new Cards('sectionCards')).generateSectionCards(cardsActionA);
+cardsWrapper.append(cards);
+
+  //cardsWrapper.append((new Cards('categoryCards').generateCategoryCards(cardsMainPage)));
+
+
+/*
+if (this.mode === 'train') {
+    modeSwitch.classList.add('train');
+  } else if (this.mode === 'play') {
+    modeSwitch.classList.add('play');
+  }*/

@@ -13,18 +13,39 @@ export default class Card {
         card.classList.add('card');
 
         if(this.sectionTitle) {
+            card.classList.add('sectionCard');
             card.classList.add(this.className);
-            card.appendChild(this.createImgBlock());
+            card.append(this.createImgBlock('sectionImage'));
             card.append(this.createSectionTitle());
         }
+        if(this.word) {
+            card.classList.add('trainCard');
+            card.append(this.createImgBlock('trainImage'));
+            const wordDescription = document.createElement('div');
+            wordDescription.className = 'wordDescription';
+            wordDescription.innerHTML = this.word;
+            const rotateElement = document.createElement('div');//add svg
+            rotateElement.className = 'rotateElement';
+            const wordDescriptionContainer = document.createElement('div');
+            wordDescriptionContainer.className = 'wordDescriptionContainer';
+            wordDescriptionContainer.append(wordDescription);
+            wordDescriptionContainer.append(rotateElement);
+            card.append(wordDescriptionContainer);
+        }
+        
+
        
         //card.classList.add(this.word);
         return card;
     }
 
-    createImgBlock() {
+
+
+
+
+    createImgBlock(sectionImage) {
         const imgContainer = document.createElement('div');
-        imgContainer.className = 'sectionImage';
+        imgContainer.className = sectionImage;
         const img = document.createElement('img');
         img.setAttribute('src', this.imageSrc);
         imgContainer.append(img);
@@ -33,6 +54,7 @@ export default class Card {
 
     createSectionTitle() {
         const sectionTitleElem = document.createElement('div');
+        sectionTitleElem.classList.add('sectionTitle');
         sectionTitleElem.classList.add(this.className);
         sectionTitleElem.innerHTML = this.sectionTitle;
         return sectionTitleElem;

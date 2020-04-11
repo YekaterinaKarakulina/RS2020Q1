@@ -24,8 +24,7 @@ export default class Cards {
         }
         console.log(cardsContainer);
         return cardsContainer;
-        // todo generateCard
-        // add mode checkk
+        // add mode check
       }
       
 }
