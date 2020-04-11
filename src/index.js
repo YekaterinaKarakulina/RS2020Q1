@@ -1,14 +1,14 @@
 import Cards from './js/Cards';
 import cardsActionA from './js/cardsData/cardsActionA';
+import cardsMainPage from './js/cardsData/cardsMainPage';
 
 const cardsWrapper = document.querySelector('.cardsWrapper');
 
-const cards = (new Cards('sectionCards')).generateSectionCards(cardsActionA);
+//const cards = (new Cards('categoryCards')).generateSectionCards(cardsActionA);
+const cards = (new Cards('sectionCards')).generateSectionCards(cardsMainPage)
 cardsWrapper.append(cards);
 
-  //cardsWrapper.append((new Cards('categoryCards').generateCategoryCards(cardsMainPage)));
-
-
+  
 /*
 if (this.mode === 'train') {
     modeSwitch.classList.add('train');

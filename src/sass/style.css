@@ -1,3 +1,81 @@
+.wrapper {
+  display: block;
+  width: 100%;
+  max-width: 1020px;
+  margin: 0 calc(50% - 1020px/2);
+}
+@media (max-width: 1020px) {
+  .wrapper {
+    margin: 0 auto;
+  }
+}
+
+.cardsWrapper {
+  margin-top: 100px;
+}
+
+.sectionCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 0 20px 0 20px;
+}
+
+.card {
+  display: block;
+  position: relative;
+  max-width: 210px;
+  width: 20%;
+  max-height: 210px;
+  height: 20%;
+  margin: 20px;
+  background-color: red;
+  border-radius: 40px;
+  box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  transition: 0.4s;
+}
+@media (max-width: 1020px) {
+  .card {
+    margin: 10px;
+    max-height: 180px;
+    width: 18%;
+    height: 18%;
+  }
+}
+@media (max-width: 768px) {
+  .card {
+    margin: 5px;
+    width: 21%;
+    height: 21%;
+  }
+}
+
+.card:hover {
+  transform: scale(0.9, 0.9);
+  box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25), -5px -5px 30px 15px rgba(0, 0, 0, 0.22);
+}
+
+.sectionImage {
+  background-position: 30% 57%;
+  background-size: 123.5% 102.3%;
+  border-radius: 50%;
+  border: 5px solid white;
+  margin: 10px 0;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  position: relative;
+  top: 20px;
+}
+
+.sectionTitle {
+  position: relative;
+  left: 25%;
+  margin-top: 40px;
+  line-height: 50px;
+}
+
 .onoffswitch {
   position: relative;
   width: 115px;
@@ -78,7 +156,10 @@
 
 .modeSwitch {
   display: inline-block;
+  position: relative;
   float: right;
+  top: 12px;
+  right: 30px;
 }
 
 .hamburger-line, .hamburger::after, .hamburger::before {
@@ -93,10 +174,10 @@
 .hamburger {
   display: inline-block;
   position: relative;
-  width: 25px;
+  width: 30px;
   height: 20px;
-  left: 20px;
-  top: 6px;
+  left: 50px;
+  top: 20px;
 }
 .hamburger::before {
   top: 0px;

@@ -20,7 +20,7 @@ export default class Card {
         }
         if(this.word) {
             card.classList.add('trainCard');
-            card.append(this.createImgBlock('trainImage'));
+            card.append(this.createImgBlock('tytyt','trainImage'));
             const wordDescription = document.createElement('div');
             wordDescription.className = 'wordDescription';
             wordDescription.innerHTML = this.word;
@@ -32,24 +32,16 @@ export default class Card {
             wordDescriptionContainer.append(rotateElement);
             card.append(wordDescriptionContainer);
         }
-        
-
        
         //card.classList.add(this.word);
         return card;
     }
 
-
-
-
-
     createImgBlock(sectionImage) {
-        const imgContainer = document.createElement('div');
-        imgContainer.className = sectionImage;
-        const img = document.createElement('img');
-        img.setAttribute('src', this.imageSrc);
-        imgContainer.append(img);
-        return imgContainer;
+        const imageElement = document.createElement('div');
+        imageElement.className = sectionImage;
+        imageElement.setAttribute('style', `background-image: url(${this.imageSrc});`);
+       return imageElement; 
     }
 
     createSectionTitle() {

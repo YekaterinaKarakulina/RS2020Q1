@@ -1,0 +1,23 @@
+.wrapper {
+    display: block;
+   // height: 500px;
+    width: 100%;
+    max-width: 1020px;
+    margin: 0 calc(50% - 1020px/2);
+  //  background-color: red;
+    @include media-laptop {
+        margin: 0 auto;
+    }
+    
+}
+
+.cardsWrapper {
+    margin-top: 100px;  
+}
+
+.sectionCards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 0 20px 0 20px;
+}
