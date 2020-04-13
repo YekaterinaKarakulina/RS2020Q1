@@ -1,26 +1,8 @@
-.wrapper {
-    display: block;
-    width: 100%;
-    max-width: 1020px;
-    margin: 0 calc(50% - 1020px/2);
-    @include media-laptop {
-        margin: 0 auto;
-    }
-}
-
-.cardsWrapper {
-    margin-top: 100px;  
-}
-
-.sectionCards {
+.section-cards,
+.train-cards,
+.play-cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     margin: 0 20px 0 20px;
-}
-
-.wordDescription {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 40px;
 }

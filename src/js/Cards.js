@@ -27,5 +27,16 @@ export default class Cards {
         return cardsContainer;
         // add mode check
       }
+
+      generatePlayCards(cardsArray) {
+        let cardsContainer = document.createElement('div');
+        cardsContainer.className = this.className;
+        for(let i=0; i<cardsArray.length; i++) {
+            cardsContainer.append((new Card(cardsArray[i])).generatePlayCard());
+        }
+        console.log(cardsContainer);
+        return cardsContainer;
+        // add mode check
+      }
       
 }
