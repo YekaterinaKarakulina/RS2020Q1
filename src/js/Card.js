@@ -20,7 +20,7 @@ export default class Card {
         const imageElement = document.createElement('div');
         imageElement.className = className;
         imageElement.setAttribute('style', `background-image: url(${this.imageSrc});`);
-       return imageElement; 
+        return imageElement; 
     }
 
     generateSectionCard() {

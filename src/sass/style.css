@@ -35,9 +35,15 @@
   transition: 0.4s;
 }
 .card.train {
-  border: 2px solid #7B68EE;
+  background-color: #7B68EE;
 }
 .card.play {
+  background-color: #FF69B4;
+}
+.card.train-card {
+  border: 2px solid #7B68EE;
+}
+.card.play-card {
   height: 12rem;
   border: 2px solid #FF69B4;
 }
@@ -53,8 +59,8 @@
   border-radius: 50%;
   border: 5px solid white;
   margin: 10px 0;
-  width: 100px;
-  height: 100px;
+  width: 9rem;
+  height: 9rem;
   margin: 0 auto;
   position: relative;
   top: 20px;
@@ -62,9 +68,8 @@
 
 .section-title {
   position: relative;
-  left: 25%;
-  margin-top: 40px;
-  line-height: 50px;
+  top: 2rem;
+  left: 4rem;
 }
 
 .card-image {
@@ -198,6 +203,7 @@
   height: 20px;
   left: 2rem;
   top: 1.5rem;
+  cursor: pointer;
 }
 .hamburger::before {
   top: 0px;
@@ -213,8 +219,49 @@
   left: 0;
 }
 
+.hamburger-container {
+  position: fixed;
+  width: 30%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+.hamburger-container.train {
+  background-color: #7B68EE;
+}
+.hamburger-container.play {
+  background-color: #FF69B4;
+}
 .hamburger-container.hidden {
   display: none;
+}
+
+.hamburger-menu {
+  position: relative;
+  top: 5rem;
+  left: 5rem;
+  margin: 0 auto;
+}
+.hamburger-menu .navigation li {
+  margin-bottom: 1rem;
+  justify-content: space-between;
+  text-transform: uppercase;
+}
+.hamburger-menu .navigation a {
+  text-decoration: none;
+  color: #323746;
+}
+.hamburger-menu .navigation a.active {
+  text-decoration: underline;
+}
+
+.close-button {
+  position: relative;
+  top: 3rem;
+  left: 45%;
+  width: 2rem;
+  height: 2rem;
 }
 
 /*# sourceMappingURL=style.css.map */
