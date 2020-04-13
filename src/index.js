@@ -3,7 +3,7 @@ import cardsActionA from './js/cardsData/cardsActionA';
 import cardsMainPage from './js/cardsData/cardsMainPage';
 
 localStorage.setItem('page', 'mainPage');
-  localStorage.setItem('mode', 'play');
+localStorage.setItem('mode', 'train');
 
 function hamburgerIconHandler() {
   const HAMBURGER = document.querySelector('.hamburger');
@@ -28,8 +28,21 @@ function pagesHandler() {
   cardsWrapper.append(cards);
   const els = document.querySelectorAll('.section-cards > *');
   els.forEach(e => e.classList.add(mode));
-     
+}
 
+function switchHandler() {
+  const MODESWITCH = document.querySelector('.modeSwitch');
+
+  MODESWITCH.addEventListener('mouseup', (event) => {
+    switch(localStorage.getItem('mode')) {
+      case 'train':
+        localStorage.setItem('mode', 'play');
+        break;
+      case 'play':
+        localStorage.setItem('mode', 'train');
+        break;
+    }
+  });
 }
 
 /*
@@ -44,18 +57,13 @@ if (mode === 'train') {
 }
 */
 
-/*
-if (this.mode === 'train') {
-    modeSwitch.classList.add('train');
-  } else if (this.mode === 'play') {
-    modeSwitch.classList.add('play');
-  } */
 
 
   window.onload = function () {
     hamburgerIconHandler();
     hamburgerCloseButtonHandler();
     pagesHandler();
-
+    switchHandler();
+    
 
   };
