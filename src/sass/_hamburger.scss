@@ -37,11 +37,17 @@
 //hamburger container
 .hamburger-container {
     position: fixed;
-    width: 30%;
+    width: 30rem;
     height: 100vh;
     top: 0;
     left: 0;
     z-index: 10;
+    @include media-tablet {
+        width: 20rem;
+    }
+    @include media-mobile {
+        width: 100vw;
+    }
     &.train {
         background-color: $color-trainMode;
       }
@@ -56,7 +62,7 @@
 .hamburger-menu {
     position: relative;
     top: 5rem;
-    left: 5rem;
+    left: 20%;
     margin: 0 auto;
     .navigation {
         li {

@@ -221,11 +221,21 @@
 
 .hamburger-container {
   position: fixed;
-  width: 30%;
+  width: 30rem;
   height: 100vh;
   top: 0;
   left: 0;
   z-index: 10;
+}
+@media (max-width: 768px) {
+  .hamburger-container {
+    width: 20rem;
+  }
+}
+@media (max-width: 375px) {
+  .hamburger-container {
+    width: 100vw;
+  }
 }
 .hamburger-container.train {
   background-color: #7B68EE;
@@ -240,7 +250,7 @@
 .hamburger-menu {
   position: relative;
   top: 5rem;
-  left: 5rem;
+  left: 20%;
   margin: 0 auto;
 }
 .hamburger-menu .navigation li {
