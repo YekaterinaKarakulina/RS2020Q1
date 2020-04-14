@@ -25,6 +25,16 @@ export default class Card {
     return imageElement;
   }
 
+  createSoundBlock(className) {
+    const soundElement = document.createElement('audio');
+    soundElement.className = className;
+    const sourceElement = document.createElement('source');
+    sourceElement.setAttribute('src', this.audioSrc);
+    sourceElement.setAttribute('type', "audio/mpeg");
+    soundElement.append(sourceElement);
+    return soundElement;
+  }
+
   generateSectionCard() {
     const card = document.createElement('div');
     card.classList.add('card');
@@ -41,6 +51,8 @@ export default class Card {
     card.classList.add('card');
     card.classList.add('train-card');
     card.append(this.createImgBlock('card-image'));
+
+    card.append(this.createSoundBlock('card-sound'));
     const cardWord = document.createElement('div');
     cardWord.className = 'card-word';
     cardWord.innerHTML = this.word;

@@ -80,8 +80,6 @@ function cardsHandler() {
     console.log(event.target);
     let title = '';
     if(event.target.classList.contains('card')) {
-      console.log('yes, contain');
-      console.log(event.target.children);
       for(let i=0; i<event.target.children.length; i++) {
         if(event.target.children[i].classList.contains('section-title')) {
           title = event.target.children[i].innerHTML;
@@ -115,6 +113,11 @@ function cardsHandler() {
       cardsWrapper.append(cards);
 
     }
+    if(event.target.classList.contains('card-image')) {
+  
+          event.target.nextSibling.play();
+          console.log('sound');
+    }
     
   });
 }
@@ -135,9 +138,19 @@ if (mode === 'train') {
   window.onload = function () {
     renderCards(localStorage.getItem('mode'));
     hamburgerIconHandler();
-    hamburgerCloseButtonHandler();
-    switchHandler();
-    cardsHandler();
-    
+   hamburgerCloseButtonHandler();
+   switchHandler();
+   cardsHandler();
+  
+  
+  
+  /* document.querySelector('.cards-wrapper').addEventListener('click', (event) => {
+
+    var x = document.getElementById("myAudio");
+    console.log('playaud');
+    x.play();
+   });
+*/
+  
 
   };
