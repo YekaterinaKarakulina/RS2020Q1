@@ -35,7 +35,7 @@ const cardsMainPage = [
     imageSrc: './src/assets/images/cardsMainPage/blouse.jpg',
   },
   {
-    sectionTitle: 'Emotion',
+    sectionTitle: 'Emotions',
     className: 'emotion',
     imageSrc: './src/assets/images/cardsMainPage/smile.jpg',
   },
