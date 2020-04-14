@@ -2,17 +2,30 @@ import Cards from './js/Cards';
 import cardsActionA from './js/cardsData/cardsActionA';
 import cardsMainPage from './js/cardsData/cardsMainPage';
 
+//local storage - page, mode items init
 localStorage.setItem('page', 'mainPage');
 localStorage.setItem('mode', 'train');
 
+//hamburgerIconHandler
 function hamburgerIconHandler() {
   const HAMBURGER = document.querySelector('.hamburger');
   HAMBURGER.addEventListener('click', (event) => {
     document.querySelector('.hamburger-container').classList.remove('hidden');
-    document.querySelector('.hamburger-container').classList.add(localStorage.getItem('mode'));
+    let hamburgerContainer = document.querySelector('.hamburger-container');
+    hamburgerContainer.classList.add(localStorage.getItem('mode'));
+    
+    switch(localStorage.getItem('mode')) {
+      case 'train':
+        hamburgerContainer.classList.replace('play', 'train');
+        break;
+      case 'play':
+        hamburgerContainer.classList.replace('train', 'play');
+        break;
+    }
   });
 }
 
+//hamburgerCloseButtonHandler
 function hamburgerCloseButtonHandler() {
   const CLOSEBUTTON = document.querySelector('.close-button');
   CLOSEBUTTON.addEventListener('click', (event) => {
@@ -21,27 +34,36 @@ function hamburgerCloseButtonHandler() {
   });
 }
 
-function pagesHandler() {
-  let mode = localStorage.getItem('mode');
+//renderCards
+function renderCards(mode) {
   const cardsWrapper = document.querySelector('.cards-wrapper');
   const cards = (new Cards('section-cards')).generateCards(cardsMainPage);
   cardsWrapper.append(cards);
-  const els = document.querySelectorAll('.section-cards > *');
+  let els = document.querySelectorAll('.section-cards > *');
   els.forEach(e => e.classList.add(mode));
+  switch(localStorage.getItem('mode')) {
+    case 'train':
+      els.forEach(e => e.classList.replace('play', 'train'));
+      break;
+    case 'play':
+      els.forEach(e => e.classList.replace('train', 'play'));
+      break;
+  }
 }
 
 function switchHandler() {
   const MODESWITCH = document.querySelector('.modeSwitch');
-
   MODESWITCH.addEventListener('mouseup', (event) => {
-    switch(localStorage.getItem('mode')) {
-      case 'train':
-        localStorage.setItem('mode', 'play');
-        break;
-      case 'play':
-        localStorage.setItem('mode', 'train');
-        break;
-    }
+  switch(localStorage.getItem('mode')) {
+    case 'train':
+      localStorage.setItem('mode', 'play');
+      break;
+    case 'play':
+      localStorage.setItem('mode', 'train');
+      break;
+  }
+  console.log('mode ' + localStorage.getItem('mode'));
+  renderCards(localStorage.getItem('mode'));
   });
 }
 
@@ -60,10 +82,11 @@ if (mode === 'train') {
 
 
   window.onload = function () {
+    renderCards(localStorage.getItem('mode'));
     hamburgerIconHandler();
     hamburgerCloseButtonHandler();
-    pagesHandler();
     switchHandler();
+
     
 
   };
