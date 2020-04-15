@@ -149,29 +149,33 @@ function changeTrainPlayCardsMode() {
   }
 }
 
+function getSectionTitle(elem) {
+  let title;
+  for(let i=0; i<elem.children.length; i++) {
+    if(elem.children[i].classList.contains('section-title')) {
+      title = elem.children[i].innerHTML;
+    }
+  }
+  return title;
+}
 
 function cardsHandler() {
   document.querySelector('.cards-wrapper').addEventListener('click', (event) => {
-    let title = '';
-    //console.log('localStorage.getItem(page) ' + localStorage.getItem('page'));
     if(localStorage.getItem('page') === 'main') {
-      localStorage.setItem('page' , 'category');
-      if(event.target.classList.contains('card')) { 
-        for(let i=0; i<event.target.children.length; i++) {
-          if(event.target.children[i].classList.contains('section-title')) {
-            title = event.target.children[i].innerHTML;
-          }
-        }
-      } else if(event.target.parentNode.classList.contains('card')) { 
-        for(let i=0; i<event.target.parentNode.children.length; i++) {
-          if(event.target.parentNode.children[i].classList.contains('section-title')) {
-            title = event.target.parentNode.children[i].innerHTML;
-          }
-        }
+      let clickedElem;
+      if(event.target.classList.contains('card')) {
+        clickedElem = event.target; 
+      } else if(event.target.parentNode.classList.contains('card')) {
+        clickedElem = event.target.parentNode;
       }
-      console.log('title ' + title);
-      localStorage.setItem('category', title); 
-      renderCards(localStorage.getItem('mode'), localStorage.getItem('page'), localStorage.getItem('category'));
+      console.log(clickedElem);
+      if(clickedElem != undefined) {
+        let title = getSectionTitle(clickedElem);
+        console.log('title ' + title);
+        localStorage.setItem('page' , 'category');
+        localStorage.setItem('category', title); 
+        renderCards(localStorage.getItem('mode'), localStorage.getItem('page'), localStorage.getItem('category'));
+      }
     } 
     else if(localStorage.getItem('page') === 'category') {
       if(event.target.classList.contains('card-image')) {
