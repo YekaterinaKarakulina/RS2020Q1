@@ -7,6 +7,7 @@ import cardsAnimalB from './js/cardsData/cardsAnimalB';
 import cardsClothes from './js/cardsData/cardsClothes';
 import cardsEmotions from './js/cardsData/cardsEmotions';
 
+
 //local storage - page, mode items init
 
 localStorage.setItem('mode', 'train');
@@ -43,11 +44,10 @@ function hamburgerCloseButtonHandler() {
 
 //renderCards
 function renderCards(mode, page, categoryTitle) {
-  console.log('render cards ' + mode + ' ' + page );
+  console.log('render cards, mode = ' + mode + ' page = ' + page + ' categoryTitle = ' + categoryTitle);
   const cardsWrapper = document.querySelector('.cards-wrapper');
   
   if(page === 'main') {
-    console.log('render main page ');
     const cards = (new Cards('section-cards')).generateCards(cardsMainPage);
     cardsWrapper.innerHTML = '';
     cardsWrapper.append(cards);
@@ -56,66 +56,60 @@ function renderCards(mode, page, categoryTitle) {
   }
 
   else  if(page === 'category') {
-    console.log('render category page ');
     cardsWrapper.innerHTML = '';
     let cards = [];
-
     if(localStorage.getItem('mode') === 'train') {
       switch(categoryTitle) {
         case 'Action (set A)':
             cards = (new Cards('train-cards')).generateTrainCards(cardsActionA);
             break;
-          case 'Action (set B)':
-            cards = (new Cards('train-cards')).generateTrainCards(cardsActionB);
-            break;
-            case 'Action (set B)':
-              cards = (new Cards('train-cards')).generateTrainCards(cardsActionB);
-              break;
-            case 'Animal (set A)':
-              cards = (new Cards('train-cards')).generateTrainCards(cardsAnimalA);
-              break;
-            case 'Animal (set B)':
-              cards = (new Cards('train-cards')).generateTrainCards(cardsAnimalB);
-              break;
-            case 'Clothes':
-              cards = (new Cards('train-cards')).generateTrainCards(cardsClothes);
-              break;
-            case 'Emotions':
-              cards = (new Cards('train-cards')).generateTrainCards(cardsEmotions);
-              break;
+        case 'Action (set B)':
+          cards = (new Cards('train-cards')).generateTrainCards(cardsActionB);
+          break;
+        case 'Action (set B)':
+          cards = (new Cards('train-cards')).generateTrainCards(cardsActionB);
+          break;
+        case 'Animal (set A)':
+          cards = (new Cards('train-cards')).generateTrainCards(cardsAnimalA);
+          break;
+        case 'Animal (set B)':
+          cards = (new Cards('train-cards')).generateTrainCards(cardsAnimalB);
+          break;
+        case 'Clothes':
+          cards = (new Cards('train-cards')).generateTrainCards(cardsClothes);
+          break;
+        case 'Emotions':
+          cards = (new Cards('train-cards')).generateTrainCards(cardsEmotions);
+          break;
       }
 
     } else if(localStorage.getItem('mode') === 'play') {
       switch(categoryTitle) {
         case 'Action (set A)':
-            cards = (new Cards('play-cards')).generatePlayCards(cardsActionA);
-            break;
-          case 'Action (set B)':
-            cards = (new Cards('play-cards')).generatePlayCards(cardsActionB);
-            break;
-            case 'Action (set B)':
-              cards = (new Cards('play-cards')).generatePlayCards(cardsActionB);
-              break;
-            case 'Animal (set A)':
-              cards = (new Cards('play-cards')).generatePlayCards(cardsAnimalA);
-              break;
-            case 'Animal (set B)':
-              cards = (new Cards('play-cards')).generatePlayCards(cardsAnimalB);
-              break;
-            case 'Clothes':
-              cards = (new Cards('play-cards')).generatePlayCards(cardsClothes);
-              break;
-            case 'Emotions':
-              cards = (new Cards('play-cards')).generatePlayCards(cardsEmotions);
-              break;
+          cards = (new Cards('play-cards')).generatePlayCards(cardsActionA);
+          break;
+        case 'Action (set B)':
+          cards = (new Cards('play-cards')).generatePlayCards(cardsActionB);
+          break;
+        case 'Action (set B)':
+          cards = (new Cards('play-cards')).generatePlayCards(cardsActionB);
+          break;
+        case 'Animal (set A)':
+          cards = (new Cards('play-cards')).generatePlayCards(cardsAnimalA);
+          break;
+        case 'Animal (set B)':
+          cards = (new Cards('play-cards')).generatePlayCards(cardsAnimalB);
+          break;
+        case 'Clothes':
+          cards = (new Cards('play-cards')).generatePlayCards(cardsClothes);
+          break;
+        case 'Emotions':
+          cards = (new Cards('play-cards')).generatePlayCards(cardsEmotions);
+          break;
       }
-
     }
-    
     cardsWrapper.append(cards);
-
   }
-
 }
 
 
@@ -158,22 +152,32 @@ function changeTrainPlayCardsMode() {
 
 function cardsHandler() {
   document.querySelector('.cards-wrapper').addEventListener('click', (event) => {
-    console.log(event.target);
-    localStorage.setItem('page' , 'category');
     let title = '';
-    if(event.target.classList.contains('card')) {
-      for(let i=0; i<event.target.children.length; i++) {
-        if(event.target.children[i].classList.contains('section-title')) {
-          title = event.target.children[i].innerHTML;
+    //console.log('localStorage.getItem(page) ' + localStorage.getItem('page'));
+    if(localStorage.getItem('page') === 'main') {
+      localStorage.setItem('page' , 'category');
+      if(event.target.classList.contains('card')) { 
+        for(let i=0; i<event.target.children.length; i++) {
+          if(event.target.children[i].classList.contains('section-title')) {
+            title = event.target.children[i].innerHTML;
+          }
+        }
+      } else if(event.target.parentNode.classList.contains('card')) { 
+        for(let i=0; i<event.target.parentNode.children.length; i++) {
+          if(event.target.parentNode.children[i].classList.contains('section-title')) {
+            title = event.target.parentNode.children[i].innerHTML;
+          }
         }
       }
-      console.log(title);
+      console.log('title ' + title);
       localStorage.setItem('category', title); 
       renderCards(localStorage.getItem('mode'), localStorage.getItem('page'), localStorage.getItem('category'));
-    }
-    if(event.target.classList.contains('card-image')) {
-      event.target.nextSibling.play();
-      console.log('sound');
+    } 
+    else if(localStorage.getItem('page') === 'category') {
+      if(event.target.classList.contains('card-image')) {
+        event.target.nextSibling.play();
+        console.log('sound');
+      }
     }
   });
 }
@@ -192,12 +196,10 @@ function switchHandler() {
       localStorage.setItem('mode', 'train');
       break;
     }
-    console.log('mode ' + localStorage.getItem('mode'));
+    console.log('localStorage.getItem(mode)' + localStorage.getItem('mode'));
     if(localStorage.getItem('page') === 'main') {
-      console.log('switch - main');
       changeSectionCardsMode();
     }  else if(localStorage.getItem('page') === 'category') {
-      console.log('switch - category');
       changeTrainPlayCardsMode();
     }
   });
