@@ -45,8 +45,7 @@ export default class Card {
     return card;
   }
 
-
-  generateTrainCard() {
+  generateTrainPlayCard() {
     const card = document.createElement('div');
     card.classList.add('card');
     card.classList.add('train-card');
@@ -68,14 +67,6 @@ export default class Card {
     wordDescription.append(cardWord);
     wordDescription.append(cardIcon);
     card.append(wordDescription);
-    return card;
-  }
-
-  generatePlayCard() {
-    const card = document.createElement('div');
-    card.classList.add('card');
-    card.classList.add('play-card');
-    card.append(this.createImgBlock('card-image'));
     return card;
   }
 }

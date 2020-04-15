@@ -1,4 +1,5 @@
 import Cards from './js/Cards';
+
 import cardsMainPage from './js/cardsData/cardsMainPage';
 import cardsActionA from './js/cardsData/cardsActionA';
 import cardsActionB from './js/cardsData/cardsActionB';
@@ -7,111 +8,20 @@ import cardsAnimalB from './js/cardsData/cardsAnimalB';
 import cardsClothes from './js/cardsData/cardsClothes';
 import cardsEmotions from './js/cardsData/cardsEmotions';
 
-
 //local storage - page, mode items init
-
 localStorage.setItem('mode', 'train');
 localStorage.setItem('page', 'main');   
 
 
-//hamburgerIconHandler
-function hamburgerIconHandler() {
-  const HAMBURGER = document.querySelector('.hamburger');
-  HAMBURGER.addEventListener('click', (event) => {
-    document.querySelector('.hamburger-container').classList.remove('hidden');
-    let hamburgerContainer = document.querySelector('.hamburger-container');
-    hamburgerContainer.classList.add(localStorage.getItem('mode'));
-    
-    switch(localStorage.getItem('mode')) {
-      case 'train':
-        hamburgerContainer.classList.replace('play', 'train');
-        break;
-      case 'play':
-        hamburgerContainer.classList.replace('train', 'play');
-        break;
+function getSectionTitle(elem) {
+  let title;
+  for(let i=0; i<elem.children.length; i++) {
+    if(elem.children[i].classList.contains('section-title')) {
+      title = elem.children[i].innerHTML;
     }
-  });
-}
-
-//hamburgerCloseButtonHandler
-function hamburgerCloseButtonHandler() {
-  const closeButton = document.querySelector('.close-button');
-  closeButton.addEventListener('click', (event) => {
-    document.querySelector('.hamburger-container').classList.add('hidden');
-    console.log('close');
-  });
-}
-
-//renderCards
-function renderCards(mode, page, categoryTitle) {
-  console.log('render cards, mode = ' + mode + ' page = ' + page + ' categoryTitle = ' + categoryTitle);
-  const cardsWrapper = document.querySelector('.cards-wrapper');
-  
-  if(page === 'main') {
-    const cards = (new Cards('section-cards')).generateCards(cardsMainPage);
-    cardsWrapper.innerHTML = '';
-    cardsWrapper.append(cards);
-    let els = document.querySelectorAll('.section-cards > *');
-    els.forEach(e => e.classList.add(mode));
   }
-
-  else  if(page === 'category') {
-    cardsWrapper.innerHTML = '';
-    let cards = [];
-    if(localStorage.getItem('mode') === 'train') {
-      switch(categoryTitle) {
-        case 'Action (set A)':
-            cards = (new Cards('train-cards')).generateTrainCards(cardsActionA);
-            break;
-        case 'Action (set B)':
-          cards = (new Cards('train-cards')).generateTrainCards(cardsActionB);
-          break;
-        case 'Action (set B)':
-          cards = (new Cards('train-cards')).generateTrainCards(cardsActionB);
-          break;
-        case 'Animal (set A)':
-          cards = (new Cards('train-cards')).generateTrainCards(cardsAnimalA);
-          break;
-        case 'Animal (set B)':
-          cards = (new Cards('train-cards')).generateTrainCards(cardsAnimalB);
-          break;
-        case 'Clothes':
-          cards = (new Cards('train-cards')).generateTrainCards(cardsClothes);
-          break;
-        case 'Emotions':
-          cards = (new Cards('train-cards')).generateTrainCards(cardsEmotions);
-          break;
-      }
-
-    } else if(localStorage.getItem('mode') === 'play') {
-      switch(categoryTitle) {
-        case 'Action (set A)':
-          cards = (new Cards('play-cards')).generatePlayCards(cardsActionA);
-          break;
-        case 'Action (set B)':
-          cards = (new Cards('play-cards')).generatePlayCards(cardsActionB);
-          break;
-        case 'Action (set B)':
-          cards = (new Cards('play-cards')).generatePlayCards(cardsActionB);
-          break;
-        case 'Animal (set A)':
-          cards = (new Cards('play-cards')).generatePlayCards(cardsAnimalA);
-          break;
-        case 'Animal (set B)':
-          cards = (new Cards('play-cards')).generatePlayCards(cardsAnimalB);
-          break;
-        case 'Clothes':
-          cards = (new Cards('play-cards')).generatePlayCards(cardsClothes);
-          break;
-        case 'Emotions':
-          cards = (new Cards('play-cards')).generatePlayCards(cardsEmotions);
-          break;
-      }
-    }
-    cardsWrapper.append(cards);
-  }
+  return title;
 }
-
 
 
 function changeSectionCardsMode() {
@@ -149,15 +59,103 @@ function changeTrainPlayCardsMode() {
   }
 }
 
-function getSectionTitle(elem) {
-  let title;
-  for(let i=0; i<elem.children.length; i++) {
-    if(elem.children[i].classList.contains('section-title')) {
-      title = elem.children[i].innerHTML;
-    }
+//renderCards
+function renderCards(mode, page, categoryTitle) {
+  console.log('render cards, mode = ' + mode + ' page = ' + page + ' categoryTitle = ' + categoryTitle);
+  const cardsWrapper = document.querySelector('.cards-wrapper');
+  
+  if(page === 'main') {
+    const cards = (new Cards('section-cards')).generateCards(cardsMainPage);
+    cardsWrapper.innerHTML = '';
+    cardsWrapper.append(cards);
+    let els = document.querySelectorAll('.section-cards > *');
+    els.forEach(e => e.classList.add(mode));
   }
-  return title;
+
+  else  if(page === 'category') {
+    cardsWrapper.innerHTML = '';
+    let cards = [];
+    let cardsContainerName;
+    
+    
+    if(localStorage.getItem('mode') === 'train') {
+      cardsContainerName = 'train-cards';
+    } else if(localStorage.getItem('mode') === 'play') {
+    cardsContainerName = 'play-cards';
+    }
+    switch(categoryTitle) {
+      case 'action (set a)':
+        cards = (new Cards(cardsContainerName)).generateTrainPlayCards(cardsActionA);
+        break;
+      case 'action (set b)':
+        cards = (new Cards(cardsContainerName)).generateTrainPlayCards(cardsActionB);
+        break;
+      case 'animal (set a)':
+        cards = (new Cards(cardsContainerName)).generateTrainPlayCards(cardsAnimalA);
+        break;
+      case 'animal (set b)':
+        cards = (new Cards(cardsContainerName)).generateTrainPlayCards(cardsAnimalB);
+        break;
+      case 'clothes':
+        cards = (new Cards(cardsContainerName)).generateTrainPlayCards(cardsClothes);
+        break;
+      case 'emotions':
+        cards = (new Cards(cardsContainerName)).generateTrainPlayCards(cardsEmotions);
+        break;
+  }
+    cardsWrapper.append(cards);
+    changeTrainPlayCardsMode();
+  }
 }
+
+
+
+
+
+//hamburgerIconHandler
+function hamburgerIconHandler() {
+  const HAMBURGER = document.querySelector('.hamburger');
+  HAMBURGER.addEventListener('click', (event) => {
+    document.querySelector('.hamburger-container').classList.remove('hidden');
+    let hamburgerContainer = document.querySelector('.hamburger-container');
+    hamburgerContainer.classList.add(localStorage.getItem('mode'));
+    
+    switch(localStorage.getItem('mode')) {
+      case 'train':
+        hamburgerContainer.classList.replace('play', 'train');
+        break;
+      case 'play':
+        hamburgerContainer.classList.replace('train', 'play');
+        break;
+    }
+  });
+}
+
+//hamburgerCloseButtonHandler
+function hamburgerCloseButtonHandler() {
+  const closeButton = document.querySelector('.close-button');
+  closeButton.addEventListener('click', (event) => {
+    document.querySelector('.hamburger-container').classList.add('hidden');
+    console.log('close');
+  });
+}
+
+function hamburgerMenuHandler() {
+  const hamburgerContainer = document.querySelector('.hamburger-menu');
+  hamburgerContainer.addEventListener('click', (event) => {
+console.log(event.target);
+if(event.target.parentNode.classList.contains('nav-item')) {
+  console.log('yep');
+  let navItems = document.querySelectorAll('.nav-item > a');
+  navItems.forEach(e => e.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+  })
+}
+
+
+
 
 function cardsHandler() {
   document.querySelector('.cards-wrapper').addEventListener('click', (event) => {
@@ -170,7 +168,7 @@ function cardsHandler() {
       }
       console.log(clickedElem);
       if(clickedElem != undefined) {
-        let title = getSectionTitle(clickedElem);
+        let title = getSectionTitle(clickedElem).toLowerCase();
         console.log('title ' + title);
         localStorage.setItem('page' , 'category');
         localStorage.setItem('category', title); 
@@ -213,12 +211,15 @@ function switchHandler() {
 
 
 
+
 window.onload = function () {
   renderCards(localStorage.getItem('mode'), localStorage.getItem('page'));
   hamburgerIconHandler();
   hamburgerCloseButtonHandler();
+  hamburgerMenuHandler();
   switchHandler();
   cardsHandler();
+  
  
 
 };
