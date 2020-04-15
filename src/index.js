@@ -119,7 +119,21 @@ function hamburgerIconHandler() {
     document.querySelector('.hamburger-container').classList.remove('hidden');
     let hamburgerContainer = document.querySelector('.hamburger-container');
     hamburgerContainer.classList.add(localStorage.getItem('mode'));
-    
+    let navItems = document.querySelectorAll('.nav-item > a');
+    navItems.forEach(e => e.classList.remove('active'));
+    if(localStorage.getItem('page') == 'main') {
+      for(let i=0; i< navItems.length; i++) {
+        if(navItems[i].innerHTML.toLowerCase() === 'main page') {
+          navItems[i].classList.add('active');
+        }
+      }
+    } else if(localStorage.getItem('page') === 'category') {
+      for(let i=0; i< navItems.length; i++) {
+        if (navItems[i].innerHTML.toLowerCase() === localStorage.getItem('category')){
+          navItems[i].classList.add('active');
+        }
+      } 
+    }
     switch(localStorage.getItem('mode')) {
       case 'train':
         hamburgerContainer.classList.replace('play', 'train');
