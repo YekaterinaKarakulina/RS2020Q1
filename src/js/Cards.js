@@ -13,7 +13,6 @@ export default class Cards {
     }
     console.log(cardsContainer);
     return cardsContainer;
-    // add mode check
   }
 
 
@@ -25,7 +24,6 @@ export default class Cards {
     }
     console.log(cardsContainer);
     return cardsContainer;
-    // add mode check
   }
 
   generatePlayCards(cardsArray) {
@@ -36,6 +34,5 @@ export default class Cards {
     }
     console.log(cardsContainer);
     return cardsContainer;
-    // add mode check
   }
 }

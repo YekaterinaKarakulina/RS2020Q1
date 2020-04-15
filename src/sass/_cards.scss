@@ -64,19 +64,26 @@
 }
 
 .card-word {
+  display: inline;
   position: relative;
   left: 4rem; 
+ 
 }
 
 .card-icon {
+  display: inline;
   position: relative;
   right: 10%;
   top: -0.5rem;
 }
 
 .card-description {
+  
   position: relative;
   top: 3rem;
   display: flex;
   justify-content: space-between;
+  &.hidden {
+    display: none;
+  }
 }

@@ -8,8 +8,10 @@ import cardsClothes from './js/cardsData/cardsClothes';
 import cardsEmotions from './js/cardsData/cardsEmotions';
 
 //local storage - page, mode items init
-localStorage.setItem('page', 'mainPage');
+
 localStorage.setItem('mode', 'train');
+localStorage.setItem('page', 'main');   
+
 
 //hamburgerIconHandler
 function hamburgerIconHandler() {
@@ -32,33 +34,156 @@ function hamburgerIconHandler() {
 
 //hamburgerCloseButtonHandler
 function hamburgerCloseButtonHandler() {
-  const CLOSEBUTTON = document.querySelector('.close-button');
-  CLOSEBUTTON.addEventListener('click', (event) => {
+  const closeButton = document.querySelector('.close-button');
+  closeButton.addEventListener('click', (event) => {
     document.querySelector('.hamburger-container').classList.add('hidden');
     console.log('close');
   });
 }
 
 //renderCards
-function renderCards(mode) {
+function renderCards(mode, page, categoryTitle) {
+  console.log('render cards ' + mode + ' ' + page );
   const cardsWrapper = document.querySelector('.cards-wrapper');
-  const cards = (new Cards('section-cards')).generateCards(cardsMainPage);
-  cardsWrapper.append(cards);
+  
+  if(page === 'main') {
+    console.log('render main page ');
+    const cards = (new Cards('section-cards')).generateCards(cardsMainPage);
+    cardsWrapper.innerHTML = '';
+    cardsWrapper.append(cards);
+    let els = document.querySelectorAll('.section-cards > *');
+    els.forEach(e => e.classList.add(mode));
+  }
+
+  else  if(page === 'category') {
+    console.log('render category page ');
+    cardsWrapper.innerHTML = '';
+    let cards = [];
+
+    if(localStorage.getItem('mode') === 'train') {
+      switch(categoryTitle) {
+        case 'Action (set A)':
+            cards = (new Cards('train-cards')).generateTrainCards(cardsActionA);
+            break;
+          case 'Action (set B)':
+            cards = (new Cards('train-cards')).generateTrainCards(cardsActionB);
+            break;
+            case 'Action (set B)':
+              cards = (new Cards('train-cards')).generateTrainCards(cardsActionB);
+              break;
+            case 'Animal (set A)':
+              cards = (new Cards('train-cards')).generateTrainCards(cardsAnimalA);
+              break;
+            case 'Animal (set B)':
+              cards = (new Cards('train-cards')).generateTrainCards(cardsAnimalB);
+              break;
+            case 'Clothes':
+              cards = (new Cards('train-cards')).generateTrainCards(cardsClothes);
+              break;
+            case 'Emotions':
+              cards = (new Cards('train-cards')).generateTrainCards(cardsEmotions);
+              break;
+      }
+
+    } else if(localStorage.getItem('mode') === 'play') {
+      switch(categoryTitle) {
+        case 'Action (set A)':
+            cards = (new Cards('play-cards')).generatePlayCards(cardsActionA);
+            break;
+          case 'Action (set B)':
+            cards = (new Cards('play-cards')).generatePlayCards(cardsActionB);
+            break;
+            case 'Action (set B)':
+              cards = (new Cards('play-cards')).generatePlayCards(cardsActionB);
+              break;
+            case 'Animal (set A)':
+              cards = (new Cards('play-cards')).generatePlayCards(cardsAnimalA);
+              break;
+            case 'Animal (set B)':
+              cards = (new Cards('play-cards')).generatePlayCards(cardsAnimalB);
+              break;
+            case 'Clothes':
+              cards = (new Cards('play-cards')).generatePlayCards(cardsClothes);
+              break;
+            case 'Emotions':
+              cards = (new Cards('play-cards')).generatePlayCards(cardsEmotions);
+              break;
+      }
+
+    }
+    
+    cardsWrapper.append(cards);
+
+  }
+
+}
+
+
+
+function changeSectionCardsMode() {
+  console.log('just change section cards');
   let els = document.querySelectorAll('.section-cards > *');
-  els.forEach(e => e.classList.add(mode));
+    els.forEach(e => e.classList.add(localStorage.getItem('mode')));
+    switch(localStorage.getItem('mode')) {
+      case 'train':
+        els.forEach(e => e.classList.replace('play', 'train'));
+        break;
+      case 'play':
+        els.forEach(e => e.classList.replace('train', 'play'));
+        break;
+    }
+}
+
+function changeTrainPlayCardsMode() {
+  console.log('just change train cards');
+  const cardsContainer = document.querySelector('.cards-wrapper').firstElementChild;
+  let cardDescription = document.querySelectorAll('.card-description');
+  let els = [];
   switch(localStorage.getItem('mode')) {
     case 'train':
-      els.forEach(e => e.classList.replace('play', 'train'));
+      cardsContainer.classList.replace('play-cards', 'train-cards');
+      els = document.querySelectorAll('.train-cards > *');
+      els.forEach(e => e.classList.replace('play-card', 'train-card'));
+      cardDescription.forEach(e => e.classList.remove('hidden'));
       break;
     case 'play':
-      els.forEach(e => e.classList.replace('train', 'play'));
+      cardsContainer.classList.replace('train-cards', 'play-cards');
+      els = document.querySelectorAll('.play-cards > *');
+      els.forEach(e => e.classList.replace('train-card', 'play-card'));
+      cardDescription.forEach(e => e.classList.add('hidden'));
       break;
   }
 }
 
+
+function cardsHandler() {
+  document.querySelector('.cards-wrapper').addEventListener('click', (event) => {
+    console.log(event.target);
+    localStorage.setItem('page' , 'category');
+    let title = '';
+    if(event.target.classList.contains('card')) {
+      for(let i=0; i<event.target.children.length; i++) {
+        if(event.target.children[i].classList.contains('section-title')) {
+          title = event.target.children[i].innerHTML;
+        }
+      }
+      console.log(title);
+      localStorage.setItem('category', title); 
+      renderCards(localStorage.getItem('mode'), localStorage.getItem('page'), localStorage.getItem('category'));
+    }
+    if(event.target.classList.contains('card-image')) {
+      event.target.nextSibling.play();
+      console.log('sound');
+    }
+  });
+}
+
+
+
+
 function switchHandler() {
-  const MODESWITCH = document.querySelector('.modeSwitch');
-  MODESWITCH.addEventListener('mouseup', (event) => {
+  const modeSwitch = document.querySelector('.modeSwitch');
+  modeSwitch.addEventListener('mouseup', (event) => {
   switch(localStorage.getItem('mode')) {
     case 'train':
       localStorage.setItem('mode', 'play');
@@ -66,91 +191,28 @@ function switchHandler() {
     case 'play':
       localStorage.setItem('mode', 'train');
       break;
-  }
-  console.log('mode ' + localStorage.getItem('mode'));
-  renderCards(localStorage.getItem('mode'));
+    }
+    console.log('mode ' + localStorage.getItem('mode'));
+    if(localStorage.getItem('page') === 'main') {
+      console.log('switch - main');
+      changeSectionCardsMode();
+    }  else if(localStorage.getItem('page') === 'category') {
+      console.log('switch - category');
+      changeTrainPlayCardsMode();
+    }
   });
 }
 
 
-function cardsHandler() {
-  const cardsWrapper = document.querySelector('.cards-wrapper');
-  
-  document.querySelector('.cards-wrapper').addEventListener('click', (event) => {
-    console.log(event.target);
-    let title = '';
-    if(event.target.classList.contains('card')) {
-      for(let i=0; i<event.target.children.length; i++) {
-        if(event.target.children[i].classList.contains('section-title')) {
-          title = event.target.children[i].innerHTML;
-
-        }
-      }
-      console.log(title);
-      cardsWrapper.innerHTML = '';
-      let cards = [];
-      switch(title) {
-        case 'Action (set A)':
-          cards = (new Cards('train-cards')).generateTrainCards(cardsActionA);
-          break;
-        case 'Action (set B)':
-          cards = (new Cards('train-cards')).generateTrainCards(cardsActionB);
-          break;
-        case 'Animal (set A)':
-          cards = (new Cards('train-cards')).generateTrainCards(cardsAnimalA);
-          break;
-        case 'Animal (set B)':
-          cards = (new Cards('train-cards')).generateTrainCards(cardsAnimalB);
-          break;
-        case 'Clothes':
-          cards = (new Cards('train-cards')).generateTrainCards(cardsClothes);
-          break;
-        case 'Emotions':
-          cards = (new Cards('train-cards')).generateTrainCards(cardsEmotions);
-          break;
-  
-      }
-      cardsWrapper.append(cards);
-
-    }
-    if(event.target.classList.contains('card-image')) {
-  
-          event.target.nextSibling.play();
-          console.log('sound');
-    }
-    
-  });
-}
-/*
-const mode = 'lay';
-const cardsWrapper = document.querySelector('.cards-wrapper');
-if (mode === 'train') {
-  const cards = (new Cards('train-cards')).generateTrainCards(cardsActionA);
-  cardsWrapper.append(cards);
-} else if (mode === 'play') {
-  const cards = (new Cards('play-cards')).generatePlayCards(cardsActionA);
-  cardsWrapper.append(cards);
-}
-*/
 
 
 
-  window.onload = function () {
-    renderCards(localStorage.getItem('mode'));
-    hamburgerIconHandler();
-   hamburgerCloseButtonHandler();
-   switchHandler();
-   cardsHandler();
-  
-  
-  
-  /* document.querySelector('.cards-wrapper').addEventListener('click', (event) => {
+window.onload = function () {
+  renderCards(localStorage.getItem('mode'), localStorage.getItem('page'));
+  hamburgerIconHandler();
+  hamburgerCloseButtonHandler();
+  switchHandler();
+  cardsHandler();
+ 
 
-    var x = document.getElementById("myAudio");
-    console.log('playaud');
-    x.play();
-   });
-*/
-  
-
-  };
+};
