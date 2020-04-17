@@ -207,7 +207,13 @@ function cardsHandler() {
       }
     } 
     else if(localStorage.getItem('page') === 'category') {
-      if(event.target.classList.contains('card-image')) {
+      if(event.target.classList.contains('card-icon')) {
+        const card = event.target.parentNode.parentNode.parentNode;
+        card.classList.add('is-flipped');
+        card.addEventListener( 'mouseleave', function() {
+          card.classList.remove('is-flipped');
+        });
+      } else if(event.target.classList.contains('card-image')) {
         event.target.nextSibling.play();
         console.log('sound');
       }
@@ -250,6 +256,27 @@ window.onload = function () {
   hamburgerMenuHandler();
   switchHandler();
   cardsHandler();
+ 
+
+ //var icon = document.querySelector('.card-icon');
+ /*var card = document.querySelector('.card');
+card.addEventListener( 'click', (event) => {
+  console.log(event.target);
+  if(event.target.classList.contains('.card-icon')) 
+  {
+    card.classList.add('is-flipped');
+  }
+  
+});
+
+
+card.addEventListener( 'mouseleave', function() {
+  console.log('leave');
+ 
+ card.classList.remove('is-flipped');
+  
+});*/
+
   
  
 

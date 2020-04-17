@@ -49,24 +49,62 @@ export default class Card {
     const card = document.createElement('div');
     card.classList.add('card');
     card.classList.add('train-card');
-    card.append(this.createImgBlock('card-image'));
 
-    card.append(this.createSoundBlock('card-sound'));
+    const cardFront = document.createElement('div');
+    cardFront.classList.add('card-face');
+    cardFront.classList.add('card-face-front');
+
+    const cardBack = document.createElement('div');
+    cardBack.classList.add('card-face');
+    cardBack.classList.add('card-face-back');
+
     const cardWord = document.createElement('div');
     cardWord.className = 'card-word';
     cardWord.innerHTML = this.word;
-    const cardIcon = document.createElement('div');
-    cardIcon.className = 'card-icon';
-    const rotateIcon = document.createElement('object');
-    rotateIcon.className = 'icon-rotate';
-    rotateIcon.setAttribute('type', 'image/svg+xml');
-    rotateIcon.setAttribute('data', './src/assets/images/rotate.svg');
-    const wordDescription = document.createElement('div');
-    wordDescription.className = 'card-description';
-    cardIcon.append(rotateIcon);
-    wordDescription.append(cardWord);
-    wordDescription.append(cardIcon);
-    card.append(wordDescription);
+
+    const cardTranslation = document.createElement('div');
+    cardTranslation.className = 'card-word';
+    cardTranslation.innerHTML = this.translation;
+
+    const cardIconFront = document.createElement('a');
+    cardIconFront.className = 'card-icon';
+    
+    const rotateIconF = document.createElement('object');
+    rotateIconF.className = 'icon-rotate';
+    rotateIconF.setAttribute('type', 'image/svg+xml');
+    rotateIconF.setAttribute('data', './src/assets/images/rotate.svg');
+
+    const rotateIconB = document.createElement('object');
+    rotateIconB.className = 'icon-rotate';
+    rotateIconB.setAttribute('type', 'image/svg+xml');
+    rotateIconB.setAttribute('data', './src/assets/images/rotate.svg');
+   
+    const cardIconBack = document.createElement('a');
+    cardIconBack.className = 'card-icon';
+
+    cardIconFront.append(rotateIconF);
+    cardIconBack.append(rotateIconB);
+
+    const cardDescriptionFront = document.createElement('div');
+    cardDescriptionFront.className = 'card-description';
+    cardDescriptionFront.append(cardWord);
+    cardDescriptionFront.append(cardIconFront);
+
+    const cardDescriptionBack = document.createElement('div');
+    cardDescriptionBack.className = 'card-description';
+    cardDescriptionBack.append(cardTranslation);
+    cardDescriptionBack.append(cardIconBack);
+
+    cardFront.append(this.createImgBlock('card-image'));
+    cardFront.append(this.createSoundBlock('card-sound'));
+    cardFront.append(cardDescriptionFront);
+
+    cardBack.append(this.createImgBlock('card-image'));
+    cardBack.append(cardDescriptionBack);
+
+    card.append(cardFront);
+    card.append(cardBack);
+
     return card;
   }
 }
