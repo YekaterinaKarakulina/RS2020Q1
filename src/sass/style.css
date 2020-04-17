@@ -310,4 +310,13 @@ object {
   height: 2rem;
 }
 
+.start-game-button {
+  position: relative;
+  top: 3rem;
+  left: calc(50% - 5rem);
+  width: 10rem;
+  height: 2rem;
+  margin-bottom: 5rem;
+}
+
 /*# sourceMappingURL=style.css.map */
