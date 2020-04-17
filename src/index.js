@@ -230,6 +230,28 @@ function cardsHandler() {
         console.log('sound');
       }
     }
+
+  //   else if(localStorage.getItem('page') === 'category' && localStorage.getItem('mode') === 'play' && localStorage.getItem('isGameStarted')==='true') {
+    
+  //   console.log('HERE');
+  // }
+
+  });
+}
+
+function cardsGameHandler(cardsCollection, array, cardNumber) {
+  document.querySelector('.cards-wrapper').addEventListener('click', (event) => {
+    if(localStorage.getItem('page') === 'category' && localStorage.getItem('mode') === 'play' && localStorage.getItem('isGameStarted')==='true') {
+      let clickedCard = event.target.parentNode.parentNode;
+      if(clickedCard.classList.contains(cardNumber)) {
+        console.log('yes');
+        localStorage.setItem('isGuessed', true);
+        gameInProgress(cardsCollection, array);
+      } else {
+        console.log('no');
+        localStorage.setItem('isGuessed', false);
+      }
+    }
   });
 }
 
@@ -274,28 +296,51 @@ function mixCards() {
   }
 }
 
-function gameHandler() {
-  document.querySelector('.wrapper').addEventListener('click', (event) => {
-  if(event.target.className === 'start-game-button') {
-    localStorage.setItem('isGameInProgress', true);
-    console.log('game started');
-    mixCards();
-    console.log(localStorage.getItem('category'));
-    
-    let soundsArray;
-    //let cards = document.querySelectorAll('.play-card');
-      
-    //soundsArray = document.querySelectorAll('.card-sound');
-    // console.log(cards);
 
-     
-  }
-      
-  });
-
+function chooseRandomCard(cards, randomNumber) {
+    let randomCard = cards[randomNumber];
+    randomCard.classList.add(randomNumber);
+    return randomCard;
 }
 
+function get_random(array) {
+  return array[Math.floor((Math.random()*array.length))];
+} 
 
+function gameInProgress(cardsCollection, array) {
+  if(localStorage.getItem('isGameStarted') === 'true') {
+    //console.log(array);
+    let randomNumber = get_random(array);
+    //console.log(randomNumber);
+    for(let i=0; i< array.length; i++) {
+      if(array[i] === randomNumber) {
+        array.splice(i,1);
+      }
+    }
+    //console.log(array);
+    let randomCard = chooseRandomCard(cardsCollection, randomNumber);
+    let currentSound = randomCard.querySelector('.card-sound');
+    currentSound.play();
+    cardsGameHandler(cardsCollection, array, randomNumber);
+  }
+}
+
+function gameHandler() {
+  document.querySelector('.wrapper').addEventListener('click', (event) => {
+    if(event.target.className === 'start-game-button') {
+      localStorage.setItem('isGameStarted', true);
+      //console.log('start-game-button');
+      mixCards();
+      let cardsCollection = document.querySelectorAll('.play-card');
+      let array = [];
+      for(let i=0; i<cardsCollection.length; i++) {
+        array.push(i);
+      }
+      console.log('array ' + array );
+      gameInProgress(cardsCollection, array);
+    }   
+  });
+}
 
 window.onload = function () {
   renderCards(localStorage.getItem('mode'), localStorage.getItem('page'));
@@ -307,6 +352,7 @@ window.onload = function () {
   
   gameHandler();
 
+  
 
 
   
