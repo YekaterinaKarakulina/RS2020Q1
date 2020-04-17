@@ -23,6 +23,28 @@
   margin: 0 20px 0 20px;
 }
 
+.modal {
+  width: 100vw;
+  height: 100vh;
+  background: #0008;
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.modal.hidden {
+  display: none;
+}
+
+.modalImg {
+  width: 488px;
+  height: 400px;
+  z-index: 100;
+  position: relative;
+  top: calc(50% - 200px);
+  left: calc(50% - 244px);
+}
+
 .card {
   display: block;
   position: relative;

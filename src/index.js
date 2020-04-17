@@ -230,26 +230,56 @@ function cardsHandler() {
         console.log('sound');
       }
     }
-
-  //   else if(localStorage.getItem('page') === 'category' && localStorage.getItem('mode') === 'play' && localStorage.getItem('isGameStarted')==='true') {
-    
-  //   console.log('HERE');
-  // }
-
   });
 }
 
+function showPicture(imgSrc) {
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  const imageElement = document.createElement('div');
+  imageElement.className = 'modalImg';
+  imageElement.setAttribute('style', imgSrc);
+  modal.append(imageElement);
+  document.querySelector('.wrapper').append(modal);
+  setTimeout(function hideModal() {
+    modal.remove();
+  }, 500);
+}
+
+function playSound(audioSrc) {
+
+  const soundElement = document.createElement('audio');
+    const sourceElement = document.createElement('source');
+    sourceElement.setAttribute('src', audioSrc);
+    sourceElement.setAttribute('type', "audio/mpeg");
+    soundElement.append(sourceElement);
+    soundElement.play();
+
+  
+}
+
+
 function cardsGameHandler(cardsCollection, array, cardNumber) {
+  const successImgSrc = 'background-image: url(./src/assets/images/success.jpg)';
+  const failureImgSrc = 'background-image: url(./src/assets/images/failure.jpg)';
+  const correctSound ='./src/assets/sounds/correct.mp3';
+  const errorSound = './src/assets/sounds/error.mp3';
   document.querySelector('.cards-wrapper').addEventListener('click', (event) => {
     if(localStorage.getItem('page') === 'category' && localStorage.getItem('mode') === 'play' && localStorage.getItem('isGameStarted')==='true') {
       let clickedCard = event.target.parentNode.parentNode;
       if(clickedCard.classList.contains(cardNumber)) {
         console.log('yes');
+        playSound(correctSound);
         localStorage.setItem('isGuessed', true);
         gameInProgress(cardsCollection, array);
+        
+       // showPicture(successImgSrc);
+        
       } else {
         console.log('no');
         localStorage.setItem('isGuessed', false);
+        playSound(errorSound);
+        //showPicture(failureImgSrc);
       }
     }
   });
