@@ -12,6 +12,15 @@
   transition: 0.4s;
   transition: transform 1s;
   transform-style: preserve-3d;
+  &.not-active {
+    background-color: $color-playMode;
+    cursor: not-allowed;
+    transition: none;
+    transform-style: none;
+    &:hover {
+      transform: none;
+    }
+  }
   &.train {
     background-color: $color-trainMode;
   }

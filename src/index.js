@@ -340,6 +340,7 @@ function cardsGameHandler() {
   document.querySelector('.cards-wrapper').addEventListener('mouseup', (event) => {
     if(localStorage.getItem('page') === 'category' && localStorage.getItem('mode') === 'play' && localStorage.getItem('isGameStarted')==='true') {
       let clickedCard;
+      console.log(event.target);
       if(event.target.classList.contains('card-face')){
         clickedCard = event.target.parentNode;
       } else if(event.target.classList.contains('card-image')) {
@@ -347,6 +348,7 @@ function cardsGameHandler() {
       }
       if (clickedCard.classList.contains(randomNumber)) {
         console.log('yes you are right');
+        clickedCard.classList.add('not-active');
         playSound(correctSound);
         localStorage.setItem('isGuessed', true);
         points += 1;

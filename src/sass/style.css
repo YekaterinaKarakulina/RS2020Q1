@@ -78,6 +78,15 @@
   transition: transform 1s;
   transform-style: preserve-3d;
 }
+.card.not-active {
+  background-color: #FF69B4;
+  cursor: not-allowed;
+  transition: none;
+  transform-style: none;
+}
+.card.not-active:hover {
+  transform: none;
+}
 .card.train {
   background-color: #7B68EE;
 }
