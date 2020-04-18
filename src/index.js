@@ -10,7 +10,15 @@ import cardsEmotions from './js/cardsData/cardsEmotions';
 
 //local storage - page, mode items init
 localStorage.setItem('mode', 'train');
-localStorage.setItem('page', 'main');   
+localStorage.setItem('page', 'main');  
+localStorage.setItem('isGameStarted', false);
+
+let cardsCollection ;
+let array = [];
+let randomNumber;
+let randomCard;
+let points = 0;
+let errors = 0;
 
 
 function getSectionTitle(elem) {
@@ -38,14 +46,13 @@ function mixCards() {
   }
 }
 
-
 function chooseRandomCard(cards, randomNumber) {
     let randomCard = cards[randomNumber];
     randomCard.classList.add(randomNumber);
     return randomCard;
 }
 
-function get_random(array) {
+function getRandom(array) {
   return array[Math.floor((Math.random()*array.length))];
 } 
 
@@ -57,11 +64,16 @@ function renderStartGameButton() {
   startGameButton.innerHTML = 'start game';
   document.querySelector('.wrapper').append(startGameButton);
 }
-
-
 function removeStartGameButton() {
+if(document.querySelector('.start-game-button') != null) {
   document.querySelector('.start-game-button').remove();
-}
+     
+    }
+  }
+
+/*function removStartGameButton() {
+  document.querySelector('.start-game-button').remove();
+}*/
 
 function renderRepeatButton() {
   const repeatButton = document.createElement('a');
@@ -73,6 +85,12 @@ function renderRepeatButton() {
   repeatButton.append(repeatIcon);
   document.querySelector('.wrapper').append(repeatButton);
 
+}
+
+function removeRepeatButton() {
+  if(document.querySelector('.icon-repeat-container') != null) {
+  document.querySelector('.icon-repeat-container').remove();
+  }
 }
 
 
@@ -122,10 +140,11 @@ function renderCards(mode, page, categoryTitle) {
     cardsWrapper.append(cards);
     let els = document.querySelectorAll('.section-cards > *');
     els.forEach(e => e.classList.add(mode));
-    if(document.querySelector('.start-game-button') != null) {
+    /*if(document.querySelector('.start-game-button') != null) {
       console.log('render cards remove start button');
       removeStartGameButton();
-    }
+    }*/
+    removeStartGameButton();
   }
 
   else  if(page === 'category') {
@@ -301,14 +320,25 @@ function playSound(audioSrc) {
 
   
 }
+     
+
+function repeatSound() {
+  document.querySelector('.icon-repeat-container').addEventListener('click', (event) => {
+    if(localStorage.getItem('isGameStarted') ==='true') {
+      console.log('sound 2');
+      randomCard.querySelector('.card-sound').play();
+    }
+  });
+}
 
 
-function cardsGameHandler(cardsCollection, array, cardNumber, currentSound) {
+function cardsGameHandler() {
   const successImgSrc = 'background-image: url(./src/assets/images/success.jpg)';
   const failureImgSrc = 'background-image: url(./src/assets/images/failure.jpg)';
   const correctSound ='./src/assets/sounds/correct.mp3';
   const errorSound = './src/assets/sounds/error.mp3';
-  document.querySelector('.cards-wrapper').addEventListener('click', (event) => {
+
+  document.querySelector('.cards-wrapper').addEventListener('mouseup', (event) => {
     if(localStorage.getItem('page') === 'category' && localStorage.getItem('mode') === 'play' && localStorage.getItem('isGameStarted')==='true') {
       let clickedCard;
       if(event.target.classList.contains('card-face')){
@@ -316,106 +346,91 @@ function cardsGameHandler(cardsCollection, array, cardNumber, currentSound) {
       } else if(event.target.classList.contains('card-image')) {
         clickedCard = event.target.parentNode.parentNode;
       }
-      if (clickedCard.classList.contains(cardNumber)) {
+      if (clickedCard.classList.contains(randomNumber)) {
         console.log('yes you are right');
         playSound(correctSound);
         localStorage.setItem('isGuessed', true);
-        clickedCard = '';
-        gameInProgress(cardsCollection, array);
-        
-       // showPicture(successImgSrc);
+        points += 1;
+        gameInProgress(); 
+        // showPicture(successImgSrc);
       } else {
         console.log('no, try again');
-        
+        errors += 1;
         localStorage.setItem('isGuessed', false);
         playSound(errorSound);
-        document.querySelector('.icon-repeat-container').addEventListener('click', (event) => {
-console.log(event);
-console.log('sound 2');
-currentSound.play();
-
-
-
-        });
         //showPicture(failureImgSrc);
-      }
-       
+      } 
     }
   });
 }
-
-
-
 
 function switchHandler() {
   const modeSwitch = document.querySelector('.modeSwitch');
   modeSwitch.addEventListener('mouseup', (event) => {
-  switch(localStorage.getItem('mode')) {
-    case 'train':
-      localStorage.setItem('mode', 'play');
-      
-      break;
-    case 'play':
-      
-      localStorage.setItem('mode', 'train');
-      break;
-    }
-  if(localStorage.getItem('page') === 'main') {
-    
-    changeSectionCardsMode();
-   
-  } else if (localStorage.getItem('page') === 'category') {
-    changeTrainPlayCardsMode();
     switch(localStorage.getItem('mode')) {
       case 'train':
-        removeStartGameButton();
-        
+        localStorage.setItem('mode', 'play');
         break;
       case 'play':
-        renderStartGameButton();
+        localStorage.setItem('mode', 'train');
+        localStorage.setItem('isGameStarted', false);//////////
+        removeRepeatButton();
         break;
+    }
+    if(localStorage.getItem('page') === 'main') {
+      changeSectionCardsMode();
+    } else if (localStorage.getItem('page') === 'category') {
+      changeTrainPlayCardsMode();
+      switch(localStorage.getItem('mode')) {
+        case 'train':
+          removeStartGameButton();
+          break;
+        case 'play':
+          renderStartGameButton();
+          break;
       }
-     
     }
   });
 }
 
-
-
-function gameInProgress(cardsCollection, array) {
-  if(localStorage.getItem('isGameStarted') === 'true') {
-    
-    let randomNumber = get_random(array);
+function gameInProgress() {
+  if(points <8 ) {
+    randomNumber = getRandom(array);
     for(let i=0; i< array.length; i++) {
       if(array[i] === randomNumber) {
         array.splice(i,1);
       }
     }
-    let randomCard = chooseRandomCard(cardsCollection, randomNumber);
-    let currentSound = randomCard.querySelector('.card-sound');
-    currentSound.play();
-    //cardsGameHandler(cardsCollection, array, randomNumber);
-    cardsGameHandler(cardsCollection, array, randomNumber, currentSound);
+    randomCard = chooseRandomCard(cardsCollection, randomNumber);
+    randomCard.querySelector('.card-sound').play();
+    repeatSound();
+  } else {
+    console.log('stop game!!! points ' + points + ' errors ' + errors);
+    localStorage.setItem('isGameStarted', false);
+    localStorage.setItem('mode', 'train');
+    localStorage.setItem('page', 'main');
+    document.querySelector('.onoffswitch-inner').click();
+    renderCards(localStorage.getItem('mode'), localStorage.getItem('page'), localStorage.getItem('category'));
+    removeRepeatButton();
   }
 }
 
 function gameHandler() {
+  let a=0;
   document.querySelector('.wrapper').addEventListener('click', (event) => {
+    localStorage.setItem('isGuessed', false);
     if(event.target.className === 'start-game-button') {
       localStorage.setItem('isGameStarted', true);
-      
-      
       mixCards();
       removeStartGameButton();
       renderRepeatButton();
-      let cardsCollection = document.querySelectorAll('.play-card');
-      let array = [];
+      cardsCollection = document.querySelectorAll('.play-card');
       for(let i=0; i<cardsCollection.length; i++) {
         array.push(i);
       }
-      gameInProgress(cardsCollection, array);
+      gameInProgress();
     }   
-  });
+  }); 
 }
 
 window.onload = function () {
@@ -425,17 +440,8 @@ window.onload = function () {
   hamburgerMenuHandler();
   switchHandler();
   cardsHandler();
-  
   gameHandler();
-
+  cardsGameHandler();
   
-
-
-  
-  
- 
-
-
- 
 
 };
