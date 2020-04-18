@@ -10,18 +10,15 @@ export default class Cards {
     for (let i = 0; i < cardsArray.length; i++) {
       cardsContainer.append((new Card(cardsArray[i])).generateSectionCard());
     }
-    console.log(cardsContainer);
     return cardsContainer;
   }
 
   generateTrainPlayCards(cardsArray) {
     const cardsContainer = document.createElement('div');
     cardsContainer.className = this.className;
-    console.log(cardsArray);
     for (let i = 0; i < cardsArray.length; i++) {
       cardsContainer.append((new Card(cardsArray[i])).generateTrainPlayCard());
     }
-    console.log(cardsContainer);
     return cardsContainer;
   }
 }

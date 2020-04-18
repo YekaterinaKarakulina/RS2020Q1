@@ -31,8 +31,21 @@ function renderStartGameButton() {
   document.querySelector('.wrapper').append(startGameButton);
 }
 
+
 function removeStartGameButton() {
   document.querySelector('.start-game-button').remove();
+}
+
+function renderRepeatButton() {
+  const repeatButton = document.createElement('a');
+  repeatButton. className = 'icon-play';
+  const repeatIcon = document.createElement('object');
+  repeatIcon.className = 'icon-repeat';
+  repeatIcon.setAttribute('type', 'image/svg+xml');
+  repeatIcon.setAttribute('data', './src/assets/images/repeat.svg');
+  repeatButton.append(repeatIcon);
+  document.querySelector('.wrapper').append(repeatButton);
+
 }
 
 
@@ -82,6 +95,10 @@ function renderCards(mode, page, categoryTitle) {
     cardsWrapper.append(cards);
     let els = document.querySelectorAll('.section-cards > *');
     els.forEach(e => e.classList.add(mode));
+    if(document.querySelector('.start-game-button') != null) {
+      console.log('renser cards remove start button');
+      removeStartGameButton();
+    }
   }
 
   else  if(page === 'category') {
@@ -94,6 +111,8 @@ function renderCards(mode, page, categoryTitle) {
       cardsContainerName = 'train-cards';
     } else if(localStorage.getItem('mode') === 'play') {
     cardsContainerName = 'play-cards';
+    console.log('render cards add start button');
+    renderStartGameButton();
     }
     switch(categoryTitle) {
       case 'action (set a)':
@@ -117,6 +136,9 @@ function renderCards(mode, page, categoryTitle) {
   }
     cardsWrapper.append(cards);
     changeTrainPlayCardsMode();
+
+    
+
   }
 }
 
@@ -162,7 +184,6 @@ function hamburgerCloseButtonHandler() {
   const closeButton = document.querySelector('.close-button');
   closeButton.addEventListener('click', (event) => {
     document.querySelector('.hamburger-container').classList.add('hidden');
-    console.log('close');
   });
 }
 
@@ -171,9 +192,7 @@ function hamburgerCloseButtonHandler() {
 function hamburgerMenuHandler() {
   const hamburgerContainer = document.querySelector('.hamburger-menu');
   hamburgerContainer.addEventListener('click', (event) => {
-    console.log(event.target);
     if(event.target.parentNode.classList.contains('nav-item')) {
-      console.log('yep');
       let navItems = document.querySelectorAll('.nav-item > a');
       navItems.forEach(e => e.classList.remove('active'));
       event.target.classList.add('active');
@@ -209,10 +228,8 @@ function cardsHandler() {
       } else if(event.target.parentNode.classList.contains('card')) {
         clickedElem = event.target.parentNode;
       }
-      console.log(clickedElem);
       if(clickedElem != undefined) {
         let title = getSectionTitle(clickedElem).toLowerCase();
-        console.log('title ' + title);
         localStorage.setItem('page' , 'category');
         localStorage.setItem('category', title); 
         renderCards(localStorage.getItem('mode'), localStorage.getItem('page'), localStorage.getItem('category'));
@@ -273,7 +290,7 @@ function cardsGameHandler(cardsCollection, array, cardNumber) {
         clickedCard = event.target.parentNode.parentNode;
       }
       if (clickedCard.classList.contains(cardNumber)) {
-        console.log('yes');
+        console.log('yes you are right');
         playSound(correctSound);
         localStorage.setItem('isGuessed', true);
         clickedCard = '';
@@ -281,7 +298,8 @@ function cardsGameHandler(cardsCollection, array, cardNumber) {
         
        // showPicture(successImgSrc);
       } else {
-        console.log('no');
+        console.log('no, try again');
+        
         localStorage.setItem('isGuessed', false);
         playSound(errorSound);
         //showPicture(failureImgSrc);
@@ -300,23 +318,29 @@ function switchHandler() {
   switch(localStorage.getItem('mode')) {
     case 'train':
       localStorage.setItem('mode', 'play');
+      
       break;
     case 'play':
+      
       localStorage.setItem('mode', 'train');
       break;
     }
   if(localStorage.getItem('page') === 'main') {
+    
     changeSectionCardsMode();
+   
   } else if (localStorage.getItem('page') === 'category') {
+    changeTrainPlayCardsMode();
     switch(localStorage.getItem('mode')) {
       case 'train':
         removeStartGameButton();
+        //renderRepeatButton();
         break;
       case 'play':
         renderStartGameButton();
         break;
       }
-      changeTrainPlayCardsMode();
+     
     }
   });
 }
@@ -366,6 +390,7 @@ function gameHandler() {
   document.querySelector('.wrapper').addEventListener('click', (event) => {
     if(event.target.className === 'start-game-button') {
       localStorage.setItem('isGameStarted', true);
+
       document.querySelector('.start-game-button').classList.add('hidden');
       mixCards();
       let cardsCollection = document.querySelectorAll('.play-card');
@@ -373,7 +398,6 @@ function gameHandler() {
       for(let i=0; i<cardsCollection.length; i++) {
         array.push(i);
       }
-      console.log('array ' + array );
       gameInProgress(cardsCollection, array);
     }   
   });

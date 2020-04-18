@@ -14,6 +14,25 @@
   cursor: pointer;
 }
 
+.icon-play {
+  position: absolute;
+  display: inline-block;
+  width: 100px;
+  height: 50px;
+  background-color: #FF69B4;
+  border: 2px solid #666d89;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.icon-repeat {
+  width: 35px;
+  cursor: pointer;
+  position: relative;
+  top: 20px;
+  left: 20px;
+}
+
 .section-cards,
 .train-cards,
 .play-cards {
