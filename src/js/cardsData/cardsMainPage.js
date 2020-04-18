@@ -9,16 +9,6 @@ const cardsMainPage = [
     className: 'actionB',
     imageSrc: './src/assets/images/cardsMainPage/swim.jpg',
   },
-  /* {
-        sectionTitle: 'Action (set C)',
-        className: 'actionC',
-        imageSrc: 'img/jump.jpg',
-    },
-    {
-        sectionTitle: 'Adjective',
-        className: 'adjective',
-        imageSrc: 'img/jump.jpg',
-    }, */
   {
     sectionTitle: 'Animal (set A)',
     className: 'animalA',
@@ -39,6 +29,16 @@ const cardsMainPage = [
     className: 'emotion',
     imageSrc: './src/assets/images/cardsMainPage/smile.jpg',
   },
+  {
+        sectionTitle: 'Vegetables',
+        className: 'vegetables',
+        imageSrc: './src/assets/images/cardsVegetables/pumpkin.jpg',
+    },
+    {
+        sectionTitle: 'Weather',
+        className: 'weather',
+        imageSrc: './src/assets/images/cardsWeather/sunny.jpg',
+    }, 
 ];
 
 export default cardsMainPage;

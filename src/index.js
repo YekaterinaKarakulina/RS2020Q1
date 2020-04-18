@@ -7,6 +7,8 @@ import cardsAnimalA from './js/cardsData/cardsAnimalA';
 import cardsAnimalB from './js/cardsData/cardsAnimalB';
 import cardsClothes from './js/cardsData/cardsClothes';
 import cardsEmotions from './js/cardsData/cardsEmotions';
+import cardsVegetables from './js/cardsData/cardsVegetables';
+import cardsWeather from './js/cardsData/cardsWeather';
 
 //local storage - page, mode items init
 localStorage.setItem('mode', 'train');
@@ -179,6 +181,12 @@ if(localStorage.getItem('isGameStarted')==='true') {
         break;
       case 'emotions':
         cards = (new Cards(cardsContainerName)).generateTrainPlayCards(cardsEmotions);
+        break;
+      case 'vegetables':
+        cards = (new Cards(cardsContainerName)).generateTrainPlayCards(cardsVegetables);
+        break;
+      case 'weather':
+        cards = (new Cards(cardsContainerName)).generateTrainPlayCards(cardsWeather);
         break;
   }
     cardsWrapper.append(cards);
