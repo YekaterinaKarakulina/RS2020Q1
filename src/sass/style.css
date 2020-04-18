@@ -340,5 +340,8 @@ object {
   height: 2rem;
   margin-bottom: 5rem;
 }
+.start-game-button.hidden {
+  display: none;
+}
 
 /*# sourceMappingURL=style.css.map */

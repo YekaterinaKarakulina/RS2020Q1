@@ -266,21 +266,27 @@ function cardsGameHandler(cardsCollection, array, cardNumber) {
   const errorSound = './src/assets/sounds/error.mp3';
   document.querySelector('.cards-wrapper').addEventListener('click', (event) => {
     if(localStorage.getItem('page') === 'category' && localStorage.getItem('mode') === 'play' && localStorage.getItem('isGameStarted')==='true') {
-      let clickedCard = event.target.parentNode.parentNode;
-      if(clickedCard.classList.contains(cardNumber)) {
+      let clickedCard;
+      if(event.target.classList.contains('card-face')){
+        clickedCard = event.target.parentNode;
+      } else if(event.target.classList.contains('card-image')) {
+        clickedCard = event.target.parentNode.parentNode;
+      }
+      if (clickedCard.classList.contains(cardNumber)) {
         console.log('yes');
         playSound(correctSound);
         localStorage.setItem('isGuessed', true);
+        clickedCard = '';
         gameInProgress(cardsCollection, array);
         
        // showPicture(successImgSrc);
-        
       } else {
         console.log('no');
         localStorage.setItem('isGuessed', false);
         playSound(errorSound);
         //showPicture(failureImgSrc);
       }
+       
     }
   });
 }
@@ -294,18 +300,22 @@ function switchHandler() {
   switch(localStorage.getItem('mode')) {
     case 'train':
       localStorage.setItem('mode', 'play');
-      renderStartGameButton();
-     
       break;
     case 'play':
       localStorage.setItem('mode', 'train');
-      removeStartGameButton();
       break;
     }
-    console.log('localStorage.getItem(mode)' + localStorage.getItem('mode'));
-    if(localStorage.getItem('page') === 'main') {
-      changeSectionCardsMode();
-    }  else if(localStorage.getItem('page') === 'category') {
+  if(localStorage.getItem('page') === 'main') {
+    changeSectionCardsMode();
+  } else if (localStorage.getItem('page') === 'category') {
+    switch(localStorage.getItem('mode')) {
+      case 'train':
+        removeStartGameButton();
+        break;
+      case 'play':
+        renderStartGameButton();
+        break;
+      }
       changeTrainPlayCardsMode();
     }
   });
@@ -339,15 +349,12 @@ function get_random(array) {
 
 function gameInProgress(cardsCollection, array) {
   if(localStorage.getItem('isGameStarted') === 'true') {
-    //console.log(array);
     let randomNumber = get_random(array);
-    //console.log(randomNumber);
     for(let i=0; i< array.length; i++) {
       if(array[i] === randomNumber) {
         array.splice(i,1);
       }
     }
-    //console.log(array);
     let randomCard = chooseRandomCard(cardsCollection, randomNumber);
     let currentSound = randomCard.querySelector('.card-sound');
     currentSound.play();
@@ -359,7 +366,7 @@ function gameHandler() {
   document.querySelector('.wrapper').addEventListener('click', (event) => {
     if(event.target.className === 'start-game-button') {
       localStorage.setItem('isGameStarted', true);
-      //console.log('start-game-button');
+      document.querySelector('.start-game-button').classList.add('hidden');
       mixCards();
       let cardsCollection = document.querySelectorAll('.play-card');
       let array = [];
