@@ -1,5 +1,9 @@
 .start-game-button {
     position: relative;
+    background-color: $color-playMode;
+    border: 2px solid $color-gray;
+    color: $color-light;
+    border-radius: 20px;
     top: 3rem;
     left: calc(50% - 5rem);
     width: 10rem;

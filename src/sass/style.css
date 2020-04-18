@@ -391,6 +391,10 @@ object {
 
 .start-game-button {
   position: relative;
+  background-color: #FF69B4;
+  border: 2px solid #666d89;
+  color: #FFFFFF;
+  border-radius: 20px;
   top: 3rem;
   left: calc(50% - 5rem);
   width: 10rem;
