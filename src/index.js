@@ -19,8 +19,8 @@ let cardsCollection ;
 let array = [];
 let randomNumber;
 let randomCard;
-let points = 0;
-let errors = 0;
+let points;
+let errors;
 
 
 function getSectionTitle(elem) {
@@ -153,7 +153,7 @@ function changeTrainPlayCardsMode() {
     case 'play':
       cardsContainer.classList.replace('train-cards', 'play-cards');
       els = document.querySelectorAll('.play-cards > *');
-      els.forEach(e => e.classList.remove('not-active'));//
+      els.forEach(e => e.classList.remove('not-active'));
       els.forEach(e => e.classList.replace('train-card', 'play-card'));
       cardDescription.forEach(e => e.classList.add('hidden'));
       break;
@@ -468,6 +468,8 @@ function gameHandler() {
     localStorage.setItem('isGuessed', false);
     if(event.target.className === 'start-game-button') {
       localStorage.setItem('isGameStarted', true);
+      points=0;
+      errors=0;
       mixCards();
       removeStartGameButton();
       renderRepeatButton();
