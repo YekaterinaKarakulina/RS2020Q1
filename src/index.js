@@ -146,12 +146,14 @@ function changeTrainPlayCardsMode() {
     case 'train':
       cardsContainer.classList.replace('play-cards', 'train-cards');
       els = document.querySelectorAll('.train-cards > *');
+      els.forEach(e => e.classList.remove('not-active'));//
       els.forEach(e => e.classList.replace('play-card', 'train-card'));
       cardDescription.forEach(e => e.classList.remove('hidden'));
       break;
     case 'play':
       cardsContainer.classList.replace('train-cards', 'play-cards');
       els = document.querySelectorAll('.play-cards > *');
+      els.forEach(e => e.classList.remove('not-active'));//
       els.forEach(e => e.classList.replace('train-card', 'play-card'));
       cardDescription.forEach(e => e.classList.add('hidden'));
       break;
