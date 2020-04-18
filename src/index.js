@@ -58,18 +58,20 @@ function getRandom(array) {
 
 
 function renderStartGameButton() {
-  const startGameButton = document.createElement('button');
-  startGameButton.className = 'start-game-button';
-  startGameButton.setAttribute('type', 'button');
-  startGameButton.innerHTML = 'start game';
-  document.querySelector('.wrapper').append(startGameButton);
-}
-function removeStartGameButton() {
-if(document.querySelector('.start-game-button') != null) {
-  document.querySelector('.start-game-button').remove();
-     
-    }
+  if(document.querySelector('.start-game-button') === null) {
+    const startGameButton = document.createElement('button');
+    startGameButton.className = 'start-game-button';
+    startGameButton.setAttribute('type', 'button');
+    startGameButton.innerHTML = 'start game';
+    document.querySelector('.wrapper').append(startGameButton);
   }
+}
+
+function removeStartGameButton() {
+  if(document.querySelector('.start-game-button') != null) {
+    document.querySelector('.start-game-button').remove();
+  }
+}
 
 
 
