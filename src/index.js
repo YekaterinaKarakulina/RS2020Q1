@@ -71,9 +71,7 @@ if(document.querySelector('.start-game-button') != null) {
     }
   }
 
-/*function removStartGameButton() {
-  document.querySelector('.start-game-button').remove();
-}*/
+
 
 function renderRepeatButton() {
   const repeatButton = document.createElement('a');
@@ -134,16 +132,17 @@ function renderCards(mode, page, categoryTitle) {
   console.log('render cards, mode = ' + mode + ' page = ' + page + ' categoryTitle = ' + categoryTitle);
   const cardsWrapper = document.querySelector('.cards-wrapper');
   
+if(localStorage.getItem('isGameStarted')==='true') {
+  console.log('tra');///
+  removeRepeatButton();
+}
+
   if(page === 'main') {
     const cards = (new Cards('section-cards')).generateCards(cardsMainPage);
     cardsWrapper.innerHTML = '';
     cardsWrapper.append(cards);
     let els = document.querySelectorAll('.section-cards > *');
     els.forEach(e => e.classList.add(mode));
-    /*if(document.querySelector('.start-game-button') != null) {
-      console.log('render cards remove start button');
-      removeStartGameButton();
-    }*/
     removeStartGameButton();
   }
 
@@ -394,7 +393,7 @@ function switchHandler() {
 }
 
 function gameInProgress() {
-  if(points <8 ) {
+  if(points < 8 ) {
     randomNumber = getRandom(array);
     for(let i=0; i< array.length; i++) {
       if(array[i] === randomNumber) {
@@ -406,6 +405,8 @@ function gameInProgress() {
     repeatSound();
   } else {
     console.log('stop game!!! points ' + points + ' errors ' + errors);
+    errors = 0;
+    points = 0;
     localStorage.setItem('isGameStarted', false);
     localStorage.setItem('mode', 'train');
     localStorage.setItem('page', 'main');
@@ -416,7 +417,6 @@ function gameInProgress() {
 }
 
 function gameHandler() {
-  let a=0;
   document.querySelector('.wrapper').addEventListener('click', (event) => {
     localStorage.setItem('isGuessed', false);
     if(event.target.className === 'start-game-button') {
