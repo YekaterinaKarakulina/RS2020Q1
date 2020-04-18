@@ -28,3 +28,10 @@
     top: calc(50% - 200px);
     left: calc(50% - 244px);
 }
+
+.stars-container {
+    height: 70px;
+    justify-content: flex-end;
+    display: flex;
+    overflow: hidden;
+}

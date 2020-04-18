@@ -95,6 +95,33 @@ function removeRepeatButton() {
   }
 }
 
+function renderStarsContainer() {
+  if(document.querySelector('.stars-container') === null)  {
+    const starsContainer = document.createElement('div');
+    starsContainer.className = 'stars-container';
+    document.querySelector('.header').insertAdjacentElement('afterend', starsContainer);
+  }
+}
+
+function removeStarsContainer() {
+  if(document.querySelector('.stars-container') != null)  {
+    document.querySelector('.stars-container').remove();
+    
+  }
+}
+
+
+
+function renderStar(starType) {
+  console.log('here');
+  const star = document.createElement('object');
+    star.className = 'star';
+    star.setAttribute('type', 'image/svg+xml');
+    star.setAttribute('data', `./src/assets/images/${starType}.svg`);
+document.querySelector('.stars-container').append(star);
+}
+
+
 
 function changeSectionCardsMode() {
   console.log('just change section cards');
@@ -138,6 +165,7 @@ function renderCards(mode, page, categoryTitle) {
   
 if(localStorage.getItem('isGameStarted')==='true') {
   console.log('tra');///
+  removeStarsContainer();
   removeRepeatButton();
 }
 
@@ -362,13 +390,16 @@ function cardsGameHandler() {
         playSound(correctSound);
         localStorage.setItem('isGuessed', true);
         points += 1;
+        renderStar('starGold');
         gameInProgress(); 
+        
         // showPicture(successImgSrc);
       } else {
         console.log('no, try again');
         errors += 1;
         localStorage.setItem('isGuessed', false);
         playSound(errorSound);
+        renderStar('starEmpty');
         //showPicture(failureImgSrc);
       } 
     }
@@ -385,6 +416,7 @@ function switchHandler() {
       case 'play':
         localStorage.setItem('mode', 'train');
         localStorage.setItem('isGameStarted', false);//////////
+        removeStarsContainer();
         removeRepeatButton();
         break;
     }
@@ -424,6 +456,7 @@ function gameInProgress() {
     localStorage.setItem('page', 'main');
     document.querySelector('.onoffswitch-inner').click();
     renderCards(localStorage.getItem('mode'), localStorage.getItem('page'), localStorage.getItem('category'));
+    removeStarsContainer();
     removeRepeatButton();
   }
 }
@@ -436,6 +469,7 @@ function gameHandler() {
       mixCards();
       removeStartGameButton();
       renderRepeatButton();
+      renderStarsContainer();
       cardsCollection = document.querySelectorAll('.play-card');
       for(let i=0; i<cardsCollection.length; i++) {
         array.push(i);
