@@ -335,17 +335,25 @@ function cardsHandler() {
   });
 }
 
-function showPicture(imgSrc) {
+function renderResults(imgSrc, className, soundSrc) {
+  
+
   const modal = document.createElement('div');
   modal.className = 'modal';
   const imageElement = document.createElement('div');
   imageElement.className = 'modalImg';
+  imageElement.classList.add(className);
   imageElement.setAttribute('style', imgSrc);
+  const errorsElement = document.createElement('div');
+  errorsElement.className = 'errors-element';
+  errorsElement.innerHTML = 'Errors: ' + errors;
+  modal.append(errorsElement);
   modal.append(imageElement);
   document.querySelector('.wrapper').append(modal);
+  playSound(soundSrc);
   setTimeout(function hideModal() {
     modal.remove();
-  }, 500);
+  }, 5000);
 }
 
 function playSound(audioSrc) {
@@ -372,8 +380,7 @@ function repeatSound() {
 
 
 function cardsGameHandler() {
-  const successImgSrc = 'background-image: url(./src/assets/images/success.jpg)';
-  const failureImgSrc = 'background-image: url(./src/assets/images/failure.jpg)';
+  
   const correctSound ='./src/assets/sounds/correct.mp3';
   const errorSound = './src/assets/sounds/error.mp3';
 
@@ -395,14 +402,14 @@ function cardsGameHandler() {
         renderStar('starGold');
         gameInProgress(); 
         
-        // showPicture(successImgSrc);
+       
       } else {
         console.log('no, try again');
         errors += 1;
         localStorage.setItem('isGuessed', false);
         playSound(errorSound);
         renderStar('starEmpty');
-        //showPicture(failureImgSrc);
+       
       } 
     }
   });
@@ -438,6 +445,22 @@ function switchHandler() {
   });
 }
 
+function showResults() {
+  const successImgSrc = 'background-image: url(./src/assets/images/success.jpg)';
+  const failureImgSrc = 'background-image: url(./src/assets/images/failure.jpg)';
+  const successSoundSrc ='./src/assets/sounds/success.mp3';
+  const failureSoundSrc ='./src/assets/sounds/failure.mp3';
+
+  if(errors === 0) {
+    renderResults(successImgSrc, 'success', successSoundSrc);
+  }
+  else {
+    renderResults(failureImgSrc, 'failure', failureSoundSrc);
+  }
+
+}
+
+
 function gameInProgress() {
   if(points < 8 ) {
     randomNumber = getRandom(array);
@@ -451,11 +474,14 @@ function gameInProgress() {
     repeatSound();
   } else {
     console.log('stop game!!! points ' + points + ' errors ' + errors);
+    showResults();
     errors = 0;
     points = 0;
+    
     localStorage.setItem('isGameStarted', false);
     localStorage.setItem('mode', 'train');
     localStorage.setItem('page', 'main');
+
     document.querySelector('.onoffswitch-inner').click();
     renderCards(localStorage.getItem('mode'), localStorage.getItem('page'), localStorage.getItem('category'));
     removeStarsContainer();

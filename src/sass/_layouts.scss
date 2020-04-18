@@ -10,7 +10,7 @@
 .modal {
     width: 100vw;
     height: 100vh;
-    background: #0008;
+    background: $color-light;
     z-index: 2;
     position: absolute;
     top: 0;
@@ -20,13 +20,25 @@
     }
 }
 
+.errors-element {
+    font-size: 2rem;
+    position: absolute;
+    left: calc(50% - 4rem);
+    top: 3rem;
+}
+
 .modalImg {
-    width: 488px;
     height: 400px;
     z-index: 100;
     position: relative;
     top: calc(50% - 200px);
     left: calc(50% - 244px);
+    &.failure {
+        width: 400px;
+    }
+    &.success {
+        width: 488px;
+    }
 }
 
 .stars-container {
