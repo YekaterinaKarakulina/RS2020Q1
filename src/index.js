@@ -23,6 +23,33 @@ function getSectionTitle(elem) {
   return title;
 }
 
+function mixCards() {
+  const cards_collection = document.querySelectorAll('.play-card');
+	var cards_mixed = [];
+	for(let i=0; i < cards_collection.length; i++) {
+		cards_mixed.push(cards_collection[i]); 
+	}
+	document.querySelector('.play-cards').innerHTML = '';
+	for(let i=0; i< cards_collection.length; i++) {
+		let randomNumber = Math.floor(Math.random() * cards_mixed.length);
+		let randomCard = cards_mixed[randomNumber];
+		cards_mixed.splice(randomNumber,1);
+		document.querySelector('.play-cards').append(randomCard);
+  }
+}
+
+
+function chooseRandomCard(cards, randomNumber) {
+    let randomCard = cards[randomNumber];
+    randomCard.classList.add(randomNumber);
+    return randomCard;
+}
+
+function get_random(array) {
+  return array[Math.floor((Math.random()*array.length))];
+} 
+
+
 function renderStartGameButton() {
   const startGameButton = document.createElement('button');
   startGameButton.className = 'start-game-button';
@@ -38,7 +65,7 @@ function removeStartGameButton() {
 
 function renderRepeatButton() {
   const repeatButton = document.createElement('a');
-  repeatButton. className = 'icon-play';
+  repeatButton. className = 'icon-repeat-container';
   const repeatIcon = document.createElement('object');
   repeatIcon.className = 'icon-repeat';
   repeatIcon.setAttribute('type', 'image/svg+xml');
@@ -96,7 +123,7 @@ function renderCards(mode, page, categoryTitle) {
     let els = document.querySelectorAll('.section-cards > *');
     els.forEach(e => e.classList.add(mode));
     if(document.querySelector('.start-game-button') != null) {
-      console.log('renser cards remove start button');
+      console.log('render cards remove start button');
       removeStartGameButton();
     }
   }
@@ -276,7 +303,7 @@ function playSound(audioSrc) {
 }
 
 
-function cardsGameHandler(cardsCollection, array, cardNumber) {
+function cardsGameHandler(cardsCollection, array, cardNumber, currentSound) {
   const successImgSrc = 'background-image: url(./src/assets/images/success.jpg)';
   const failureImgSrc = 'background-image: url(./src/assets/images/failure.jpg)';
   const correctSound ='./src/assets/sounds/correct.mp3';
@@ -302,6 +329,14 @@ function cardsGameHandler(cardsCollection, array, cardNumber) {
         
         localStorage.setItem('isGuessed', false);
         playSound(errorSound);
+        document.querySelector('.icon-repeat-container').addEventListener('click', (event) => {
+console.log(event);
+console.log('sound 2');
+currentSound.play();
+
+
+
+        });
         //showPicture(failureImgSrc);
       }
        
@@ -334,7 +369,7 @@ function switchHandler() {
     switch(localStorage.getItem('mode')) {
       case 'train':
         removeStartGameButton();
-        //renderRepeatButton();
+        
         break;
       case 'play':
         renderStartGameButton();
@@ -345,34 +380,11 @@ function switchHandler() {
   });
 }
 
-function mixCards() {
-  const cards_collection = document.querySelectorAll('.play-card');
-	var cards_mixed = [];
-	for(let i=0; i < cards_collection.length; i++) {
-		cards_mixed.push(cards_collection[i]); 
-	}
-	document.querySelector('.play-cards').innerHTML = '';
-	for(let i=0; i< cards_collection.length; i++) {
-		let randomNumber = Math.floor(Math.random() * cards_mixed.length);
-		let randomCard = cards_mixed[randomNumber];
-		cards_mixed.splice(randomNumber,1);
-		document.querySelector('.play-cards').append(randomCard);
-  }
-}
 
-
-function chooseRandomCard(cards, randomNumber) {
-    let randomCard = cards[randomNumber];
-    randomCard.classList.add(randomNumber);
-    return randomCard;
-}
-
-function get_random(array) {
-  return array[Math.floor((Math.random()*array.length))];
-} 
 
 function gameInProgress(cardsCollection, array) {
   if(localStorage.getItem('isGameStarted') === 'true') {
+    
     let randomNumber = get_random(array);
     for(let i=0; i< array.length; i++) {
       if(array[i] === randomNumber) {
@@ -382,7 +394,8 @@ function gameInProgress(cardsCollection, array) {
     let randomCard = chooseRandomCard(cardsCollection, randomNumber);
     let currentSound = randomCard.querySelector('.card-sound');
     currentSound.play();
-    cardsGameHandler(cardsCollection, array, randomNumber);
+    //cardsGameHandler(cardsCollection, array, randomNumber);
+    cardsGameHandler(cardsCollection, array, randomNumber, currentSound);
   }
 }
 
@@ -390,9 +403,11 @@ function gameHandler() {
   document.querySelector('.wrapper').addEventListener('click', (event) => {
     if(event.target.className === 'start-game-button') {
       localStorage.setItem('isGameStarted', true);
-
-      document.querySelector('.start-game-button').classList.add('hidden');
+      
+      
       mixCards();
+      removeStartGameButton();
+      renderRepeatButton();
       let cardsCollection = document.querySelectorAll('.play-card');
       let array = [];
       for(let i=0; i<cardsCollection.length; i++) {
