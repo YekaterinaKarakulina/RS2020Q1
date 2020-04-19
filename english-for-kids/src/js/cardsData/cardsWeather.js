@@ -13,7 +13,7 @@ const cardsWeather = [
   },
   {
     word: 'fog',
-    translation: 'ман',
+    translation: 'туман',
     imageSrc: './src/assets/images/cardsWeather/fog.jpg',
     audioSrc: './src/assets/sounds/cardsWeather/fog.mp3',
   },

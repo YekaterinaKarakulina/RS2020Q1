@@ -10,6 +10,8 @@ import cardsEmotions from './js/cardsData/cardsEmotions';
 import cardsVegetables from './js/cardsData/cardsVegetables';
 import cardsWeather from './js/cardsData/cardsWeather';
 
+//import './sass/style.scss';
+
 // elements
 const HAMBURGER = document.querySelector('.hamburger');
 
