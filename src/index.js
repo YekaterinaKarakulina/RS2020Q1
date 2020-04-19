@@ -13,7 +13,6 @@ import cardsWeather from './js/cardsData/cardsWeather';
 //elements
 const HAMBURGER = document.querySelector('.hamburger');
 
-
 //local storage - page, mode items init
 localStorage.setItem('mode', 'train');
 localStorage.setItem('page', 'main');  
@@ -27,7 +26,7 @@ let randomCard;
 let points;
 let errors;
 
-
+//get title from card
 function getSectionTitle(elem) {
   let title;
   for(let i=0; i<elem.children.length; i++) {
@@ -38,6 +37,7 @@ function getSectionTitle(elem) {
   return title;
 }
 
+//mix cards when game starts (playMode)
 function mixCards() {
   const cards_collection = document.querySelectorAll('.play-card');
 	var cards_mixed = [];
@@ -53,17 +53,19 @@ function mixCards() {
   }
 }
 
+//choose random card while game in progress
 function chooseRandomCard(cards, randomNumber) {
     let randomCard = cards[randomNumber];
     randomCard.classList.add(randomNumber);
     return randomCard;
 }
 
+//get random number from array
 function getRandom(array) {
   return array[Math.floor((Math.random()*array.length))];
 } 
 
-
+//render 'start game' button
 function renderStartGameButton() {
   if(document.querySelector('.start-game-button') === null) {
     const startGameButton = document.createElement('button');
@@ -74,14 +76,14 @@ function renderStartGameButton() {
   }
 }
 
+//remove 'start-game' button
 function removeStartGameButton() {
   if(document.querySelector('.start-game-button') != null) {
     document.querySelector('.start-game-button').remove();
   }
 }
 
-
-
+//render 'repeat sound' button
 function renderRepeatButton() {
   const repeatButton = document.createElement('a');
   repeatButton. className = 'icon-repeat-container';
@@ -91,15 +93,16 @@ function renderRepeatButton() {
   repeatIcon.setAttribute('data', './src/assets/images/repeat.svg');
   repeatButton.append(repeatIcon);
   document.querySelector('.wrapper').append(repeatButton);
-
 }
 
+//remove 'repeat sound' button
 function removeRepeatButton() {
   if(document.querySelector('.icon-repeat-container') != null) {
   document.querySelector('.icon-repeat-container').remove();
   }
 }
 
+//render container for stars while game in progress
 function renderStarsContainer() {
   if(document.querySelector('.stars-container') === null)  {
     const starsContainer = document.createElement('div');
@@ -108,6 +111,7 @@ function renderStarsContainer() {
   }
 }
 
+//render container for stars when game ends
 function removeStarsContainer() {
   if(document.querySelector('.stars-container') != null)  {
     document.querySelector('.stars-container').remove();
@@ -115,21 +119,17 @@ function removeStarsContainer() {
   }
 }
 
-
-
+//render star
 function renderStar(starType) {
-  console.log('here');
   const star = document.createElement('object');
-    star.className = 'star';
-    star.setAttribute('type', 'image/svg+xml');
-    star.setAttribute('data', `./src/assets/images/${starType}.svg`);
-document.querySelector('.stars-container').append(star);
+  star.className = 'star';
+  star.setAttribute('type', 'image/svg+xml');
+  star.setAttribute('data', `./src/assets/images/${starType}.svg`);
+  document.querySelector('.stars-container').append(star);
 }
 
-
-
+//change section cards mode train/play
 function changeSectionCardsMode() {
-  console.log('just change section cards');
   let els = document.querySelectorAll('.section-cards > *');
     els.forEach(e => e.classList.add(localStorage.getItem('mode')));
     switch(localStorage.getItem('mode')) {
@@ -142,8 +142,8 @@ function changeSectionCardsMode() {
     }
 }
 
+//change category cards mode train/play
 function changeTrainPlayCardsMode() {
-  console.log('just change train cards');
   const cardsContainer = document.querySelector('.cards-wrapper').firstElementChild;
   let cardDescription = document.querySelectorAll('.card-description');
   let els = [];
@@ -167,15 +167,11 @@ function changeTrainPlayCardsMode() {
 
 //renderCards
 function renderCards(mode, page, categoryTitle) {
-  console.log('render cards, mode = ' + mode + ' page = ' + page + ' categoryTitle = ' + categoryTitle);
   const cardsWrapper = document.querySelector('.cards-wrapper');
-  
-if(localStorage.getItem('isGameStarted')==='true') {
-  console.log('tra');///
-  removeStarsContainer();
-  removeRepeatButton();
-}
-
+  if(localStorage.getItem('isGameStarted')==='true') {
+    removeStarsContainer();
+    removeRepeatButton();
+  }
   if(page === 'main') {
     const cards = (new Cards('section-cards')).generateCards(cardsMainPage);
     cardsWrapper.innerHTML = '';
@@ -183,19 +179,14 @@ if(localStorage.getItem('isGameStarted')==='true') {
     let els = document.querySelectorAll('.section-cards > *');
     els.forEach(e => e.classList.add(mode));
     removeStartGameButton();
-  }
-
-  else  if(page === 'category') {
+  } else  if(page === 'category') {
     cardsWrapper.innerHTML = '';
     let cards = [];
     let cardsContainerName;
-    
-    
     if(localStorage.getItem('mode') === 'train') {
       cardsContainerName = 'train-cards';
     } else if(localStorage.getItem('mode') === 'play') {
     cardsContainerName = 'play-cards';
-    console.log('render cards add start button');
     renderStartGameButton();
     }
     switch(categoryTitle) {
@@ -226,20 +217,13 @@ if(localStorage.getItem('isGameStarted')==='true') {
   }
     cardsWrapper.append(cards);
     changeTrainPlayCardsMode();
-
-    
-
   }
 }
 
-
-
-
-
-//hamburgerIconHandler
+//hamburger icon handler
 function hamburgerIconHandler() {
-  HAMBURGER.addEventListener('click', (event) => {
-    HAMBURGER.classList.toggle('open');//
+  HAMBURGER.addEventListener('click', () => {
+    HAMBURGER.classList.toggle('open');
     document.querySelector('.hamburger-container').classList.toggle('hidden');
     let hamburgerContainer = document.querySelector('.hamburger-container');
     hamburgerContainer.classList.add(localStorage.getItem('mode'));
@@ -269,13 +253,11 @@ function hamburgerIconHandler() {
   });
 }
 
+//hamburger menu handler
 function hamburgerMenuHandler() {
-
   const hamburgerContainer = document.querySelector('.hamburger-menu');
   hamburgerContainer.addEventListener('click', (event) => {
-    
     if(event.target.parentNode.classList.contains('nav-item')) {
-
       let navItems = document.querySelectorAll('.nav-item > a');
       navItems.forEach(e => e.classList.remove('active'));
       event.target.classList.add('active');
@@ -287,10 +269,9 @@ function hamburgerMenuHandler() {
         }
       }
       document.querySelector('.hamburger-container').classList.add('hidden');
-if(HAMBURGER.classList.contains('open')) {
-  HAMBURGER.classList.remove('open');//
-}
-
+      if(HAMBURGER.classList.contains('open')) {
+        HAMBURGER.classList.remove('open');
+      }
       if(activeLinkElem === 'main page') {
         localStorage.setItem('page', 'main');
         renderCards(localStorage.getItem('mode'), localStorage.getItem('page'), localStorage.getItem('category'));
@@ -300,14 +281,10 @@ if(HAMBURGER.classList.contains('open')) {
         renderCards(localStorage.getItem('mode'), localStorage.getItem('page'), localStorage.getItem('category'));
       }
     }
-  })
-
-
+  });
 }
 
-
-
-
+//cards handler
 function cardsHandler() {
   document.querySelector('.cards-wrapper').addEventListener('click', (event) => {
     if(localStorage.getItem('page') === 'main') {
@@ -333,15 +310,13 @@ function cardsHandler() {
         });
       } else if(event.target.classList.contains('card-image')) {
         event.target.nextSibling.play();
-        console.log('sound');
       }
     }
   });
 }
 
+//render game results
 function renderResults(imgSrc, className, soundSrc) {
-  
-
   const modal = document.createElement('div');
   modal.className = 'modal';
   const imageElement = document.createElement('div');
@@ -360,34 +335,29 @@ function renderResults(imgSrc, className, soundSrc) {
   }, 5000);
 }
 
+//play sound
 function playSound(audioSrc) {
-
   const soundElement = document.createElement('audio');
-    const sourceElement = document.createElement('source');
-    sourceElement.setAttribute('src', audioSrc);
-    sourceElement.setAttribute('type', "audio/mpeg");
-    soundElement.append(sourceElement);
-    soundElement.play();
-
-  
+  const sourceElement = document.createElement('source');
+  sourceElement.setAttribute('src', audioSrc);
+  sourceElement.setAttribute('type', "audio/mpeg");
+  soundElement.append(sourceElement);
+  soundElement.play();
 }
      
-
+//repeat sound button handler
 function repeatSound() {
-  document.querySelector('.icon-repeat-container').addEventListener('click', (event) => {
+  document.querySelector('.icon-repeat-container').addEventListener('click', () => {
     if(localStorage.getItem('isGameStarted') ==='true') {
-      console.log('sound 2');
       randomCard.querySelector('.card-sound').play();
     }
   });
 }
 
-
+//game handler
 function cardsGameHandler() {
-  
   const correctSound ='./src/assets/sounds/correct.mp3';
   const errorSound = './src/assets/sounds/error.mp3';
-
   document.querySelector('.cards-wrapper').addEventListener('mouseup', (event) => {
     if(localStorage.getItem('page') === 'category' && localStorage.getItem('mode') === 'play' && localStorage.getItem('isGameStarted')==='true') {
       let clickedCard;
@@ -398,37 +368,33 @@ function cardsGameHandler() {
         clickedCard = event.target.parentNode.parentNode;
       }
       if (clickedCard.classList.contains(randomNumber)) {
-        console.log('yes you are right');
         clickedCard.classList.add('not-active');
         playSound(correctSound);
         localStorage.setItem('isGuessed', true);
         points += 1;
         renderStar('starGold');
         gameInProgress(); 
-        
-       
       } else {
-        console.log('no, try again');
         errors += 1;
         localStorage.setItem('isGuessed', false);
         playSound(errorSound);
         renderStar('starEmpty');
-       
       } 
     }
   });
 }
 
+//switch handler
 function switchHandler() {
   const modeSwitch = document.querySelector('.modeSwitch');
-  modeSwitch.addEventListener('mouseup', (event) => {
+  modeSwitch.addEventListener('mouseup', () => {
     switch(localStorage.getItem('mode')) {
       case 'train':
         localStorage.setItem('mode', 'play');
         break;
       case 'play':
         localStorage.setItem('mode', 'train');
-        localStorage.setItem('isGameStarted', false);//////////
+        localStorage.setItem('isGameStarted', false);
         removeStarsContainer();
         removeRepeatButton();
         break;
@@ -449,22 +415,21 @@ function switchHandler() {
   });
 }
 
+//show results of game
 function showResults() {
   const successImgSrc = 'background-image: url(./src/assets/images/success.jpg)';
   const failureImgSrc = 'background-image: url(./src/assets/images/failure.jpg)';
   const successSoundSrc ='./src/assets/sounds/success.mp3';
   const failureSoundSrc ='./src/assets/sounds/failure.mp3';
-
   if(errors === 0) {
     renderResults(successImgSrc, 'success', successSoundSrc);
   }
   else {
     renderResults(failureImgSrc, 'failure', failureSoundSrc);
   }
-
 }
 
-
+//game in progress
 function gameInProgress() {
   if(points < 8 ) {
     randomNumber = getRandom(array);
@@ -477,15 +442,12 @@ function gameInProgress() {
     randomCard.querySelector('.card-sound').play();
     repeatSound();
   } else {
-    console.log('stop game!!! points ' + points + ' errors ' + errors);
     showResults();
     errors = 0;
     points = 0;
-    
     localStorage.setItem('isGameStarted', false);
     localStorage.setItem('mode', 'train');
     localStorage.setItem('page', 'main');
-
     document.querySelector('.onoffswitch-inner').click();
     renderCards(localStorage.getItem('mode'), localStorage.getItem('page'), localStorage.getItem('category'));
     removeStarsContainer();
@@ -493,6 +455,7 @@ function gameInProgress() {
   }
 }
 
+//game handler
 function gameHandler() {
   document.querySelector('.wrapper').addEventListener('click', (event) => {
     localStorage.setItem('isGuessed', false);
@@ -516,14 +479,9 @@ function gameHandler() {
 window.onload = function () {
  renderCards(localStorage.getItem('mode'), localStorage.getItem('page'));
   hamburgerIconHandler();
- // hamburgerCloseButtonHandler();
   hamburgerMenuHandler();
   switchHandler();
   cardsHandler();
   gameHandler();
   cardsGameHandler();
-
-  
-  
-
 };
