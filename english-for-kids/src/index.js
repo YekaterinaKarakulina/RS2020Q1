@@ -10,8 +10,6 @@ import cardsEmotions from './js/cardsData/cardsEmotions';
 import cardsVegetables from './js/cardsData/cardsVegetables';
 import cardsWeather from './js/cardsData/cardsWeather';
 
-//import './sass/style.scss';
-
 // elements
 const HAMBURGER = document.querySelector('.hamburger');
 
@@ -262,6 +260,7 @@ function hamburgerIconHandler() {
         }
       }
     } else if (localStorage.getItem('page') === 'category') {
+     
       for (let i = 0; i < navItems.length; i += 1) {
         if (navItems[i].innerHTML.toLowerCase() === localStorage.getItem('category')) {
           navItems[i].classList.add('active');
@@ -307,6 +306,7 @@ function hamburgerMenuHandler() {
         localStorage.setItem('category', activeLinkElem);
         localStorage.setItem('page', 'category');
         renderCards(localStorage.getItem('mode'), localStorage.getItem('page'), localStorage.getItem('category'));
+        localStorage.setItem('isGameStarted', false);
       }
     }
   });
@@ -413,6 +413,8 @@ function cardsGameHandler() {
       } else if (event.target.classList.contains('card-image')) {
         clickedCard = event.target.parentNode.parentNode;
       }
+      
+      //
       if (clickedCard.classList.contains(randomNumber)) {
         clickedCard.classList.add('not-active');
         playSound(correctSound);
