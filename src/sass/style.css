@@ -302,7 +302,7 @@ object {
   right: 1.5rem;
 }
 
-.hamburger-line, .hamburger::after, .hamburger::before {
+.hamburger-line {
   content: "";
   display: inline-block;
   position: absolute;
@@ -314,19 +314,21 @@ object {
 .hamburger {
   display: inline-block;
   position: relative;
-  width: 30px;
-  height: 20px;
+  width: 3rem;
+  height: 3rem;
   left: 2rem;
   top: 1.5rem;
   cursor: pointer;
-}
-.hamburger::before {
-  top: 0px;
-  left: 0;
-}
-.hamburger::after {
-  bottom: 0px;
-  left: 0;
+  /* &::before {
+       @extend %hamburger-line;
+       top: 0px;
+       left: 0;
+   }
+   &::after {
+       @extend %hamburger-line;
+       bottom: 0px;
+       left: 0;
+   }*/
 }
 
 .hamburger-line {
@@ -387,6 +389,75 @@ object {
   left: 45%;
   width: 2rem;
   height: 2rem;
+}
+
+/* Icon 1 */
+.hamburger {
+  position: relative;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+.hamburger.open {
+  z-index: 100;
+}
+
+.hamburger span {
+  display: block;
+  position: absolute;
+  height: 7px;
+  width: 100%;
+  background: #666d89;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.25s ease-in-out;
+  -moz-transition: 0.25s ease-in-out;
+  -o-transition: 0.25s ease-in-out;
+  transition: 0.25s ease-in-out;
+}
+
+.hamburger span:nth-child(1) {
+  top: 0;
+}
+
+.hamburger span:nth-child(2) {
+  top: 0.8rem;
+}
+
+.hamburger span:nth-child(3) {
+  top: 1.6rem;
+}
+
+.hamburger.open span:nth-child(1) {
+  top: 18px;
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  left: -60px;
+}
+
+.hamburger.open span:nth-child(3) {
+  top: 18px;
+  -webkit-transform: rotate(-135deg);
+  -moz-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  transform: rotate(-135deg);
 }
 
 .start-game-button {

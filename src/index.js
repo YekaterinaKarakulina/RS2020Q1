@@ -10,11 +10,16 @@ import cardsEmotions from './js/cardsData/cardsEmotions';
 import cardsVegetables from './js/cardsData/cardsVegetables';
 import cardsWeather from './js/cardsData/cardsWeather';
 
+//elements
+const HAMBURGER = document.querySelector('.hamburger');
+
+
 //local storage - page, mode items init
 localStorage.setItem('mode', 'train');
 localStorage.setItem('page', 'main');  
 localStorage.setItem('isGameStarted', false);
 
+//variables
 let cardsCollection ;
 let array = [];
 let randomNumber;
@@ -233,9 +238,9 @@ if(localStorage.getItem('isGameStarted')==='true') {
 
 //hamburgerIconHandler
 function hamburgerIconHandler() {
-  const HAMBURGER = document.querySelector('.hamburger');
   HAMBURGER.addEventListener('click', (event) => {
-    document.querySelector('.hamburger-container').classList.remove('hidden');
+    HAMBURGER.classList.toggle('open');//
+    document.querySelector('.hamburger-container').classList.toggle('hidden');
     let hamburgerContainer = document.querySelector('.hamburger-container');
     hamburgerContainer.classList.add(localStorage.getItem('mode'));
     let navItems = document.querySelectorAll('.nav-item > a');
@@ -264,20 +269,13 @@ function hamburgerIconHandler() {
   });
 }
 
-//hamburgerCloseButtonHandler
-function hamburgerCloseButtonHandler() {
-  const closeButton = document.querySelector('.close-button');
-  closeButton.addEventListener('click', (event) => {
-    document.querySelector('.hamburger-container').classList.add('hidden');
-  });
-}
-
-
-
 function hamburgerMenuHandler() {
+
   const hamburgerContainer = document.querySelector('.hamburger-menu');
   hamburgerContainer.addEventListener('click', (event) => {
+    
     if(event.target.parentNode.classList.contains('nav-item')) {
+
       let navItems = document.querySelectorAll('.nav-item > a');
       navItems.forEach(e => e.classList.remove('active'));
       event.target.classList.add('active');
@@ -289,6 +287,10 @@ function hamburgerMenuHandler() {
         }
       }
       document.querySelector('.hamburger-container').classList.add('hidden');
+if(HAMBURGER.classList.contains('open')) {
+  HAMBURGER.classList.remove('open');//
+}
+
       if(activeLinkElem === 'main page') {
         localStorage.setItem('page', 'main');
         renderCards(localStorage.getItem('mode'), localStorage.getItem('page'), localStorage.getItem('category'));
@@ -299,6 +301,8 @@ function hamburgerMenuHandler() {
       }
     }
   })
+
+
 }
 
 
@@ -510,14 +514,16 @@ function gameHandler() {
 }
 
 window.onload = function () {
-  renderCards(localStorage.getItem('mode'), localStorage.getItem('page'));
+ renderCards(localStorage.getItem('mode'), localStorage.getItem('page'));
   hamburgerIconHandler();
-  hamburgerCloseButtonHandler();
+ // hamburgerCloseButtonHandler();
   hamburgerMenuHandler();
   switchHandler();
   cardsHandler();
   gameHandler();
   cardsGameHandler();
+
+  
   
 
 };
