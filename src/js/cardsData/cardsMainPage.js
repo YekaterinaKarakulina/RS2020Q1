@@ -30,15 +30,15 @@ const cardsMainPage = [
     imageSrc: './src/assets/images/cardsMainPage/smile.jpg',
   },
   {
-        sectionTitle: 'Vegetables',
-        className: 'vegetables',
-        imageSrc: './src/assets/images/cardsVegetables/pumpkin.jpg',
-    },
-    {
-        sectionTitle: 'Weather',
-        className: 'weather',
-        imageSrc: './src/assets/images/cardsWeather/sunny.jpg',
-    }, 
+    sectionTitle: 'Vegetables',
+    className: 'vegetables',
+    imageSrc: './src/assets/images/cardsVegetables/pumpkin.jpg',
+  },
+  {
+    sectionTitle: 'Weather',
+    className: 'weather',
+    imageSrc: './src/assets/images/cardsWeather/sunny.jpg',
+  },
 ];
 
 export default cardsMainPage;

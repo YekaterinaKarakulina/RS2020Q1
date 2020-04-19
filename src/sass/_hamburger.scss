@@ -1,17 +1,4 @@
-//hamburger
-%hamburger-line {
-    content: "";
-    display: inline-block;
-    position: absolute;
-    background-color: $color-gray;
-    height: 2.4px;
-    width: 100%;
-}
-
 .hamburger {
-
-    //
-    
     display: inline-block;
     position: relative;
     width: 3rem;
@@ -19,22 +6,6 @@
     left: 2rem;
     top: 1.5rem;
     cursor: pointer;
-   /* &::before {
-        @extend %hamburger-line;
-        top: 0px;
-        left: 0;
-    }
-    &::after {
-        @extend %hamburger-line;
-        bottom: 0px;
-        left: 0;
-    }*/
-}
-
-.hamburger-line {
-    @extend %hamburger-line;
-    top: calc(50% - 1.2px);
-    left: 0;
 }
 
 //hamburger container
@@ -93,13 +64,8 @@
 
 
 
-/////////
-/* Icon 1 */
-
 .hamburger {
-    
     position: relative;
-   
     -webkit-transform: rotate(0deg);
     -moz-transform: rotate(0deg);
     -o-transform: rotate(0deg);
@@ -160,7 +126,6 @@
   }
   
   .hamburger.open span:nth-child(3) {
-  
     top: 18px;
     -webkit-transform: rotate(-135deg);
     -moz-transform: rotate(-135deg);

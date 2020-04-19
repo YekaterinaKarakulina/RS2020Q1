@@ -30,7 +30,7 @@ export default class Card {
     soundElement.className = className;
     const sourceElement = document.createElement('source');
     sourceElement.setAttribute('src', this.audioSrc);
-    sourceElement.setAttribute('type', "audio/mpeg");
+    sourceElement.setAttribute('type', 'audio/mpeg');
     soundElement.append(sourceElement);
     return soundElement;
   }
@@ -68,7 +68,7 @@ export default class Card {
 
     const cardIconFront = document.createElement('a');
     cardIconFront.className = 'card-icon';
-    
+
     const rotateIconF = document.createElement('object');
     rotateIconF.className = 'icon-rotate';
     rotateIconF.setAttribute('type', 'image/svg+xml');
@@ -78,7 +78,7 @@ export default class Card {
     rotateIconB.className = 'icon-rotate';
     rotateIconB.setAttribute('type', 'image/svg+xml');
     rotateIconB.setAttribute('data', './src/assets/images/rotate.svg');
-   
+
     const cardIconBack = document.createElement('a');
     cardIconBack.className = 'card-icon';
 

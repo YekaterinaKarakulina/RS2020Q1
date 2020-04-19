@@ -302,15 +302,6 @@ object {
   right: 1.5rem;
 }
 
-.hamburger-line {
-  content: "";
-  display: inline-block;
-  position: absolute;
-  background-color: #666d89;
-  height: 2.4px;
-  width: 100%;
-}
-
 .hamburger {
   display: inline-block;
   position: relative;
@@ -319,21 +310,6 @@ object {
   left: 2rem;
   top: 1.5rem;
   cursor: pointer;
-  /* &::before {
-       @extend %hamburger-line;
-       top: 0px;
-       left: 0;
-   }
-   &::after {
-       @extend %hamburger-line;
-       bottom: 0px;
-       left: 0;
-   }*/
-}
-
-.hamburger-line {
-  top: calc(50% - 1.2px);
-  left: 0;
 }
 
 .hamburger-container {
@@ -391,7 +367,6 @@ object {
   height: 2rem;
 }
 
-/* Icon 1 */
 .hamburger {
   position: relative;
   -webkit-transform: rotate(0deg);
