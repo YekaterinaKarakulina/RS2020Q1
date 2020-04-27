@@ -1,0 +1,33 @@
+.table1 {
+    font-size: 24px;
+}
+
+.solid_S {
+    background-image: url("../assets/solidS.png");
+    width: 430px;
+    height: 100px;
+}
+
+.solid_O {
+    background-image: url("../assets/solidO.png");
+    width: 400px;
+    height: 100px;
+}
+
+.solid_L {
+    background-image: url("../assets/solidL.png");
+    width: 430px;
+    height: 100px;
+}
+
+.solid_I {
+    background-image: url("../assets/solidI.png");
+    width: 450px;
+    height: 100px;
+}
+
+.solid_D {
+    background-image: url("../assets/solidD.png");
+    width: 450px;
+    height: 100px;
+}
