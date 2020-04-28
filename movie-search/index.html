@@ -10,6 +10,7 @@
     <header class="wrapper wrapper__header">
         <h1 class="header__title">Movie Search</h1>
     </header>
+
     <main class="wrapper">
         <section class="search">
             <div class="search__container">
@@ -18,12 +19,40 @@
                 <span class="icon icon__delete"></span>
             </div>
                 <button class="search__button">Search</button>
-            
         </section>
-        <section class="search__results">
 
+        <section class="search__results">
+            <div class="errorSearch"></div>
+            <div class="carousel">
+                <div class="items">
+                    <!--<div class="item">
+                        <a class="item__header" href="#"></a>
+                        <div class="item__body"></div>
+                        <div class="item__footer">
+                            <span class="item__year"></span>
+                            <span class="item__rate"></span>
+                        </div>
+                    </div>-->
+                </div>
+                <div class="control">
+                    <div class="arrow left"></div>
+                    <div class="arrow right"></div>
+                </div>
+            </div>  
         </section>
     </main>
+
+    <footer class="wrapper wrapper__footer">
+        <div class="schoolInfo">
+            <span class="icon icon__school"></span>
+            <span class="schoolName">RS School 2020q1</span>
+        </div>
+        
+        <div class="githubInfo">
+            <span class="icon icon__github"></span>
+            <span class="githubAccount">YekaterinaKarakulina</span>
+        </div>
+    </footer>
     <script src="./src/index.js"></script>
 </body>
 </html>

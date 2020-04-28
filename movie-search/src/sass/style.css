@@ -21,13 +21,13 @@ body {
   display: inline-block;
   width: 3rem;
   height: 3rem;
-  position: absolute;
+  z-index: 1;
 }
 
 .icon__search {
+  position: absolute;
   background-image: url("../assets/icons/iconSearch.png");
   left: calc(50% - 23rem);
-  z-index: 1;
 }
 @media (max-width: 1019px) {
   .icon__search {
@@ -52,9 +52,9 @@ body {
 }
 
 .icon__delete {
+  position: absolute;
   background-image: url("../assets/icons/iconDelete.png");
   left: calc(50% + 20rem);
-  z-index: 1;
   transform: scale(0.8);
 }
 @media (max-width: 1019px) {
@@ -77,6 +77,17 @@ body {
     left: calc(50% + 5.7rem);
     top: -0.3rem;
   }
+}
+
+.icon__school {
+  background-image: url("../assets/icons/logo-rs.svg");
+  background-size: 3rem 3rem;
+  margin-right: 0.5rem;
+}
+
+.icon__github {
+  background-image: url("../assets/icons/iconGithub.png");
+  margin-right: 0.5rem;
 }
 
 .wrapper__header {
@@ -206,6 +217,40 @@ body {
     font-size: 1rem;
     font-weight: bold;
   }
+}
+
+.wrapper__footer {
+  background-color: #2d303a;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+@media (max-width: 767px) {
+  .wrapper__footer {
+    font-size: 0.7rem;
+    font-weight: bold;
+  }
+}
+
+.schoolInfo {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+@media (max-width: 414px) {
+  .schoolName {
+    display: none;
+  }
+}
+
+.githubInfo {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
 }
 
 /*# sourceMappingURL=style.css.map */

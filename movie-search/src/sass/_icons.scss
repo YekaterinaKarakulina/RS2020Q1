@@ -2,16 +2,13 @@
     display: inline-block;
     width: 3rem;
     height: 3rem;
-    position: absolute;
-    
-    
-    
+    z-index: 1;
 }
 
 .icon__search {
+    position: absolute;
     background-image: url("../assets/icons/iconSearch.png");
     left: calc(50% - 23rem);
-    z-index: 1;
     @include media-laptop {
         transform: scale(0.7);
         left: calc(50% - 15.3rem);
@@ -30,9 +27,9 @@
 }
 
 .icon__delete {
+    position: absolute;
     background-image: url("../assets/icons/iconDelete.png");
     left: calc(50% + 20rem);
-    z-index: 1;
     transform: scale(0.8);
     @include media-laptop {
         transform: scale(0.5);
@@ -51,3 +48,13 @@
     }
 }
 
+.icon__school{
+    background-image: url('../assets/icons/logo-rs.svg');
+    background-size: 3rem 3rem;
+    margin-right: 0.5rem;
+}
+
+.icon__github {
+    background-image: url('../assets/icons/iconGithub.png');
+    margin-right: 0.5rem;
+}
