@@ -1,7 +1,47 @@
-.one {
-  width: 100px;
-  height: 100px;
-  background-color: red;
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", Verdana, sans-serif;
+}
+
+html {
+  font-size: 10px;
+}
+
+.wrapper {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.wrapper__header {
+  background-color: #2d303a;
+}
+
+.header__title {
+  display: inline-block;
+  margin: 0 calc(50% - 11rem);
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ffffff;
+  padding: 1.2rem 0;
+}
+@media (max-width: 767px) {
+  .header__title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0 calc(50% - 7rem);
+  }
+}
+@media (max-width: 320px) {
+  .header__title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 calc(50% - 5.5rem);
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
