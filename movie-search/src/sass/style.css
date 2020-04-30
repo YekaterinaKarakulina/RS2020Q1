@@ -7,6 +7,11 @@ body {
   font-family: "Poppins", Verdana, sans-serif;
 }
 
+html, body {
+  position: relative;
+  height: 100%;
+}
+
 body {
   font-size: 10px;
 }
@@ -114,6 +119,62 @@ body {
     font-size: 1.5rem;
     font-weight: bold;
     margin: 0 calc(50% - 5.5rem);
+  }
+}
+
+.swiper-container {
+  width: 60rem;
+  height: 20rem;
+  margin: 5rem 0;
+}
+@media (max-width: 1019px) {
+  .swiper-container {
+    width: 44rem;
+    height: 20rem;
+  }
+}
+@media (max-width: 767px) {
+  .swiper-container {
+    width: 24rem;
+    height: 20rem;
+  }
+}
+@media (max-width: 414px) {
+  .swiper-container {
+    width: 10rem;
+    height: 20rem;
+  }
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: blueviolet;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .swiper-button-prev::after,
+.swiper-button-next::after {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .swiper-pagination {
+    display: none;
   }
 }
 

@@ -63,4 +63,12 @@ async function searchButtonHandler () {
 
 document.querySelector('.search__button').addEventListener('click', ()=> {   
    searchButtonHandler(); 
+  
 });
+
+
+
+
+
+
+
