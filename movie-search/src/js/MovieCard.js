@@ -11,7 +11,7 @@ export default class MovieCard {
      createCardElement() {
         const cardElement = document.createElement('div');
         cardElement.className = `swiper-slide`;
-        
+
         const cardHeader = document.createElement('a');
         cardHeader.className = 'card__header';
         cardHeader.setAttribute('href', this.linkToVideoGallery);
@@ -19,7 +19,11 @@ export default class MovieCard {
 
         const cardBody = document.createElement('div');
         cardBody.className = 'card__body';
-        cardBody.setAttribute('style', `background-image: url(${this.poster})`);
+        if(this.poster !== 'N/A') {
+            cardBody.setAttribute('style', `background-image: url(${this.poster})`);
+        } else {
+            cardBody.innerText = 'Image not found';
+        }
 
         const year = document.createElement('span');
         year.className = 'movieYear';
