@@ -10,8 +10,34 @@ export default class MovieCard {
 
      createCardElement() {
         const cardElement = document.createElement('div');
-        cardElement.className = `card ${this.imdbID}`;
-        return cardElement;
+        cardElement.className = `swiper-slide`;
         
+        const cardHeader = document.createElement('a');
+        cardHeader.className = 'card__header';
+        cardHeader.setAttribute('href', this.linkToVideoGallery);
+        cardHeader.text = this.title;
+
+        const cardBody = document.createElement('div');
+        cardBody.className = 'card__body';
+        cardBody.setAttribute('style', `background-image: url(${this.poster})`);
+
+        const year = document.createElement('span');
+        year.className = 'movieYear';
+        year.innerHTML = this.year;
+
+        const rating = document.createElement('span');
+        rating.className = 'movieRating';
+        rating.innerHTML = this.imdbRating;
+
+        const cardFooter = document.createElement('div');
+        cardFooter.className = 'card__footer';
+        cardFooter.append(year);
+        cardFooter.append(rating);
+        
+        cardElement.append(cardHeader);
+        cardElement.append(cardBody);
+        cardElement.append(cardFooter);
+
+        return cardElement;
     }
 }

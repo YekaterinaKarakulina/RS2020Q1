@@ -34,7 +34,7 @@ body {
   background-image: url("../assets/icons/iconSearch.png");
   left: calc(50% - 23rem);
 }
-@media (max-width: 1019px) {
+@media (max-width: 1039px) {
   .icon__search {
     transform: scale(0.7);
     left: calc(50% - 15.3rem);
@@ -62,7 +62,7 @@ body {
   left: calc(50% + 20rem);
   transform: scale(0.8);
 }
-@media (max-width: 1019px) {
+@media (max-width: 1039px) {
   .icon__delete {
     transform: scale(0.5);
     left: calc(50% + 12.3rem);
@@ -124,32 +124,31 @@ body {
 
 .swiper-container {
   width: 60rem;
-  height: 20rem;
-  margin: 5rem 0;
+  height: 40rem;
+  margin: 5rem auto;
 }
-@media (max-width: 1019px) {
+@media (max-width: 1039px) {
   .swiper-container {
-    width: 44rem;
-    height: 20rem;
+    width: 42rem;
+    height: 40rem;
   }
 }
 @media (max-width: 767px) {
   .swiper-container {
     width: 24rem;
-    height: 20rem;
+    height: 40rem;
   }
 }
 @media (max-width: 414px) {
   .swiper-container {
-    width: 10rem;
-    height: 20rem;
+    width: 22rem;
+    height: 40rem;
   }
 }
 
 .swiper-slide {
   text-align: center;
-  font-size: 18px;
-  background: blueviolet;
+  flex-direction: column;
   /* Center slide text vertically */
   display: -webkit-box;
   display: -ms-flexbox;
@@ -164,6 +163,9 @@ body {
   -webkit-align-items: center;
   align-items: center;
 }
+.swiper-slide:hover {
+  box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25), -5px -5px 30px 15px rgba(0, 0, 0, 0.22);
+}
 
 @media (max-width: 767px) {
   .swiper-button-prev::after,
@@ -176,6 +178,26 @@ body {
   .swiper-pagination {
     display: none;
   }
+}
+
+.card__header {
+  line-height: 1.3rem;
+  height: 2.6rem;
+  font-size: 1.2rem;
+}
+
+.card__body {
+  width: 18.75rem;
+  height: 27.75rem;
+  display: block;
+  margin: 0.5rem 0;
+  background-size: cover;
+}
+
+.movieYear,
+.movieRating {
+  display: block;
+  font-size: 1rem;
 }
 
 .search {
@@ -199,7 +221,7 @@ body {
   border: 1px solid #2d303a;
   margin-right: 0.5rem;
 }
-@media (max-width: 1019px) {
+@media (max-width: 1039px) {
   .search__container {
     width: 30rem;
     height: 2.5rem;
@@ -226,7 +248,7 @@ body {
   margin: 0 calc(50% - 20rem);
   border: none;
 }
-@media (max-width: 1019px) {
+@media (max-width: 1039px) {
   .search__inputField {
     width: 25rem;
     height: 2.5rem;
@@ -257,7 +279,7 @@ body {
   font-size: 1rem;
   font-weight: bold;
 }
-@media (max-width: 1019px) {
+@media (max-width: 1039px) {
   .search__button {
     width: 7rem;
     height: 2.5rem;

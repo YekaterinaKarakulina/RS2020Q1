@@ -1,26 +1,25 @@
 .swiper-container {
   width: 60rem;
-  height: 20rem;
-  margin: 5rem 0;
+  height: 40rem;
+  margin: 5rem auto;
   @include media-laptop {
-    width: 44rem;
-    height: 20rem;
+    width: 42rem;
+    height: 40rem;
   }
   @include media-tablet {
     width: 24rem;
-    height: 20rem;
+    height: 40rem;
   }
   @include media-mobile {
-    width: 10rem;
-    height: 20rem;
+    width: 22rem;
+    height: 40rem;
   }
 }
 
 .swiper-slide {
   text-align: center;
-  font-size: 18px;
-  background: blueviolet;
-
+  flex-direction: column;
+  
   /* Center slide text vertically */
   display: -webkit-box;
   display: -ms-flexbox;
@@ -34,6 +33,11 @@
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
+
+  &:hover {
+    box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
+      -5px -5px 30px 15px rgba(0,0,0,0.22);
+  }
 }
 
 .swiper-button-prev::after,
@@ -47,4 +51,24 @@
   @include media-tablet {
     display: none;
   }
+}
+
+.card__header {
+  line-height: 1.3rem;
+  height: 2.6rem;
+  font-size: 1.2rem;
+}
+
+.card__body {
+  width: 18.75rem;
+  height: 27.75rem;
+  display: block;
+  margin: 0.5rem 0;
+  background-size: cover;
+}
+
+.movieYear, 
+.movieRating {
+  display: block;
+  font-size: 1rem;
 }

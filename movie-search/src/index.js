@@ -1,5 +1,6 @@
 
 import MovieCard from './js/MovieCard';
+import swiper from './js/swiper';
 
 async function translate(word) {
     const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200322T155651Z.de98a60e6a99185e.089aea4237b51c6db082c966f27a7895cd1e8b44&text=${word}&lang=ru-en`;
@@ -32,33 +33,33 @@ async function getMovieInfo(title) {
     return data.Search;
 }
 
-async function getMovieObject(title) {
+async function getMovieObject(title, i) {
     let data = await getMovieInfo(title);
     let movieObject = {
-        title: data[0].Title,
-        year: data[0].Year,
-        poster: data[0].Poster,
-        imdbID: data[0].imdbID,
+        title: data[i].Title,
+        year: data[i].Year,
+        poster: data[i].Poster,
+        imdbID: data[i].imdbID,
        }
        movieObject.linkToVideoGallery = `https://www.imdb.com/title/${movieObject.imdbID}/videogallery/`;
     let data2 = await getMovieImdbRating(movieObject.imdbID);
-    movieObject.ratingImdb = data2.imdbRating;
+    movieObject.imdbRating = data2.imdbRating;
     return movieObject;
 }
     
-function  renderMovieCard(movieObject) {
-    let container = document.querySelector('.search__results');
+function  createMovieCard(movieObject) {
     const card = new MovieCard(movieObject);
     let cardItem = card.createCardElement();
-    console.log(cardItem);
-   // container.append(renderMovieCard(movieForSearch));  
+    return cardItem;
 }
 
 async function searchButtonHandler () {
     let movieForSearch = await readInputValue();
-    console.log(movieForSearch);
-    let movieObject = await getMovieObject(movieForSearch);
-    renderMovieCard(movieObject);
+    let container = document.querySelector('.swiper-wrapper');
+    for(let i=0; i<10; i++) {
+        let movieObject = await getMovieObject(movieForSearch, i);
+        swiper.appendSlide(createMovieCard(movieObject));
+    }  
 }
 
 document.querySelector('.search__button').addEventListener('click', ()=> {   
