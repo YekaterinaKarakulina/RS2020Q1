@@ -141,7 +141,7 @@ body {
 }
 @media (max-width: 414px) {
   .swiper-container {
-    width: 22rem;
+    width: 20rem;
     height: 40rem;
   }
 }
