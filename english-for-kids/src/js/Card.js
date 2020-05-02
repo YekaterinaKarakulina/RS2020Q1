@@ -57,6 +57,7 @@ export default class Card {
     const cardBack = document.createElement('div');
     cardBack.classList.add('card-face');
     cardBack.classList.add('card-face-back');
+    cardBack.classList.add('hidden');
 
     const cardWord = document.createElement('div');
     cardWord.className = 'card-word';

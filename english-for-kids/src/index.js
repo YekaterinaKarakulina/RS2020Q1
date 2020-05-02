@@ -331,9 +331,15 @@ function cardsHandler() {
     } else if (localStorage.getItem('page') === 'category' && localStorage.getItem('mode') === 'train') {
       if (event.target.classList.contains('card-icon')) {
         const card = event.target.parentNode.parentNode.parentNode;
+        const cardFrontSide = event.target.closest('.card-face');
+        const cardBackSide = cardFrontSide.nextSibling;
+        cardFrontSide.classList.add('hidden');
+        cardBackSide.classList.remove('hidden');
         card.classList.add('is-flipped');
         card.addEventListener('mouseleave', () => {
+          cardBackSide.classList.add('hidden');
           card.classList.remove('is-flipped');
+          cardFrontSide.classList.remove('hidden');
         });
       } else if (event.target.classList.contains('card-image')) {
         event.target.nextSibling.play();
@@ -385,19 +391,24 @@ function gameInProgress() {
       }
     }
     randomCard = chooseRandomCard(cardsCollection, randomNumber);
-    randomCard.querySelector('.card-sound').play();
+    setTimeout(()=> {
+      randomCard.querySelector('.card-sound').play();
+    }, 1000);
     repeatSound();
   } else {
-    showResults();
-    errors = 0;
-    points = 0;
-    localStorage.setItem('isGameStarted', false);
-    localStorage.setItem('mode', 'train');
-    localStorage.setItem('page', 'main');
-    document.querySelector('.onoffswitch-inner').click();
-    renderCards(localStorage.getItem('mode'), localStorage.getItem('page'), localStorage.getItem('category'));
-    removeStarsContainer();
-    removeRepeatButton();
+    setTimeout(()=> {
+      showResults();
+      errors = 0;
+      points = 0;
+      localStorage.setItem('isGameStarted', false);
+      localStorage.setItem('mode', 'train');
+      localStorage.setItem('page', 'main');
+      document.querySelector('.onoffswitch-inner').click();
+      renderCards(localStorage.getItem('mode'), localStorage.getItem('page'), localStorage.getItem('category'));
+      removeStarsContainer();
+      removeRepeatButton();
+    }, 1000);
+    
   }
 }
 
@@ -413,8 +424,6 @@ function cardsGameHandler() {
       } else if (event.target.classList.contains('card-image')) {
         clickedCard = event.target.parentNode.parentNode;
       }
-      
-      //
       if (clickedCard.classList.contains(randomNumber)) {
         clickedCard.classList.add('not-active');
         playSound(correctSound);
@@ -422,7 +431,7 @@ function cardsGameHandler() {
         points += 1;
         renderStar('starGold');
         gameInProgress();
-      } else {
+      } else if(!clickedCard.classList.contains('not-active')){
         errors += 1;
         localStorage.setItem('isGuessed', false);
         playSound(errorSound);
