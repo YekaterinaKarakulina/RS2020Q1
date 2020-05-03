@@ -5,8 +5,9 @@
   width: 15rem;
   height: 15rem;
   margin: 1rem;
-  border-radius: 20px;
-  box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+  border-radius: 1.25rem;
+  box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), 
+    -5px -5px 30px 7px rgba(0,0,0,0.22);
   background-color: $color-light;
   cursor: pointer;
   transition: 0.4s;
@@ -45,15 +46,15 @@
 //section card
 .section-image {
   background-position: 30% 57%;
-  background-size: 100% 100%;
+  background-size: cover;
   border-radius: 50%;
   border: 5px solid white;
-  margin: 10px 0;
+  margin: 0.625rem 0;
   width: 9rem;
   height: 9rem;
   margin: 0 auto;
   position: relative;
-  top: 20px;
+  top: 1.25rem;
 }
 
 .section-title {
@@ -78,7 +79,6 @@
   display: inline;
   position: relative;
   left: 4rem; 
- 
 }
 
 .card-icon {
