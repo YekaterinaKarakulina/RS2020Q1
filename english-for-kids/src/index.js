@@ -107,7 +107,7 @@ function renderStarsContainer() {
   if (document.querySelector('.stars-container') === null) {
     const starsContainer = document.createElement('div');
     starsContainer.className = 'stars-container';
-    document.querySelector('.header').insertAdjacentElement('afterend', starsContainer);
+    document.querySelector('.header').append(starsContainer);
   }
 }
 
@@ -288,11 +288,10 @@ function hamburgerMenuHandler() {
       const navItems = document.querySelectorAll('.nav-item > a');
       navItems.forEach((e) => e.classList.remove('active'));
       event.target.classList.add('active');
-      const allLinkElements = document.querySelectorAll('.nav-item > a');
       let activeLinkElem;
-      for (let i = 0; i < allLinkElements.length; i += 1) {
-        if (allLinkElements[i].classList.contains('active')) {
-          activeLinkElem = allLinkElements[i].innerHTML.toLowerCase();
+      for (let i = 0; i < navItems.length; i += 1) {
+        if (navItems[i].classList.contains('active')) {
+          activeLinkElem = navItems[i].innerHTML.toLowerCase();
         }
       }
       document.querySelector('.hamburger-container').classList.add('hidden');

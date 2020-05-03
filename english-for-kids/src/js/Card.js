@@ -37,9 +37,7 @@ export default class Card {
 
   generateSectionCard() {
     const card = document.createElement('div');
-    card.classList.add('card');
-    card.classList.add('section-card');
-    card.classList.add(this.className);
+    card.classList.add('card', 'section-card', this.className);
     card.append(this.createImgBlock('section-image'));
     card.append(this.createSectionTitle());
     return card;
@@ -47,17 +45,13 @@ export default class Card {
 
   generateTrainPlayCard() {
     const card = document.createElement('div');
-    card.classList.add('card');
-    card.classList.add('train-card');
+    card.classList.add('card', 'train-card');
 
     const cardFront = document.createElement('div');
-    cardFront.classList.add('card-face');
-    cardFront.classList.add('card-face-front');
+    cardFront.classList.add('card-face', 'card-face-front');
 
     const cardBack = document.createElement('div');
-    cardBack.classList.add('card-face');
-    cardBack.classList.add('card-face-back');
-    cardBack.classList.add('hidden');
+    cardBack.classList.add('card-face', 'card-face-back', 'hidden');
 
     const cardWord = document.createElement('div');
     cardWord.className = 'card-word';
