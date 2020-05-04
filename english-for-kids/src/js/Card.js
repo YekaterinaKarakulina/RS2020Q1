@@ -62,7 +62,10 @@ export default class Card {
     cardTranslation.innerHTML = this.translation;
 
     const cardIconFront = document.createElement('a');
-    cardIconFront.className = 'card-icon';
+    cardIconFront.className = 'card-icon card-icon-front';
+
+    const cardIconBack = document.createElement('a');
+    cardIconBack.className = 'card-icon card-icon-back';
 
     const rotateIconF = document.createElement('object');
     rotateIconF.className = 'icon-rotate';
@@ -73,9 +76,6 @@ export default class Card {
     rotateIconB.className = 'icon-rotate';
     rotateIconB.setAttribute('type', 'image/svg+xml');
     rotateIconB.setAttribute('data', './src/assets/images/rotate.svg');
-
-    const cardIconBack = document.createElement('a');
-    cardIconBack.className = 'card-icon';
 
     cardIconFront.append(rotateIconF);
     cardIconBack.append(rotateIconB);

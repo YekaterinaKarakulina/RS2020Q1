@@ -328,19 +328,38 @@ function cardsHandler() {
         renderCards(localStorage.getItem('mode'), localStorage.getItem('page'), localStorage.getItem('category'));
       }
     } else if (localStorage.getItem('page') === 'category' && localStorage.getItem('mode') === 'train') {
-      if (event.target.classList.contains('card-icon')) {
+      if(event.target.classList.contains('card-icon')) {
         const card = event.target.parentNode.parentNode.parentNode;
-        const cardFrontSide = event.target.closest('.card-face');
-        const cardBackSide = cardFrontSide.nextSibling;
-        cardFrontSide.classList.add('hidden');
-        cardBackSide.classList.remove('hidden');
-        card.classList.add('is-flipped');
+        let cardFrontSide;
+        let cardBackSide;
+        let sides = card.childNodes;
+        for(let i=0; i<sides.length; i++) {
+          if(sides[i].classList.contains('card-face-front')) {
+            cardFrontSide = sides[i];
+          }
+          if(sides[i].classList.contains('card-face-back')) {
+            cardBackSide = sides[i];
+          }
+        }
+        console.log(cardFrontSide);
+        console.log(cardBackSide);
+        if(event.target.classList.contains('card-icon-front')) {
+          cardFrontSide.classList.add('hidden');
+          cardBackSide.classList.remove('hidden');
+          card.classList.add('is-flipped');
+
+        } else if(event.target.classList.contains('card-icon-back')) {
+          cardFrontSide.classList.remove('hidden');
+          cardBackSide.classList.add('hidden');
+          card.classList.remove('is-flipped');
+        }
         card.addEventListener('mouseleave', () => {
           cardBackSide.classList.add('hidden');
           card.classList.remove('is-flipped');
           cardFrontSide.classList.remove('hidden');
         });
-      } else if (event.target.classList.contains('card-image')) {
+      }
+       else if (event.target.classList.contains('card-image')) {
         event.target.nextSibling.play();
       }
     }
