@@ -104,3 +104,10 @@
         display: block;
     }
 }
+
+.spinner {
+    display: block;
+    &.hidden {
+        display: none;
+    }
+}

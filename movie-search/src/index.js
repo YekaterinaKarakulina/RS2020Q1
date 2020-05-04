@@ -10,13 +10,14 @@ const apiKey = '5964eff4';
 
 const searchResultsTitle = document.querySelector('.search__resultsTitle');
 const searchResultsMessage = document.querySelector('.search__resultsMessage');
+const searchInputField = document.querySelector('.search__inputField');
 
 function setFocus() {
-  document.querySelector('.search__inputField').focus();
+  searchInputField.focus();
 }
 
 function printSearchResults(movieForSearch) {
-  if (document.querySelector('.search__inputField').getAttribute('bla') === 'true') {
+  if (searchInputField.getAttribute('isResponseOk') === 'true') {
     searchResultsTitle.textContent = 'Search results for: ';
     searchResultsMessage.textContent = movieForSearch;
   } else {
@@ -33,13 +34,13 @@ async function translate(word) {
 }
 
 function clearInputValue() {
-  document.querySelector('.search__inputField').value = '';
+  searchInputField.value = '';
   searchResultsTitle.textContent = '';
   searchResultsMessage.textContent = '';
 }
 
 async function readInputValue() {
-  const inputValue = (document.querySelector('.search__inputField').value).toLowerCase();
+  const inputValue = (searchInputField.value).toLowerCase();
   if (inputValue.match(/[а-яА-ЯёЁ]/g)) {
     const translation = await translate(inputValue);
     console.log(`translation ${translation}`);
@@ -62,9 +63,9 @@ async function getMovieInfo(title) {
   console.log(data);
   if (data.Response === 'False') {
     console.log(data.Error);
-    document.querySelector('.search__inputField').setAttribute('bla', 'false');
+    searchInputField.setAttribute('isResponseOk', 'false');
   } else {
-    document.querySelector('.search__inputField').setAttribute('bla', 'true');
+    searchInputField.setAttribute('isResponseOk', 'true');
     return data.Search;
   }
 }
@@ -96,13 +97,14 @@ async function renderRequestResults(data) {
       slides.push(createMovieCard(movieObject));
     }
   }
+  document.querySelector('.spinner').classList.add('hidden');
   slides.forEach((slide) => {
     swiper.appendSlide(slide);
   });
 }
 
 async function firstRequest(movieForSearch) {
-  document.querySelector('.search__inputField').setAttribute('bla', 'true');
+  searchInputField.setAttribute('isResponseOk', 'true');
   printSearchResults(movieForSearch);
   const data = await getMovieInfo(movieForSearch);
   await renderRequestResults(data);
@@ -111,8 +113,8 @@ async function firstRequest(movieForSearch) {
 async function searchButtonHandler() {
   const movieForSearch = await readInputValue();
   const data = await getMovieInfo(movieForSearch);
-  printSearchResults(movieForSearch);
-  if (document.querySelector('.search__inputField').getAttribute('bla') === 'true') {
+  if (searchInputField.getAttribute('isResponseOk') === 'true') {
+    printSearchResults(movieForSearch);
     swiper.removeAllSlides();
     renderRequestResults(data);
   }
@@ -123,6 +125,7 @@ setFocus();
 firstRequest(firstRequestValue);
 
 document.querySelector('.search__button').addEventListener('click', () => {
+  document.querySelector('.spinner').classList.remove('hidden');//
   searchButtonHandler();
 });
 
