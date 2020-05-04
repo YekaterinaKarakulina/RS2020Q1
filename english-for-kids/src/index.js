@@ -341,8 +341,6 @@ function cardsHandler() {
             cardBackSide = sides[i];
           }
         }
-        console.log(cardFrontSide);
-        console.log(cardBackSide);
         if(event.target.classList.contains('card-icon-front')) {
           cardFrontSide.classList.add('hidden');
           cardBackSide.classList.remove('hidden');
