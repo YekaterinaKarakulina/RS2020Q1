@@ -6,7 +6,9 @@
   "scripts": {
     "style": "sass --watch src/sass/style.scss src/sass/style.css",
     "dev": "webpack --mode development",
-    "prod": "webpack --mode production"
+    "prod": "webpack --mode production",
+    "eslint": "eslint ./src",
+    "eslint:fix": "eslint ./src --fix"
   },
   "keywords": [
     "API"
