@@ -5,10 +5,12 @@
   @include media-laptop {
     width: 42rem;
     height: 40rem;
+    margin: 4rem auto;
   }
   @include media-tablet {
     width: 24rem;
     height: 40rem;
+    margin: 2rem auto;
   }
   @include media-mobile {
     width: 20rem;
