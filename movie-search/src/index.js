@@ -35,8 +35,10 @@ async function getMovieImdbRating(imdbID) {
 async function getMovieInfo(title) {
   const url = `https://www.omdbapi.com/?s=${title}&apikey=${apiKey}`;
   const res = await fetch(url);
+  console.log(res);
   const data = await res.json();
-  console.log(`data.totalResults ${data.totalResults}`);
+  console.log(`data.totalResults: ${data.totalResults}`);
+  console.log(data);
   console.log(data.Search);
   return data.Search;
 }
@@ -79,7 +81,11 @@ async function firstRequest(movieForSearch) {
   await renderRequestResults(movieForSearch);
 }
 
+function setFocus() {
+  document.querySelector('.search__inputField').focus();
+}
 
+setFocus();
 firstRequest('home alone');
 
 document.querySelector('.search__button').addEventListener('click', () => {

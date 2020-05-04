@@ -29,7 +29,15 @@ module.exports = (env, options) => {
                             presets: ['@babel/preset-env']
                         }
                     }
-                }, {
+                }, 
+                
+                {
+                    test: /\.html$/,
+                    loader: 'html-loader',
+                  },
+                  
+                  
+                  {
                     test: /\.scss$/,
                     use: [
                         MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'  
@@ -42,8 +50,12 @@ module.exports = (env, options) => {
                         }
                     ]
                 }
+               
             ]
         },
+        devServer: {
+            stats: 'errors-only'
+            },
 
         plugins: [
             new CleanWebpackPlugin(),
