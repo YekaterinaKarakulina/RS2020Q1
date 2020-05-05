@@ -41,6 +41,10 @@
     height: 2.9rem;
     background-color: $color-primary;
     color:$color-light;
+    cursor: pointer;
+    &:hover {
+        background-color: $color-primary-light;
+    }
     @include font($size: 1rem, $weight: bold);
     @include media-laptop {
         width: 7rem;

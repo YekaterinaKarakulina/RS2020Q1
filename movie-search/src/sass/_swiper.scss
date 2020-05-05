@@ -56,9 +56,15 @@
 }
 
 .card__header {
+  text-decoration: none;
   line-height: 1.3rem;
   height: 2.6rem;
   font-size: 1.2rem;
+  cursor: pointer;
+  color: $color-primary;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .card__body {
@@ -73,4 +79,5 @@
 .movieRating {
   display: block;
   font-size: 1rem;
+  color: $color-primary;
 }

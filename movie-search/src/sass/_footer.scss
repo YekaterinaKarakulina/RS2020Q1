@@ -27,3 +27,13 @@
     align-items: center;
     padding: 0.5rem 0;
 }
+
+.githubAccount, 
+.schoolName {
+    cursor: pointer;
+    text-decoration: none;
+    color: $color-light;
+    &:hover {
+        text-decoration: underline;
+    }
+}
