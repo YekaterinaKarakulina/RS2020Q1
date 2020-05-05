@@ -11,18 +11,21 @@ const apiKey = '5964eff4';
 const searchResultsTitle = document.querySelector('.search__resultsTitle');
 const searchResultsMessage = document.querySelector('.search__resultsMessage');
 const searchInputField = document.querySelector('.search__inputField');
+const searchErrorMessage = document.querySelector('.search__errorMessage');
 
 function setFocus() {
   searchInputField.focus();
 }
 
-function printSearchResults(movieForSearch) {
+function printSearchResults(movieForSearch, error) {
   if (searchInputField.getAttribute('isResponseOk') === 'true') {
     searchResultsTitle.textContent = 'Search results for: ';
     searchResultsMessage.textContent = movieForSearch;
+    searchErrorMessage.textContent = '';
   } else {
-    searchResultsTitle.textContent = 'No results for: ';
-    searchResultsMessage.textContent = movieForSearch;
+    searchResultsTitle.textContent = '';
+    searchResultsMessage.textContent = '';
+    searchErrorMessage.textContent = error;
   }
 }
 
@@ -34,17 +37,22 @@ async function translate(word) {
 }
 
 function clearInputValue() {
+  searchInputField.setAttribute('isResponseOk', 'false');
   searchInputField.value = '';
   searchResultsTitle.textContent = '';
   searchResultsMessage.textContent = '';
+  searchErrorMessage.textContent = '';
 }
 
 async function readInputValue() {
-  const inputValue = (searchInputField.value).toLowerCase();
-  if (inputValue.match(/[а-яА-ЯёЁ]/g)) {
-    const translation = await translate(inputValue);
-    console.log(`translation ${translation}`);
-    return translation;
+  searchInputField.setAttribute('isResponseOk', 'false');
+  let inputValue = (searchInputField.value).toLowerCase();
+
+  if (inputValue.match(/^[а-яА-ЯёЁ]/g)) {
+    inputValue = await translate(inputValue);
+  } else if (inputValue.match(/[!@#$%^&*()_+=]/g)) {
+    printSearchResults('', 'Typing error!');
+    inputValue = undefined;
   }
   return inputValue;
 }
@@ -57,6 +65,7 @@ async function getMovieImdbRating(imdbID) {
 }
 
 async function getMovieInfo(title) {
+  searchInputField.setAttribute('isResponseOk', 'false');
   const url = `https://www.omdbapi.com/?s=${title}&apikey=${apiKey}`;
   const res = await fetch(url);
   const data = await res.json();
@@ -66,8 +75,9 @@ async function getMovieInfo(title) {
     searchInputField.setAttribute('isResponseOk', 'false');
   } else {
     searchInputField.setAttribute('isResponseOk', 'true');
-    return data.Search;
   }
+  printSearchResults(title, data.Error);
+  return data.Search;
 }
 
 async function createMovieObject(data, i) {
@@ -105,18 +115,23 @@ async function renderRequestResults(data) {
 
 async function firstRequest(movieForSearch) {
   searchInputField.setAttribute('isResponseOk', 'true');
-  printSearchResults(movieForSearch);
   const data = await getMovieInfo(movieForSearch);
   await renderRequestResults(data);
 }
 
 async function searchButtonHandler() {
   const movieForSearch = await readInputValue();
-  const data = await getMovieInfo(movieForSearch);
-  if (searchInputField.getAttribute('isResponseOk') === 'true') {
-    printSearchResults(movieForSearch);
-    swiper.removeAllSlides();
-    renderRequestResults(data);
+  if (movieForSearch) {
+    try {
+      const data = await getMovieInfo(movieForSearch);
+      if (searchInputField.getAttribute('isResponseOk') === 'true') {
+        document.querySelector('.spinner').classList.remove('hidden');//
+        swiper.removeAllSlides();
+        renderRequestResults(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 
@@ -125,11 +140,9 @@ setFocus();
 firstRequest(firstRequestValue);
 
 document.querySelector('.search__button').addEventListener('click', () => {
-  document.querySelector('.spinner').classList.remove('hidden');//
   searchButtonHandler();
 });
 
 document.querySelector('.icon__delete').addEventListener('click', () => {
-  console.log('del');
   clearInputValue();
 });
