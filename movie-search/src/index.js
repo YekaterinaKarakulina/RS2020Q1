@@ -15,22 +15,28 @@ const searchErrorMessage = document.querySelector('.search__errorMessage');
 
 let sMovieForSearch = 'Home alone';
 let iPageNumber = 1;
-let bFlag = false;
+let bIsLoadingPages = false;
 
-
-function setFocus() {
-  searchInputField.focus();
+function renderSearchResults(resultsTitle, movieTitle, errorMessage) {
+  searchResultsTitle.textContent = resultsTitle;
+  searchResultsMessage.textContent = movieTitle;
+  searchErrorMessage.textContent = errorMessage;
 }
 
-function printSearchResults(movieForSearch, error) {
-  if (searchInputField.getAttribute('isResponseOk') === 'true') {
-    searchResultsTitle.textContent = 'Search results for: ';
-    searchResultsMessage.textContent = movieForSearch;
-    searchErrorMessage.textContent = '';
+function printSearchResults(movieTitle, data, errorMessage) {
+  if (data.Response === 'True') {
+    renderSearchResults('Showing results for: ', movieTitle, '');
+  } else if (errorMessage) {
+    renderSearchResults('', '', errorMessage);
   } else {
-    searchResultsTitle.textContent = '';
-    searchResultsMessage.textContent = '';
-    searchErrorMessage.textContent = error;
+    switch (data.Error) {
+      case 'Movie not found!':
+        renderSearchResults('No results for: ', movieTitle, '');
+        break;
+      default:
+        renderSearchResults('', '', data.Error);
+        break;
+    }
   }
 }
 
@@ -42,21 +48,20 @@ async function translate(word) {
 }
 
 function clearInputValue() {
-  searchInputField.setAttribute('isResponseOk', 'false');
   searchInputField.value = '';
   searchResultsTitle.textContent = '';
   searchResultsMessage.textContent = '';
   searchErrorMessage.textContent = '';
+  iPageNumber = 1;
 }
 
 async function readInputValue() {
-  searchInputField.setAttribute('isResponseOk', 'false');
   let inputValue = (searchInputField.value).toLowerCase();
-
   if (inputValue.match(/^[а-яА-ЯёЁ]/g)) {
     inputValue = await translate(inputValue);
   } else if (inputValue.match(/[!@#$%^&*()_+=]/g)) {
-    printSearchResults('', 'Typing error!');
+    console.log('typing error');
+    printSearchResults('', '', 'Typing error!');
     inputValue = undefined;
   }
   return inputValue;
@@ -70,19 +75,12 @@ async function getMovieImdbRating(imdbID) {
 }
 
 async function getMovieInfo(title, page) {
-  searchInputField.setAttribute('isResponseOk', 'false');
   const url = `https://www.omdbapi.com/?s=${title}&page=${page}&apikey=${apiKey}`;
   const res = await fetch(url);
   const data = await res.json();
   console.log(data);
-  if (data.Response === 'False') {
-    console.log(data.Error);
-    searchInputField.setAttribute('isResponseOk', 'false');
-  } else {
-    searchInputField.setAttribute('isResponseOk', 'true');
-  }
-  printSearchResults(title, data.Error);
-  return data.Search;
+  printSearchResults(title, data);
+  return data;
 }
 
 async function createMovieObject(data, i) {
@@ -104,27 +102,6 @@ function createMovieCard(movieObject) {
   return cardItem;
 }
 
-async function needToLoad() {
-  const array = document.querySelector('.swiper-wrapper').children;
-  console.log(array.length);
-  const el = array[array.length - 7];
-  if (el.classList.contains('swiper-slide-active')) {
-    console.log('need To load');
-    iPageNumber += 1;
-    console.log(sMovieForSearch, iPageNumber);
-    if (sMovieForSearch) {
-      try {
-        const data = await getMovieInfo(sMovieForSearch, iPageNumber);
-        if (searchInputField.getAttribute('isResponseOk') === 'true') {
-          renderRequestResults(data);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }
-}
-
 async function renderRequestResults(data) {
   const slides = [];
   if (data) {
@@ -137,24 +114,47 @@ async function renderRequestResults(data) {
   slides.forEach((slide) => {
     swiper.appendSlide(slide);
   });
-  await needToLoad(data);
+}
+
+async function loadNextPages() {
+  bIsLoadingPages = true;
+  const array = document.querySelector('.swiper-wrapper').children;
+  console.log(array.length);
+  const el = array[array.length - 7];
+  if (el.classList.contains('swiper-slide-active')) {
+    console.log('need To load');
+    iPageNumber += 1;
+    console.log('sMovieForSearch' + sMovieForSearch +  'iPageNumber' + iPageNumber + bIsLoadingPages);
+    if (sMovieForSearch) {
+      try {
+        const data = await getMovieInfo(sMovieForSearch, iPageNumber);
+        if (data.Response === 'True') {
+          renderRequestResults(data.Search);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
 }
 
 async function firstRequest(movieForSearch) {
-  searchInputField.setAttribute('isResponseOk', 'true');
+  searchInputField.focus();
   const data = await getMovieInfo(movieForSearch, iPageNumber);
-  await renderRequestResults(data);
+  await renderRequestResults(data.Search);
 }
 
 async function searchButtonHandler() {
+  bIsLoadingPages = false;
+  iPageNumber = 1;
   sMovieForSearch = await readInputValue();
   if (sMovieForSearch) {
     try {
       const data = await getMovieInfo(sMovieForSearch, iPageNumber);
-      if (searchInputField.getAttribute('isResponseOk') === 'true') {
-        document.querySelector('.spinner').classList.remove('hidden');//
+      if (data.Response === 'True') {
+        document.querySelector('.spinner').classList.remove('hidden');
         swiper.removeAllSlides();
-        renderRequestResults(data);
+        renderRequestResults(data.Search);
       }
     } catch (error) {
       console.log(error);
@@ -162,7 +162,6 @@ async function searchButtonHandler() {
   }
 }
 
-setFocus();
 firstRequest(sMovieForSearch);
 
 document.querySelector('.search__button').addEventListener('click', () => {
@@ -174,11 +173,11 @@ document.querySelector('.icon__delete').addEventListener('click', () => {
 });
 
 document.querySelector('.swiper-button-next').addEventListener('click', () => {
-  needToLoad();
+  loadNextPages();
 });
 
 document.querySelector('.swiper-pagination').addEventListener('click', (event) => {
   if (event.target.classList.contains('swiper-pagination-bullet')) {
-    needToLoad();
+    loadNextPages();
   }
 });
