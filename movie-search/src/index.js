@@ -120,8 +120,13 @@ async function loadNextPages() {
   bIsLoadingPages = true;
   const array = document.querySelector('.swiper-wrapper').children;
   console.log(array.length);
-  const el = array[array.length - 7];
-  if (el.classList.contains('swiper-slide-active')) {
+  let activeElementPosition;
+  for (let i = 0; i < array.length; i += 1) {
+    if (array[i].classList.contains('swiper-slide-active')) {
+      activeElementPosition = i;
+    }
+  }
+  if (activeElementPosition > array.length - 7) {
     console.log('need To load');
     iPageNumber += 1;
     console.log('sMovieForSearch' + sMovieForSearch +  'iPageNumber' + iPageNumber + bIsLoadingPages);
