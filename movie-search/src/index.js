@@ -186,3 +186,9 @@ document.querySelector('.swiper-pagination').addEventListener('click', (event) =
     loadNextPages();
   }
 });
+
+document.addEventListener('keydown', (event) => {
+  if (event.code === 'Enter') {
+    searchButtonHandler();
+  }
+});

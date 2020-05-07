@@ -29,11 +29,11 @@ export default class MovieCard {
 
     const year = document.createElement('span');
     year.className = 'movieYear';
-    year.innerHTML = this.year;
+    year.innerHTML = `${this.year} year`;
 
     const rating = document.createElement('span');
     rating.className = 'movieRating';
-    rating.innerHTML = this.imdbRating;
+    rating.innerHTML = `IMDb rating: ${this.imdbRating}`;
 
     const cardFooter = document.createElement('div');
     cardFooter.className = 'card__footer';
