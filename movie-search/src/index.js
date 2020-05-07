@@ -1,4 +1,3 @@
-
 import MovieCard from './js/MovieCard';
 import swiper from './js/swiper';
 import './sass/style.scss';
@@ -129,7 +128,7 @@ async function loadNextPages() {
   if (activeElementPosition > array.length - 7) {
     console.log('need To load');
     iPageNumber += 1;
-    console.log('sMovieForSearch' + sMovieForSearch +  'iPageNumber' + iPageNumber + bIsLoadingPages);
+    console.log(`sMovieForSearch${sMovieForSearch}iPageNumber${iPageNumber}${bIsLoadingPages}`);
     if (sMovieForSearch) {
       try {
         const data = await getMovieInfo(sMovieForSearch, iPageNumber);

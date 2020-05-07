@@ -16,7 +16,7 @@
     margin: 0 calc(50% - 20rem);
     border: none;
     &:focus {
-        border: 1px solid red;
+        border: 2px solid $color-primary-light;
     }
     @include media-laptop {
         width: 25rem;
