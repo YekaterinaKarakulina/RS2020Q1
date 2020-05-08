@@ -3,48 +3,17 @@ import swiper from './js/swiper';
 import './sass/style.scss';
 import '@babel/polyfill';
 
+import { translate, getMovieImdbRating, getMovieInfo } from './js/client';
+import printSearchResults from './js/searchResults';
+import {
+  searchResultsTitle, searchResultsMessage, searchErrorMessage, searchInputField,
+} from './js/constants';
+
 require('@babel/polyfill');
-
-const apiKey = '5964eff4';
-
-const searchResultsTitle = document.querySelector('.search__resultsTitle');
-const searchResultsMessage = document.querySelector('.search__resultsMessage');
-const searchInputField = document.querySelector('.search__inputField');
-const searchErrorMessage = document.querySelector('.search__errorMessage');
 
 let sMovieForSearch = 'Home alone';
 let iPageNumber = 1;
 let bIsLoadingPages = false;
-
-function renderSearchResults(resultsTitle, movieTitle, errorMessage) {
-  searchResultsTitle.textContent = resultsTitle;
-  searchResultsMessage.textContent = movieTitle;
-  searchErrorMessage.textContent = errorMessage;
-}
-
-function printSearchResults(movieTitle, data, errorMessage) {
-  if (data.Response === 'True') {
-    renderSearchResults('Showing results for: ', movieTitle, '');
-  } else if (errorMessage) {
-    renderSearchResults('', '', errorMessage);
-  } else {
-    switch (data.Error) {
-      case 'Movie not found!':
-        renderSearchResults('No results for: ', movieTitle, '');
-        break;
-      default:
-        renderSearchResults('', '', data.Error);
-        break;
-    }
-  }
-}
-
-async function translate(word) {
-  const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200322T155651Z.de98a60e6a99185e.089aea4237b51c6db082c966f27a7895cd1e8b44&text=${word}&lang=ru-en`;
-  const res = await fetch(url);
-  const data = await res.json();
-  return data.text[0];
-}
 
 function clearInputValue() {
   searchInputField.value = '';
@@ -64,22 +33,6 @@ async function readInputValue() {
     inputValue = undefined;
   }
   return inputValue;
-}
-
-async function getMovieImdbRating(imdbID) {
-  const url = `https://www.omdbapi.com/?i=${imdbID}&apikey=${apiKey}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  return data;
-}
-
-async function getMovieInfo(title, page) {
-  const url = `https://www.omdbapi.com/?s=${title}&page=${page}&apikey=${apiKey}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  console.log(data);
-  printSearchResults(title, data);
-  return data;
 }
 
 async function createMovieObject(data, i) {
