@@ -134,6 +134,10 @@ document.querySelector('.swiper-button-next').addEventListener('click', () => {
   loadNextPages();
 });
 
+document.querySelector('.swiper-container').addEventListener('touchstart', () => {
+  loadNextPages();
+});
+
 document.querySelector('.swiper-pagination').addEventListener('click', (event) => {
   if (event.target.classList.contains('swiper-pagination-bullet')) {
     loadNextPages();
