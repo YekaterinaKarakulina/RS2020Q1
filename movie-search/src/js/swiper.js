@@ -1,3 +1,5 @@
+import Swiper from '../../swiperAPI/swiperAPI';
+
 const swiper = new Swiper('.swiper-container', {
   breakpoints: {
     // when window width is >= 415px
