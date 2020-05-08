@@ -1,19 +1,13 @@
 @import "./normalize";
+@import "../../swiperAPI/swiper.scss";
 
 @import "./constants";
-
 @import "./placeholders";
 @import "./mixins";
-
-
-
 @import "./base";
-
 @import "./layouts";
 @import "./icons";
 @import "./spinner";
-//@import "./swipermin";
-
 @import "./header";
 @import "./swiper";
 @import "./search";
