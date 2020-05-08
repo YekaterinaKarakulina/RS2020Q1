@@ -8,8 +8,8 @@
     "dev": "webpack --mode development",
     "prod": "webpack --mode production",
     "start": "webpack-dev-server",
-    "eslint": "eslint ./src",
-    "eslint:fix": "eslint ./src --fix",
+    "eslint": "eslint ./src/js ./src/index.js",
+    "eslint:fix": "eslint ./src/js ./src/index.js --fix",
     "test": "jest"
   },
   "keywords": [

@@ -1,0 +1,73 @@
+.keyboard-textarea {
+    font-size: 20px;
+    width: 50vw;
+    height: 25vh;
+    margin-top: 3%;
+    margin-left: 25%;  
+}
+
+.keyboard {
+    width: 100vw;
+    height: 50vh;
+    min-height: 255px;
+    position: fixed;
+    bottom: 0;
+}
+
+.keyboard__keys {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.keyboard__key {
+    height: 45px;
+    width: 6%;
+    max-width: 45px;
+    margin: 3px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
+    position: relative;
+    background-color: #2d303a;
+    color: #ffffff;
+    &.keyboard__key_extra-wide {
+        width: 26%; 
+        max-width: 500px;
+    }
+    &.keyboard__key_wide {
+        width: 12%;
+        max-width: 90px;
+    }
+    &.keyboard__key_activatable::after {
+            content: '';
+            top: 5px;
+            right: 5px;
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            //background: rgba(0, 0, 0, 0.5);
+            background: red;
+            border-radius: 50%;
+    }
+    &.active::after {
+        content: '';
+        top: 5px;
+        right: 5px;
+        position: absolute;
+        width: 8px;
+        height: 8px;        
+        border-radius: 50%;
+        background: #08ff00;
+    }
+    &:hover {
+        cursor: pointer;
+    } 
+}
+
+.pressed {
+    background-color: #666d89;
+    box-shadow: 0 1px #c5c5c5;
+    transform: translateY(2px);
+}

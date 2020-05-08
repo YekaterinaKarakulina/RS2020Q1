@@ -9,6 +9,8 @@ import {
   searchResultsTitle, searchResultsMessage, searchErrorMessage, searchInputField,
 } from './js/constants';
 
+import Keyboard from './js/Keyboard';
+
 const iRemainSlides = 7;
 let sMovieForSearch = 'Home alone';
 let iPageNumber = 1;
@@ -141,3 +143,13 @@ document.addEventListener('keydown', (event) => {
     searchButtonHandler();
   }
 });
+
+///
+
+sessionStorage.setItem('isLanguageEng', sessionStorage.getItem('isLanguageEng'));
+
+ const keyboard = new Keyboard('keyboard');
+// keyboard.generateKeyboardContainer();
+
+const data = sessionStorage.getItem('isLanguageEng'); // if data == true - eng, else ru
+keyboard.renderKeys(data, false); // isCapsLockOn - false
