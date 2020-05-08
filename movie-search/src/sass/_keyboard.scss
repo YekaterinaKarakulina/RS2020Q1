@@ -1,22 +1,19 @@
-.keyboard-textarea {
-    font-size: 20px;
-    width: 50vw;
-    height: 25vh;
-    margin-top: 3%;
-    margin-left: 25%;  
-}
+// .keyboard {
+//     width: 100vw;
+//     height: 50vh;
+//     min-height: 255px;
+//     position: fixed;
+//     bottom: 0;
 
-.keyboard {
-    width: 100vw;
-    height: 50vh;
-    min-height: 255px;
-    position: fixed;
-    bottom: 0;
-}
+// }
 
 .keyboard__keys {
+    display: block;
     text-align: center;
     margin: 0 auto;
+    &.hidden {
+        display: none;
+    }
 }
 
 .keyboard__key {

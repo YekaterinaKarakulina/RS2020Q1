@@ -27,7 +27,7 @@ const keyboardRu = [
 const addLanguageSwitchDescriptionElement = () => {
   const text = document.createElement('div');
   text.classList.add('languages-switch-description');
-  text.innerHTML = 'Switch language: ShiftLeft + ControlLeft';
+  text.textContent = 'Switch language: ShiftLeft + ControlLeft';
   document.querySelector('.keyboard__keys').appendChild(text);
 };
 
@@ -35,15 +35,6 @@ export default class Keyboard {
   constructor(name) {
     this.name = name;
   }
-
-//   generateKeyboardContainer() {
-//     const keyboardContainer = document.createElement('div');
-//     keyboardContainer.classList.add(this.name);
-//     const keys = document.createElement('div');
-//     keys.classList.add('keyboard__keys');
-//     keyboardContainer.append(keys);
-//     document.body.append(keyboardContainer);
-//   }
 
   renderKeys(isLanguageEng, isUppercase) {
     addLanguageSwitchDescriptionElement();

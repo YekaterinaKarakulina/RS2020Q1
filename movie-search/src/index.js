@@ -146,10 +146,13 @@ document.addEventListener('keydown', (event) => {
 
 ///
 
-sessionStorage.setItem('isLanguageEng', sessionStorage.getItem('isLanguageEng'));
+import keyboardHandler from './js/virtualKeyboard';
 
- const keyboard = new Keyboard('keyboard');
-// keyboard.generateKeyboardContainer();
+document.querySelector('.icon__keyboard').addEventListener('click', () => {
+  document.querySelector('.keyboard__keys').classList.toggle('hidden');
+  searchInputField.focus();
 
-const data = sessionStorage.getItem('isLanguageEng'); // if data == true - eng, else ru
-keyboard.renderKeys(data, false); // isCapsLockOn - false
+});
+
+const keyboard = new Keyboard('keyboard');
+keyboardHandler(keyboard);
