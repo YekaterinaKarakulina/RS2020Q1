@@ -9,8 +9,6 @@ import {
   searchResultsTitle, searchResultsMessage, searchErrorMessage, searchInputField,
 } from './js/constants';
 
-require('@babel/polyfill');
-
 const iRemainSlides = 7;
 let sMovieForSearch = 'Home alone';
 let iPageNumber = 1;

@@ -7,11 +7,9 @@
     "style": "sass --watch src/sass/style.scss src/sass/style.css",
     "dev": "webpack --mode development",
     "prod": "webpack --mode production",
+    "start": "webpack-dev-server",
     "eslint": "eslint ./src",
     "eslint:fix": "eslint ./src --fix",
-    "start": "webpack-dev-server",
-    "build": "webpack",
-    "serv": "static build",
     "test": "jest"
   },
   "keywords": [
