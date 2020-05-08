@@ -11,9 +11,9 @@ import {
 
 require('@babel/polyfill');
 
+const iRemainSlides = 7;
 let sMovieForSearch = 'Home alone';
 let iPageNumber = 1;
-let bIsLoadingPages = false;
 
 function clearInputValue() {
   searchInputField.value = '';
@@ -28,7 +28,6 @@ async function readInputValue() {
   if (inputValue.match(/^[а-яА-ЯёЁ]/g)) {
     inputValue = await translate(inputValue);
   } else if (inputValue.match(/[!@#$%^&*()_+=]/g)) {
-    console.log('typing error');
     printSearchResults('', '', 'Typing error!');
     inputValue = undefined;
   }
@@ -70,19 +69,15 @@ async function renderRequestResults(data) {
 }
 
 async function loadNextPages() {
-  bIsLoadingPages = true;
   const array = document.querySelector('.swiper-wrapper').children;
-  console.log(array.length);
   let activeElementPosition;
   for (let i = 0; i < array.length; i += 1) {
     if (array[i].classList.contains('swiper-slide-active')) {
       activeElementPosition = i;
     }
   }
-  if (activeElementPosition > array.length - 7) {
-    console.log('need To load');
+  if (activeElementPosition > array.length - iRemainSlides) {
     iPageNumber += 1;
-    console.log(`sMovieForSearch${sMovieForSearch}iPageNumber${iPageNumber}${bIsLoadingPages}`);
     if (sMovieForSearch) {
       try {
         const data = await getMovieInfo(sMovieForSearch, iPageNumber);
@@ -103,7 +98,6 @@ async function firstRequest(movieForSearch) {
 }
 
 async function searchButtonHandler() {
-  bIsLoadingPages = false;
   iPageNumber = 1;
   sMovieForSearch = await readInputValue();
   if (sMovieForSearch) {

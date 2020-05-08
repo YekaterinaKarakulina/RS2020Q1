@@ -20,7 +20,6 @@ async function getMovieInfo(title, page) {
   const url = `https://www.omdbapi.com/?s=${title}&page=${page}&apikey=${apiKey}`;
   const res = await fetch(url);
   const data = await res.json();
-  console.log(data);
   printSearchResults(title, data);
   return data;
 }
