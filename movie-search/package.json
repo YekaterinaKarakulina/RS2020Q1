@@ -11,7 +11,8 @@
     "eslint:fix": "eslint ./src --fix",
     "start": "webpack-dev-server",
     "build": "webpack",
-    "serv": "static build"
+    "serv": "static build",
+    "test": "jest"
   },
   "keywords": [
     "API"
@@ -30,9 +31,12 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^23.9.0",
     "file-loader": "^6.0.0",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
+    "jest": "^26.0.1",
+    "jest-cli": "^26.0.1",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.0",
     "sass-loader": "^8.0.2",

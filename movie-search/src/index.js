@@ -105,6 +105,7 @@ async function renderRequestResults(data) {
   const slides = [];
   if (data) {
     for (let i = 0; i < data.length; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
       const movieObject = await createMovieObject(data, i);
       slides.push(createMovieCard(movieObject));
     }
