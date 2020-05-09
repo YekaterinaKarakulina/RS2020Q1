@@ -41,22 +41,28 @@ function switchLanguage() {
 
 function printToTextarea(keyboard, event, keyCode) {
   let textareaContent = searchInputField.value;
+  let cursorPos = searchInputField.selectionStart;
+  const left = searchInputField.value.slice(0, cursorPos);
+  const right = searchInputField.value.slice(cursorPos);
   let keyContent = '';
   if (keyCode === 'Backspace') {
-    keyContent = textareaContent.substring(0, textareaContent.length - 1);
     textareaContent = '';
+    keyContent = `${left.slice(0, -1)}${right}`;
+    cursorPos -= 1;
   } else if (keyCode === 'Tab') {
-    keyContent = '    ';
+    textareaContent = '';
+    keyContent = `${left}\t${right}`;
+    cursorPos += 1;
   } else if (keyCode === 'Delete') {
-    keyContent = '';
+    keyContent = `${left}${right.slice(1)}`;
   } else if (keyCode === 'CapsLock') {
     isCapsLockOn = !isCapsLockOn;
     keyContent = '';
     activateCapsLock(keyboard, sessionStorage.getItem('isLanguageEng'));
-  } else if (keyCode === 'Enter') {
-    keyContent = '\n';
   } else if (keyCode === 'Space') {
-    keyContent = ' ';
+    textareaContent = '';
+    keyContent = `${left} ${right}`;
+    cursorPos += 1;
   } else if (keyCode === 'ShiftLeft') {
     keyContent = '';
     if (event.ctrlKey && event.shiftKey && event.altKey) {
@@ -91,22 +97,26 @@ function printToTextarea(keyboard, event, keyCode) {
     keyContent = '';
   } else if (keyCode === 'ArrowUp') {
     keyContent = '↑';
+    cursorPos += 1;
   } else if (keyCode === 'ArrowLeft') {
-    keyContent = '←';
+    cursorPos = cursorPos - 1 >= 0 ? cursorPos - 1 : 0;
   } else if (keyCode === 'ArrowDown') {
     keyContent = '↓';
+    cursorPos += 1;
   } else if (keyCode === 'ArrowRight') {
-    keyContent = '→';
+    cursorPos += 1;
   } else {
     const keysElements = document.querySelectorAll('.keyboard__key');
     for (let i = 0; i < keysElements.length; i += 1) {
       if (keysElements[i].classList.contains(keyCode)) {
         keyContent = keysElements[i].innerHTML;
+        cursorPos += 1;
       }
     }
   }
   textareaContent += keyContent;
   searchInputField.value = textareaContent;
+  searchInputField.setSelectionRange(cursorPos, cursorPos);
 }
 
 function keyboardHandler(keyboard) {
