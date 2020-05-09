@@ -5,7 +5,6 @@ export default class Key {
     this.isUpperCase = isUpperCase;
   }
 
-  // generate key
   generateKey() {
     const key = document.createElement('button');
     key.classList.add('keyboard__key');

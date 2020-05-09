@@ -59,6 +59,8 @@ function printToTextarea(keyboard, event, keyCode) {
     isCapsLockOn = !isCapsLockOn;
     keyContent = '';
     activateCapsLock(keyboard, sessionStorage.getItem('isLanguageEng'));
+  } else if (keyCode === 'Enter') {
+    keyContent = '';
   } else if (keyCode === 'Space') {
     textareaContent = '';
     keyContent = `${left} ${right}`;
@@ -152,6 +154,7 @@ function mouseHandler(keyboard) {
   keyboardKeys.addEventListener('mouseup', () => {
     if (keyButton) {
       keyButton.classList.remove('pressed');
+      searchInputField.focus();
     }
   });
 }

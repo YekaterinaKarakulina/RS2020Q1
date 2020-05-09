@@ -115,38 +115,6 @@ async function searchButtonHandler() {
   }
 }
 
-firstRequest(sMovieForSearch);
-
-document.querySelector('.search__button').addEventListener('click', () => {
-  searchButtonHandler();
-  keyboardKeys.classList.add('hidden');
-});
-
-document.querySelector('.icon__delete').addEventListener('click', () => {
-  clearInputValue();
-});
-
-document.querySelector('.swiper-button-next').addEventListener('click', () => {
-  loadNextPages();
-});
-
-document.querySelector('.swiper-container').addEventListener('touchstart', () => {
-  loadNextPages();
-});
-
-document.querySelector('.swiper-pagination').addEventListener('click', (event) => {
-  if (event.target.classList.contains('swiper-pagination-bullet')) {
-    loadNextPages();
-  }
-});
-
-document.addEventListener('keydown', (event) => {
-  if (event.code === 'Enter') {
-    keyboardKeys.classList.add('hidden');
-    searchButtonHandler();
-  }
-});
-
 const keyboard = new Keyboard('keyboard');
 document.querySelector('.icon__keyboard').addEventListener('click', () => {
   keyboardKeys.classList.toggle('hidden');
@@ -155,5 +123,33 @@ document.querySelector('.icon__keyboard').addEventListener('click', () => {
   keyboard.renderKeys(sessionStorage.getItem('isLanguageEng'), false); // isCapsLockOn - false
 });
 
+firstRequest(sMovieForSearch);
 keyboardHandler(keyboard);
 mouseHandler(keyboard);
+
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('search__button')) {
+    searchButtonHandler();
+    keyboardKeys.classList.add('hidden');
+  } else if (event.target.classList.contains('icon__delete')) {
+    clearInputValue();
+  } else if (event.target.classList.contains('swiper-button-next')) {
+    loadNextPages();
+  } else if (event.target.classList.contains('swiper-pagination-bullet')) {
+    loadNextPages();
+  } else if (event.target.classList.contains('Enter')) {
+    searchButtonHandler();
+    keyboardKeys.classList.add('hidden');
+  }
+});
+
+document.querySelector('.swiper-container').addEventListener('touchstart', () => {
+  loadNextPages();
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.code === 'Enter') {
+    keyboardKeys.classList.add('hidden');
+    searchButtonHandler();
+  }
+});
