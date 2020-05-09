@@ -6,7 +6,7 @@ import '@babel/polyfill';
 import { translate, getMovieImdbRating, getMovieInfo } from './js/client';
 import printSearchResults from './js/searchResults';
 import {
-  searchResultsTitle, searchResultsMessage, searchErrorMessage, searchInputField,
+  searchResultsTitle, searchResultsMessage, searchErrorMessage, searchInputField, keyboardKeys,
 } from './js/constants';
 
 import Keyboard from './js/Keyboard';
@@ -119,6 +119,7 @@ firstRequest(sMovieForSearch);
 
 document.querySelector('.search__button').addEventListener('click', () => {
   searchButtonHandler();
+  keyboardKeys.classList.add('hidden');
 });
 
 document.querySelector('.icon__delete').addEventListener('click', () => {
@@ -141,15 +142,14 @@ document.querySelector('.swiper-pagination').addEventListener('click', (event) =
 
 document.addEventListener('keydown', (event) => {
   if (event.code === 'Enter') {
+    keyboardKeys.classList.add('hidden');
     searchButtonHandler();
   }
 });
 
-///
-
 const keyboard = new Keyboard('keyboard');
 document.querySelector('.icon__keyboard').addEventListener('click', () => {
-  document.querySelector('.keyboard__keys').classList.toggle('hidden');
+  keyboardKeys.classList.toggle('hidden');
   searchInputField.focus();
   clearKeyboardContainer();
   keyboard.renderKeys(sessionStorage.getItem('isLanguageEng'), false); // isCapsLockOn - false

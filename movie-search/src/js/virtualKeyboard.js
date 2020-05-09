@@ -1,7 +1,5 @@
 import Keyboard from './Keyboard';
-import { searchInputField } from './constants';
-
-const keyboardContainer = document.querySelector('.keyboard__keys');
+import { searchInputField, keyboardKeys } from './constants';
 
 sessionStorage.setItem('isLanguageEng', true);
 let isCapsLockOn = false;
@@ -20,7 +18,7 @@ function toggleKeyClass(keyCode, action) {
 }
 
 function clearKeyboardContainer() {
-  document.querySelector('.keyboard__keys').innerHTML = '';
+  keyboardKeys.innerHTML = '';
 }
 
 function activateCapsLock(keyboard) {
@@ -113,15 +111,14 @@ function printToTextarea(keyboard, event, keyCode) {
 
 function keyboardHandler(keyboard) {
   document.addEventListener('keydown', (event) => {
-    if (!document.querySelector('.keyboard__keys').classList.contains('hidden')) {
-      console.log(event);
+    if (!keyboardKeys.classList.contains('hidden')) {
       toggleKeyClass(event.code, 'add');
       printToTextarea(keyboard, event, event.code, event.key);
       event.preventDefault();
     }
   });
   document.addEventListener('keyup', (event) => {
-    if (!document.querySelector('.keyboard__keys').classList.contains('hidden')) {
+    if (!keyboardKeys.classList.contains('hidden')) {
       toggleKeyClass(event.code, 'remove');
     }
   });
@@ -130,8 +127,7 @@ function keyboardHandler(keyboard) {
 function mouseHandler(keyboard) {
   let keyCode = '';
   let keyButton;
-  keyboardContainer.addEventListener('mousedown', (event) => {
-    console.log(event.target);
+  keyboardKeys.addEventListener('mousedown', (event) => {
     keyButton = event.target.closest('.keyboard__key');
     if (keyButton) {
       if (keyButton.classList[keyButton.classList.length - 1] === 'active') {
@@ -143,7 +139,7 @@ function mouseHandler(keyboard) {
     }
     printToTextarea(keyboard, event, keyCode);
   });
-  keyboardContainer.addEventListener('mouseup', () => {
+  keyboardKeys.addEventListener('mouseup', () => {
     if (keyButton) {
       keyButton.classList.remove('pressed');
     }
