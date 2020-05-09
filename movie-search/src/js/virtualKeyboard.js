@@ -39,8 +39,6 @@ function switchLanguage() {
   clearKeyboardContainer();
   const keyboard = new Keyboard('keyboard');
   keyboard.renderKeys(sessionStorage.getItem('isLanguageEng'), isCapsLockOn);
-  toggleKeyClass('ShiftLeft', 'add');
-  toggleKeyClass('ControlLeft', 'add');
 }
 
 function printToTextarea(keyboard, event, keyCode) {
@@ -67,8 +65,12 @@ function printToTextarea(keyboard, event, keyCode) {
       toggleKeyClass('ShiftLeft', 'add');
       toggleKeyClass('ControlLeft', 'add');
       toggleKeyClass('AltLeft', 'add');
-    } else if (event.ctrlKey && event.shiftKey) {
-      switchLanguage(event);
+    } else if ((event.ctrlKey && event.shiftKey)) {
+      switchLanguage();
+      toggleKeyClass('ShiftLeft', 'add');
+      toggleKeyClass('ControlLeft', 'add');
+    } else if (document.querySelector('.ControlLeft').classList.contains('pressed')) {
+      switchLanguage();
     }
   } else if (keyCode === 'ControlLeft') {
     keyContent = '';
@@ -77,6 +79,10 @@ function printToTextarea(keyboard, event, keyCode) {
       toggleKeyClass('ControlLeft', 'add');
       toggleKeyClass('AltLeft', 'add');
     } else if (event.ctrlKey && event.shiftKey) {
+      switchLanguage();
+      toggleKeyClass('ShiftLeft', 'add');
+      toggleKeyClass('ControlLeft', 'add');
+    } else if (document.querySelector('.ShiftLeft').classList.contains('pressed')) {
       switchLanguage();
     }
   } else if (keyCode === 'ShiftRight') {
