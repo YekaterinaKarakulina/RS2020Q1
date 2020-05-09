@@ -10,6 +10,7 @@ import {
 } from './js/constants';
 
 import Keyboard from './js/Keyboard';
+import { clearKeyboardContainer, keyboardHandler, mouseHandler } from './js/virtualKeyboard';
 
 const iRemainSlides = 7;
 let sMovieForSearch = 'Home alone';
@@ -146,13 +147,13 @@ document.addEventListener('keydown', (event) => {
 
 ///
 
-import keyboardHandler from './js/virtualKeyboard';
-
+const keyboard = new Keyboard('keyboard');
 document.querySelector('.icon__keyboard').addEventListener('click', () => {
   document.querySelector('.keyboard__keys').classList.toggle('hidden');
   searchInputField.focus();
-
+  clearKeyboardContainer();
+  keyboard.renderKeys(sessionStorage.getItem('isLanguageEng'), false); // isCapsLockOn - false
 });
 
-const keyboard = new Keyboard('keyboard');
 keyboardHandler(keyboard);
+mouseHandler(keyboard);

@@ -1,29 +1,23 @@
 import Keyboard from './Keyboard';
 import { searchInputField } from './constants';
 
+const keyboardContainer = document.querySelector('.keyboard__keys');
+
 sessionStorage.setItem('isLanguageEng', true);
 let isCapsLockOn = false;
 let isLanguageEng = sessionStorage.getItem('isLanguageEng');
-let textareaContent = '';
-let keyContent = '';
 
-
-function pressedKeyHandler(keyCode) {
+function toggleKeyClass(keyCode, action) {
   document.querySelectorAll('.keyboard__key').forEach((element) => {
     if (element.classList.contains(keyCode)) {
-      element.classList.add('pressed');
+      if (action === 'add') {
+        element.classList.add('pressed');
+      } else if (action === 'remove') {
+        element.classList.remove('pressed');
+      }
     }
   });
 }
-
-function unpressedKeyHandler(keyCode) {
-  document.querySelectorAll('.keyboard__key').forEach((element) => {
-    if (element.classList.contains(keyCode)) {
-      element.classList.remove('pressed');
-    }
-  });
-}
-
 
 function clearKeyboardContainer() {
   document.querySelector('.keyboard__keys').innerHTML = '';
@@ -45,12 +39,13 @@ function switchLanguage() {
   clearKeyboardContainer();
   const keyboard = new Keyboard('keyboard');
   keyboard.renderKeys(sessionStorage.getItem('isLanguageEng'), isCapsLockOn);
-  pressedKeyHandler('ShiftLeft');
-  pressedKeyHandler('ControlLeft');
+  toggleKeyClass('ShiftLeft', 'add');
+  toggleKeyClass('ControlLeft', 'add');
 }
 
 function printToTextarea(keyboard, event, keyCode) {
-  keyContent = '';
+  let textareaContent = searchInputField.value;
+  let keyContent = '';
   if (keyCode === 'Backspace') {
     keyContent = textareaContent.substring(0, textareaContent.length - 1);
     textareaContent = '';
@@ -68,19 +63,19 @@ function printToTextarea(keyboard, event, keyCode) {
     keyContent = ' ';
   } else if (keyCode === 'ShiftLeft') {
     keyContent = '';
-    if (event.ctrlKey && event.shiftKey && event.altKey) { 
-      pressedKeyHandler('ShiftLeft');
-      pressedKeyHandler('ControlLeft');
-      pressedKeyHandler('AltLeft');
+    if (event.ctrlKey && event.shiftKey && event.altKey) {
+      toggleKeyClass('ShiftLeft', 'add');
+      toggleKeyClass('ControlLeft', 'add');
+      toggleKeyClass('AltLeft', 'add');
     } else if (event.ctrlKey && event.shiftKey) {
       switchLanguage(event);
     }
   } else if (keyCode === 'ControlLeft') {
     keyContent = '';
-    if (event.ctrlKey && event.shiftKey && event.altKey) { 
-      pressedKeyHandler('ShiftLeft');
-      pressedKeyHandler('ControlLeft');
-      pressedKeyHandler('AltLeft');
+    if (event.ctrlKey && event.shiftKey && event.altKey) {
+      toggleKeyClass('ShiftLeft', 'add');
+      toggleKeyClass('ControlLeft', 'add');
+      toggleKeyClass('AltLeft', 'add');
     } else if (event.ctrlKey && event.shiftKey) {
       switchLanguage();
     }
@@ -110,15 +105,43 @@ function printToTextarea(keyboard, event, keyCode) {
   searchInputField.value = textareaContent;
 }
 
-export default function keyboardHandler(keyboard) {
-  keyboard.renderKeys(isLanguageEng, isCapsLockOn);
+function keyboardHandler(keyboard) {
   document.addEventListener('keydown', (event) => {
-    console.log(event);
-    pressedKeyHandler(event.code);
-    printToTextarea(keyboard, event, event.code, event.key);
-    event.preventDefault();
+    if (!document.querySelector('.keyboard__keys').classList.contains('hidden')) {
+      console.log(event);
+      toggleKeyClass(event.code, 'add');
+      printToTextarea(keyboard, event, event.code, event.key);
+      event.preventDefault();
+    }
   });
   document.addEventListener('keyup', (event) => {
-    unpressedKeyHandler(event.code);
+    if (!document.querySelector('.keyboard__keys').classList.contains('hidden')) {
+      toggleKeyClass(event.code, 'remove');
+    }
   });
 }
+
+function mouseHandler(keyboard) {
+  let keyCode = '';
+  let keyButton;
+  keyboardContainer.addEventListener('mousedown', (event) => {
+    console.log(event.target);
+    keyButton = event.target.closest('.keyboard__key');
+    if (keyButton) {
+      if (keyButton.classList[keyButton.classList.length - 1] === 'active') {
+        keyCode = keyButton.classList[keyButton.classList.length - 2];
+      } else {
+        keyCode = keyButton.classList[keyButton.classList.length - 1];
+      }
+      keyButton.classList.add('pressed');
+    }
+    printToTextarea(keyboard, event, keyCode);
+  });
+  keyboardContainer.addEventListener('mouseup', () => {
+    if (keyButton) {
+      keyButton.classList.remove('pressed');
+    }
+  });
+}
+
+export { clearKeyboardContainer, keyboardHandler, mouseHandler };
