@@ -12,7 +12,7 @@ import {
 import Keyboard from './js/Keyboard';
 import { clearKeyboardContainer, keyboardHandler, mouseHandler } from './js/virtualKeyboard';
 
-const iRemainSlides = 7;
+const iRemainSlides = 8;
 let sMovieForSearch = 'Home alone';
 let iPageNumber = 1;
 
@@ -70,14 +70,7 @@ async function renderRequestResults(data) {
 }
 
 async function loadNextPages() {
-  const array = document.querySelector('.swiper-wrapper').children;
-  let activeElementPosition;
-  for (let i = 0; i < array.length; i += 1) {
-    if (array[i].classList.contains('swiper-slide-active')) {
-      activeElementPosition = i;
-    }
-  }
-  if (activeElementPosition > array.length - iRemainSlides) {
+  if (swiper.activeIndex > swiper.slides.length - iRemainSlides) {
     iPageNumber += 1;
     if (sMovieForSearch) {
       try {
