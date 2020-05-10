@@ -1,125 +1,125 @@
 .search {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: 2rem 0;
-    @include media-mobile {
-        flex-direction: column;
-        align-items: center;
-    }
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 2rem 0;
+  @include media-mobile {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .search__inputField {
-    width: 40rem;
-    height: 2.9rem;
-    position: absolute;
-    margin: 0 calc(50% - 20rem);
-    border: none;
-    &:focus {
-        border: 2px solid $color-primary-light;
-    }
-    @include media-laptop {
-        width: 25rem;
-        height: 2.5rem;
-        margin: 0 calc(50% - 12.5rem);
-    }
-    @include media-tablet {
-        width: 16rem;
-        height: 2rem;
-        margin: 0 calc(50% - 8rem);
-    }
-    @include media-mobile {
-        width: 13rem;
-        height: 2.5rem;
-        margin: 0 calc(50% - 6.5rem);
-    }
+  width: 40rem;
+  height: 2.9rem;
+  position: absolute;
+  margin: 0 calc(50% - 20rem);
+  border: none;
+  &:focus {
+    border: 2px solid $color-primary-light;
+  }
+  @include media-laptop {
+    width: 25rem;
+    height: 2.5rem;
+    margin: 0 calc(50% - 12.5rem);
+  }
+  @include media-tablet {
+    width: 16rem;
+    height: 2rem;
+    margin: 0 calc(50% - 8rem);
+  }
+  @include media-mobile {
+    width: 13rem;
+    height: 2.5rem;
+    margin: 0 calc(50% - 6.5rem);
+  }
 }
 
 .search__button {
-    display: inline-block;
-    width: 10rem;
-    height: 2.9rem;
-    background-color: $color-primary;
-    color:$color-light;
-    cursor: pointer;
-    &:hover {
-        background-color: $color-primary-light;
-    }
+  display: inline-block;
+  width: 10rem;
+  height: 2.9rem;
+  background-color: $color-primary;
+  color:$color-light;
+  cursor: pointer;
+  &:hover {
+    background-color: $color-primary-light;
+  }
+  @include font($size: 1rem, $weight: bold);
+  @include media-laptop {
+    width: 7rem;
+    height: 2.5rem;
+  }
+  @include media-tablet {
+    width: 4rem;
+    height: 2rem;
+    @include font($size: 0.8rem, $weight: bold);
+  }
+  @include media-mobile {
+    width: 7rem;
+    height: 2.5rem;
     @include font($size: 1rem, $weight: bold);
-    @include media-laptop {
-        width: 7rem;
-        height: 2.5rem;
-    }
-    @include media-tablet {
-        width: 4rem;
-        height: 2rem;
-        @include font($size: 0.8rem, $weight: bold);
-    }
-    @include media-mobile {
-        width: 7rem;
-        height: 2.5rem;
-        @include font($size: 1rem, $weight: bold);
-    }
+  }
 }
 
 .search__container {
-    position: relative;
-    width: 46rem;
-    height: 2.9rem;
-    display: inline-block;
-    border: 1px solid $color-primary;
-    margin-right: 0.5rem;
-    @include media-laptop {
-        width: 30rem;
-        height: 2.5rem;
-    }
-    @include media-tablet {
-        width: 20rem;
-        height: 2rem;
-    }
-    @include media-mobile {
-        width: 16rem;
-        height: 2.5rem;
-        margin-bottom: 1rem;
-    }
+  position: relative;
+  width: 46rem;
+  height: 2.9rem;
+  display: inline-block;
+  border: 1px solid $color-primary;
+  margin-right: 0.5rem;
+  @include media-laptop {
+    width: 30rem;
+    height: 2.5rem;
+  }
+  @include media-tablet {
+    width: 20rem;
+    height: 2rem;
+  }
+  @include media-mobile {
+    width: 16rem;
+    height: 2.5rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .search__results {
-    text-align: center;
+  text-align: center;
 }
 
 .search__resultsTitle {
-    display: inline-block;
-    @include font($size: 1.25rem, $weight: normal);
-    @include media-laptop {
-        font-size: 1rem;
-    }
-    @include media-tablet {
-        display: block;
-    }
+  display: inline-block;
+  @include font($size: 1.25rem, $weight: normal);
+  @include media-laptop {
+    font-size: 1rem;
+  }
+  @include media-tablet {
+    display: block;
+  }
 }
 
 .search__resultsMessage {
-    @include font($size: 1.5rem, $weight: bold);
-    @include media-laptop {
-        font-size: 1.25rem;
-    }
-    @include media-tablet {
-        display: block;
-    }
+  @include font($size: 1.5rem, $weight: bold);
+  @include media-laptop {
+    font-size: 1.25rem;
+  }
+  @include media-tablet {
+    display: block;
+  }
 }
 
 .search__errorMessage {
-    display: block;
-    @include font($size: 1.5rem, $weight: bold);
-    @include media-laptop {
-        font-size: 1.25rem;
-    }
+  display: block;
+  @include font($size: 1.5rem, $weight: bold);
+  @include media-laptop {
+    font-size: 1.25rem;
+  }
 }
 
 .spinner {
-    display: block;
-    &.hidden {
-        display: none;
-    }
+  display: block;
+  &.hidden {
+    display: none;
+  }
 }

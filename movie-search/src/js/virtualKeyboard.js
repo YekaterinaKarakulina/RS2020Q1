@@ -54,6 +54,7 @@ function printToTextarea(keyboard, event, keyCode) {
     keyContent = `${left}\t${right}`;
     cursorPos += 1;
   } else if (keyCode === 'Delete') {
+    textareaContent = '';
     keyContent = `${left}${right.slice(1)}`;
   } else if (keyCode === 'CapsLock') {
     isCapsLockOn = !isCapsLockOn;
