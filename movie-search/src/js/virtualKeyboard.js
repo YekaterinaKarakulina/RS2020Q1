@@ -7,11 +7,12 @@ let isLanguageEng = sessionStorage.getItem('isLanguageEng');
 
 function toggleKeyClass(keyCode, action) {
   document.querySelectorAll('.keyboard__key').forEach((element) => {
-    if (element.classList.contains(keyCode)) {
+    const { classList } = element;
+    if (classList.contains(keyCode)) {
       if (action === 'add') {
-        element.classList.add('pressed');
+        classList.add('pressed');
       } else if (action === 'remove') {
-        element.classList.remove('pressed');
+        classList.remove('pressed');
       }
     }
   });
@@ -24,11 +25,8 @@ function clearKeyboardContainer() {
 function activateCapsLock(keyboard) {
   clearKeyboardContainer();
   keyboard.renderKeys(sessionStorage.getItem('isLanguageEng'), isCapsLockOn);
-  if (isCapsLockOn === true) {
-    document.querySelector('.keyboard__key_activatable').classList.add('active');
-  } else {
-    document.querySelector('.keyboard__key_activatable').classList.remove('active');
-  }
+  const capsLockKey = document.querySelector('.keyboard__key_activatable');
+  capsLockKey.classList.toggle('active');
 }
 
 function switchLanguage() {
@@ -39,83 +37,97 @@ function switchLanguage() {
   keyboard.renderKeys(sessionStorage.getItem('isLanguageEng'), isCapsLockOn);
 }
 
+function checkCapsLock(event) {
+  if (event.ctrlKey && event.shiftKey && event.altKey) {
+    toggleKeyClass('ShiftLeft', 'add');
+    toggleKeyClass('ControlLeft', 'add');
+    toggleKeyClass('AltLeft', 'add');
+  } else if (event.ctrlKey && event.shiftKey) {
+    switchLanguage();
+    toggleKeyClass('ShiftLeft', 'add');
+    toggleKeyClass('ControlLeft', 'add');
+  } else if (document.querySelector('.ShiftLeft').classList.contains('pressed')) {
+    switchLanguage();
+  }
+}
+
 function printToTextarea(keyboard, event, keyCode) {
   let textareaContent = searchInputField.value;
   let cursorPos = searchInputField.selectionStart;
+  let keyContent = '';
+  const keysElements = document.querySelectorAll('.keyboard__key');
   const left = searchInputField.value.slice(0, cursorPos);
   const right = searchInputField.value.slice(cursorPos);
-  let keyContent = '';
-  if (keyCode === 'Backspace') {
-    textareaContent = '';
-    keyContent = `${left.slice(0, -1)}${right}`;
-    cursorPos -= 1;
-  } else if (keyCode === 'Tab') {
-    textareaContent = '';
-    keyContent = `${left}\t${right}`;
-    cursorPos += 1;
-  } else if (keyCode === 'Delete') {
-    textareaContent = '';
-    keyContent = `${left}${right.slice(1)}`;
-  } else if (keyCode === 'CapsLock') {
-    isCapsLockOn = !isCapsLockOn;
-    keyContent = '';
-    activateCapsLock(keyboard, sessionStorage.getItem('isLanguageEng'));
-  } else if (keyCode === 'Enter') {
-    keyContent = '';
-  } else if (keyCode === 'Space') {
-    textareaContent = '';
-    keyContent = `${left} ${right}`;
-    cursorPos += 1;
-  } else if (keyCode === 'ShiftLeft') {
-    keyContent = '';
-    if (event.ctrlKey && event.shiftKey && event.altKey) {
-      toggleKeyClass('ShiftLeft', 'add');
-      toggleKeyClass('ControlLeft', 'add');
-      toggleKeyClass('AltLeft', 'add');
-    } else if ((event.ctrlKey && event.shiftKey)) {
-      switchLanguage();
-      toggleKeyClass('ShiftLeft', 'add');
-      toggleKeyClass('ControlLeft', 'add');
-    } else if (document.querySelector('.ControlLeft').classList.contains('pressed')) {
-      switchLanguage();
-    }
-  } else if (keyCode === 'ControlLeft') {
-    keyContent = '';
-    if (event.ctrlKey && event.shiftKey && event.altKey) {
-      toggleKeyClass('ShiftLeft', 'add');
-      toggleKeyClass('ControlLeft', 'add');
-      toggleKeyClass('AltLeft', 'add');
-    } else if (event.ctrlKey && event.shiftKey) {
-      switchLanguage();
-      toggleKeyClass('ShiftLeft', 'add');
-      toggleKeyClass('ControlLeft', 'add');
-    } else if (document.querySelector('.ShiftLeft').classList.contains('pressed')) {
-      switchLanguage();
-    }
-  } else if (keyCode === 'ShiftRight') {
-    keyContent = '';
-  } else if (keyCode === 'ControlRight') {
-    keyContent = '';
-  } else if (keyCode === 'AltLeft' || keyCode === 'AltRight') {
-    keyContent = '';
-  } else if (keyCode === 'ArrowUp') {
-    keyContent = '↑';
-    cursorPos += 1;
-  } else if (keyCode === 'ArrowLeft') {
-    cursorPos = cursorPos - 1 >= 0 ? cursorPos - 1 : 0;
-  } else if (keyCode === 'ArrowDown') {
-    keyContent = '↓';
-    cursorPos += 1;
-  } else if (keyCode === 'ArrowRight') {
-    cursorPos += 1;
-  } else {
-    const keysElements = document.querySelectorAll('.keyboard__key');
-    for (let i = 0; i < keysElements.length; i += 1) {
-      if (keysElements[i].classList.contains(keyCode)) {
-        keyContent = keysElements[i].innerHTML;
-        cursorPos += 1;
-      }
-    }
+
+  switch (keyCode) {
+    case 'Backspace':
+      textareaContent = '';
+      keyContent = `${left.slice(0, -1)}${right}`;
+      cursorPos -= 1;
+      break;
+    case 'Tab':
+      textareaContent = '';
+      keyContent = `${left}\t${right}`;
+      cursorPos += 1;
+      break;
+    case 'Delete':
+      textareaContent = '';
+      keyContent = `${left}${right.slice(1)}`;
+      break;
+    case 'CapsLock':
+      isCapsLockOn = !isCapsLockOn;
+      keyContent = '';
+      activateCapsLock(keyboard, sessionStorage.getItem('isLanguageEng'));
+      break;
+    case 'Enter':
+      keyContent = '';
+      break;
+    case 'Space':
+      textareaContent = '';
+      keyContent = `${left} ${right}`;
+      cursorPos += 1;
+      break;
+    case 'ShiftLeft':
+      keyContent = '';
+      checkCapsLock(event);
+      break;
+    case 'ControlLeft':
+      keyContent = '';
+      checkCapsLock(event);
+      break;
+    case 'ArrowUp':
+      keyContent = '↑';
+      cursorPos += 1;
+      break;
+    case 'ArrowDown':
+      keyContent = '↓';
+      cursorPos += 1;
+      break;
+    case 'ArrowLeft':
+      cursorPos = cursorPos - 1 >= 0 ? cursorPos - 1 : 0;
+      break;
+    case 'ArrowRight':
+      cursorPos += 1;
+      break;
+    case 'ShiftRight':
+      keyContent = '';
+      break;
+    case 'ControlRight':
+      keyContent = '';
+      break;
+    case 'AltLeft':
+      keyContent = '';
+      break;
+    case 'AltRight':
+      keyContent = '';
+      break;
+    default:
+      keysElements.forEach((value, index) => {
+        if (keysElements[index].classList.contains(keyCode)) {
+          keyContent = keysElements[index].innerHTML;
+          cursorPos += 1;
+        }
+      });
   }
   textareaContent += keyContent;
   searchInputField.value = textareaContent;
