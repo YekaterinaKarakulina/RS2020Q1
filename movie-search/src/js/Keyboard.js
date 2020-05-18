@@ -1,7 +1,6 @@
 import Key from './Key';
 import { keyboardKeyCodes, keyboardEng, keyboardRu } from './KeyboardData';
 
-
 const addLanguageSwitchDescriptionElement = () => {
   const text = document.createElement('div');
   text.classList.add('languages-switch-description');
@@ -16,7 +15,6 @@ export default class Keyboard {
 
   renderKeys(isLanguageEng, isUppercase) {
     addLanguageSwitchDescriptionElement();
-    // const keysContainer = document.querySelector('.keyboard__keys');
     if (isLanguageEng === 'true') {
       this.generateKeys(keyboardKeyCodes, keyboardEng, isUppercase);
     } else {
