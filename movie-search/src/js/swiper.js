@@ -1,4 +1,4 @@
-import Swiper from '../swiperAPI/swiperAPI';
+import Swiper from './swiperAPI/swiperAPI';
 
 const swiper = new Swiper('.swiper-container', {
   breakpoints: {

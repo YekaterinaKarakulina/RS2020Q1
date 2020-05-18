@@ -71,6 +71,7 @@ async function renderRequestResults(data) {
 
 async function loadNextPages() {
   if (swiper.activeIndex > swiper.slides.length - iRemainSlides) {
+    document.querySelector('.spinner').classList.remove('hidden');
     iPageNumber += 1;
     if (sMovieForSearch) {
       try {

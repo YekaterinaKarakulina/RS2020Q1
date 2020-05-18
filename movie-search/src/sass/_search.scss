@@ -85,11 +85,15 @@
 }
 
 .search__results {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
 }
 
 .search__resultsTitle {
   display: inline-block;
+  margin-right: 0.5rem;
   @include font($size: 1.25rem, $weight: normal);
   @include media-laptop {
     font-size: 1rem;
