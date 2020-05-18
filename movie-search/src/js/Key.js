@@ -6,6 +6,9 @@ export default class Key {
   }
 
   generateKey() {
+    const specificKeys = ['Tab', 'ControlLeft', 'ControlRight', 'ShiftLeft', 'ShiftRight', 'Enter',
+      'AltLeft', 'AltRight', 'Backspace'];
+    const lengthOfCommonKeysName = 1;
     const key = document.createElement('button');
     key.classList.add('keyboard__key');
     let keyName = '';
@@ -29,22 +32,15 @@ export default class Key {
     } else {
       keyName = this.keyName;
     }
-    if (this.keyName.length < 2) {
-      if (this.isUpperCase === true) {
-        key.innerHTML = keyName.toUpperCase();
-      } else {
-        key.innerHTML = keyName.toLowerCase();
-      }
+    if (this.keyName.length <= lengthOfCommonKeysName) {
+      key.innerHTML = this.isUpperCase ? keyName.toUpperCase() : keyName.toLowerCase();
     } else {
       key.innerHTML = keyName;
     }
-
     if (this.keyName === 'Space') {
       key.classList.add('keyboard__key_extra-wide');
     }
-    if (this.keyName === 'Tab' || this.keyName === 'ControlLeft' || this.keyName === 'ControlRight'
-      || this.keyName === 'ShiftLeft' || this.keyName === 'ShiftRight' || this.keyName === 'Enter'
-      || this.keyName === 'AltLeft' || this.keyName === 'AltRight' || this.keyName === 'Backspace') {
+    if (specificKeys.includes(this.keyName)) {
       key.classList.add('keyboard__key_wide');
     }
     if (this.keyName === 'CapsLock') {
