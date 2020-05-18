@@ -43,8 +43,8 @@ async function createMovieObject(data, i) {
     imdbID: data[i].imdbID,
   };
   movieObject.linkToVideoGallery = `https://www.imdb.com/title/${movieObject.imdbID}/videogallery/`;
-  const data2 = await getMovieImdbRating(movieObject.imdbID);
-  movieObject.imdbRating = data2.imdbRating;
+  const movieRating = await getMovieImdbRating(movieObject.imdbID);
+  movieObject.imdbRating = movieRating.imdbRating;
   return movieObject;
 }
 
@@ -56,11 +56,16 @@ function createMovieCard(movieObject) {
 
 async function renderRequestResults(data) {
   const slides = [];
+  const promises = [];
   if (data) {
-    for (let i = 0; i < data.length; i += 1) {
-      // eslint-disable-next-line no-await-in-loop
-      const movieObject = await createMovieObject(data, i);
-      slides.push(createMovieCard(movieObject));
+    data.forEach((value, index) => {
+      promises.push(createMovieObject(data, index));
+    });
+    const movieObjects = await Promise.all(promises);
+    if (movieObjects) {
+      movieObjects.forEach((movie) => {
+        slides.push(createMovieCard(movie));
+      });
     }
   }
   document.querySelector('.spinner').classList.add('hidden');
@@ -122,16 +127,17 @@ keyboardHandler(keyboard);
 mouseHandler(keyboard);
 
 document.addEventListener('click', (event) => {
-  if (event.target.classList.contains('search__button')) {
+  const { classList } = event.target;
+  if (classList.contains('search__button')) {
     searchButtonHandler();
     keyboardKeys.classList.add('hidden');
-  } else if (event.target.classList.contains('icon__delete')) {
+  } else if (classList.contains('icon__delete')) {
     clearInputValue();
-  } else if (event.target.classList.contains('swiper-button-next')) {
+  } else if (classList.contains('swiper-button-next')) {
     loadNextPages();
-  } else if (event.target.classList.contains('swiper-pagination-bullet')) {
+  } else if (classList.contains('swiper-pagination-bullet')) {
     loadNextPages();
-  } else if (event.target.classList.contains('Enter')) {
+  } else if (classList.contains('Enter')) {
     searchButtonHandler();
     keyboardKeys.classList.add('hidden');
   }
