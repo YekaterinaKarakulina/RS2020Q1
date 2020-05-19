@@ -37,7 +37,7 @@ function switchLanguage() {
   keyboard.renderKeys(sessionStorage.getItem('isLanguageEng'), isCapsLockOn);
 }
 
-function checkCapsLock(event) {
+function checkSwitchLanguage(event) {
   if (event.ctrlKey && event.shiftKey && event.altKey) {
     toggleKeyClass('ShiftLeft', 'add');
     toggleKeyClass('ControlLeft', 'add');
@@ -89,11 +89,11 @@ function printToTextarea(keyboard, event, keyCode) {
       break;
     case 'ShiftLeft':
       keyContent = '';
-      checkCapsLock(event);
+      checkSwitchLanguage(event);
       break;
     case 'ControlLeft':
       keyContent = '';
-      checkCapsLock(event);
+      checkSwitchLanguage(event);
       break;
     case 'ArrowUp':
       keyContent = '↑';
