@@ -8,11 +8,13 @@
 }
 
 .location {
+  width: 100%;
+  height: 5rem; 
   font-size: 3rem;
 }
 
 .city::after {
-  content: ",";
+  content: ", ";
 }
 
 .currentDate, 
