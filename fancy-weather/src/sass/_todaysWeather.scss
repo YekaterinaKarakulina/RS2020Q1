@@ -1,0 +1,28 @@
+.weatherInfo {
+  display: inline-block;
+  width: 30rem;
+  height: 40rem;
+  background-color: red;
+  color: $color-light;
+  font-weight: 700;
+}
+
+.location {
+  font-size: 3rem;
+}
+
+.city::after {
+  content: ",";
+}
+
+.currentDate {
+  font-size: 1rem;
+}
+
+.currentTemperature {
+  font-size: 10rem;
+}
+
+.tempContainer {
+  display: flex;
+}

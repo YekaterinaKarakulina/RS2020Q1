@@ -1,0 +1,19 @@
+.wrapper {
+    width: 1020px;
+    margin: 0 auto;
+}
+
+.wrapper__header {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrapper__main {
+  margin-top: 5rem;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
