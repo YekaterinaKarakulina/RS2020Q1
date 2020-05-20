@@ -1,0 +1,26 @@
+.input__city {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    background-color: $color-primary;
+    border: none;
+    border-radius: 5px;
+    color: $color-light;
+    cursor: pointer;
+  }
+
+.input__city {
+  height: 2.5rem;
+  width: 20rem;
+}
+
+form {
+  display: inline-flex;
+  width: 25.5rem;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Poppins', Verdana, sans-serif;
+  font-size: 1rem;
+}
+
+

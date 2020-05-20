@@ -10,6 +10,17 @@ body {
   font-family: 'Poppins', Verdana, sans-serif;
 }
 
-label {
+label,
+form {
   margin: 0;
 }
+
+input {
+  padding: 0;
+  margin: 0;
+}
+
+form {
+  border: none;
+}
+

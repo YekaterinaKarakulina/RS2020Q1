@@ -3,11 +3,21 @@
     width: 1020px;
     margin: 0 auto;
     margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
   }
 
   .header__parameters {
     border: 1px solid black;
-    display: flex;
+    display: inline-flex;
+    width: 16.5rem;
+    align-items: center;
+    justify-content: space-between;
+
+  }
+
+  .header__search {
+    border: 1px solid black;
   }
 
  
