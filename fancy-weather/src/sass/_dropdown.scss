@@ -1,0 +1,26 @@
+.dropdown {
+  display: inline-block;
+  position: relative;
+  width: 8rem;
+  height: 2.5rem;
+  background-color: $color-primary;
+  border-radius: 5px;
+}
+
+.nav-link {
+  font-size: 1rem;
+  color: $color-light;
+  &:hover {
+    color: $color-light-darken;
+  }
+}
+
+.dropdown-menu {
+  background-color: $color-primary;;
+}
+
+.dropdown-item {
+  font-size: 1rem;
+  color: $color-light;
+}
+  

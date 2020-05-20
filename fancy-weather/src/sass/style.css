@@ -1,0 +1,198 @@
+html, body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  font-size: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+label {
+  margin: 0;
+}
+
+.image__button {
+  display: inline-block;
+  width: 5rem;
+  height: 2.5rem;
+  margin: 0;
+  padding: 0;
+  background-color: #323746;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+}
+
+.toggle-label {
+  position: relative;
+  width: 100px;
+  height: 2.5rem;
+  border: 1px solid #808080;
+}
+
+.toggle-label input[type=checkbox] {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.toggle-label input[type=checkbox] + .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #ed1c24;
+  transition: background 150ms linear;
+}
+
+.toggle-label input[type=checkbox]:checked + .back {
+  background: #00a651;
+  /*green*/
+}
+
+.toggle-label input[type=checkbox] + .back .toggle {
+  display: block;
+  position: absolute;
+  content: " ";
+  background: #fff;
+  width: 50%;
+  height: 100%;
+  transition: margin 150ms linear;
+  border: 1px solid #808080;
+  border-radius: 0;
+}
+
+.toggle-label input[type=checkbox]:checked + .back .toggle {
+  margin-left: 50px;
+}
+
+.toggle-label .label {
+  display: block;
+  position: absolute;
+  width: 50%;
+  color: #ddd;
+  line-height: 33px;
+  text-align: center;
+  font-size: 1em;
+}
+
+.toggle-label .label.on {
+  left: 0px;
+}
+
+.toggle-label .label.off {
+  right: 0px;
+}
+
+.toggle-label input[type=checkbox]:checked + .back .label.on {
+  color: #fff;
+}
+
+.toggle-label input[type=checkbox] + .back .label.off {
+  color: #fff;
+}
+
+.toggle-label input[type=checkbox]:checked + .back .label.off {
+  color: #ddd;
+}
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+  width: 8rem;
+  height: 2.5rem;
+  background-color: #323746;
+  border-radius: 5px;
+}
+
+.nav-link {
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.dropdown-menu {
+  background-color: #323746;
+}
+
+.dropdown-item {
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+/*  
+.dd-button {
+  display: inline-block;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 10px 30px 10px 20px;
+  background-color: red;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+  .dd-button:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid black;
+  }
+
+  .dd-button:hover {
+    background-color: red;
+  }
+
+
+  .dd-input {
+    display: none;
+  }
+
+  .dd-menu {
+    position: absolute;
+    top: 100%;
+    border: 1px solid blue;
+    border-radius: 4px;
+    padding: 0;
+    margin: 2px 0 0 0;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+    background-color: #ffffff;
+    list-style-type: none;
+  }
+
+  .dd-input + .dd-menu {
+    display: none;
+  } 
+
+  .dd-input:checked + .dd-menu {
+    display: block;
+  } 
+
+  .dd-menu li {
+    padding: 10px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .dd-menu li:hover {
+    background-color: black;
+  }
+  */
+.wrapper__header {
+  width: 1020px;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+
+.header__buttons {
+  border: 1px solid black;
+  display: flex;
+}
+
+/*# sourceMappingURL=style.css.map */
