@@ -1,7 +1,21 @@
-
 .locationInfo {
-    display: inline-block;
-    width: 20rem;
-    height: 30rem;
-    background-color: orange;
-  }
+  display: inline-block;
+  width: 20rem;
+  height: 30rem;
+  background-color: orange;
+  font-size: 1rem;
+  font-weight: 700;
+  color: $color-light;
+}
+
+.coordinates {
+  float: right;
+}
+
+.latitude::before {
+  content: 'Latitude:';
+}
+
+.longitude::before {
+  content: 'Longitude:';
+}
