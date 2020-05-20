@@ -1,7 +1,7 @@
 .weatherInfo {
   display: inline-block;
   width: 30rem;
-  height: 40rem;
+  height: 30rem;
   background-color: red;
   color: $color-light;
   font-weight: 700;
@@ -15,7 +15,8 @@
   content: ",";
 }
 
-.currentDate {
+.currentDate, 
+.summaryContainer {
   font-size: 1rem;
 }
 

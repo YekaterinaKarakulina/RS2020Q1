@@ -1,0 +1,14 @@
+.threeDaysWeather {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+}
+
+.day {
+  font-size: 1rem;
+}
+
+.dayTemperature {
+    font-size: 3rem;
+}
