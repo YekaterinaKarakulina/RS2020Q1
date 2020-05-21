@@ -1,6 +1,11 @@
 import createDomElement from './utils';
 import icons from './icons';
 
+const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fr', 'Sat'];
+const weekDaysFull = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+  'August', 'September', 'October', 'November', 'December'];
+
 function renderGeolocationInfo(geolocation) {
   const { city, country } = geolocation;
   const fragment = document.createDocumentFragment();
@@ -20,8 +25,8 @@ function renderGeolocationInfo(geolocation) {
 function generateSummaryContainer(todayWeather) {
   const summaryContainer = createDomElement('div', 'summaryContainer');
 
+  const iconWeatherClassNames = icons[todayWeather.weatherCode];
 
-  const iconWeatherClassNames = icons.cloudy;
   const weatherIcon = createDomElement('i', `icon__weather ${iconWeatherClassNames}`);
 
   const weatherDescription = createDomElement('div', 'weatherDescription');
@@ -60,10 +65,18 @@ function renderTodayWeatherData(todayWeather) {
   document.querySelector('.weatherContainer').append(fragment);
 }
 
-function generateOneDayWeather(dayWeather) {
+function getWeekDay(index) {
+  if (index < weekDaysFull.length) {
+    return weekDaysFull[index];
+  }
+  return weekDaysFull[index % 7];
+}
+
+function generateOneDayWeather(dayWeather, day) {
   const dayElement = createDomElement('div', 'day');
 
   const weekDay = createDomElement('div', 'weekDay');
+  weekDay.textContent = day;
 
   const dayTemperature = createDomElement('span', 'dayTemperature');
   dayTemperature.textContent = `${dayWeather.currentTemp}°`;
@@ -80,16 +93,35 @@ function generateOneDayWeather(dayWeather) {
 function renderThreeDaysWeather(threeDaysWeather) {
   const fragment = document.createDocumentFragment();
 
-  const firstDayWeather = generateOneDayWeather(threeDaysWeather[0]);
-  const secondDayWeather = generateOneDayWeather(threeDaysWeather[1]);
-  const thirdDayWeather = generateOneDayWeather(threeDaysWeather[2]);
+  const date = new Date();
+
+  const firstDayWeather = generateOneDayWeather(threeDaysWeather[0], getWeekDay(date.getDay() + 1));
+  const secDayWeather = generateOneDayWeather(threeDaysWeather[1], getWeekDay(date.getDay() + 2));
+  const thirdDayWeather = generateOneDayWeather(threeDaysWeather[2], getWeekDay(date.getDay() + 3));
 
   fragment.append(firstDayWeather);
-  fragment.append(secondDayWeather);
+  fragment.append(secDayWeather);
   fragment.append(thirdDayWeather);
 
   document.querySelector('.threeDaysWeather').append(fragment);
-
 }
 
-export { renderGeolocationInfo, renderTodayWeatherData, renderThreeDaysWeather };
+function renderDate() {
+  const fragment = document.createDocumentFragment();
+
+  const currentDate = new Date();
+  const date = createDomElement('span', 'date');
+  date.textContent = `${weekDays[currentDate.getDay()]} ${currentDate.getDate()} ${months[currentDate.getMonth()]} `;
+
+  const time = createDomElement('span', 'time');
+  time.textContent = `${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
+
+  fragment.append(date);
+  fragment.append(time);
+
+  document.querySelector('.currentDate').append(fragment);
+}
+
+export {
+  renderGeolocationInfo, renderTodayWeatherData, renderThreeDaysWeather, renderDate,
+};

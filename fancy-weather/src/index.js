@@ -2,7 +2,9 @@ import './sass/style.scss';
 import '@babel/polyfill';
 import getUserGeolocation from './js/geolocationAPI';
 import { getWeatherForDay, getWeatherForThreeDays } from './js/weatherAPIUtils';
-import { renderGeolocationInfo, renderTodayWeatherData, renderThreeDaysWeather } from './js/renderData';
+import {
+  renderGeolocationInfo, renderTodayWeatherData, renderThreeDaysWeather,renderDate,
+} from './js/renderData';
 import getWeatherData from './js/weatherAPI';
 
 
@@ -27,6 +29,8 @@ async function init() {
   const threeDaysWeatherData = getWeatherForThreeDays(weatherData, nextThreeDaysIndexes);
   console.log(threeDaysWeatherData);
   renderThreeDaysWeather(threeDaysWeatherData);
+
+  renderDate();
 }
 
 init();
