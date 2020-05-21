@@ -113,15 +113,34 @@ function renderDate() {
   const date = createDomElement('span', 'date');
   date.textContent = `${weekDays[currentDate.getDay()]} ${currentDate.getDate()} ${months[currentDate.getMonth()]} `;
 
-  const time = createDomElement('span', 'time');
-  time.textContent = `${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
+  // const time = createDomElement('span', 'time');
+  // time.textContent = `${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
 
   fragment.append(date);
-  fragment.append(time);
+  // fragment.append(time);
 
   document.querySelector('.currentDate').append(fragment);
 }
 
+function renderTime() {
+  const currentDate = new Date();
+  const time = createDomElement('span', 'time');
+  let HH = currentDate.getHours();
+  if (HH < 10) {
+    HH = `0${HH}`;
+  }
+  let mm = currentDate.getMinutes();
+  if (mm < 10) {
+    mm = `0${mm}`;
+  }
+  let ss = currentDate.getSeconds();
+  if (ss < 10) {
+    ss = `0${ss}`;
+  }
+  time.textContent = `${HH}:${mm}:${ss}`;
+  document.querySelector('.currentDate').append(time);
+}
+
 export {
-  renderGeolocationInfo, renderTodayWeatherData, renderThreeDaysWeather, renderDate,
+  renderGeolocationInfo, renderTodayWeatherData, renderThreeDaysWeather, renderDate, renderTime,
 };
