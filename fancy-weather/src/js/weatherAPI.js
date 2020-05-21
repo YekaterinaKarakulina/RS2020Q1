@@ -1,12 +1,4 @@
-/* export default async function getWeatherInfo() {
-  const weatherAPIToken = '20699dba1886b7bc0707b05b23ae1e06';
-  const url = `https://api.openweathermap.org/data/2.5/forecast?q=Kiev&lang=ua&units=metric&APPID=${weatherAPIToken}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  return data;
-} */
-
-export default async function getWeatherInfo(loc) { // climacello
+export default async function getWeatherData(loc) { // climacello
   const locArray = loc.split(',');
   const latitude = locArray[0];
   const longitude = locArray[1];

@@ -7,7 +7,7 @@ function extractWeatherInfo(weatherObject) {
   return (weatherObject[0].min.value + weatherObject[1].max.value) / 2;
 }
 
-export default function getWeatherForDay(weatherData, dayIndex) {
+function getWeatherForDay(weatherData, dayIndex) {
   const day = weatherData[dayIndex];
 
   const { feels_like } = day;
@@ -29,3 +29,13 @@ export default function getWeatherForDay(weatherData, dayIndex) {
     realFeelTemp, hum, currentTemp, weatherCode, windSpeed,
   };
 }
+
+function getWeatherForThreeDays(weatherData, nextThreeDaysIndexes) {
+  const threeDaysWeather = [];
+  nextThreeDaysIndexes.forEach((el) => {
+    threeDaysWeather.push(getWeatherForDay(weatherData, el));
+  });
+  return threeDaysWeather;
+}
+
+export { getWeatherForDay, getWeatherForThreeDays };
