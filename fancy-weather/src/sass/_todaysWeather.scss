@@ -22,10 +22,15 @@
   font-size: 1rem;
 }
 
+.summaryContainer {
+  margin-left: 1rem;
+}
+
 .currentTemperature {
   font-size: 10rem;
 }
 
-.tempContainer {
+.weatherContainer {
   display: flex;
+  height: 15rem;
 }
