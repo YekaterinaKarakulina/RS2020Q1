@@ -51,6 +51,6 @@ let timerId = setTimeout(function tick() {
   }
   document.querySelector('.time').textContent = `${HH}:${mm}:${ss}`;
   timerId = setTimeout(tick, 1000);
-}, 1000);
+}, 2000);
 
 init();

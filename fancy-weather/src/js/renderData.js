@@ -81,7 +81,9 @@ function generateOneDayWeather(dayWeather, day) {
   const dayTemperature = createDomElement('span', 'dayTemperature');
   dayTemperature.textContent = `${dayWeather.currentTemp}°`;
 
-  const weatherIcon = createDomElement('span', 'icon icon__weather');
+  // const weatherIcon = createDomElement('span', 'icon icon__weather'); //
+  const iconWeatherClassNames = icons[dayWeather.weatherCode];
+  const weatherIcon = createDomElement('i', `icon__weather icon__small ${iconWeatherClassNames}`);
 
   dayElement.append(weekDay);
   dayElement.append(dayTemperature);
@@ -108,17 +110,10 @@ function renderThreeDaysWeather(threeDaysWeather) {
 
 function renderDate() {
   const fragment = document.createDocumentFragment();
-
   const currentDate = new Date();
   const date = createDomElement('span', 'date');
   date.textContent = `${weekDays[currentDate.getDay()]} ${currentDate.getDate()} ${months[currentDate.getMonth()]} `;
-
-  // const time = createDomElement('span', 'time');
-  // time.textContent = `${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
-
   fragment.append(date);
-  // fragment.append(time);
-
   document.querySelector('.currentDate').append(fragment);
 }
 

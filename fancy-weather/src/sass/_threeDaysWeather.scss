@@ -1,5 +1,6 @@
 .threeDaysWeather {
   display: flex;
+  width: 27rem;
   align-items: center;
   justify-content: space-between;
   margin-top: 2.5rem;
@@ -7,6 +8,7 @@
 
 .day {
   font-size: 1rem;
+  position: relative;
 }
 
 .dayTemperature {
