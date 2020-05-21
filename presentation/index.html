@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Programming principles</title>
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
@@ -31,7 +31,7 @@
 					<h3>Programming principles</h3>
 					<aside class="notes">
 						Hello everyone! My today`s talk is about programming principles.
-						Before start to explain these principles, let`s begin with such a question is programmer? 
+						Before start to explain these principles, let`s begin with such a question "Who is programmer?" 
 					</aside>
 				</section>
 
@@ -39,7 +39,7 @@
 					<h3>Who is programmer?</h3>
 					<img src="./assets/1.jpeg" alt="">
 					<aside class="notes">
-						What does he do? Programmer - is someone who create code 
+						What does he do? Programmer - is someone who create code.
 						So we may say that programmer is a person who coding.
 						Really? Maybe he Programming? So what Is The Difference Between Coding & Programming?
 					</aside>
@@ -51,7 +51,7 @@
 						“Coding” and “Programming” are two most important approaches in Software Development Industries.
 						Coding is basically the process of creating codes from one language to another one. 
 						It can also be called as a subset of Programming since it actually implements the initial steps 
-						of Programming. It involves writing codes in different languages as instructed. 
+						of Programming.
 						While programming is the process of developing an executable machine level program 
 						that can be implemented without any error.
 						So, let us see the features in coding and programming.
@@ -111,7 +111,7 @@
 				<section>
 					<img src="./assets/programmingPrinciples.jpeg" alt="">
 					<aside class="notes">
-						So while studying some programming language it`s wise aim to become not just a coder, 
+						So while studying some programming language it`s wise try to become not just a coder, 
 						but reach the highest point - programming.
 						One of the way to do it - use some software design principles to improve code.
 						Today I want to introduce you these principles. 
@@ -130,12 +130,10 @@
 						rather than making it complex.
 						So when you are writing code your solution should not be complicated that takes a lot of time 
 						and effort to understand. If your code is simple then other developers won’t face any problem
-						understanding the code logic. Always try to simplify your code using different approaches 
-						like breaking a complex problem into smaller chunks or taking out some unnecessary code 
-						you have written.
+						understanding the code logic. 
 						As you can see in picture: if there is a simple way to solve a problem or 
-						find a solution for some task, just do it. So KISS means keep it short and simple or 
-						keep it simple and straightforward. 
+						find a solution for some task, just do it. So KISS means: "keep it short and simple" or 
+						"keep it simple and straightforward".
 						In the wise words of Antoine de Saint-Exupery, “Perfection is achieved, 
 						not when there is nothing more to add, but when there is nothing left to take away.”
 					</aside>
@@ -151,21 +149,15 @@
 						If you need to make a small change in your code then you need to do it at several places. 
 						“Don’t Repeat Yourself (DRY)” principle goal is to reduce the repetition of code. 
 						It states that a piece of code should be implemented in just one place in the source code. 
-						The opposite of the DRY principle is WET (“write everything twice” or “waste everyone’s time”) 
-						which breaks the DRY principle if you are writing the same logic at several places. 
+						
 						You can create a common function or abstract your code to avoid the repetition in your code.
-
-						The key points for how to apply abstraction to write code that doesn’t repeat itself:
-						Create functions for common software patterns. We call them higher order functions.
+						How to apply abstraction to write code that doesn’t repeat itself?
+						Basically, create functions for common software patterns. It`s called higher order functions.
     					Replace the boilerplate in your code with higher order functions.
-						Some examples of higher order functions include:
-    					map — modifying each element in the array based on a give rule
-    					filter — getting a subset of the array that passes a given criterion
-    					reduce — combining everything in the array based on a given rule
-
-						Avoid repeating code. Sometimes you are going to need to use the same algorithm 
-						in different places of your application, so instead of repeating the same lines of code 
-						you must create a general solution in one entity or class and re-use it.
+						Some examples of higher order functions include: 
+						map - modifying each element in the array based on a given rule,
+    					filter — getting a subset of the array that passes a given criterion,
+    					reduce — combining everything in the array based on a given rule.
 					</aside>
 				</section>
 
@@ -178,10 +170,7 @@
 						which you may need in future but not at the moment. 
 						“You Aren’t Gonna Need It (YAGNI)” principle states that “don’t implement something 
 						until it is necessary” because in most of the cases you are not going to use that piece of code 
-						in future. Most of the programmers while implementing software think about the future possibility 
-						and add some code or logic for some other features which they don’t need at present. 
-						They add all the unnecessary class and functionality which maybe they never use in the future. 
-						Doing this is completely wrong. Don’t try to predict the future. 
+						in future. So don’t try to predict the future. 
 						Just avoid this mistake, it helps to save a lot of time and effort.
 					</aside>
 				</section>
@@ -192,11 +181,11 @@
 						<aside class="notes">
 							The SOLID principle is a coding standard in programming. 
 							This principle is an acronym of the five principles which is given below…
-							Single Responsibility Principle
-							Open/Closed Principle
-							Liskov’s Substitution Principle
-							Interface Segregation Principle
-							Dependency Inversion Principle
+							Single Responsibility Principle,
+							Open/Closed Principle,
+							Liskov’s Substitution Principle,
+							Interface Segregation Principle,
+							Dependency Inversion Principle.
 						</aside>
 					</section>
 					<section>
@@ -211,11 +200,8 @@
 							
 							This principle states that “a class should have only one reason to change” 
 							which means every class should have a single responsibility or single job or single purpose.
-							Most of the time it happens that when programmers have to add features or new behavior 
-							they implement everything into the existing class which is completely wrong. 
-							It makes their code lengthy, complex and consumes time when later something needs 
-							to be modified. Instead use layers in your application and break huge classes into 
-							smaller classes or modules.
+							When you developing new features of your application and your code growing up, 
+							use layers in your application and break huge classes into smaller classes or modules.
 						</aside>
 					</section>
 					<section>
@@ -224,10 +210,10 @@
 						<aside class="notes">
 							Open/Closed Principle: 
 							This principle states that “software entities (classes, modules, 
-							functions, etc.) should be open for extension, but closed for modification” which means 
-							you should be able to extend a class behavior, without modifying it.
-							Using this principle separates the existing code from the modified code so 
-							it provides better stability, maintainability and minimizes changes in your code.
+							functions, etc.) should be open for extension, but closed for modification”. 
+							Which means you should be able to extend a class behavior, without modifying it.
+							Using this principle separates the existing code from the modified code,
+							so it provides better stability, maintainability and minimizes changes in your code.
 						</aside>
 					</section>
 					<section>
@@ -235,16 +221,16 @@
 						<img src="./assets/LSP.png" alt="">
 						<aside class="notes">
 							Liskov’s Substitution Principle: 
-							According to this principle “Derived or child classes must be substitutable 
-							for their base or parent classes“. This principle ensures that any class that 
+							According to this principle “child classes must be substitutable 
+							for their parent classes“. This principle ensures that any class that 
 							is the child of a parent class should be usable in place of its parent without any 
 							unexpected behavior.
 
 							You can understand it in a way that a some Car class can be a super class for 
-							others cars classes like cabriolet, flashing cars, buggy and others by inheritance 
-							of super class properties and basic logic. So it`s easy to even replace super class Car 
-							by child classes. But it completely impossible to create Helicopter class as a child of Car class.
-							Every subclass should be substitutable for their parent class.
+							others cars classes like cabriolet, buggy and others by inheritance 
+							of super class properties and basic logic. 
+							So it`s easy to just replace super class Car by child classes. 
+							But it completely impossible to create Helicopter class as a child of Car class.
 						</aside>
 					</section>
 					<section>
@@ -259,12 +245,10 @@
 
 							Suppose if you enter a restaurant and you are pure vegetarian. 
 							The waiter in that restaurant gave you the menu card which includes vegetarian items,
-							non-vegetarian items, drinks, and sweets. In this case, as a customer, you should have 
+							non-vegetarian items, drinks and sweets. In this case, as a customer, you should have 
 							a menu card which includes only vegetarian items, not everything which you don’t eat 
 							in your food. Here the menu should be different for different types of customers. 
-							The common or general menu card for everyone can be divided into multiple cards 
-							instead of just one. Using this principle helps in reducing the side effects and 
-							frequency of required changes.
+							Using this principle helps in reducing the side effects and frequency of required changes.
 						</aside>
 					</section>
 					<section>
@@ -276,13 +260,9 @@
 							low-level modules/classes. 	Both should depend upon abstractions. 
 							Abstractions should not depend upon details. Details should depend upon abstractions. 
 
-							The above lines simply state that if a high module or class will be dependent 
+							The above lines simply state if a high module or class will be dependent 
 							more on low-level modules or class then your code would have tight coupling and 
-							if you will try to make a change in one class it can break another class 
-							which is risky at the production level. So always try to make classes loosely coupled 
-							as much as you can and you can achieve this through abstraction. 
-							
-							Entities must depend on abstractions not on concretions.
+							if you will try to make a change in one class it can break another class.
 						</aside>
 					</section>
 				</section>
@@ -291,12 +271,9 @@
 					<h3>Refactor Principle</h3>
 					<img src="./assets/refactopPrinciple.jpg" alt="">
 					<aside class="notes">
-						This principle explains that the “code rarely comes out right the first time”. 
-						With more advancements in the technologies, the coding has been developing with time. 
-						Thus you need to keep in mind to remodify them with time. 
-						As the new feature that you just implemented might be hindered by the complexity
-						of the future feature. As you know that the Code is constantly evolving with the pass of time. 
-						Therefore you need to rewrite and even sometimes redesign the whole chunk of code. 
+						Next principle explains that the “code rarely comes out right the first time”. 
+						You always need to maintain code, sometimes add new features with time.
+						And while implementing it you need to rewrite and even sometimes redesign the whole piece of code. 
 						In addition to all this, the Refactor principle is a healthy process among 
 						the Principles of Programming list. 
 					</aside>
