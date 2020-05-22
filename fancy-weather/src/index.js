@@ -3,7 +3,7 @@ import '@babel/polyfill';
 import getUserGeolocation from './js/geolocationAPI';
 import { getWeatherForDay, getWeatherForThreeDays } from './js/weatherAPIUtils';
 import {
-  renderGeolocationInfo, renderTodayWeatherData, renderThreeDaysWeather, renderDate, renderTime,
+  renderGeolocationInfo, renderTodayWeatherData, renderThreeDaysWeather, renderDate, renderTimeContainer,
 } from './js/renderData';
 import getWeatherData from './js/weatherAPI';
 import getImage from './js/imagesAPI';
@@ -32,14 +32,14 @@ async function init() {
 
   renderDate();
 
-  renderTime();
+  renderTimeContainer();
 
   const img = await getImage();
   console.log(img);
-  const { full } = img.urls;
-  console.log(full);
-  const el = document.querySelector('.photo');
-  el.style = `background-image: url("${full}")`;
+  const { regular } = img.urls;
+  console.log(regular);
+  const el = document.querySelector('.imgContainer');
+  el.style = `background-image: url("${regular}")`;
 }
 
 let timerId = setTimeout(function tick() {

@@ -81,7 +81,6 @@ function generateOneDayWeather(dayWeather, day) {
   const dayTemperature = createDomElement('span', 'dayTemperature');
   dayTemperature.textContent = `${dayWeather.currentTemp}°`;
 
-  // const weatherIcon = createDomElement('span', 'icon icon__weather'); //
   const iconWeatherClassNames = icons[dayWeather.weatherCode];
   const weatherIcon = createDomElement('i', `icon__weather icon__small ${iconWeatherClassNames}`);
 
@@ -117,25 +116,25 @@ function renderDate() {
   document.querySelector('.currentDate').append(fragment);
 }
 
-function renderTime() {
+function renderTimeContainer() {
   const currentDate = new Date();
   const time = createDomElement('span', 'time');
-  let HH = currentDate.getHours();
-  if (HH < 10) {
-    HH = `0${HH}`;
-  }
-  let mm = currentDate.getMinutes();
-  if (mm < 10) {
-    mm = `0${mm}`;
-  }
-  let ss = currentDate.getSeconds();
-  if (ss < 10) {
-    ss = `0${ss}`;
-  }
-  time.textContent = `${HH}:${mm}:${ss}`;
+  // let HH = currentDate.getHours();
+  // if (HH < 10) {
+  //   HH = `0${HH}`;
+  // }
+  // let mm = currentDate.getMinutes();
+  // if (mm < 10) {
+  //   mm = `0${mm}`;
+  // }
+  // let ss = currentDate.getSeconds();
+  // if (ss < 10) {
+  //   ss = `0${ss}`;
+  // }
+  // time.textContent = `${HH}:${mm}:${ss}`;
   document.querySelector('.currentDate').append(time);
 }
 
 export {
-  renderGeolocationInfo, renderTodayWeatherData, renderThreeDaysWeather, renderDate, renderTime,
+  renderGeolocationInfo, renderTodayWeatherData, renderThreeDaysWeather, renderDate, renderTimeContainer,
 };
