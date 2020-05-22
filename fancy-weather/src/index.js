@@ -6,7 +6,7 @@ import {
   renderGeolocationInfo, renderTodayWeatherData, renderThreeDaysWeather, renderDate, renderTime,
 } from './js/renderData';
 import getWeatherData from './js/weatherAPI';
-import createDomElement from './js/utils';
+import getImage from './js/imagesAPI';
 
 async function init() {
   const todayIndex = 0;
@@ -33,6 +33,13 @@ async function init() {
   renderDate();
 
   renderTime();
+
+  const img = await getImage();
+  console.log(img);
+  const { full } = img.urls;
+  console.log(full);
+  const el = document.querySelector('.photo');
+  el.style = `background-image: url("${full}")`;
 }
 
 let timerId = setTimeout(function tick() {
