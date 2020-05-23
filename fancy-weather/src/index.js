@@ -9,6 +9,7 @@ import {
 import getWeatherData from './js/weatherAPI';
 import getImage from './js/imagesAPI';
 import renderMap from './js/mapsAPI';
+import getCoordinates from './js/geocoordinatesAPI';
 
 async function init() {
   const todayIndex = 0;
@@ -44,6 +45,9 @@ async function init() {
   el.style = `background-image: url("${regular}")`;
 
   renderMap();
+
+  const a = await getCoordinates('Abu-Dhabi');
+  console.log(a);
 }
 
 let timerId = setTimeout(function tick() {
