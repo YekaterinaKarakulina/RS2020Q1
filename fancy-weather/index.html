@@ -1,94 +1,69 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fancy-weather</title>
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"> 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/52a64ca834.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css" rel="stylesheet" />
 
-    </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>fancy-weather</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"> 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/52a64ca834.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css" rel="stylesheet" />
+</head>
+
 <body>
   <div class="imgContainer">
     <div class="wrapperContainer">
       <header class="wrapper wrapper__header">
-
-      <section class="header__parameters">
-        <button class="button image__button">
-          <span class="icon icon__rotate"></span>
-        </button>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"> </span> English</a>
-          <div class="dropdown-menu" aria-labelledby="dropdown09">
-              <a class="dropdown-item" href="#"><span class="flag-icon flag-icon-blr"> </span>  Belarus</a>
-              <a class="dropdown-item" href="#"><span class="flag-icon flag-icon-ru"> </span>  Russian</a>
-          </div>
-        </li>
-
-        <label class='toggle-label'>
-          <input type='checkbox'/>
-            <span class='back'>
-             <span class='toggle'></span>
-              <span class='label on'>°C</span>
-             <span class='label off'>°F</span>  
-           </span>
-         </label>
-      </section>
-
-      <section class="header__search">
-        <form id="form" action="https://www.w3schools.com/action_page.php" target="_blank" method="POST">
-          <input class="input input__city" type="text" name="city" id="city" placeholder="Search city" required autocomplete="off" maxlength="70">
-          <button class="button submit__button" id="submit__button">Search</button>
-        </form>
-      </section>
-
+        <section class="header__parameters">
+          <button class="button image__button">
+            <span class="icon icon__rotate"></span>
+          </button>
+          <!--dropdown imported from bootstrap-->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"> </span> English</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown09">
+                <a class="dropdown-item" href="#"><span class="flag-icon flag-icon-blr"> </span>  Belarus</a>
+                <a class="dropdown-item" href="#"><span class="flag-icon flag-icon-ru"> </span>  Russian</a>
+            </div>
+          </li>
+          <!--toogle-label imported from codepen-->
+          <label class='toggle-label'>
+            <input type='checkbox'/>
+              <span class='back'>
+              <span class='toggle'></span>
+                <span class='label on'>°C</span>
+              <span class='label off'>°F</span>  
+            </span>
+          </label>
+        </section>
+        <section class="header__search">
+          <form id="form" action="https://www.w3schools.com/action_page.php" target="_blank" method="POST">
+            <input class="input input__city" type="text" name="city" id="city" placeholder="Search city" required autocomplete="off" maxlength="70">
+            <span class="icon icon__microphone"></span>
+            <button class="button submit__button" id="submit__button">Search</button>
+          </form>
+        </section>
     </header>
 
     <main class="wrapper wrapper__main">
-
-      <div class="container">
-
         <div class="weatherInfo">
-
           <section class="todaysWeather">
-
             <div class="location"></div>
-
-            <div class="currentDate">
-              <!--<span class="weekDay">Mon</span>
-              <span class="date">1 June</span>
-              <span class="time">17:23:12</span>-->
-            </div>
-
+            <div class="currentDate"></div>
             <div class="weatherContainer"></div>
-            
           </section>
-
           <section class="threeDaysWeather"></section>
-
         </div>
-
         <div class="locationInfo">
-
           <div class="mapContainer">
             <div id="map"></div>
           </div>
-
-          <div class="coordinates">
-            <div class="latitude"></div>
-            <div class="longitude"></div>
-          </div>
+          <div class="coordinates"></div>
         </div>
-
-      </div>
-    </main>
-
+      </main>
+    </div>
   </div>
-  </div>
-  
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

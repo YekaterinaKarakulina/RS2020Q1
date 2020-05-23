@@ -1,16 +1,32 @@
 .weatherInfo {
   display: inline-block;
   width: 30rem;
-  height: 30rem;
-  border: 1px solid black;
+  border: 1px solid red;
   color: $color-light;
   font-weight: 700;
+  @include media-laptop {
+    width: 20rem;
+  }
+  @include media-tablet {
+    position: relative;
+  }
+  @include media-mobile {
+    width: 17rem;
+  }
 }
 
 .location {
   width: 100%;
   height: 5rem; 
   font-size: 3rem;
+  @include media-laptop {
+    font-size: 2rem;
+    height: 3rem;
+  }
+  @include media-mobile {
+    font-size: 1.5rem;
+    height: 2rem;
+  }
 }
 
 .city::after {
@@ -20,6 +36,9 @@
 .currentDate, 
 .summaryContainer {
   font-size: 1rem;
+  @include media-mobile {
+    font-size: 0.8rem;
+  }
 }
 
 .summaryContainer {
@@ -28,9 +47,17 @@
 
 .currentTemperature {
   font-size: 10rem;
+  @include media-laptop {
+    font-size: 7rem;
+  }
+  @include media-mobile {
+    font-size: 6rem;
+  }
 }
 
 .weatherContainer {
   display: flex;
+  justify-content: center;
+  align-items: center;
   height: 15rem;
 }

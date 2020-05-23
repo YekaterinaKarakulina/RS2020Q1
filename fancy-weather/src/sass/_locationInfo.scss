@@ -1,21 +1,36 @@
 .locationInfo {
   display: inline-block;
-  width: 20rem;
-  height: 30rem;
-  border: 1px solid black;
+  width: 25rem;
+  border: 1px solid red;
   font-size: 1rem;
   font-weight: 700;
   color: $color-light;
+  @include media-laptop {
+    width: 15rem;
+  }
+  @include media-tablet {
+    margin-top: 7.5rem;
+  }
+  @include media-mobile {
+    margin-top: 5rem;
+  }
 }
 
 .coordinates {
   float: right;
 }
 
-.latitude::before {
-  content: 'Latitude:';
+#map { 
+  width: 100%;
+  height: 100%;
+  background-size: cover;
 }
 
-.longitude::before {
-  content: 'Longitude:';
+.mapContainer {
+  width: 25rem;
+  height: 25rem;
+  @include media-laptop {
+    width: 15rem;
+    height: 15rem;
+  }
 }

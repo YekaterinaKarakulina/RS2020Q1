@@ -15,5 +15,8 @@
 }
 
 .submit__button {
-  width: 5rem; 
+  width: 18%; 
+  @include media-tablet {
+    width: 20%;
+  }
 }

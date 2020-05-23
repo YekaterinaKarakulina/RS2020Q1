@@ -1,11 +1,9 @@
 .header__parameters {
-  border: 1px solid black;
   display: inline-flex;
   width: 16.5rem;
   align-items: center;
   justify-content: space-between;
-}
-
-.header__search {
-  border: 1px solid black;
+  @include media-laptop {
+    margin-bottom: 2rem;
+  }
 }
