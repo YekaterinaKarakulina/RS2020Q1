@@ -3,10 +3,12 @@ import '@babel/polyfill';
 import getUserGeolocation from './js/geolocationAPI';
 import { getWeatherForDay, getWeatherForThreeDays } from './js/weatherAPIUtils';
 import {
-  renderGeolocationInfo, renderTodayWeatherData, renderThreeDaysWeather, renderDate, renderTimeContainer,
+  renderGeolocationInfo, renderTodayWeatherData, renderThreeDaysWeather, renderDate,
+  renderTimeContainer,
 } from './js/renderData';
 import getWeatherData from './js/weatherAPI';
 import getImage from './js/imagesAPI';
+import renderMap from './js/mapsAPI';
 
 async function init() {
   const todayIndex = 0;
@@ -40,6 +42,8 @@ async function init() {
   console.log(regular);
   const el = document.querySelector('.imgContainer');
   el.style = `background-image: url("${regular}")`;
+
+  renderMap();
 }
 
 let timerId = setTimeout(function tick() {
