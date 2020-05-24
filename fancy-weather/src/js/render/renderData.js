@@ -112,26 +112,42 @@ function createThreeDaysWeatherDOMFragment(threeDaysWeather) {
   return fragment;
 }
 
+function createLocationMapDOMFragment(appObject) {
+  const fragment = document.createDocumentFragment();
+
+  const mapElem = createDomElement('div', 'map');
+  mapElem.id = 'map';
+
+  const mapContainer = createDomElement('div', 'mapContainer');
+  mapContainer.append(mapElem);
+
+  const latitude = createDomElement('div', 'latitude');
+  latitude.textContent = `Latitude: ${appObject.lat}`;
+
+  const longitude = createDomElement('div', 'longitude');
+  longitude.textContent = `Longitude: ${appObject.lng}`;
+
+  const coordinates = createDomElement('div', 'coordinates');
+  coordinates.append(latitude);
+  coordinates.append(longitude);
+
+  fragment.append(mapContainer);
+  fragment.append(coordinates);
+  return fragment;
+}
+
 export default function renderData(appObject) {
   const fragment = document.createDocumentFragment();
   const weatherInfo = createDomElement('div', 'weatherInfo');
 
   const locationFragment = createLocationDOMFragment(appObject);
-  const location = createDomElement('div', 'location');
-  location.append(locationFragment);
-
   const dateTimeFragment = createDateTimeDOMFragment();
-  const currentDate = createDomElement('div', 'currentDate');
-  currentDate.append(dateTimeFragment);
-
   const todayWeatherFragment = createTodayWeatherDOMFragment(appObject.todayWeatherData);
-  const weatherContainer = createDomElement('div', 'weatherContainer');
-  weatherContainer.append(todayWeatherFragment);
 
   const todaysWeather = createDomElement('section', 'todaysWeather');
-  todaysWeather.append(location);
-  todaysWeather.append(currentDate);
-  todaysWeather.append(weatherContainer);
+  todaysWeather.append(locationFragment);
+  todaysWeather.append(dateTimeFragment);
+  todaysWeather.append(todayWeatherFragment);
 
   const threeDaysWeatherFragment = createThreeDaysWeatherDOMFragment(appObject.threeDaysWeatherData);
   const threeDaysWeather = createDomElement('section', 'threeDaysWeather');
@@ -140,14 +156,9 @@ export default function renderData(appObject) {
   weatherInfo.append(todaysWeather);
   weatherInfo.append(threeDaysWeather);
 
-  const mapElem = createDomElement('div', 'map');
-  mapElem.id = 'map';
-
-  const mapContainer = createDomElement('div', 'mapContainer');
-  mapContainer.append(mapElem);
-
   const locationInfo = createDomElement('div', 'locationInfo');
-  locationInfo.append(mapContainer);
+  const locationMapFragment = createLocationMapDOMFragment(appObject);
+  locationInfo.append(locationMapFragment);
 
   fragment.append(weatherInfo);
   fragment.append(locationInfo);
