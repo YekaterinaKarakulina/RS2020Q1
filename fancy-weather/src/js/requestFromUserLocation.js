@@ -4,6 +4,7 @@ import getWeatherData from './APIs/weatherAPI';
 import { getWeatherForDay, getWeatherForThreeDays } from './APIs/weatherAPIUtils';
 import renderData from './render/renderData';
 import renderMap from './APIs/mapsAPI';
+import renderImage from './render/renderImage';
 
 export default async function requestFromUserLocation() {
   const appObject = {};
@@ -32,4 +33,5 @@ export default async function requestFromUserLocation() {
 
   renderData(appObject);
   renderMap(lat, lng);
+  renderImage();
 }

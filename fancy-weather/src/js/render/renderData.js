@@ -1,4 +1,4 @@
-import createDomElement from '../utils';
+import { createDomElement, translateCoordinates } from '../utils';
 import icons from '../icons';
 
 const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fr', 'Sat'];
@@ -121,11 +121,13 @@ function createLocationMapDOMFragment(appObject) {
   const mapContainer = createDomElement('div', 'mapContainer');
   mapContainer.append(mapElem);
 
+  const coordinatesTranslated = translateCoordinates(appObject.lat, appObject.lng);
+
   const latitude = createDomElement('div', 'latitude');
-  latitude.textContent = `Latitude: ${appObject.lat}`;
+  latitude.textContent = `Latitude: ${coordinatesTranslated.latitude}`;
 
   const longitude = createDomElement('div', 'longitude');
-  longitude.textContent = `Longitude: ${appObject.lng}`;
+  longitude.textContent = `Longitude: ${coordinatesTranslated.longitude}`;
 
   const coordinates = createDomElement('div', 'coordinates');
   coordinates.append(latitude);
