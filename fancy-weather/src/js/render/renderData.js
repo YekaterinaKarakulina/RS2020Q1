@@ -139,6 +139,8 @@ function createLocationMapDOMFragment(appObject) {
 }
 
 export default function renderData(appObject) {
+  console.log(appObject);
+
   const fragment = document.createDocumentFragment();
   const weatherInfo = createDomElement('div', 'weatherInfo');
 
