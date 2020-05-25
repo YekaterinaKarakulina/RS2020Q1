@@ -19,6 +19,9 @@ form {
 
 .imgContainer {
   background-size: cover;
+  -webkit-transition-property: background;
+  -webkit-transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease;
 }
 
 .temperature {

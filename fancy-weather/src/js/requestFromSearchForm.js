@@ -8,28 +8,33 @@ import renderImage from './render/renderImage';
 export default async function requestFromSearchForm(city) {
   const appObject = {};
 
-  appObject.city = city;
+  try {
+    appObject.city = city;
 
-  const bestSearchMatchResultIndex = 0;
-  const geolocation = await getGeolocation(city);
-  const { lat, lng } = geolocation.results[bestSearchMatchResultIndex].geometry;
-  appObject.lat = lat;
-  appObject.lng = lng;
+    const bestSearchMatchResultIndex = 0;
+    const geolocation = await getGeolocation(city);
+    const { lat, lng } = geolocation.results[bestSearchMatchResultIndex].geometry;
+    appObject.lat = lat;
+    appObject.lng = lng;
 
-  const { country } = geolocation.results[bestSearchMatchResultIndex].components;
-  appObject.country = country;
+    const { country } = geolocation.results[bestSearchMatchResultIndex].components;
+    appObject.country = country;
 
-  const weatherData = await getWeatherData(lat, lng);
-  const todayIndex = 0;
-  const nextThreeDaysIndexes = [1, 2, 3];
-  const todayWeatherData = getWeatherForDay(weatherData, todayIndex);
-  appObject.todayWeatherData = todayWeatherData;
+    const weatherData = await getWeatherData(lat, lng);
+    const todayIndex = 0;
+    const nextThreeDaysIndexes = [1, 2, 3];
+    const todayWeatherData = getWeatherForDay(weatherData, todayIndex);
+    appObject.todayWeatherData = todayWeatherData;
 
-  const threeDaysWeatherData = getWeatherForThreeDays(weatherData, nextThreeDaysIndexes);
-  appObject.threeDaysWeatherData = threeDaysWeatherData;
+    const threeDaysWeatherData = getWeatherForThreeDays(weatherData, nextThreeDaysIndexes);
+    appObject.threeDaysWeatherData = threeDaysWeatherData;
 
-  document.querySelector('.wrapper__main').innerHTML = '';
-  renderData(appObject);
-  renderMap(lat, lng);
-  renderImage();
+    document.querySelector('.wrapper__main').innerHTML = '';
+    return appObject;
+    // renderData(appObject);
+    // renderMap(lat, lng);
+    // renderImage();
+  } catch (error) {
+    console.log(error);
+  }
 }

@@ -38,34 +38,6 @@ function translateCoordinates(lat, lng) {
   return { latitude, longitude };
 }
 
-
-/* function translateCToF(tempElements) {
-  tempElements.forEach((el) => {
-    const tempElem = el;
-    const currentT = el.textContent.slice(0, -1);
-    const translatedTemp = (9 / 5) * currentT + 32;
-    tempElem.textContent = `${Math.round(translatedTemp)}°`;
-  });
-  const realFeelTempElem = document.querySelector('.realFeelTemperature');
-  const currentRealFeelTemp = realFeelTempElem.textContent.split(' ')[1].slice(0, -1);
-  const translatedRealFeelTemp = (9 / 5) * currentRealFeelTemp + 32;
-  realFeelTempElem.textContent = `REALFEEL ${Math.round(translatedRealFeelTemp)}°`;
-}
-
-function translateFToC(tempElements) {
-  tempElements.forEach((el) => {
-    const tempElem = el;
-    const currentT = el.textContent.slice(0, -1);
-    const translatedTemp = (5 / 9) * (currentT - 32);
-    tempElem.textContent = `${Math.round(translatedTemp)}°`;
-  });
-  const realFeelTempElem = document.querySelector('.realFeelTemperature');
-  const currentRealFeelTemp = realFeelTempElem.textContent.split(' ')[1].slice(0, -1);
-  const translatedRealFeelTemp = (5 / 9) * (currentRealFeelTemp - 32);
-  realFeelTempElem.textContent = `REALFEEL ${Math.round(translatedRealFeelTemp)}°`;
-} */
-
-
 function transferCelsiusToFahrenheit(tempElements) {
   tempElements.forEach((el) => {
     const tempElem = el;
