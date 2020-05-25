@@ -9,9 +9,6 @@ import clock from './js/clock';
 requestFromUserLocation();
 clock();
 
-localStorage.setItem('isCelsius', 'true');
-
-
 document.querySelector('.submit__button').addEventListener('click', (event) => {
   event.preventDefault();
   const city = document.querySelector('.input__city').value;
@@ -19,5 +16,6 @@ document.querySelector('.submit__button').addEventListener('click', (event) => {
 });
 
 document.querySelector('.tempInput').addEventListener('click', () => {
-  transferTemperature();
+  const tempElements = document.querySelectorAll('.temperature');
+  transferTemperature(tempElements);
 });

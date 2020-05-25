@@ -84,19 +84,16 @@ function transferFahrenheitToCelsius(tempElements) {
   });
 }
 
-function transferTemperature() {
-  const tempElements = document.querySelectorAll('.temperature');
-
-  console.log(localStorage.getItem('isCelsius'));
-  if (localStorage.getItem('isCelsius') === 'true') {
-    console.log('yes');
-    localStorage.setItem('isCelsius', 'false');
+function transferTemperature(tempElements) {
+  if (localStorage.getItem('temp') === 'isCelsius') {
+    localStorage.setItem('temp', 'isFahrenheit');
     transferCelsiusToFahrenheit(tempElements);
   } else {
-    console.log('no');
-    localStorage.setItem('isCelsius', 'true');
+    localStorage.setItem('temp', 'isCelsius');
     transferFahrenheitToCelsius(tempElements);
   }
 }
 
-export { createDomElement, translateCoordinates, transferTemperature };
+export {
+  createDomElement, translateCoordinates, transferTemperature, transferCelsiusToFahrenheit,
+};

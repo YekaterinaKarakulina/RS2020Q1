@@ -1,4 +1,4 @@
-import { createDomElement, translateCoordinates } from '../utils';
+import { createDomElement, translateCoordinates, transferCelsiusToFahrenheit } from '../utils';
 import icons from '../icons';
 
 const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fr', 'Sat'];
@@ -75,6 +75,11 @@ function createTodayWeatherDOMFragment(todayWeather) {
   weatherContainer.append(currentTemperature);
   weatherContainer.append(summaryContainer);
   fragment.append(weatherContainer);
+
+  if (localStorage.getItem('temp') === 'isFahrenheit') {
+    const tempElements = fragment.querySelectorAll('.temperature');
+    transferCelsiusToFahrenheit(tempElements);
+  }
   return fragment;
 }
 
@@ -101,6 +106,12 @@ function generateOneDayWeather(dayWeather, day) {
   dayElement.append(weekDay);
   dayElement.append(dayTemperature);
   dayElement.append(weatherIcon);
+
+  if (localStorage.getItem('temp') === 'isFahrenheit') {
+    const tempElements = dayElement.querySelectorAll('.temperature');
+    transferCelsiusToFahrenheit(tempElements);
+  }
+
   return dayElement;
 }
 
@@ -146,6 +157,10 @@ function createLocationMapDOMFragment(appObject) {
 
 export default function renderData(appObject) {
   console.log(appObject);
+
+  if (localStorage.getItem('temp') === 'isFahrenheit') {
+    document.querySelector('.tempInput').checked = true;
+  }
 
   const fragment = document.createDocumentFragment();
   const weatherInfo = createDomElement('div', 'weatherInfo');
