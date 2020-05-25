@@ -38,4 +38,65 @@ function translateCoordinates(lat, lng) {
   return { latitude, longitude };
 }
 
-export { createDomElement, translateCoordinates };
+
+/* function translateCToF(tempElements) {
+  tempElements.forEach((el) => {
+    const tempElem = el;
+    const currentT = el.textContent.slice(0, -1);
+    const translatedTemp = (9 / 5) * currentT + 32;
+    tempElem.textContent = `${Math.round(translatedTemp)}°`;
+  });
+  const realFeelTempElem = document.querySelector('.realFeelTemperature');
+  const currentRealFeelTemp = realFeelTempElem.textContent.split(' ')[1].slice(0, -1);
+  const translatedRealFeelTemp = (9 / 5) * currentRealFeelTemp + 32;
+  realFeelTempElem.textContent = `REALFEEL ${Math.round(translatedRealFeelTemp)}°`;
+}
+
+function translateFToC(tempElements) {
+  tempElements.forEach((el) => {
+    const tempElem = el;
+    const currentT = el.textContent.slice(0, -1);
+    const translatedTemp = (5 / 9) * (currentT - 32);
+    tempElem.textContent = `${Math.round(translatedTemp)}°`;
+  });
+  const realFeelTempElem = document.querySelector('.realFeelTemperature');
+  const currentRealFeelTemp = realFeelTempElem.textContent.split(' ')[1].slice(0, -1);
+  const translatedRealFeelTemp = (5 / 9) * (currentRealFeelTemp - 32);
+  realFeelTempElem.textContent = `REALFEEL ${Math.round(translatedRealFeelTemp)}°`;
+} */
+
+
+function transferCelsiusToFahrenheit(tempElements) {
+  tempElements.forEach((el) => {
+    const tempElem = el;
+    const currentT = el.textContent;
+    const translatedTemp = (9 / 5) * currentT + 32;
+    tempElem.textContent = Math.round(translatedTemp);
+  });
+}
+
+function transferFahrenheitToCelsius(tempElements) {
+  tempElements.forEach((el) => {
+    const tempElem = el;
+    const currentT = el.textContent;
+    const translatedTemp = (5 / 9) * (currentT - 32);
+    tempElem.textContent = Math.round(translatedTemp);
+  });
+}
+
+function transferTemperature() {
+  const tempElements = document.querySelectorAll('.temperature');
+
+  console.log(localStorage.getItem('isCelsius'));
+  if (localStorage.getItem('isCelsius') === 'true') {
+    console.log('yes');
+    localStorage.setItem('isCelsius', 'false');
+    transferCelsiusToFahrenheit(tempElements);
+  } else {
+    console.log('no');
+    localStorage.setItem('isCelsius', 'true');
+    transferFahrenheitToCelsius(tempElements);
+  }
+}
+
+export { createDomElement, translateCoordinates, transferTemperature };

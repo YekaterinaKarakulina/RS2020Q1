@@ -20,3 +20,9 @@ form {
 .imgContainer {
   background-size: cover;
 }
+
+.temperature {
+  &:after {
+    content: '°';
+  }
+}

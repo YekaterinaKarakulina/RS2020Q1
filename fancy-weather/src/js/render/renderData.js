@@ -37,8 +37,8 @@ function createTodayWeatherDOMFragment(todayWeather) {
   const fragment = document.createDocumentFragment();
   const weatherContainer = createDomElement('div', 'weatherContainer');
 
-  const currentTemperature = createDomElement('div', 'currentTemperature');
-  currentTemperature.textContent = `${todayWeather.currentTemp}°`;
+  const currentTemperature = createDomElement('div', 'temperature currentTemperature');
+  currentTemperature.textContent = todayWeather.currentTemp;
 
   const summaryContainer = createDomElement('div', 'summaryContainer');
 
@@ -48,8 +48,14 @@ function createTodayWeatherDOMFragment(todayWeather) {
   const weatherDescription = createDomElement('div', 'weatherDescription');
   weatherDescription.textContent = todayWeather.weatherCode.toUpperCase();
 
+  const realFeelTempTitle = createDomElement('span', 'realFeelTempTitle');
+  realFeelTempTitle.textContent = 'REALFEEL ';
+  const realFeelTempValue = createDomElement('span', 'temperature realFeelTempValue');
+  realFeelTempValue.textContent = todayWeather.realFeelTemp;
+
   const realFeelTemperature = createDomElement('div', 'realFeelTemperature');
-  realFeelTemperature.textContent = `REALFEEL ${todayWeather.realFeelTemp}°`;
+  realFeelTemperature.append(realFeelTempTitle);
+  realFeelTemperature.append(realFeelTempValue);
 
   const windSpeed = createDomElement('div', 'windSpeed');
   windSpeed.textContent = `SPEED ${todayWeather.windSpeed} m/s`;
@@ -86,8 +92,8 @@ function generateOneDayWeather(dayWeather, day) {
   const weekDay = createDomElement('div', 'weekDay');
   weekDay.textContent = day;
 
-  const dayTemperature = createDomElement('span', 'dayTemperature');
-  dayTemperature.textContent = `${dayWeather.currentTemp}°`;
+  const dayTemperature = createDomElement('span', 'temperature dayTemperature');
+  dayTemperature.textContent = dayWeather.currentTemp;
 
   const iconWeatherClassNames = icons[dayWeather.weatherCode];
   const weatherIcon = createDomElement('i', `icon__weather icon__small ${iconWeatherClassNames}`);
