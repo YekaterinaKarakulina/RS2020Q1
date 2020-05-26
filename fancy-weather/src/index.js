@@ -62,3 +62,4 @@ document.querySelector('.tempInput').addEventListener('click', () => {
   const tempElements = document.querySelectorAll('.temperature');
   transferTemperature(tempElements);
 });
+

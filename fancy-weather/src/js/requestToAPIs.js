@@ -2,11 +2,7 @@ import getGeolocation from './APIs/geolocationAPI';
 import getWeatherData from './APIs/weatherAPI';
 import { getWeatherForDay, getWeatherForThreeDays } from './utils/weatherUtils';
 import getImage from './APIs/imagesAPI';
-
-function getKeywordsForImgAPI() {
-  const imgKeywords = 'winter night';
-  return imgKeywords;
-}
+import getKeywordsForImgAPI from './utils/imageUtils';
 
 export default async function requestToAPIs(city) {
   const appObject = {};
@@ -16,7 +12,6 @@ export default async function requestToAPIs(city) {
 
     const bestSearchMatchResultIndex = 0;
     const geolocation = await getGeolocation(city);
-
     if (geolocation.results.length !== 0) {
       const { lat, lng } = geolocation.results[bestSearchMatchResultIndex].geometry;
       appObject.lat = lat;
@@ -27,16 +22,19 @@ export default async function requestToAPIs(city) {
 
       const { country } = geolocation.results[bestSearchMatchResultIndex].components;
       appObject.country = country;
-      const imgKeywords = getKeywordsForImgAPI;
-      const promises = [getWeatherData(lat, lng), getImage(imgKeywords)];
+
+      const imgProperties = `${getKeywordsForImgAPI(appObject)} nature`;
+      console.log(imgProperties);
+
+      const promises = [getWeatherData(lat, lng), getImage(imgProperties)];
       const results = await Promise.all(promises);
+
       if (results) {
         const weatherData = results[0];
         const todayIndex = 0;
         const nextThreeDaysIndexes = [1, 2, 3];
         const todayWeatherData = getWeatherForDay(weatherData, todayIndex);
         appObject.todayWeatherData = todayWeatherData;
-
         const threeDaysWeatherData = getWeatherForThreeDays(weatherData, nextThreeDaysIndexes);
         appObject.threeDaysWeatherData = threeDaysWeatherData;
 
