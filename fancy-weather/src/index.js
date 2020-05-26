@@ -1,7 +1,7 @@
 import './sass/style.scss';
 import '@babel/polyfill';
 import requestToAPIs from './js/requestToAPIs';
-import { transferTemperature } from './js/utils';
+import { transferTemperature } from './js/utils/temperatureUtils';
 import renderData from './js/render/renderData';
 import getUserGeolocation from './js/APIs/userGeolocationAPI';
 

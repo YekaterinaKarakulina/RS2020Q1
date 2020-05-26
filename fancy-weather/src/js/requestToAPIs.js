@@ -1,7 +1,12 @@
 import getGeolocation from './APIs/geolocationAPI';
 import getWeatherData from './APIs/weatherAPI';
-import { getWeatherForDay, getWeatherForThreeDays } from './APIs/weatherAPIUtils';
+import { getWeatherForDay, getWeatherForThreeDays } from './utils/weatherUtils';
 import getImage from './APIs/imagesAPI';
+
+function getKeywordsForImgAPI() {
+  const imgKeywords = 'winter night';
+  return imgKeywords;
+}
 
 export default async function requestToAPIs(city) {
   const appObject = {};
@@ -22,7 +27,8 @@ export default async function requestToAPIs(city) {
 
       const { country } = geolocation.results[bestSearchMatchResultIndex].components;
       appObject.country = country;
-      const promises = [getWeatherData(lat, lng), getImage()];
+      const imgKeywords = getKeywordsForImgAPI;
+      const promises = [getWeatherData(lat, lng), getImage(imgKeywords)];
       const results = await Promise.all(promises);
       if (results) {
         const weatherData = results[0];
@@ -37,7 +43,6 @@ export default async function requestToAPIs(city) {
         const img = results[1];
         const { regular } = img.urls;
         appObject.linkToImg = regular;
-        console.log(appObject);
         return appObject;
       }
     }
