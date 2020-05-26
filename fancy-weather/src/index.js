@@ -1,44 +1,40 @@
 import './sass/style.scss';
 import '@babel/polyfill';
-import requestFromUserLocation from './js/requestFromUserLocation';
-import requestFromSearchForm from './js/requestFromSearchForm';
+import requestToAPIs from './js/requestToAPIs';
 import { transferTemperature } from './js/utils';
-import renderImage from './js/render/renderImage';
 import clock from './js/clock';
-import getImage from './js/APIs/imagesAPI';
 import renderData from './js/render/renderData';
-import renderMap from './js/APIs/mapsAPI';
+import getUserGeolocation from './js/APIs/userGeolocationAPI';
 
 async function init() {
-  const promises = [requestFromUserLocation(), getImage()];
-  const results = await Promise.all(promises);
-  if (results) {
-    const { lat, lng } = results[0];
-    renderImage(results[1]);
-    renderData(results[0]);
-    renderMap(lat, lng);
-  }
+  const userGeolocation = await getUserGeolocation();
+  const { city } = userGeolocation;
+  const appObj = await requestToAPIs(city);
+  renderData(appObj);
+  clock();
 }
-
 
 init();
-clock();
 
-async function initSearch(city) {
-  const promises = [requestFromSearchForm(city), getImage()];
-  const results = await Promise.all(promises);
-  if (results) {
-    const { lat, lng } = results[0];
-    renderImage(results[1]);
-    renderData(results[0]);
-    renderMap(lat, lng);
+
+async function searchFromInputForm(city) {
+  if (city.match(/[!@#$%^&*()_+=]/g)) {
+    alert('Unappropriate city name, try another city');
+  } else if (city.length <= 3) {
+    alert('Too short city name, minimum length is 4 symbols');
+  } else if (city.length > 3) {
+    const appObj = await requestToAPIs(city);
+    renderData(appObj);
   }
 }
 
+
 document.querySelector('.submit__button').addEventListener('click', (event) => {
+  const cityInput = document.querySelector('.input__city');
+  cityInput.focus();
   event.preventDefault();
-  const city = document.querySelector('.input__city').value;
-  initSearch(city);
+  const city = cityInput.value;
+  searchFromInputForm(city);
 });
 
 document.querySelector('.tempInput').addEventListener('click', () => {
