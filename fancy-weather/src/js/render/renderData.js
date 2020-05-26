@@ -16,10 +16,11 @@ function createLocationDOMFragment(appObject) {
   return fragment;
 }
 
-function createDateTimeDOMFragment() {
+function createDateTimeDOMFragment(appObject) {
   const fragment = document.createDocumentFragment();
 
-  const currentDate = new Date();
+  const localeStrDate = new Date().toLocaleString('en-US', { timeZone: `${appObject.timezone}` });
+  const currentDate = new Date(Date.parse(localeStrDate));
 
   const date = createDomElement('span', 'date');
   date.textContent = `${weekDays[currentDate.getDay()]} ${currentDate.getDate()}
@@ -32,6 +33,7 @@ function createDateTimeDOMFragment() {
   currentDateAndTimeElem.append(time);
 
   fragment.append(currentDateAndTimeElem);
+
   return fragment;
 }
 
@@ -117,13 +119,16 @@ function generateOneDayWeather(dayWeather, day) {
   return dayElement;
 }
 
-function createThreeDaysWeatherDOMFragment(threeDaysWeather) {
-  const fragment = document.createDocumentFragment();
-  const date = new Date();
+function createThreeDaysWeatherDOMFragment(appObject) {
+  const threeDaysWeather = appObject.threeDaysWeatherData;
 
-  const firstDayWeather = generateOneDayWeather(threeDaysWeather[0], getWeekDay(date.getDay() + 1));
-  const secDayWeather = generateOneDayWeather(threeDaysWeather[1], getWeekDay(date.getDay() + 2));
-  const thirdDayWeather = generateOneDayWeather(threeDaysWeather[2], getWeekDay(date.getDay() + 3));
+  const fragment = document.createDocumentFragment();
+  const localeStrDate = new Date().toLocaleString('en-US', { timeZone: `${appObject.timezone}` });
+  const currentDate = new Date(Date.parse(localeStrDate));
+
+  const firstDayWeather = generateOneDayWeather(threeDaysWeather[0], getWeekDay(currentDate.getDay() + 1));
+  const secDayWeather = generateOneDayWeather(threeDaysWeather[1], getWeekDay(currentDate.getDay() + 2));
+  const thirdDayWeather = generateOneDayWeather(threeDaysWeather[2], getWeekDay(currentDate.getDay() + 3));
 
   fragment.append(firstDayWeather);
   fragment.append(secDayWeather);
@@ -170,7 +175,7 @@ export default function renderData(appObject) {
     const weatherInfo = createDomElement('div', 'weatherInfo');
 
     const locationFragment = createLocationDOMFragment(appObject);
-    const dateTimeFragment = createDateTimeDOMFragment();
+    const dateTimeFragment = createDateTimeDOMFragment(appObject);
     const todayWeatherFragment = createTodayWeatherDOMFragment(appObject.todayWeatherData);
 
     const todaysWeather = createDomElement('section', 'todaysWeather');
@@ -178,7 +183,7 @@ export default function renderData(appObject) {
     todaysWeather.append(dateTimeFragment);
     todaysWeather.append(todayWeatherFragment);
 
-    const threeDaysWeatherFragment = createThreeDaysWeatherDOMFragment(appObject.threeDaysWeatherData);
+    const threeDaysWeatherFragment = createThreeDaysWeatherDOMFragment(appObject);
     const threeDaysWeather = createDomElement('section', 'threeDaysWeather');
     threeDaysWeather.append(threeDaysWeatherFragment);
 

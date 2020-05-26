@@ -17,6 +17,9 @@ export default async function requestToAPIs(city) {
       appObject.lat = lat;
       appObject.lng = lng;
 
+      const { timezone } = geolocation.results[bestSearchMatchResultIndex].annotations;
+      appObject.timezone = timezone.name;
+
       const { country } = geolocation.results[bestSearchMatchResultIndex].components;
       appObject.country = country;
       const promises = [getWeatherData(lat, lng), getImage()];
@@ -34,6 +37,7 @@ export default async function requestToAPIs(city) {
         const img = results[1];
         const { regular } = img.urls;
         appObject.linkToImg = regular;
+        console.log(appObject);
         return appObject;
       }
     }

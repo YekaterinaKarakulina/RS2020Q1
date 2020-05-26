@@ -2,19 +2,40 @@ import './sass/style.scss';
 import '@babel/polyfill';
 import requestToAPIs from './js/requestToAPIs';
 import { transferTemperature } from './js/utils';
-import clock from './js/clock';
 import renderData from './js/render/renderData';
 import getUserGeolocation from './js/APIs/userGeolocationAPI';
+
+let appObject;
 
 async function init() {
   const userGeolocation = await getUserGeolocation();
   const { city } = userGeolocation;
-  const appObj = await requestToAPIs(city);
-  renderData(appObj);
-  clock();
+  appObject = await requestToAPIs(city);
+  renderData(appObject);
 }
 
 init();
+
+
+let timerId = setTimeout(function tick() {
+  const localeStrDate = new Date().toLocaleString('en-US', { timeZone: `${appObject.timezone}` });
+  const currentDate = new Date(Date.parse(localeStrDate));
+
+  let HH = currentDate.getHours();
+  if (HH < 10) {
+    HH = `0${HH}`;
+  }
+  let mm = currentDate.getMinutes();
+  if (mm < 10) {
+    mm = `0${mm}`;
+  }
+  let ss = currentDate.getSeconds();
+  if (ss < 10) {
+    ss = `0${ss}`;
+  }
+  document.querySelector('.time').textContent = `${HH}:${mm}:${ss}`;
+  timerId = setTimeout(tick, 1000);
+}, 2000);
 
 
 async function searchFromInputForm(city) {
@@ -23,8 +44,8 @@ async function searchFromInputForm(city) {
   } else if (city.length <= 3) {
     alert('Too short city name, minimum length is 4 symbols');
   } else if (city.length > 3) {
-    const appObj = await requestToAPIs(city);
-    renderData(appObj);
+    appObject = await requestToAPIs(city);
+    renderData(appObject);
   }
 }
 
