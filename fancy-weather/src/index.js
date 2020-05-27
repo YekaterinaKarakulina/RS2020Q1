@@ -12,9 +12,17 @@ let appObject;
 let appObjCopy;
 
 async function init() {
-  const lang = (languages[localStorage.getItem('language')] === undefined) ? 'English' : languages[localStorage.getItem('language')]; //
-  console.log(`lang ${lang}`);
-  document.querySelector('.dropdown-toggle').innerHTML = lang; //
+  console.log(`init LC lang ${localStorage.getItem('language')}`);
+  console.log(`init LC temp ${localStorage.getItem('temp')}`);
+  if (localStorage.getItem('language') === null) {
+    localStorage.setItem('language', 'English');
+    console.log(`if language null , set to eng ${localStorage.getItem('language')}`);
+  }
+  if (localStorage.getItem('temp') === null) {
+    localStorage.setItem('temp', 'isCelsius');
+    console.log(`if temp null , set to isCelsius ${localStorage.getItem('temp')}`);
+  }
+  document.querySelector('.dropdown-toggle').innerHTML = languages[localStorage.getItem('language')]; //
 
   const userGeolocation = await getUserGeolocation();
   const { city } = userGeolocation;
@@ -25,6 +33,7 @@ async function init() {
 init();
 
 let timerId = setTimeout(function tick() {
+  console.log(appObject);
   if (appObject) {
     appObjCopy = appObject;
   }
@@ -45,6 +54,9 @@ let timerId = setTimeout(function tick() {
       ss = `0${ss}`;
     }
     document.querySelector('.time').textContent = `${HH}:${mm}:${ss}`;
+    timerId = setTimeout(tick, 1000);
+  }
+  if (appObjCopy === undefined) {
     timerId = setTimeout(tick, 1000);
   }
 }, 2000);
@@ -90,10 +102,5 @@ document.querySelector('.dropdown-menu').addEventListener('click', (event) => {
   const appLanguage = event.target.closest('.dropdown-item').innerText;
   localStorage.setItem('language', appLanguage);
   console.log(`localStorage.setItem('language', appLanguage) ${appLanguage}`);
-  // const english = '<span class="flag-icon flag-icon-us"></span>English';
-  // const russian = '<span class="flag-icon flag-icon-ru"></span>Russian';
-  // const belorussian = '<span class="flag-icon flag-icon-by"></span>Belorussian';
   document.querySelector('.dropdown-toggle').innerHTML = languages[localStorage.getItem('language')];
-  // console.log(languages[currentLanguage]);
-
 });

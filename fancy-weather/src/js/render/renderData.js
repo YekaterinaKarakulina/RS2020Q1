@@ -11,6 +11,7 @@ export default function renderData(appObject) {
   const errorMessageElem = document.querySelector('.errorMessage');
   console.log(appObject);
   console.log(`localStorage.getItem('language') ${localStorage.getItem('language')}`); //
+  console.log(`localStorage.getItem('temp') ${localStorage.getItem('temp')}`); //
 
   if (appObject) {
     document.querySelector('.wrapper__main').innerHTML = '';
@@ -19,10 +20,7 @@ export default function renderData(appObject) {
     if (localStorage.getItem('temp') === 'isFahrenheit') {
       document.querySelector('.tempInput').checked = true;
     }
-
-    const lang = (languages[localStorage.getItem('language')] === undefined) ? 'English' : languages[localStorage.getItem('language')]; //
-    console.log(`lang ${lang}`); //
-    document.querySelector('.dropdown-toggle').innerHTML = lang; //
+    document.querySelector('.dropdown-toggle').innerHTML = languages[localStorage.getItem('language')]; //
 
     const fragment = document.createDocumentFragment();
     const weatherInfo = createDomElement('div', 'weatherInfo');
