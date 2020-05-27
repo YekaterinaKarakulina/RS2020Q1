@@ -8,6 +8,7 @@ import { getAndRenderNewImage } from './js/render/renderImage';
 
 
 let appObject;
+let appObjCopy;
 
 async function init() {
   const userGeolocation = await getUserGeolocation();
@@ -18,36 +19,45 @@ async function init() {
 
 init();
 
-
 let timerId = setTimeout(function tick() {
-  const localeStrDate = new Date().toLocaleString('en-US', { timeZone: `${appObject.timezone}` });
-  const currentDate = new Date(Date.parse(localeStrDate));
+  if (appObject) {
+    appObjCopy = appObject;
+  }
+  if (appObjCopy) {
+    const localeStrDate = new Date().toLocaleString('en-US', { timeZone: `${appObjCopy.timezone}` });
+    const currentDate = new Date(Date.parse(localeStrDate));
 
-  let HH = currentDate.getHours();
-  if (HH < 10) {
-    HH = `0${HH}`;
+    let HH = currentDate.getHours();
+    if (HH < 10) {
+      HH = `0${HH}`;
+    }
+    let mm = currentDate.getMinutes();
+    if (mm < 10) {
+      mm = `0${mm}`;
+    }
+    let ss = currentDate.getSeconds();
+    if (ss < 10) {
+      ss = `0${ss}`;
+    }
+    document.querySelector('.time').textContent = `${HH}:${mm}:${ss}`;
+    timerId = setTimeout(tick, 1000);
   }
-  let mm = currentDate.getMinutes();
-  if (mm < 10) {
-    mm = `0${mm}`;
-  }
-  let ss = currentDate.getSeconds();
-  if (ss < 10) {
-    ss = `0${ss}`;
-  }
-  document.querySelector('.time').textContent = `${HH}:${mm}:${ss}`;
-  timerId = setTimeout(tick, 1000);
 }, 2000);
 
 
 async function searchFromInputForm(city) {
+  const errorMessageElem = document.querySelector('.errorMessage');
   if (city.match(/[!@#$%^&*()_+=]/g)) {
-    alert('Unappropriate city name, try another city');
+    errorMessageElem.textContent = 'Unappropriate city name. Please, try another city name!';
   } else if (city.length <= 3) {
-    alert('Too short city name, minimum length is 4 symbols');
+    errorMessageElem.textContent = 'Too short city name, minimum length is 4 symbols!';
   } else if (city.length > 3) {
     appObject = await requestToAPIs(city);
-    renderData(appObject);
+    if (appObject) {
+      renderData(appObject);
+    } else {
+      errorMessageElem.textContent = 'Can not find information by your request. Please, try another city name!';
+    }
   }
 }
 

@@ -7,9 +7,11 @@ import { createTodayWeatherDOMFragment, createThreeDaysWeatherDOMFragment } from
 import createMapDOMFragment from './mapDOMFragment';
 
 export default function renderData(appObject) {
+  const errorMessageElem = document.querySelector('.errorMessage');
   console.log(appObject);
   if (appObject) {
     document.querySelector('.wrapper__main').innerHTML = '';
+    errorMessageElem.textContent = '';
 
     if (localStorage.getItem('temp') === 'isFahrenheit') {
       document.querySelector('.tempInput').checked = true;
