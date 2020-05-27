@@ -17,13 +17,21 @@ function transferFahrenheitToCelsius(tempElements) {
 }
 
 function transferTemperature(tempElements) {
-  if (localStorage.getItem('temp') === 'isCelsius') {
+  const temperature = (localStorage.getItem('temp') === undefined) ? 'isCelsius' : localStorage.getItem('temp'); //
+  if (temperature === 'isCelsius') {
     localStorage.setItem('temp', 'isFahrenheit');
     transferCelsiusToFahrenheit(tempElements);
-  } else {
-    localStorage.setItem('temp', 'isCelsius');
+  } else if (temperature === 'isCelsius') {
+    localStorage.setItem('temp', 'isFahrenheit');
     transferFahrenheitToCelsius(tempElements);
   }
+  // if (localStorage.getItem('temp') === 'isCelsius') {
+  //   localStorage.setItem('temp', 'isFahrenheit');
+  //   transferCelsiusToFahrenheit(tempElements);
+  // } else {
+  //   localStorage.setItem('temp', 'isCelsius');
+  //   transferFahrenheitToCelsius(tempElements);
+  // }
 }
 
 export { transferTemperature, transferCelsiusToFahrenheit };

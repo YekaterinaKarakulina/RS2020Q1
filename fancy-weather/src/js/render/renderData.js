@@ -5,10 +5,13 @@ import createLocationDOMFragment from './locationDOMFragment';
 import createDateDOMFragment from './dateDOMFragment';
 import { createTodayWeatherDOMFragment, createThreeDaysWeatherDOMFragment } from './weatherDOMFragments';
 import createMapDOMFragment from './mapDOMFragment';
+import { languages } from '../data/data';
 
 export default function renderData(appObject) {
   const errorMessageElem = document.querySelector('.errorMessage');
   console.log(appObject);
+  console.log(`localStorage.getItem('language') ${localStorage.getItem('language')}`); //
+
   if (appObject) {
     document.querySelector('.wrapper__main').innerHTML = '';
     errorMessageElem.textContent = '';
@@ -16,6 +19,10 @@ export default function renderData(appObject) {
     if (localStorage.getItem('temp') === 'isFahrenheit') {
       document.querySelector('.tempInput').checked = true;
     }
+
+    const lang = (languages[localStorage.getItem('language')] === undefined) ? 'English' : languages[localStorage.getItem('language')]; //
+    console.log(`lang ${lang}`); //
+    document.querySelector('.dropdown-toggle').innerHTML = lang; //
 
     const fragment = document.createDocumentFragment();
     const weatherInfo = createDomElement('div', 'weatherInfo');

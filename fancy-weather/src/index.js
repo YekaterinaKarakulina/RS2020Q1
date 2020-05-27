@@ -5,12 +5,17 @@ import { transferTemperature } from './js/utils/temperatureUtils';
 import renderData from './js/render/renderData';
 import getUserGeolocation from './js/APIs/userGeolocationAPI';
 import { getAndRenderNewImage } from './js/render/renderImage';
+import { languages } from './js/data/data';
 
 
 let appObject;
 let appObjCopy;
 
 async function init() {
+  const lang = (languages[localStorage.getItem('language')] === undefined) ? 'English' : languages[localStorage.getItem('language')]; //
+  console.log(`lang ${lang}`);
+  document.querySelector('.dropdown-toggle').innerHTML = lang; //
+
   const userGeolocation = await getUserGeolocation();
   const { city } = userGeolocation;
   appObject = await requestToAPIs(city);
@@ -78,4 +83,17 @@ document.querySelector('.tempInput').addEventListener('click', () => {
 
 document.querySelector('.icon__rotate').addEventListener('click', () => {
   getAndRenderNewImage(appObject.imgProperties);
+});
+
+document.querySelector('.dropdown-menu').addEventListener('click', (event) => {
+  console.log('dropdown');
+  const appLanguage = event.target.closest('.dropdown-item').innerText;
+  localStorage.setItem('language', appLanguage);
+  console.log(`localStorage.setItem('language', appLanguage) ${appLanguage}`);
+  // const english = '<span class="flag-icon flag-icon-us"></span>English';
+  // const russian = '<span class="flag-icon flag-icon-ru"></span>Russian';
+  // const belorussian = '<span class="flag-icon flag-icon-by"></span>Belorussian';
+  document.querySelector('.dropdown-toggle').innerHTML = languages[localStorage.getItem('language')];
+  // console.log(languages[currentLanguage]);
+
 });

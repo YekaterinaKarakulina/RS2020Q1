@@ -1,17 +1,21 @@
 .dropdown {
   display: inline-block;
   position: relative;
-  width: 8rem;
+  width: 10.2rem;
   height: 2.5rem;
   background-color: $color-primary;
   border: 1px solid $color-light;
   border-radius: 5px;
+  margin: 0 0.5rem;
 }
 
 .nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 1rem;
   color: $color-light;
-  padding: .5rem 0.8rem;
+  padding: 0.5rem 0.8rem;
   &:hover{
     transform: scale(1.1);
     color: $color-light-darken;
