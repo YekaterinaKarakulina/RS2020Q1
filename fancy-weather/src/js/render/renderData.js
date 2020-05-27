@@ -1,5 +1,5 @@
 import createDomElement from '../utils/renderUtils';
-import renderImage from './renderImage';
+import { renderImage } from './renderImage';
 import renderMap from '../APIs/mapsAPI';
 import createLocationDOMFragment from './locationDOMFragment';
 import createDateDOMFragment from './dateDOMFragment';

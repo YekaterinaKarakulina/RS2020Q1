@@ -4,6 +4,8 @@ import requestToAPIs from './js/requestToAPIs';
 import { transferTemperature } from './js/utils/temperatureUtils';
 import renderData from './js/render/renderData';
 import getUserGeolocation from './js/APIs/userGeolocationAPI';
+import { getAndRenderNewImage } from './js/render/renderImage';
+
 
 let appObject;
 
@@ -63,3 +65,7 @@ document.querySelector('.tempInput').addEventListener('click', () => {
   transferTemperature(tempElements);
 });
 
+
+document.querySelector('.icon__rotate').addEventListener('click', () => {
+  getAndRenderNewImage(appObject.imgProperties);
+});
