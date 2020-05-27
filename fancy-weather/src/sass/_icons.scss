@@ -1,20 +1,20 @@
 .icon {
   display: inline-block;
+  cursor: pointer;
   &:hover{
-    border: 1px solid #666d89;
-    border-radius: 5px;
+    transform: scale(1.2);
   }
 }
   
 .icon__rotate {
-  width: 15px;
-  height: 20px;
+  width: 0.94rem;
+  height: 1.25rem;
   background-image: url('../assets/iconRotate.svg');
 }
 
 .icon__microphone {
-  width: 16px;
-  height: 18px;
+  width: 1rem;
+  height: 1.125rem;
   background-image: url('../assets/iconMicrophone.svg');
   position: absolute;
   left: calc(50% + 5.5rem);

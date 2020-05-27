@@ -1,9 +1,9 @@
 .input__city {
   display: inline-block;
   margin: 0;
-  padding: 0;
+  padding-left: 0.5rem;
   background-color: $color-primary;
-  border: none;
+  border: 1px solid $color-light;
   border-radius: 5px;
   color: $color-light;
   cursor: pointer;

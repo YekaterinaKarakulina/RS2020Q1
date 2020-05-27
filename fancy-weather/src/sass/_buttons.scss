@@ -4,7 +4,7 @@
   margin: 0;
   padding: 0;
   background-color: $color-primary;
-  border: none;
+  border: 1px solid $color-light;
   border-radius: 5px;
   color: $color-light;
   cursor: pointer;
@@ -18,5 +18,8 @@
   width: 18%; 
   @include media-tablet {
     width: 20%;
+  }
+  &:hover {
+    font-size: 1.1rem;
   }
 }

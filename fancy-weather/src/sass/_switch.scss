@@ -3,7 +3,7 @@
 .toggle-label {
   position: relative;
   width: 5rem;
-  height: 2.5rem;
+  height: 2.4rem;
 }
 
 .toggle-label input[type=checkbox] { 
@@ -17,9 +17,14 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  border: 1px solid $color-light;
   border-radius: 5px;
   background: $color-gray;
   transition: background 150ms linear;  
+  cursor: pointer;
+  &:hover {
+    border: 2px;
+  }
 }
 
 .toggle-label input[type=checkbox]:checked+.back {
@@ -35,10 +40,13 @@
   height: 100%;
   transition: margin 150ms linear;
   border-radius: 5px;
+  &:hover {
+    border: 2px;
+  }
 }
 
 .toggle-label input[type=checkbox]:checked+.back .toggle {
-  margin-left: 2.5rem;
+  margin-left: 2.4rem;
 }
 
 .toggle-label .label {

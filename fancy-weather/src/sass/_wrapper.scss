@@ -1,9 +1,7 @@
 .wrapper {
   width: 90%;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background-color: rgba(0,0,0,.5);
   @include media-mobile {
     width: 94%;
   }
@@ -14,7 +12,9 @@
 }
 
 .wrapper__header {
-  background-color: rgba(0,0,0,.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 4rem 5rem 0; 
   @include media-laptop {
     flex-direction: column;
@@ -23,9 +23,11 @@
 }
 
 .wrapper__main {
-  min-height: 100%;
-  background-color: rgba(0,0,0,.5);
-  padding: 7rem 5rem 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 75%;
+  padding: 5rem 5rem 5rem;
   align-items: flex-start;
   @include media-laptop {
     padding: 5rem 3rem 5rem;
@@ -37,4 +39,19 @@
   @include media-tablet {
     padding: 3rem 2rem 3rem;
   } 
+}
+
+.errorMessage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $color-light;
+  padding: 3rem 5rem 0;
+  @include media-laptop {
+    padding: 2rem 3rem 0;
+    font-size: 1.25rem;
+  }
 }

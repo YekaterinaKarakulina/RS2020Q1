@@ -1,9 +1,11 @@
 .threeDaysWeather {
   display: flex;
-  width: 27rem;
   align-items: center;
   justify-content: space-between;
   margin-top: 2.5rem;
+  @include media-laptop {
+    width: 25rem; 
+  }
   @include media-tablet {
     position: absolute;
     left: calc(50% - 11rem);

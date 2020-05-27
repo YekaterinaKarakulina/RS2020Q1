@@ -14,39 +14,44 @@
 <body>
   <div class="imgContainer">
     <div class="wrapperContainer">
-      <header class="wrapper wrapper__header">
-        <section class="header__parameters">
-          <button class="button image__button">
-            <span class="icon icon__rotate"></span>
-          </button>
-          <!--dropdown imported from bootstrap-->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"> </span> English</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown09">
-                <a class="dropdown-item" href="#"><span class="flag-icon flag-icon-blr"> </span>  Belarus</a>
-                <a class="dropdown-item" href="#"><span class="flag-icon flag-icon-ru"> </span>  Russian</a>
-            </div>
-          </li>
-          <!--toogle-label imported from codepen-->
-          <label class='toggle-label'>
-            <input class='tempInput' type='checkbox'/>
-              <span class='back'>
-              <span class='toggle'></span>
-              <span class='label on'>°C</span>
-              <span class='label off'>°F</span>  
-            </span>
-          </label>
-        </section>
-        <section class="header__search">
-          <form id="form" action="https://www.w3schools.com/action_page.php" target="_blank" method="POST">
-            <input class="input input__city" type="text" name="city" id="city" placeholder="Search city" required autocomplete="off" spellcheck="false" maxlength="25">
-            <span class="icon icon__microphone"></span>
-            <button class="button submit__button" id="submit__button">Search</button>
-          </form>
-        </section>
+      <header class="wrapper">
+        <div class="wrapper__header">
+          <section class="header__parameters">
+            <button class="button image__button">
+              <span class="icon icon__rotate"></span>
+            </button>
+            <!--dropdown imported from bootstrap-->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"> </span> English</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown09">
+                  <a class="dropdown-item" href="#"><span class="flag-icon flag-icon-blr"> </span>  Belarus</a>
+                  <a class="dropdown-item" href="#"><span class="flag-icon flag-icon-ru"> </span>  Russian</a>
+              </div>
+            </li>
+            <!--toogle-label imported from codepen-->
+            <label class='toggle-label'>
+              <input class='tempInput' type='checkbox'/>
+                <span class='back'>
+                <span class='toggle'></span>
+                <span class='label on'>°C</span>
+                <span class='label off'>°F</span>  
+              </span>
+            </label>
+          </section>
+
+          <section class="header__search">
+            <form id="form" action="https://www.w3schools.com/action_page.php" target="_blank" method="POST">
+              <input class="input input__city" type="text" name="city" id="city" placeholder="Search city" required autocomplete="off" spellcheck="false" maxlength="25">
+              <span class="icon icon__microphone"></span>
+              <button class="button submit__button" id="submit__button">Search</button>
+            </form>
+          </section>
+        </div>
+        <div class="errorMessage"></div>
     </header>
 
-    <main class="wrapper wrapper__main"></main>
+    <main class="wrapper wrapper__main">
+    </main>
     </div>
   </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

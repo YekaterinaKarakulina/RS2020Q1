@@ -4,13 +4,16 @@
   width: 8rem;
   height: 2.5rem;
   background-color: $color-primary;
+  border: 1px solid $color-light;
   border-radius: 5px;
 }
 
 .nav-link {
   font-size: 1rem;
   color: $color-light;
-  &:hover {
+  padding: .5rem 0.8rem;
+  &:hover{
+    transform: scale(1.1);
     color: $color-light-darken;
   }
 }
