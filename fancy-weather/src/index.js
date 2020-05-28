@@ -6,6 +6,7 @@ import renderData from './js/render/renderData';
 import getUserGeolocation from './js/APIs/userGeolocationAPI';
 import { getAndRenderNewImage } from './js/render/renderImage';
 import { languages } from './js/data/data';
+import switchLanguage from './js/utils/translationsUtils';
 
 
 let appObject;
@@ -33,7 +34,6 @@ async function init() {
 init();
 
 let timerId = setTimeout(function tick() {
-  console.log(appObject);
   if (appObject) {
     appObjCopy = appObject;
   }
@@ -103,4 +103,6 @@ document.querySelector('.dropdown-menu').addEventListener('click', (event) => {
   localStorage.setItem('language', appLanguage);
   console.log(`localStorage.setItem('language', appLanguage) ${appLanguage}`);
   document.querySelector('.dropdown-toggle').innerHTML = languages[localStorage.getItem('language')];
+  switchLanguage(localStorage.getItem('language'));
 });
+

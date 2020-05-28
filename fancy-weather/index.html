@@ -22,7 +22,9 @@
             </button>
             <!--dropdown imported from bootstrap-->
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"></span>English</a>
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="flag-icon flag-icon-us"></span>English
+              </a>
               <div class="dropdown-menu" aria-labelledby="dropdown09">
                   <a class="dropdown-item" href="#"><span class="flag-icon flag-icon-us"></span>English</a>
                   <a class="dropdown-item" href="#"><span class="flag-icon flag-icon-ru"></span>Russian</a>
@@ -42,9 +44,10 @@
 
           <section class="header__search">
             <form id="form" action="https://www.w3schools.com/action_page.php" target="_blank" method="POST">
-              <input class="input input__city" type="text" name="city" id="city" placeholder="Search city" required autocomplete="off" spellcheck="false" maxlength="25">
+              <input data-placeholder="placeholder" class="input input__city" type="text" name="city" id="city" placeholder="Type city name" required autocomplete="off" spellcheck="false" maxlength="25">
               <span class="icon icon__microphone"></span>
-              <button class="button submit__button" id="submit__button">Search</button>
+              <button data-i18n="searchButton" class="button submit__button" id="submit__button">Search</button>
+
             </form>
           </section>
         </div>

@@ -10,8 +10,8 @@ import { languages } from '../data/data';
 export default function renderData(appObject) {
   const errorMessageElem = document.querySelector('.errorMessage');
   console.log(appObject);
-  console.log(`localStorage.getItem('language') ${localStorage.getItem('language')}`); //
-  console.log(`localStorage.getItem('temp') ${localStorage.getItem('temp')}`); //
+  console.log(`localStorage.getItem('language') ${localStorage.getItem('language')}`);
+  console.log(`localStorage.getItem('temp') ${localStorage.getItem('temp')}`);
 
   if (appObject) {
     document.querySelector('.wrapper__main').innerHTML = '';

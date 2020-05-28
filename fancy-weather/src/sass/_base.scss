@@ -30,3 +30,31 @@ form {
     content: '°';
   }
 }
+
+.realFeelTempValue,
+.windSpeedValue, 
+.humidityValue {
+  &:before {
+    content: ' ';
+  }
+}
+
+.latitudeValue,
+.longitudeValue {
+  &:before {
+    content: ': ';
+  }
+}
+
+.windSpeedValue {
+  &:after {
+    content: 'm/s';
+  }
+}
+
+.humidityValue {
+  &:after {
+    content: '%';
+  }
+}
+

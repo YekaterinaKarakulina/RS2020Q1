@@ -1,0 +1,9 @@
+{
+    "placeholder": "Type city name",
+    "searchButton": "Search",
+    "realFeel": "Realfeel",
+    "windSpeed": "Wind",
+    "humidity": "Humidity",
+    "latitude": "Latitude",
+    "longitude": "Longitude"
+}

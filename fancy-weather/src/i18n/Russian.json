@@ -1,0 +1,9 @@
+{
+    "placeholder": "Введите название города",
+    "searchButton": "Поиск",
+    "realFeel": "Ощущение",
+    "windSpeed": "Ветер",
+    "humidity": "Влажность",
+    "latitude": "Широта",
+    "longitude": "Долгота"
+}

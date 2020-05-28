@@ -15,8 +15,10 @@ function createTodayWeatherDOMFragment(todayWeather) {
   const weatherDescription = createDomElement('div', 'weatherDescription');
   weatherDescription.textContent = todayWeather.weatherCode.toUpperCase();
 
+
   const realFeelTempTitle = createDomElement('span', 'realFeelTempTitle');
-  realFeelTempTitle.textContent = 'REALFEEL ';
+  realFeelTempTitle.dataset.i18n = 'realFeel';
+  realFeelTempTitle.textContent = 'REALFEEL';
 
   const realFeelTempValue = createDomElement('span', 'temperature realFeelTempValue');
   realFeelTempValue.textContent = todayWeather.realFeelTemp;
@@ -25,11 +27,30 @@ function createTodayWeatherDOMFragment(todayWeather) {
   realFeelTemperature.append(realFeelTempTitle);
   realFeelTemperature.append(realFeelTempValue);
 
+
+  const windSpeedTitle = createDomElement('span', 'windSpeedTitle');
+  windSpeedTitle.dataset.i18n = 'windSpeed';
+  windSpeedTitle.textContent = 'WIND';
+
+  const windSpeedValue = createDomElement('span', 'windSpeedValue');
+  windSpeedValue.textContent = todayWeather.windSpeed;
+
   const windSpeed = createDomElement('div', 'windSpeed');
-  windSpeed.textContent = `SPEED ${todayWeather.windSpeed} m/s`;
+  windSpeed.append(windSpeedTitle);
+  windSpeed.append(windSpeedValue);
+
+
+  const humidityTitle = createDomElement('span', 'humidityTitle');
+  humidityTitle.dataset.i18n = 'humidity';
+  humidityTitle.textContent = 'HUMIDITY';
+
+  const humidityValue = createDomElement('span', 'humidityValue');
+  humidityValue.textContent = todayWeather.hum;
 
   const humidity = createDomElement('div', 'humidity');
-  humidity.textContent = `HUMIDITY ${todayWeather.hum} %`;
+  humidity.append(humidityTitle);
+  humidity.append(humidityValue);
+
 
   const weatherSummary = createDomElement('div', 'weatherSummary');
   weatherSummary.append(weatherDescription);
