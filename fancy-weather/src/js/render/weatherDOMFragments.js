@@ -1,4 +1,4 @@
-import createDomElement from '../utils/renderUtils';
+import { createDomElement, createDomElementWithDataAttr } from '../utils/renderUtils';
 import { transferCelsiusToFahrenheit } from '../utils/temperatureUtils';
 import { getWeekDay } from '../utils/dateUtils';
 import icons from '../data/icons';
@@ -15,9 +15,7 @@ function createTodayWeatherDOMFragment(todayWeather) {
   const weatherDescription = createDomElement('div', 'weatherDescription');
   weatherDescription.textContent = todayWeather.weatherCode.toUpperCase();
 
-
-  const realFeelTempTitle = createDomElement('span', 'realFeelTempTitle');
-  realFeelTempTitle.dataset.i18n = 'realFeel';
+  const realFeelTempTitle = createDomElementWithDataAttr('span', 'realFeelTempTitle', 'i18n', 'realFeel');
   realFeelTempTitle.textContent = 'REALFEEL';
 
   const realFeelTempValue = createDomElement('span', 'temperature realFeelTempValue');
@@ -28,8 +26,7 @@ function createTodayWeatherDOMFragment(todayWeather) {
   realFeelTemperature.append(realFeelTempValue);
 
 
-  const windSpeedTitle = createDomElement('span', 'windSpeedTitle');
-  windSpeedTitle.dataset.i18n = 'windSpeed';
+  const windSpeedTitle = createDomElementWithDataAttr('span', 'windSpeedTitle', 'i18n', 'windSpeed');
   windSpeedTitle.textContent = 'WIND';
 
   const windSpeedValue = createDomElement('span', 'windSpeedValue');
@@ -40,8 +37,7 @@ function createTodayWeatherDOMFragment(todayWeather) {
   windSpeed.append(windSpeedValue);
 
 
-  const humidityTitle = createDomElement('span', 'humidityTitle');
-  humidityTitle.dataset.i18n = 'humidity';
+  const humidityTitle = createDomElementWithDataAttr('span', 'humidityTitle', 'i18n', 'humidity');
   humidityTitle.textContent = 'HUMIDITY';
 
   const humidityValue = createDomElement('span', 'humidityValue');

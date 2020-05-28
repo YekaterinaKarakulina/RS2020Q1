@@ -1,4 +1,4 @@
-import createDomElement from '../utils/renderUtils';
+import { createDomElement } from '../utils/renderUtils';
 
 export default function createLocationDOMFragment(appObject) {
   const fragment = document.createDocumentFragment();

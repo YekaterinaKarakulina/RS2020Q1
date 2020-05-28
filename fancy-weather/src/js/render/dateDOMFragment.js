@@ -1,4 +1,4 @@
-import createDomElement from '../utils/renderUtils';
+import { createDomElement } from '../utils/renderUtils';
 import { getCurrentDate } from '../utils/dateUtils';
 import { weekDays, months } from '../data/data';
 

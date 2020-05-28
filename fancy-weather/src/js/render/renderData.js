@@ -1,4 +1,4 @@
-import createDomElement from '../utils/renderUtils';
+import { createDomElement } from '../utils/renderUtils';
 import { renderImage } from './renderImage';
 import renderMap from '../APIs/mapsAPI';
 import createLocationDOMFragment from './locationDOMFragment';
@@ -6,6 +6,7 @@ import createDateDOMFragment from './dateDOMFragment';
 import { createTodayWeatherDOMFragment, createThreeDaysWeatherDOMFragment } from './weatherDOMFragments';
 import createMapDOMFragment from './mapDOMFragment';
 import { languages } from '../data/data';
+import { transferLanguageBeforeRendering } from '../utils/translationsUtils';
 
 export default function renderData(appObject) {
   const errorMessageElem = document.querySelector('.errorMessage');
@@ -47,6 +48,9 @@ export default function renderData(appObject) {
 
     fragment.append(weatherInfo);
     fragment.append(locationInfo);
+
+    const language = localStorage.getItem('language');
+    transferLanguageBeforeRendering(language, fragment);
 
     document.querySelector('.wrapper__main').append(fragment);
 

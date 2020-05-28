@@ -1,4 +1,4 @@
-import createDomElement from '../utils/renderUtils';
+import { createDomElement } from '../utils/renderUtils';
 import translateCoordinates from '../utils/coordinatesUtils';
 
 export default function createMapDOMFragment(appObject) {

@@ -6,7 +6,7 @@ import renderData from './js/render/renderData';
 import getUserGeolocation from './js/APIs/userGeolocationAPI';
 import { getAndRenderNewImage } from './js/render/renderImage';
 import { languages } from './js/data/data';
-import switchLanguage from './js/utils/translationsUtils';
+import { switchLanguage } from './js/utils/translationsUtils';
 
 
 let appObject;
@@ -105,4 +105,3 @@ document.querySelector('.dropdown-menu').addEventListener('click', (event) => {
   document.querySelector('.dropdown-toggle').innerHTML = languages[localStorage.getItem('language')];
   switchLanguage(localStorage.getItem('language'));
 });
-
