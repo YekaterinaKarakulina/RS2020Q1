@@ -50,7 +50,7 @@ export default function renderData(appObject) {
     fragment.append(locationInfo);
 
     const language = localStorage.getItem('language');
-    transferLanguageBeforeRendering(language, fragment);
+    transferLanguageBeforeRendering(appObject, language, fragment);
 
     document.querySelector('.wrapper__main').append(fragment);
 

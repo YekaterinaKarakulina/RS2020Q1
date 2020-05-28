@@ -14,5 +14,28 @@
         "thursday": "Чацвер",
         "friday": "Пятніца",
         "saturday": "Субота"
+    },
+    "weekDaysShort": {
+        "sun": "Нд",
+        "mon": "Пн",
+        "tue": "Аўт",
+        "wed": "Ср",
+        "thu": "Чц",
+        "fri": "Пт",
+        "sat": "Сб"
+    },
+    "months": {
+        "january": "Студзеня",
+        "february": "Лютага",
+        "march": "Сакавіка",
+        "april": "Красавіка",
+        "may": "Мая",
+        "june": "Чэрвеня",
+        "july": "Ліпеня",
+        "august": "Жніўня",
+        "september": "Верасня",
+        "october": "Кастрычніка",
+        "november": "Лістапада",
+        "december": "Снежня"
     }
 }

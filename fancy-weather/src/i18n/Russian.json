@@ -14,5 +14,28 @@
         "thursday": "Четверг",
         "friday": "Пятница",
         "saturday": "Суббота"
+    },
+    "weekDaysShort": {
+        "sun": "Вс",
+        "mon": "Пн",
+        "tue": "Вт",
+        "wed": "Ср",
+        "thu": "Чт",
+        "fri": "Пт",
+        "sat": "Сб"
+    },
+    "months": {
+        "january": "Января",
+        "february": "Февраля",
+        "march": "Марта",
+        "april": "Апреля",
+        "may": "Мая",
+        "june": "Июня",
+        "july": "Июня",
+        "august": "Августа",
+        "september": "Сентября",
+        "october": "Октября",
+        "november": "Ноября",
+        "december": "Декабря"
     }
 }

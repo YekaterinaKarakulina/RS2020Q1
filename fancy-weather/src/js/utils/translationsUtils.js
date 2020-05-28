@@ -1,3 +1,6 @@
+import { getCurrentDate } from './dateUtils';
+import { weekDaysShort, months } from '../data/data';
+
 async function getTranslations(url) {
   const res = await fetch(url);
   const data = await res.json();
@@ -20,7 +23,16 @@ async function translateElements(language, dataAttr, elementsToTranslate, elemen
   });
 }
 
-async function transferLanguageBeforeRendering(language, fragment) {
+
+async function translateDate(language, currentDate, element) {
+  const urlToI18NFile = `/i18n/${language}.json`;
+  const data = await getTranslations(urlToI18NFile);
+  const dateElement = element;
+  dateElement.textContent = `${data.weekDaysShort[weekDaysShort[currentDate.getDay()]]} 
+  ${currentDate.getDate()} ${data.months[months[currentDate.getMonth()]]}`;
+}
+
+async function transferLanguageBeforeRendering(appObject, language, fragment) {
   const staticElements = fragment.querySelectorAll('[data-i18n]');
   translateElements(language, 'i18n', staticElements, 'textContent');
 
@@ -31,10 +43,14 @@ async function transferLanguageBeforeRendering(language, fragment) {
   translateElements(language, 'placeholder', placeholderElements, 'placeholder');
 
   const weekDaysFullElements = fragment.querySelectorAll('[data-weekdayfull]');
-  translateElements(localStorage.getItem('language'), 'weekdayfull', weekDaysFullElements, 'textContent', 'weekDaysFull');
+  translateElements(language, 'weekdayfull', weekDaysFullElements, 'textContent', 'weekDaysFull');
+
+  const currentDate = getCurrentDate(appObject);
+  const dateElement = fragment.querySelector('[data-date]');
+  translateDate(language, currentDate, dateElement);
 }
 
-async function switchLanguage(language) {
+async function switchLanguage(language, appObject) {
   const staticElements = document.querySelectorAll('[data-i18n]');
   translateElements(language, 'i18n', staticElements, 'textContent');
 
@@ -46,6 +62,10 @@ async function switchLanguage(language) {
 
   const weekDaysFullElements = document.querySelectorAll('[data-weekdayfull]');
   translateElements(localStorage.getItem('language'), 'weekdayfull', weekDaysFullElements, 'textContent', 'weekDaysFull');
+
+  const currentDate = getCurrentDate(appObject);
+  const dateElement = document.querySelector('[data-date]');
+  translateDate(language, currentDate, dateElement);
 }
 
 export { switchLanguage, transferLanguageBeforeRendering };
