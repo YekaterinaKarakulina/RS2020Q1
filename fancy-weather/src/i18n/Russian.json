@@ -5,5 +5,14 @@
     "windSpeed": "Ветер",
     "humidity": "Влажность",
     "latitude": "Широта",
-    "longitude": "Долгота"
+    "longitude": "Долгота",
+    "weekDaysFull": {
+        "sunday": "Воскресенье",
+        "monday": "Понедельник",
+        "tuesday": "Вторник",
+        "wednesday": "Среда",
+        "thursday": "Четверг",
+        "friday": "Пятница",
+        "saturday": "Суббота"
+    }
 }

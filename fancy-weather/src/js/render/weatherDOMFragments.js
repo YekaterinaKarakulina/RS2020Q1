@@ -70,11 +70,10 @@ function createTodayWeatherDOMFragment(todayWeather) {
   return fragment;
 }
 
-
 function generateOneDayWeather(dayWeather, day) {
   const dayElement = createDomElement('div', 'day');
 
-  const weekDay = createDomElement('div', 'weekDay');
+  const weekDay = createDomElementWithDataAttr('div', 'weekDay', 'weekdayfull', `${day}`);
   weekDay.textContent = day;
 
   const dayTemperature = createDomElement('span', 'temperature dayTemperature');
@@ -110,6 +109,7 @@ function createThreeDaysWeatherDOMFragment(appObject) {
   fragment.append(firstDay);
   fragment.append(secDay);
   fragment.append(thirdDay);
+
   return fragment;
 }
 
