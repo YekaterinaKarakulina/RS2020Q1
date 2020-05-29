@@ -1,5 +1,7 @@
 import { getCurrentDate } from './dateUtils';
 import { weekDaysShort, months } from '../data/data';
+// import translateCoordinates from './coordinatesUtils';
+import getWordTranslation from '../APIs/translationAPI';
 
 async function getTranslations(url) {
   const res = await fetch(url);
@@ -32,6 +34,24 @@ async function translateDate(language, currentDate, element) {
   ${currentDate.getDate()} ${data.months[months[currentDate.getMonth()]]}`;
 }
 
+
+async function translateDataFromAPI(appObjectData, language) {
+  let translateLang = '';
+  switch (language) {
+    case 'Russian':
+      translateLang = 'ru';
+      break;
+    case 'Belorussian':
+      translateLang = 'be';
+      break;
+    default:
+      translateLang = 'en';
+      break;
+  }
+  const translatedWord = await getWordTranslation(appObjectData, translateLang);
+  return translatedWord;
+}
+
 async function transferLanguageBeforeRendering(appObject, language, fragment) {
   const staticElements = fragment.querySelectorAll('[data-i18n]');
   translateElements(language, 'i18n', staticElements, 'textContent');
@@ -48,6 +68,13 @@ async function transferLanguageBeforeRendering(appObject, language, fragment) {
   const currentDate = getCurrentDate(appObject);
   const dateElement = fragment.querySelector('[data-date]');
   translateDate(language, currentDate, dateElement);
+
+  const locationElement = fragment.querySelector('.location');
+  locationElement.textContent = await translateDataFromAPI(`${appObject.city}, ${appObject.country}`, language);
+
+  const weatherDescriptionElement = document.querySelector('.weatherDescription');
+  weatherDescriptionElement.textContent = (await translateDataFromAPI(appObject.todayWeatherData.weatherCode, language)).toUpperCase();
+
 }
 
 async function switchLanguage(language, appObject) {
@@ -66,6 +93,12 @@ async function switchLanguage(language, appObject) {
   const currentDate = getCurrentDate(appObject);
   const dateElement = document.querySelector('[data-date]');
   translateDate(language, currentDate, dateElement);
+
+  const weatherDescriptionElement = document.querySelector('.weatherDescription');
+  weatherDescriptionElement.textContent = (await translateDataFromAPI(appObject.todayWeatherData.weatherCode, language)).toUpperCase();
+
+  const locationElement = document.querySelector('.location');
+  locationElement.textContent = await translateDataFromAPI(`${appObject.city}, ${appObject.country}`, language);
 }
 
 export { switchLanguage, transferLanguageBeforeRendering };

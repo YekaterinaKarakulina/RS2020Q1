@@ -105,3 +105,4 @@ document.querySelector('.dropdown-menu').addEventListener('click', (event) => {
   document.querySelector('.dropdown-toggle').innerHTML = languages[localStorage.getItem('language')];
   switchLanguage(localStorage.getItem('language'), appObject);
 });
+
