@@ -72,9 +72,8 @@ async function transferLanguageBeforeRendering(appObject, language, fragment) {
   const locationElement = fragment.querySelector('.location');
   locationElement.textContent = await translateDataFromAPI(`${appObject.city}, ${appObject.country}`, language);
 
-  const weatherDescriptionElement = document.querySelector('.weatherDescription');
-  weatherDescriptionElement.textContent = (await translateDataFromAPI(appObject.todayWeatherData.weatherCode, language)).toUpperCase();
-
+  const weatherDescriptionElements = document.querySelectorAll('[data-weathercode]');
+  translateElements(language, 'weathercode', weatherDescriptionElements, 'textContent', 'weatherCodes');
 }
 
 async function switchLanguage(language, appObject) {
@@ -94,11 +93,15 @@ async function switchLanguage(language, appObject) {
   const dateElement = document.querySelector('[data-date]');
   translateDate(language, currentDate, dateElement);
 
-  const weatherDescriptionElement = document.querySelector('.weatherDescription');
-  weatherDescriptionElement.textContent = (await translateDataFromAPI(appObject.todayWeatherData.weatherCode, language)).toUpperCase();
+  // const weatherDescriptionElement = document.querySelector('.weatherDescription');
+  // weatherDescriptionElement.textContent = (await translateDataFromAPI(appObject.todayWeatherData.weatherCode, language)).toUpperCase();
 
   const locationElement = document.querySelector('.location');
   locationElement.textContent = await translateDataFromAPI(`${appObject.city}, ${appObject.country}`, language);
+
+  const weatherDescriptionElements = document.querySelectorAll('[data-weathercode]');
+  translateElements(language, 'weathercode', weatherDescriptionElements, 'textContent', 'weatherCodes');
+
 }
 
 export { switchLanguage, transferLanguageBeforeRendering };

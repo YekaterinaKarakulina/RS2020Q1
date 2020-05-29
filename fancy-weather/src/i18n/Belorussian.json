@@ -37,5 +37,23 @@
         "october": "Кастрычніка",
         "november": "Лістапада",
         "december": "Снежня"
+    },
+    "weatherCodes": {
+        "cloudy": "воблачна",
+        "mostly_cloudy": "высокая воблачнасць",
+        "partly_cloudy": "нізкая воблачнасць",
+        "clear": "ясна",
+        "mostly_clear": "ясна",
+        "partly_clear": "нізкая воблачнасць",
+        "sunny": "сонечна",
+        "rain": "дажджліва",
+        "rain_light": "лёгкі дождж",
+        "drizzle": "кроплі дажджу",
+        "windy": "ветрана",
+        "fog": "туман",
+        "snow": "снегапад",
+        "rainbow": "вясёлка",
+        "thunderstorm": "гром",
+        "lightning": "маланка"
     }
 }

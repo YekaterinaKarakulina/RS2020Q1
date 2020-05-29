@@ -12,8 +12,9 @@ function createTodayWeatherDOMFragment(todayWeather) {
   const iconWeatherClassNames = icons[todayWeather.weatherCode];
   const weatherIcon = createDomElement('i', `icon__weather ${iconWeatherClassNames}`);
 
-  const weatherDescription = createDomElement('div', 'weatherDescription');
-  weatherDescription.textContent = todayWeather.weatherCode.toUpperCase();
+  // const weatherDescription = createDomElement('div', 'weatherDescription');
+  const weatherDescription = createDomElementWithDataAttr('div', 'weatherDescription', 'weathercode', todayWeather.weatherCode);
+  // weatherDescription.textContent = todayWeather.weatherCode.toUpperCase();
 
   const realFeelTempTitle = createDomElementWithDataAttr('span', 'realFeelTempTitle', 'i18n', 'realFeel');
   realFeelTempTitle.textContent = 'REALFEEL';

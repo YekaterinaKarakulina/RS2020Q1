@@ -37,5 +37,23 @@
         "october": "Октября",
         "november": "Ноября",
         "december": "Декабря"
+    },
+    "weatherCodes": {
+        "cloudy": "облачно",
+        "mostly_cloudy": "высокая облачность",
+        "partly_cloudy": "низкая облачность",
+        "clear": "ясно",
+        "mostly_clear": "ясно",
+        "partly_clear": "низкая облачность",
+        "sunny": "солнечно",
+        "rain": "дождливо",
+        "rain_light": "легкий дождь",
+        "drizzle": "капли дождя",
+        "windy": "ветренно",
+        "fog": "туман",
+        "snow": "снегопад",
+        "rainbow": "радуга",
+        "thunderstorm": "гром",
+        "lightning": "молния"
     }
 }

@@ -37,5 +37,23 @@
         "october": "October",
         "november": "November",
         "december": "December"
+    },
+    "weatherCodes": {
+        "cloudy": "cloudy",
+        "mostly_cloudy": "mostly clear",
+        "partly_cloudy": "partly cloudy",
+        "clear": "clear",
+        "mostly_clear": "mostly clear",
+        "partly_clear": "partly clear",
+        "sunny": "sunny",
+        "rain": "rain",
+        "rain_light": "rain light",
+        "drizzle": "drizzle",
+        "windy": "windy",
+        "fog": "fog",
+        "snow": "snow",
+        "rainbow": "rainbow",
+        "thunderstorm": "thunderstorm",
+        "lightning": "lightning"
     }
 }
