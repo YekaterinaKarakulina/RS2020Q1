@@ -28,7 +28,7 @@ export default function getKeywordsForImgAPI(appObject) {
   return imgKeywords;
 }
 
-async function getAndRenderNewImg(imgProperties) {
-  const linkToImg = await getImage(imgProperties);
-  renderImage(linkToImg);
-}
+// async function getAndRenderNewImg(imgProperties) {
+//   const linkToImg = await getImage(imgProperties);
+//   renderImage(linkToImg);
+// }

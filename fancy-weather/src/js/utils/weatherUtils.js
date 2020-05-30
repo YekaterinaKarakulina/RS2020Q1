@@ -38,4 +38,6 @@ function getWeatherForThreeDays(weatherData, nextThreeDaysIndexes) {
   return threeDaysWeather;
 }
 
-export { getWeatherForDay, getWeatherForThreeDays };
+export {
+  extractWeatherCode, extractWeatherInfo, getWeatherForDay, getWeatherForThreeDays,
+};

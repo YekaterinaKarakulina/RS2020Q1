@@ -27,4 +27,4 @@ function transferTemperature(tempElements) {
   }
 }
 
-export { transferTemperature, transferCelsiusToFahrenheit };
+export { transferTemperature, transferCelsiusToFahrenheit, transferFahrenheitToCelsius };
