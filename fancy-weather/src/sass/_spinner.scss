@@ -7,14 +7,14 @@
 
 .lds-roller {
     position: relative;
-    margin-left: 15.5rem;
+    margin-left: 14.5rem;
     width: 2.5rem;
     height: 2.5rem;
     @include media-tablet {
-      margin-left: 10.7rem;
+      margin-left: 9rem;
     }
     @include media-mobile {
-      margin-left: 9.5rem;
+      margin-left: 6.2rem;
     }
   }
   .lds-roller div {

@@ -109,6 +109,8 @@ document.querySelector('.dropdown-menu').addEventListener('click', (event) => {
   switchLanguage(localStorage.getItem('language'), appObject);
 });
 
+
+
 const microphone = document.querySelector('.icon__microphone');
 
 // The speech recognition interface lives on the browser’s window object
@@ -136,4 +138,56 @@ recognition.addEventListener('result', (event) => {
   submitButton.click();
   recognition.stop();
   microphone.classList.remove('active');
+});
+
+
+const sound = document.querySelector('.icon__sound');
+sound.addEventListener('click', () => {
+  const msg = new SpeechSynthesisUtterance();
+  msg.volume = 0.5;
+  
+
+  const date = document.querySelector('.date').innerText.split(' ');
+
+  const monthDay = date[1] + date[2];
+  const currentTemperature = document.querySelector('.currentTemperature').innerText;
+
+  const weatherDescription = document.querySelector('.weatherDescription').innerText;
+  const realFeelTempTitle = document.querySelector('.realFeelTempTitle').innerText;
+  const realFeelTempValue = document.querySelector('.realFeelTempValue').innerText;
+
+  const windSpeedTitle = document.querySelector('.windSpeedTitle').innerText;
+  const windSpeedValue = document.querySelector('.windSpeedValue').innerText.split(' ')[0];
+
+  const humidityTitle = document.querySelector('.humidityTitle').innerText;
+  const humidityValue = document.querySelector('.humidityValue').innerText;
+  const language = getLanguageAbbreviation(localStorage.getItem('language'));
+  msg.rate = 0.8;
+  msg.pitch = 1;
+
+  let template = '';
+
+  switch (language) {
+    case 'ru':
+      msg.lang = 'ru';
+      template = `Сегодня ${monthDay}. Температура воздуха ${currentTemperature} °. ${weatherDescription}.
+      ${realFeelTempTitle} ${realFeelTempValue} °. ${windSpeedTitle} ${windSpeedValue} метров в секунду.
+      ${humidityTitle} ${humidityValue} %. Наслаждайтесь погодой!`;
+      break;
+    case 'be':
+      msg.lang = 'ru';
+      template = `сёння ${monthDay}. Тэмпература паветра ${currentTemperature} °. ${weatherDescription}.
+      ${realFeelTempTitle} ${realFeelTempValue} °. ${windSpeedTitle} ${windSpeedValue} метраў у секунду.
+      ${humidityTitle} ${humidityValue} %. Атрымлівайце асалоду ад надвор'ем!`;
+      break;
+    default:
+      msg.lang = 'en';
+      template = `Today is ${monthDay}. Current temperature ${currentTemperature} °. ${weatherDescription}.
+      ${realFeelTempTitle} ${realFeelTempValue} °. ${windSpeedTitle} ${windSpeedValue} meters per second.
+      ${humidityTitle} ${humidityValue} %. Enjoy your weather!`;
+      break;
+  }
+  console.log(template);
+  msg.text = template;
+  speechSynthesis.speak(msg);
 });

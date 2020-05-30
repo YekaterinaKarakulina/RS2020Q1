@@ -49,13 +49,13 @@ form {
 
 .windSpeedValue {
   &:after {
-    content: 'm/s';
+    content: ' m/s';
   }
 }
 
 .humidityValue {
   &:after {
-    content: '%';
+    content: ' %';
   }
 }
 
