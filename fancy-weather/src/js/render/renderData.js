@@ -15,6 +15,7 @@ export default function renderData(appObject) {
   console.log(`localStorage.getItem('temp') ${localStorage.getItem('temp')}`);
 
   if (appObject) {
+    document.querySelector('.spinner').classList.add('hidden');
     document.querySelector('.wrapper__main').innerHTML = '';
     errorMessageElem.textContent = '';
 

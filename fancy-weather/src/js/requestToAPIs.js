@@ -5,6 +5,7 @@ import getImage from './APIs/imagesAPI';
 import getKeywordsForImgAPI from './utils/imageUtils';
 
 export default async function requestToAPIs(city) {
+  document.querySelector('.spinner').classList.remove('hidden');
   const appObject = {};
 
   try {

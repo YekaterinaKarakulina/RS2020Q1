@@ -1,5 +1,8 @@
 .spinner {
   position: absolute;
+  &.hidden {
+    display: none;
+  }
 }
 
 .lds-roller {

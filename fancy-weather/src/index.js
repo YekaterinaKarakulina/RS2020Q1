@@ -7,7 +7,10 @@ import getUserGeolocation from './js/APIs/userGeolocationAPI';
 import { getAndRenderNewImage } from './js/render/renderImage';
 import { languages } from './js/data/data';
 import { switchLanguage } from './js/utils/translationsUtils';
+import getLanguageAbbreviation from './js/utils/localStorageUtils';
 
+const cityInput = document.querySelector('.input__city');
+const submitButton = document.querySelector('.submit__button');
 
 let appObject;
 let appObjCopy;
@@ -79,8 +82,8 @@ async function searchFromInputForm(city) {
 }
 
 
-document.querySelector('.submit__button').addEventListener('click', (event) => {
-  const cityInput = document.querySelector('.input__city');
+submitButton.addEventListener('click', (event) => {
+  
   cityInput.focus();
   event.preventDefault();
   const city = cityInput.value;
@@ -104,4 +107,33 @@ document.querySelector('.dropdown-menu').addEventListener('click', (event) => {
   console.log(`localStorage.setItem('language', appLanguage) ${appLanguage}`);
   document.querySelector('.dropdown-toggle').innerHTML = languages[localStorage.getItem('language')];
   switchLanguage(localStorage.getItem('language'), appObject);
+});
+
+const microphone = document.querySelector('.icon__microphone');
+
+// The speech recognition interface lives on the browser’s window object
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+recognition.continuous = true;
+
+
+microphone.addEventListener('click', () => {
+  microphone.classList.toggle('active');
+  if (microphone.classList.contains('active')) {
+    recognition.lang = getLanguageAbbreviation(localStorage.getItem('language'));
+    recognition.start();
+  } else {
+    recognition.stop();
+  }
+});
+
+recognition.addEventListener('result', (event) => {
+  const transcript = Array.from(event.results)
+    .map((result) => result[0])
+    .map((result) => result.transcript);
+  console.log(transcript);
+  cityInput.value = transcript;
+  submitButton.click();
+  recognition.stop();
+  microphone.classList.remove('active');
 });

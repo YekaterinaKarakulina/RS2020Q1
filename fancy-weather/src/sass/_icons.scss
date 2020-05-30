@@ -25,6 +25,9 @@
     left: calc(50% + 6rem);
     top: calc(50% - 2.3rem);
   }
+  &.active {
+    background-color: green;
+  }
 }
 
 .icon__weather {
