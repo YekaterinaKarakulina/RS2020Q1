@@ -6,7 +6,7 @@ const icons = {
   mostly_clear: 'fas fa-sun',
   partly_clear: 'fas fa-sun',
   sunny: 'far fa-sun',
-  rain: 'fa fa-rain',
+  rain: 'fas fa-cloud-rain',
   rain_light: 'fas fa-cloud-sun-rain',
   drizzle: 'fas fa-cloud-showers-heavy',
   windy: 'fas fa-wind',
