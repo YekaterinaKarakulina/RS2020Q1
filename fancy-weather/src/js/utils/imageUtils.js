@@ -27,8 +27,3 @@ export default function getKeywordsForImgAPI(appObject) {
   const imgKeywords = `${season} ${dayTime}`;
   return imgKeywords;
 }
-
-// async function getAndRenderNewImg(imgProperties) {
-//   const linkToImg = await getImage(imgProperties);
-//   renderImage(linkToImg);
-// }

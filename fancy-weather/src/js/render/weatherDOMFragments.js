@@ -1,20 +1,20 @@
 import { createDomElement, createDomElementWithDataAttr } from '../utils/renderUtils';
 import { transferCelsiusToFahrenheit } from '../utils/temperatureUtils';
-import { getWeekDay } from '../utils/dateUtils';
-import icons from '../data/icons';
+import { getWeekDay, getCurrentDate } from '../utils/dateUtils';
+import getWeatherIconName from './iconDOMFragment';
 
-function createTodayWeatherDOMFragment(todayWeather) {
+function createTodayWeatherDOMFragment(appObject) {
+  const todayWeather = appObject.todayWeatherData;
   const fragment = document.createDocumentFragment();
 
   const currentTemperature = createDomElement('div', 'temperature currentTemperature');
   currentTemperature.textContent = todayWeather.currentTemp;
 
-  const iconWeatherClassNames = icons[todayWeather.weatherCode];
-  const weatherIcon = createDomElement('i', `icon__weather ${iconWeatherClassNames}`);
+  const iconWeatherName = getWeatherIconName(appObject);
+  const weatherIcon = createDomElement('span', 'icon__weather');
+  weatherIcon.style.backgroundImage = `url('src/assets/amcharts_weather_icons_1.0.0/animated/${iconWeatherName}.svg')`;
 
-  // const weatherDescription = createDomElement('div', 'weatherDescription');
   const weatherDescription = createDomElementWithDataAttr('div', 'weatherDescription', 'weathercode', todayWeather.weatherCode);
-  // weatherDescription.textContent = todayWeather.weatherCode.toUpperCase();
 
   const realFeelTempTitle = createDomElementWithDataAttr('span', 'realFeelTempTitle', 'i18n', 'realFeel');
   realFeelTempTitle.textContent = 'REALFEEL';
@@ -71,7 +71,12 @@ function createTodayWeatherDOMFragment(todayWeather) {
   return fragment;
 }
 
-function generateOneDayWeather(dayWeather, day) {
+function generateOneDayWeather(appObject, dayCount) {
+  const dayWeather = appObject.threeDaysWeatherData[0];
+
+  const currentDate = getCurrentDate(appObject);
+  const day = getWeekDay(currentDate.getDay() + dayCount);
+
   const dayElement = createDomElement('div', 'day');
 
   const weekDay = createDomElementWithDataAttr('div', 'weekDay', 'weekdayfull', `${day}`);
@@ -80,8 +85,10 @@ function generateOneDayWeather(dayWeather, day) {
   const dayTemperature = createDomElement('span', 'temperature dayTemperature');
   dayTemperature.textContent = dayWeather.currentTemp;
 
-  const iconWeatherClassNames = icons[dayWeather.weatherCode];
-  const weatherIcon = createDomElement('i', `icon__weather icon__small ${iconWeatherClassNames}`);
+
+  const iconWeatherName = getWeatherIconName(appObject);
+  const weatherIcon = createDomElement('span', 'icon__weather icon__small');
+  weatherIcon.style.backgroundImage = `url('src/assets/amcharts_weather_icons_1.0.0/animated/${iconWeatherName}.svg')`;
 
   dayElement.append(weekDay);
   dayElement.append(dayTemperature);
@@ -97,15 +104,18 @@ function generateOneDayWeather(dayWeather, day) {
 
 
 function createThreeDaysWeatherDOMFragment(appObject) {
-  const threeDaysWeather = appObject.threeDaysWeatherData;
+  // const threeDaysWeather = appObject.threeDaysWeatherData;
 
   const fragment = document.createDocumentFragment();
-  const localeStrDate = new Date().toLocaleString('en-US', { timeZone: `${appObject.timezone}` });
-  const currentDate = new Date(Date.parse(localeStrDate));
+  // const localeStrDate = new Date().toLocaleString('en-US', { timeZone: `${appObject.timezone}` });
+  // const currentDate = new Date(Date.parse(localeStrDate));
 
-  const firstDay = generateOneDayWeather(threeDaysWeather[0], getWeekDay(currentDate.getDay() + 1));
-  const secDay = generateOneDayWeather(threeDaysWeather[1], getWeekDay(currentDate.getDay() + 2));
-  const thirdDay = generateOneDayWeather(threeDaysWeather[2], getWeekDay(currentDate.getDay() + 3));
+  // const firstDay = generateOneDayWeather(threeDaysWeather[0], getWeekDay(currentDate.getDay() + 1));
+  // const secDay = generateOneDayWeather(threeDaysWeather[1], getWeekDay(currentDate.getDay() + 2));
+  // const thirdDay = generateOneDayWeather(threeDaysWeather[2], getWeekDay(currentDate.getDay() + 3));
+  const firstDay = generateOneDayWeather(appObject, 1);
+  const secDay = generateOneDayWeather(appObject, 2);
+  const thirdDay = generateOneDayWeather(appObject, 3);
 
   fragment.append(firstDay);
   fragment.append(secDay);

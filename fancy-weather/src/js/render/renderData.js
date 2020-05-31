@@ -29,7 +29,8 @@ export default function renderData(appObject) {
 
     const locationFragment = createLocationDOMFragment(appObject);
     const dateTimeFragment = createDateDOMFragment(appObject);
-    const todayWeatherFragment = createTodayWeatherDOMFragment(appObject.todayWeatherData);
+    // const todayWeatherFragment = createTodayWeatherDOMFragment(appObject.todayWeatherData);
+    const todayWeatherFragment = createTodayWeatherDOMFragment(appObject);
 
     const todaysWeather = createDomElement('section', 'todaysWeather');
     todaysWeather.append(locationFragment);

@@ -50,20 +50,29 @@
 }
 
 .icon__weather {
-  font-size: 5rem;
+  display: inline-block;
+  width: 4rem;
+  height: 4rem;
   margin-bottom: 1rem;
+  margin-left: 1rem;
+  transform: scale(2);
   @include media-laptop {
     font-size: 3.5rem;
   }
 }
 
 .icon__small {
-  font-size: 2.5rem;
+  transform: none;
+  width: 3rem;
   position: absolute;
-  margin-left: 0.7rem;
+  top: 0.25rem;
+  left: 4rem;
+  margin-left: 0;
+  @include media-tablet {
+    left: 2.5rem;
+  }
   @include media-mobile {
-    font-size: 1.5rem;
-    margin-left: 0.25rem;
+    left: 1.5rem;
   }
 }
 
