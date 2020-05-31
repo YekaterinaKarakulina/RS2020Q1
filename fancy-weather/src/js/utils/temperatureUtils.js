@@ -17,7 +17,6 @@ function transferFahrenheitToCelsius(tempElements) {
 }
 
 function transferTemperature(tempElements) {
-  console.log('transferTemperature');
   if (localStorage.getItem('temp') === 'isCelsius') {
     localStorage.setItem('temp', 'isFahrenheit');
     transferCelsiusToFahrenheit(tempElements);

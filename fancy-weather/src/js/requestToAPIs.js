@@ -26,13 +26,11 @@ export default async function requestToAPIs(city) {
 
       const imgProperties = `${getKeywordsForImgAPI(appObject)} nature`;
       appObject.imgProperties = imgProperties;
-      console.log(imgProperties);
 
       const promises = [getWeatherData(lat, lng), getImage(imgProperties)];
       const results = await Promise.all(promises);
 
       if (results) {
-        console.log(results);
         const weatherData = results[0];
         const todayIndex = 0;
         const nextThreeDaysIndexes = [1, 2, 3];

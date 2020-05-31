@@ -1,7 +1,7 @@
 import { getCurrentDate } from './dateUtils';
 import { weekDaysShort, months } from '../data/data';
-// import translateCoordinates from './coordinatesUtils';
 import getWordTranslation from '../APIs/translationAPI';
+import getLanguageAbbreviation from './localStorageUtils';
 
 async function getTranslations(url) {
   const res = await fetch(url);
@@ -25,7 +25,6 @@ async function translateElements(language, dataAttr, elementsToTranslate, elemen
   });
 }
 
-
 async function translateDate(language, currentDate, element) {
   const urlToI18NFile = `/i18n/${language}.json`;
   const data = await getTranslations(urlToI18NFile);
@@ -34,20 +33,8 @@ async function translateDate(language, currentDate, element) {
   ${currentDate.getDate()} ${data.months[months[currentDate.getMonth()]]}`;
 }
 
-
 async function translateDataFromAPI(appObjectData, language) {
-  let translateLang = '';
-  switch (language) {
-    case 'Russian':
-      translateLang = 'ru';
-      break;
-    case 'Belorussian':
-      translateLang = 'be';
-      break;
-    default:
-      translateLang = 'en';
-      break;
-  }
+  const translateLang = getLanguageAbbreviation(language);
   const translatedWord = await getWordTranslation(appObjectData, translateLang);
   return translatedWord;
 }
@@ -93,15 +80,11 @@ async function switchLanguage(language, appObject) {
   const dateElement = document.querySelector('[data-date]');
   translateDate(language, currentDate, dateElement);
 
-  // const weatherDescriptionElement = document.querySelector('.weatherDescription');
-  // weatherDescriptionElement.textContent = (await translateDataFromAPI(appObject.todayWeatherData.weatherCode, language)).toUpperCase();
-
   const locationElement = document.querySelector('.location');
   locationElement.textContent = await translateDataFromAPI(`${appObject.city}, ${appObject.country}`, language);
 
   const weatherDescriptionElements = document.querySelectorAll('[data-weathercode]');
   translateElements(language, 'weathercode', weatherDescriptionElements, 'textContent', 'weatherCodes');
-
 }
 
 export { switchLanguage, transferLanguageBeforeRendering };

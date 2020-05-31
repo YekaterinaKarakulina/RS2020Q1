@@ -12,12 +12,6 @@ export default function createMapDOMFragment(appObject) {
 
   const coordinatesTranslated = translateCoordinates(appObject.lat, appObject.lng);
 
-  // const latitude = createDomElement('div', 'latitude');
-  // latitude.textContent = `Latitude: ${coordinatesTranslated.latitude}`;
-
-  // const longitude = createDomElement('div', 'longitude');
-  // longitude.textContent = `Longitude: ${coordinatesTranslated.longitude}`;
-
   const latitudeTitle = createDomElement('span', 'latitudeTitle');
   latitudeTitle.dataset.i18n = 'latitude';
   latitudeTitle.textContent = 'Latitude';
@@ -43,8 +37,6 @@ export default function createMapDOMFragment(appObject) {
   const coordinates = createDomElement('div', 'coordinates');
   coordinates.append(latitude);
   coordinates.append(longitude);
-
-
 
   fragment.append(mapContainer);
   fragment.append(coordinates);

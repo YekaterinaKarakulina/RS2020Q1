@@ -10,9 +10,6 @@ import { transferLanguageBeforeRendering } from '../utils/translationsUtils';
 
 export default function renderData(appObject) {
   const errorMessageElem = document.querySelector('.errorMessage');
-  console.log(appObject);
-  console.log(`localStorage.getItem('language') ${localStorage.getItem('language')}`);
-  console.log(`localStorage.getItem('temp') ${localStorage.getItem('temp')}`);
 
   if (appObject) {
     document.querySelector('.spinner').classList.add('hidden');
@@ -29,7 +26,6 @@ export default function renderData(appObject) {
 
     const locationFragment = createLocationDOMFragment(appObject);
     const dateTimeFragment = createDateDOMFragment(appObject);
-    // const todayWeatherFragment = createTodayWeatherDOMFragment(appObject.todayWeatherData);
     const todayWeatherFragment = createTodayWeatherDOMFragment(appObject);
 
     const todaysWeather = createDomElement('section', 'todaysWeather');

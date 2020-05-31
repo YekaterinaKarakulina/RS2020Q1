@@ -7,8 +7,6 @@ import getUserGeolocation from './js/APIs/userGeolocationAPI';
 import { getAndRenderNewImage } from './js/render/renderImage';
 import { languages } from './js/data/data';
 import { switchLanguage } from './js/utils/translationsUtils';
-// import getLanguageAbbreviation from './js/utils/localStorageUtils';
-// import { recognitionRestart, tellWeather } from './js/APIs/voiceAPI';
 import voiceRecognitionAndSpeak from './js/APIs/voiceAPI';
 
 const cityInput = document.querySelector('.input__city');
@@ -18,15 +16,11 @@ let appObject;
 let appObjCopy;
 
 async function init() {
-  console.log(`init LC lang ${localStorage.getItem('language')}`);
-  console.log(`init LC temp ${localStorage.getItem('temp')}`);
   if (localStorage.getItem('language') === null) {
     localStorage.setItem('language', 'English');
-    console.log(`if language null , set to eng ${localStorage.getItem('language')}`);
   }
   if (localStorage.getItem('temp') === null) {
     localStorage.setItem('temp', 'isCelsius');
-    console.log(`if temp null , set to isCelsius ${localStorage.getItem('temp')}`);
   }
   document.querySelector('.dropdown-toggle').innerHTML = languages[localStorage.getItem('language')]; //
 
@@ -66,7 +60,6 @@ let timerId = setTimeout(function tick() {
   }
 }, 2000);
 
-
 async function searchFromInputForm(city) {
   const errorMessageElem = document.querySelector('.errorMessage');
   if (city.match(/[!@#$%^&*()_+=]/g)) {
@@ -83,7 +76,6 @@ async function searchFromInputForm(city) {
     }
   }
 }
-
 
 submitButton.addEventListener('click', (event) => {
   cityInput.focus();
@@ -103,10 +95,8 @@ document.querySelector('.icon__rotate').addEventListener('click', () => {
 });
 
 document.querySelector('.dropdown-menu').addEventListener('click', (event) => {
-  console.log('dropdown');
   const appLanguage = event.target.closest('.dropdown-item').innerText;
   localStorage.setItem('language', appLanguage);
-  console.log(`localStorage.setItem('language', appLanguage) ${appLanguage}`);
   document.querySelector('.dropdown-toggle').innerHTML = languages[localStorage.getItem('language')];
   switchLanguage(localStorage.getItem('language'), appObject);
 });

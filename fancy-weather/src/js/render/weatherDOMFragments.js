@@ -85,7 +85,6 @@ function generateOneDayWeather(appObject, dayCount) {
   const dayTemperature = createDomElement('span', 'temperature dayTemperature');
   dayTemperature.textContent = dayWeather.currentTemp;
 
-
   const iconWeatherName = getWeatherIconName(appObject);
   const weatherIcon = createDomElement('span', 'icon__weather icon__small');
   weatherIcon.style.backgroundImage = `url('src/assets/amcharts_weather_icons_1.0.0/animated/${iconWeatherName}.svg')`;
@@ -104,15 +103,8 @@ function generateOneDayWeather(appObject, dayCount) {
 
 
 function createThreeDaysWeatherDOMFragment(appObject) {
-  // const threeDaysWeather = appObject.threeDaysWeatherData;
-
   const fragment = document.createDocumentFragment();
-  // const localeStrDate = new Date().toLocaleString('en-US', { timeZone: `${appObject.timezone}` });
-  // const currentDate = new Date(Date.parse(localeStrDate));
 
-  // const firstDay = generateOneDayWeather(threeDaysWeather[0], getWeekDay(currentDate.getDay() + 1));
-  // const secDay = generateOneDayWeather(threeDaysWeather[1], getWeekDay(currentDate.getDay() + 2));
-  // const thirdDay = generateOneDayWeather(threeDaysWeather[2], getWeekDay(currentDate.getDay() + 3));
   const firstDay = generateOneDayWeather(appObject, 1);
   const secDay = generateOneDayWeather(appObject, 2);
   const thirdDay = generateOneDayWeather(appObject, 3);
