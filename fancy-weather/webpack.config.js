@@ -60,7 +60,8 @@ module.exports = (env, options) => {
         filename: 'style.css',
       }),
       new CopyWebpackPlugin([
-        { from: './src/i18n', to: path.join(__dirname, '/dist/i18n') },
+        { from: './src/i18n', to: path.join(__dirname, '/dist/src/i18n') },
+        { from: './src/assets', to: path.join(__dirname, '/dist/src/assets') },
       ]),
     ],
   };

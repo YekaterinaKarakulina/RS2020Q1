@@ -10,7 +10,7 @@ async function getTranslations(url) {
 }
 
 async function translateElement(language, dataAttr, elementToTranslate, elementAttr, dataAdditional) {
-  const urlToI18NFile = `/i18n/${language}.json`;
+  const urlToI18NFile = `src/i18n/${language}.json`;
   let data = await getTranslations(urlToI18NFile);
   const element = elementToTranslate;
   if (dataAdditional) {
