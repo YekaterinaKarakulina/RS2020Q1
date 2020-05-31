@@ -76,6 +76,7 @@ async function searchFromInputForm(city) {
     if (appObject) {
       renderData(appObject);
     } else {
+      document.querySelector('.spinner').classList.add('hidden');
       errorMessageElem.textContent = 'Can not find information by your request. Please, try another city name!';
     }
   }
