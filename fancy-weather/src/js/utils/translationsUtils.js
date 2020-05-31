@@ -26,7 +26,7 @@ async function translateElements(language, dataAttr, elementsToTranslate, elemen
 }
 
 async function translateDate(language, currentDate, element) {
-  const urlToI18NFile = `/i18n/${language}.json`;
+  const urlToI18NFile = `src/i18n/${language}.json`;
   const data = await getTranslations(urlToI18NFile);
   const dateElement = element;
   dateElement.textContent = `${data.weekDaysShort[weekDaysShort[currentDate.getDay()]]} 
