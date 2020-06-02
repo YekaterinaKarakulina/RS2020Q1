@@ -1,11 +1,4 @@
-function createWordElement(word) {
-  const element = document.createElement('span');
-  element.className = 'word data__word';
-  element.dataset.word = word.replace(/[.]/, '');
-  element.setAttribute('draggable', 'true');
-  element.textContent = word;
-  return element;
-}
+import { createWordElement, getActualSentence, mixArrayElements } from './utils';
 
 export default class Sentence {
   constructor({
@@ -16,35 +9,37 @@ export default class Sentence {
     this.textExample = textExample;
   }
 
-  createSentenceElement() {
+  createSentence() {
     const sentenceElement = document.createElement('div');
     sentenceElement.className = 'sentence data__sentence';
     sentenceElement.dataset.audio = this.audioExample;
     sentenceElement.dataset.text = this.textExample;
 
     const sentenceArray = this.textExample.split(' ');
-    console.log(sentenceArray);
 
-    const sentenceArrayMixed = [];
-    const sentenceArrayLength = sentenceArray.length;
-    for (let i = 0; i < sentenceArrayLength; i += 1) {
-      const randomNumber = Math.floor(Math.random() * sentenceArray.length);
-      const randomWord = sentenceArray[randomNumber];
-      sentenceArray.splice(randomNumber, 1);
-      sentenceArrayMixed.push(randomWord);
-    }
-    console.log(sentenceArrayMixed);
+    const sentenceArrayMixed = mixArrayElements(sentenceArray);
 
     const fragment = document.createDocumentFragment();
     sentenceArrayMixed.forEach((el) => {
       fragment.append(createWordElement(el));
     });
+
     sentenceElement.append(fragment);
     return sentenceElement;
   }
 
-  playSound() {
+  playSentenceSound() {
     const sound = new Audio(`https://raw.githubusercontent.com/yekaterinakarakulina/rslang-data/master/${this.audioExample}`);
     sound.play();
+  }
+
+  checkSentence() {
+    const expectedSentence = this.textExample;
+    const actualSentence = getActualSentence();
+    if (actualSentence === expectedSentence) {
+      console.log('sentence true');
+    } else {
+      console.log('sentence false');
+    }
   }
 }
