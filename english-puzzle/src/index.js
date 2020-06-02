@@ -1,3 +1,4 @@
+import './sass/style.scss';
 import 'babel-polyfill';
 
 import getWords from './js/wordsAPI';
@@ -27,7 +28,7 @@ async function myF() {
   sentenceContainer.append(sentenceNumber);
   sentenceContainer.append(sentenceElem.createSentenceElement());
   document.querySelector('.results-container').append(sentenceContainer);
-  sentenceElem.playSound();
+  // sentenceElem.playSound();
 }
 
-myF();
+// myF();

@@ -1,0 +1,33 @@
+.button {
+  display: inline-block;
+  background-color: $color-violet;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: $color-light;
+  
+  &.hidden {
+    display: none;
+  }
+
+  &.menu__button {
+    width: 3.5rem;
+    height: 3.5rem;
+    &:hover {
+      background-color: $color-violet;
+      background-color: darken($color: $color-violet, $amount: 15);
+    }
+  }
+
+  &.footer__button {
+    width: 10rem;
+    height: 3.5rem;
+    margin-left: 1rem;
+    &:hover {
+      background-color: $color-violet;
+      background-color: darken($color: $color-violet, $amount: 15);
+    }
+  }
+
+
+}

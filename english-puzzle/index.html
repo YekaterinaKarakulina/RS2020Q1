@@ -5,80 +5,91 @@
   <title>Document</title>
 </head>
 <body>
-  <header class="header header-wrapper">
+  <header class="wrapper header__wrapper">
     
     <div class="menu header__menu">
       <div class="menu-left">
         <div class="level menu__level">
           <span class="level-title">Level</span>
-          <select name="level-value">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
+
+          <!-- https://codepen.io/raubaca/pen/VejpQP -->
+          <div class="select select__level">
+            <select name="slct" id="slct">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
         </div>
         <div class="page menu__page">
           <span class="page-title">Page</span>
-          <select name="page-value">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="1">5</option>
-            <option value="2">6</option>
-            <option value="3">7</option>
-            <option value="4">8</option>
-            <option value="1">9</option>
-            <option value="2">10</option>
-          </select>
+
+          <div class="select select__page">
+            <select name="slct" id="slct">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
         </div>
       </div>
 
       <div class="menu-right">
         <div class="buttons menu__buttons">
-          <button class="button menu__button">Autosound</button>
-          <button class="button menu__button">Translation</button>
-          <button class="button menu__button">Sound</button>
-          <button class="button menu__button">Picture</button>
+          <button class="button menu__button">
+            <i class="icon icon__auto-pronunciation"></i>
+          </button>
+          <button class="button menu__button">
+            <i class="icon icon__translation"></i>
+          </button>
+          <button class="button menu__button">
+            <i class="icon icon__sentence-pronunciation"></i>
+          </button>
+          <button class="button menu__button">
+            <i class="icon icon__bck-image"></i>
+          </button>
         </div>
       </div>
     </div>
   </header>
 
 
-  <main class="main main__wrapper">
+  <main class="wrapper main__wrapper">
     <section class="hints main__hints">
-      <span class="icon icon__sound">Icon</span>
-      <div class="hints-sentence">Some sentence!</div>
+      <span class="icon-container">
+        <i class="icon icon__sound"></i>
+      </span>
+      <div class="hints-sentence">Some sentense translation!!!</div>
     </section>
 
     <section class="results main__results">
       <div class="results-container">
-        
-        <div class="sentence-container">
-          <span class="sentence-number">1</span>
-          <div class="sentence" data-audio="files/01_0001_example.mp3" data-text="The students agree they have too much homework.">
-            <span class="word">much</span>
-            <span class="word">too</span>
-            <span class="word">agree</span>
-            <span class="word">they</span>
-            <span class="word">students</span>
-            <span class="word">have</span>
-            <span class="word">homework.</span>
-            <span class="word">The</span>
-          </div>
-        </div>
-
-
+        <div class="sentence"></div>
       </div>
     </section>
 
     <section class="data main__data">
-
+      <div class="data-sentence">
+        <div class="word data__word">word</div>
+        <div class="word data__word">word</div>
+        <div class="word data__word">word</div>
+        <div class="word data__word">word</div>
+        <div class="word data__word">word</div>
+      </div>
     </section>
+
   </main>
-  <footer class="footer footer-wrapper">
+  <footer class="wrapper footer__wrapper">
     <div class="buttons footer__buttons">
       <button class="button footer__button">I don`t know</button>
       <button class="button footer__button">Check</button>

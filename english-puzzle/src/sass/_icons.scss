@@ -1,0 +1,32 @@
+.icon {
+  display: inline-block;
+  background-size: contain;
+  width: 2rem;
+  height: 2rem;
+
+  &.icon__auto-pronunciation {
+    background-image: url('../assets/auto-pronunciation.svg');
+  }
+
+  &.icon__translation {
+    background-image: url('../assets/translation.svg');
+  }
+
+  &.icon__sentence-pronunciation {
+    background-image: url('../assets/sentence-pronunciation.svg');
+  }
+
+  &.icon__bck-image {
+    background-image: url('../assets/bck-image.svg');
+  }
+
+  &.icon__sound {
+    width: 3rem;
+    height: 3rem;
+    background-image: url('../assets/sound.svg');
+    &.active {
+      background-image: url('../assets/sound-active.svg');
+    }
+  }
+  
+}

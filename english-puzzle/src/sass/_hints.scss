@@ -1,0 +1,19 @@
+.icon-container {
+  display: flex;
+  height: 3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__hints {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.hints-sentence {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 400;
+}

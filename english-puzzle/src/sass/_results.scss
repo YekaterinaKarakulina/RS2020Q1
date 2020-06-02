@@ -1,0 +1,25 @@
+.main__results {
+  display: flex;
+  width: 90%;
+  height: 20rem;
+  margin: 0 auto;
+  margin-top: 4rem;
+  font-size: 2.5rem;
+  font-weight: 400;
+}
+
+.results-container {
+  display: flex;
+  flex-direction: column;
+  border: 3px solid black;
+  width: 100%;
+}
+
+.sentence {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  height: 5rem;
+  border: 1px solid red;
+}
