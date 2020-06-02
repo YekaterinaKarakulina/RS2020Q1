@@ -4,6 +4,33 @@ import 'babel-polyfill';
 import getWords from './js/wordsAPI';
 import Sentence from './js/Sentence';
 
+localStorage.setItem('level', '1');
+localStorage.setItem('page', '1');
+localStorage.setItem('autoPronunciation', 'true');
+localStorage.setItem('translation', 'true');
+localStorage.setItem('sentencePronunciation', 'true');
+localStorage.setItem('bckImage', 'false');
+
+
+function checkSentence(dataSentence, resultSentence) {
+  console.log(dataSentence);
+  const expectedSentence = dataSentence.dataset.text;
+  console.log(expectedSentence);
+  console.log(resultSentence);
+  const dataWords = resultSentence.querySelectorAll('.data__word');
+  const actualSentenceArray = [];
+  dataWords.forEach((el) => {
+    actualSentenceArray.push(el.textContent);
+  });
+  const actualSentence = actualSentenceArray.join(' ');
+  console.log(actualSentence);
+  if (actualSentence === expectedSentence) {
+    console.log('sentence true');
+  } else {
+    console.log('sentence false');
+  }
+}
+
 
 async function myF() {
   const data = await getWords(0, 0);
@@ -16,13 +43,31 @@ async function myF() {
     textExample: data[0].textExample.replace(/<b>/, '').replace(/<\/b>/, ''),
   };
 
-  const sentenceElem = new Sentence(sentenceObj);
+  const sentenceElem = (new Sentence(sentenceObj)).createSentenceElement();
 
-  document.querySelector('.data-container').append(sentenceElem.createSentenceElement());
+  document.querySelector('.data-container').append(sentenceElem);
+
   // sentenceElem.playSound();
+
+  document.querySelector('.footer__buttons').addEventListener('click', (event) => {
+    console.log(event.target);
+    if (event.target.classList.contains('dontKnow')) {
+      console.log('I don`t know');
+      const resultSentence = document.querySelector('.results__sentence');
+      // makeSentence(sentenceElem, resultSentence);
+    }
+    if (event.target.classList.contains('check')) {
+      console.log('Check');
+      const resultSentence = document.querySelector('.results__sentence');
+      checkSentence(sentenceElem, resultSentence);
+    }
+  });
 }
 
+// function puzzleGame(sentenceElem) { }
+
 myF();
+// puzzleGame();
 
 // click events
 document.addEventListener('click', (event) => {
