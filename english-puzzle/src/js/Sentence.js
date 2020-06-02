@@ -1,6 +1,8 @@
 function createWordElement(word) {
   const element = document.createElement('span');
-  element.className = 'word';
+  element.className = 'word data__word';
+  element.dataset.word = word.replace(/[.]/, '');
+  element.setAttribute('draggable', 'true');
   element.textContent = word;
   return element;
 }
@@ -16,7 +18,7 @@ export default class Sentence {
 
   createSentenceElement() {
     const sentenceElement = document.createElement('div');
-    sentenceElement.className = 'sentence';
+    sentenceElement.className = 'sentence data__sentence';
     sentenceElement.dataset.audio = this.audioExample;
     sentenceElement.dataset.text = this.textExample;
 

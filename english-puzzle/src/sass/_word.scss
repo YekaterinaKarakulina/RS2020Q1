@@ -1,6 +1,5 @@
 .word {
   display: inline-flex;
-  margin-left: 1rem;
   padding: 5px;
   border: 1px solid black;
   border-radius: 5px;
@@ -8,5 +7,8 @@
   &.sentence__word {
     // min-height: 2rem;
     // min-width: 2rem;
+  }
+  &.dragOver {
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
   }
 }
