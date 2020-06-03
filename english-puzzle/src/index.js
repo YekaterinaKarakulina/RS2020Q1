@@ -11,6 +11,16 @@ localStorage.setItem('translation', 'true');
 localStorage.setItem('sentencePronunciation', 'true');
 localStorage.setItem('bckImage', 'false');
 
+
+function checkWord() {
+  const words = document.querySelectorAll('.data__sentence>.data__word');
+  words.forEach((el) => {
+    el.classList.remove('true');
+    el.classList.remove('false');
+  });
+}
+
+
 async function game() {
   const data = await getWords(0, 0);
   console.log(data);
@@ -31,6 +41,7 @@ async function game() {
     console.log(event.target);
     if (event.target.classList.contains('dontKnow')) {
       console.log('I don`t know');
+      sentence.buildSentence();
     }
     if (event.target.classList.contains('check')) {
       console.log('Check');
@@ -50,6 +61,7 @@ document.addEventListener('click', (event) => {
   } else if (event.target.closest('.results__sentence')) {
     console.log('results__sentence click');
     document.querySelector('.data__sentence').append(event.target);
+    checkWord();
   }
 });
 
@@ -80,3 +92,5 @@ document.ondrop = function onDrop(event) {
   }
   event.target.classList.remove('dragOver');
 };
+
+

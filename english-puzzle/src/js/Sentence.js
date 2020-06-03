@@ -34,12 +34,30 @@ export default class Sentence {
   }
 
   checkSentence() {
-    const expectedSentence = this.textExample;
+    const expectedSentence = this.textExample.split(' ');
     const actualSentence = getActualSentence();
-    if (actualSentence === expectedSentence) {
-      console.log('sentence true');
-    } else {
-      console.log('sentence false');
+    actualSentence.forEach((el) => {
+      el.classList.remove('true');
+      el.classList.remove('false');
+    });
+    for (let i = 0; i < expectedSentence.length; i += 1) {
+      if (expectedSentence[i] === actualSentence[i].textContent) {
+        actualSentence[i].classList.add('true');
+      } else {
+        actualSentence[i].classList.add('false');
+      }
     }
+  }
+
+  buildSentence() {
+    const sentenceArray = this.textExample.split(' ');
+    const fragment = document.createDocumentFragment();
+    sentenceArray.forEach((el) => {
+      fragment.append(createWordElement(el));
+    });
+    fragment.querySelectorAll('.data__word').forEach((el) => {
+      document.querySelector('.results__sentence').append(el);
+    });
+    document.querySelectorAll('.data__sentence>.data__word').forEach((el) => el.remove());
   }
 }

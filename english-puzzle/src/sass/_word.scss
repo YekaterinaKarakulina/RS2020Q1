@@ -12,5 +12,11 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     margin-left: 2rem;
   }
+  &.true {
+    box-shadow: 0 0 10px rgba(0,255,127, 0.5);
+  }
+  &.false {
+    box-shadow: 0 0 10px rgba(255,69,0,0.5);
+  }
 
 }
