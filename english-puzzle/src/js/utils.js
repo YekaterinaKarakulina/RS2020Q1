@@ -11,7 +11,6 @@ function getActualSentence() {
   const dataWords = document.querySelectorAll('.results__sentence>.data__word');
   const actualSentenceArray = [];
   dataWords.forEach((el) => {
-    // actualSentenceArray.push(el.textContent);
     actualSentenceArray.push(el);
   });
   return actualSentenceArray;
@@ -29,4 +28,6 @@ function mixArrayElements(array) {
   return arrayMixed;
 }
 
-export { createWordElement, getActualSentence, mixArrayElements };
+export {
+  createWordElement, getActualSentence, mixArrayElements,
+};

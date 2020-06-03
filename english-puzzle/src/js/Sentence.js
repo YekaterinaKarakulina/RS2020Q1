@@ -9,7 +9,7 @@ export default class Sentence {
     this.textExample = textExample;
   }
 
-  createSentence() {
+  createDataSentence() {
     const sentenceElement = document.createElement('div');
     sentenceElement.className = 'sentence data__sentence';
     sentenceElement.dataset.audio = this.audioExample;
