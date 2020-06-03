@@ -8,7 +8,7 @@ function createWordElement(word) {
 }
 
 function getActualSentence() {
-  const dataWords = document.querySelectorAll('.results__sentence>.data__word');
+  const dataWords = document.querySelectorAll('.result__sentence>.data__word');
   const actualSentenceArray = [];
   dataWords.forEach((el) => {
     actualSentenceArray.push(el);
@@ -28,6 +28,14 @@ function mixArrayElements(array) {
   return arrayMixed;
 }
 
+function checkWord() {
+  const words = document.querySelectorAll('.data__sentence>.data__word');
+  words.forEach((el) => {
+    el.classList.remove('true');
+    el.classList.remove('false');
+  });
+}
+
 export {
-  createWordElement, getActualSentence, mixArrayElements,
+  createWordElement, getActualSentence, mixArrayElements, checkWord,
 };

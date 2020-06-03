@@ -7,6 +7,7 @@ export default class Sentence {
     this.id = id;
     this.audioExample = audioExample;
     this.textExample = textExample;
+    this.length = 0;
   }
 
   createDataSentence() {
@@ -16,6 +17,7 @@ export default class Sentence {
     sentenceElement.dataset.text = this.textExample;
 
     const sentenceArray = this.textExample.split(' ');
+    this.length = sentenceArray.length;
 
     const sentenceArrayMixed = mixArrayElements(sentenceArray);
 
@@ -36,6 +38,7 @@ export default class Sentence {
   checkSentence() {
     const expectedSentence = this.textExample.split(' ');
     const actualSentence = getActualSentence();
+    let errors = 0;
     actualSentence.forEach((el) => {
       el.classList.remove('true');
       el.classList.remove('false');
@@ -45,8 +48,10 @@ export default class Sentence {
         actualSentence[i].classList.add('true');
       } else {
         actualSentence[i].classList.add('false');
+        errors += 1;
       }
     }
+    return errors;
   }
 
   buildSentence() {
@@ -56,7 +61,7 @@ export default class Sentence {
       fragment.append(createWordElement(el));
     });
     fragment.querySelectorAll('.data__word').forEach((el) => {
-      document.querySelector('.results__sentence').append(el);
+      document.querySelector('.result__sentence').append(el);
     });
     document.querySelectorAll('.data__sentence>.data__word').forEach((el) => el.remove());
   }
