@@ -3,12 +3,12 @@ import 'babel-polyfill';
 
 import Game from './js/Game';
 
-localStorage.setItem('level', '1');
-localStorage.setItem('round', '1');
-localStorage.setItem('autoPronunciation', 'true');
-localStorage.setItem('translation', 'true');
-localStorage.setItem('sentencePronunciation', 'true');
-localStorage.setItem('bckImage', 'false');
+// localStorage.setItem('level', '1');
+// localStorage.setItem('round', '1');
+// localStorage.setItem('autoPronunciation', 'false');
+// localStorage.setItem('translation', 'false');
+// localStorage.setItem('sentencePronunciation', 'false');
+// localStorage.setItem('bckImage', 'false');
 
 const game = new Game();
 game.startGame(localStorage.getItem('level'), localStorage.getItem('round'));
@@ -25,9 +25,35 @@ document.addEventListener('click', (event) => {
   } else if (event.target.classList.contains('check')) {
     console.log('Check');
     game.checkCurrentSentence();
-  } else if (event.target.classList.contains('icon__sound')) {
-    game.translateCurrentSentence();
+  } else if (event.target.closest('.menu__button.auto-pronunciation')) {
+    if (localStorage.getItem('autoPronunciation') === 'true') {
+      localStorage.setItem('autoPronunciation', 'false');
+    } else {
+      localStorage.setItem('autoPronunciation', 'true');
+    }
+  } else if (event.target.closest('.menu__button.translation')) {
+    if (localStorage.getItem('translation') === 'true') {
+      localStorage.setItem('translation', 'false');
+    } else {
+      localStorage.setItem('translation', 'true');
+    }
+  } else if (event.target.closest('.menu__button.sentence-pronunciation')) {
+    if (localStorage.getItem('sentencePronunciation') === 'true') {
+      localStorage.setItem('sentencePronunciation', 'false');
+    } else {
+      localStorage.setItem('sentencePronunciation', 'true');
+    }
+  } else if (event.target.closest('.menu__button.bck-image')) {
+    if (localStorage.getItem('bckImage') === 'true') {
+      localStorage.setItem('bckImage', 'false');
+    } else {
+      localStorage.setItem('bckImage', 'true');
+    }
   }
+  else if (event.target.classList.contains('icon__sound')) {
+    game.autoPronounceCurrentSentence();
+  }
+// game.translateCurrentSentence();
   game.checkGameStatus();
 });
 

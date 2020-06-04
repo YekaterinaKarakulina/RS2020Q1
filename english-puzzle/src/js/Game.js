@@ -2,7 +2,7 @@ import getData from './wordsAPI';
 import Sentence from './Sentence';
 
 export default class Game {
-  constructor(level, round) {
+  constructor(level, round, hints) {
     this.iLevel = level;
     this.iRound = round;
     this.bIsRoundInProgress = false;
@@ -12,6 +12,7 @@ export default class Game {
     this.dataSentencesObjects = [];
     this.dataSentences = [];
     this.resultSentences = [];
+    this.hints = hints;
   }
 
   async startGame() {
@@ -46,7 +47,8 @@ export default class Game {
     currentSentence.classList.add('active');
 
     document.querySelector('.data-container').append(this.dataSentences[this.iCurrentSentenceNumber]);
-
+    this.checkGameStatus();
+    this.showHintsAtBegin();
     return this.game;
   }
 
@@ -77,6 +79,48 @@ export default class Game {
     } else if (this.bIsSentenceBuild === false) {
       checkButton.classList.add('hidden');
     }
+
+
+    if (localStorage.getItem('autoPronunciation') === null) {
+      localStorage.setItem('autoPronunciation', 'true');
+    }
+    if (localStorage.getItem('translation') === null) {
+      localStorage.setItem('translation', 'true');
+    }
+    if (localStorage.getItem('sentencePronunciation') === null) {
+      localStorage.setItem('sentencePronunciation', 'true');
+    }
+    if (localStorage.getItem('bckImage') === null) {
+      localStorage.setItem('bckImage', 'true');
+    }
+
+    const autoPronunciationButton = document.querySelector('.menu__button.auto-pronunciation');
+    if (localStorage.getItem('autoPronunciation') === 'true') {
+      autoPronunciationButton.classList.add('active');
+    } else {
+      autoPronunciationButton.classList.remove('active');
+    }
+
+    const translationButton = document.querySelector('.menu__button.translation');
+    if (localStorage.getItem('translation') === 'true') {
+      translationButton.classList.add('active');
+    } else {
+      translationButton.classList.remove('active');
+    }
+
+    const sentencePronunciationButton = document.querySelector('.menu__button.sentence-pronunciation');
+    if (localStorage.getItem('sentencePronunciation') === 'true') {
+      sentencePronunciationButton.classList.add('active');
+    } else {
+      sentencePronunciationButton.classList.remove('active');
+    }
+
+    const bckImageButton = document.querySelector('.menu__button.bck-image');
+    if (localStorage.getItem('bckImage') === 'true') {
+      bckImageButton.classList.add('active');
+    } else {
+      bckImageButton.classList.remove('active');
+    }
   }
 
   checkCurrentSentence() {
@@ -98,4 +142,26 @@ export default class Game {
     const currentSentence = this.dataSentencesObjects[this.iCurrentSentenceNumber];
     currentSentence.buildSentence();
   }
+
+  autoPronounceCurrentSentence() {
+    const currentSentence = this.dataSentencesObjects[this.iCurrentSentenceNumber];
+    currentSentence.playSentenceSound();
+  }
+
+  showHintsAtBegin() {
+    if (localStorage.getItem('autoPronunciation') === 'true') {
+      this.autoPronounceCurrentSentence();
+    }
+    if (localStorage.getItem('translation') === 'true') {
+      this.translateCurrentSentence();
+    }
+    if (localStorage.getItem('bckImage') === 'true') {
+      console.log('bckImage');
+    }
+  }
+
+  showHintsAtEnd() {
+
+  }
+
 }
