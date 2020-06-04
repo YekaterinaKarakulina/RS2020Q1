@@ -72,7 +72,7 @@ function createTodayWeatherDOMFragment(appObject) {
 }
 
 function generateOneDayWeather(appObject, dayCount) {
-  const dayWeather = appObject.threeDaysWeatherData[0];
+  const dayWeather = appObject.threeDaysWeatherData[dayCount - 1];
 
   const currentDate = getCurrentDate(appObject);
   const day = getWeekDay(currentDate.getDay() + dayCount);
