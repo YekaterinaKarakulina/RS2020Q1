@@ -28,14 +28,6 @@ function mixArrayElements(array) {
   return arrayMixed;
 }
 
-function checkWord() {
-  const words = document.querySelectorAll('.data__sentence>.data__word');
-  words.forEach((el) => {
-    el.classList.remove('true');
-    el.classList.remove('false');
-  });
-}
-
 export {
-  createWordElement, getActualSentence, mixArrayElements, checkWord,
+  createWordElement, getActualSentence, mixArrayElements,
 };

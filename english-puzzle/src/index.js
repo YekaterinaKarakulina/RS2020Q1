@@ -2,7 +2,6 @@ import './sass/style.scss';
 import 'babel-polyfill';
 
 import Game from './js/Game';
-import { checkWord } from './js/utils';
 
 localStorage.setItem('level', '1');
 localStorage.setItem('round', '1');
@@ -20,17 +19,14 @@ document.addEventListener('click', (event) => {
   if (event.target.closest('.data__sentence')) {
     console.log('data__sentence click');
     document.querySelector('.result__sentence').append(event.target);
-  } else if (event.target.closest('.result__sentence')) {
-    console.log('results__sentence click');
-    document.querySelector('.data__sentence').append(event.target);
-    checkWord();
   } else if (event.target.classList.contains('dontKnow')) {
     console.log('I don`t know');
-    // sentence.buildSentence();
+    game.buildCurrentSentence();
   } else if (event.target.classList.contains('check')) {
     console.log('Check');
     game.checkCurrentSentence();
-    // game.checkGameStatus();
+  } else if (event.target.classList.contains('icon__sound')) {
+    game.translateCurrentSentence();
   }
   game.checkGameStatus();
 });
@@ -51,14 +47,12 @@ document.ondragover = function onDragOver(event) {
 
 document.ondrop = function onDrop(event) {
   event.preventDefault();
-  console.log(event.target);
   const data = event.dataTransfer.getData('text/plain');
   if (event.target.classList.contains('result__sentence')) {
-    console.log('append to end');
     event.target.append(document.querySelector(`[data-word=${data}]`));
   } else if (event.target.classList.contains('word')) {
-    console.log('append between');
     document.querySelector('.result__sentence').insertBefore(document.querySelector(`[data-word=${data}]`), event.target);
   }
   event.target.classList.remove('dragOver');
+  game.checkGameStatus();
 };

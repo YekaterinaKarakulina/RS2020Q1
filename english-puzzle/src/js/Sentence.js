@@ -1,4 +1,5 @@
 import { createWordElement, getActualSentence, mixArrayElements } from './utils';
+import getTranslation from './translationAPI';
 
 export default class Sentence {
   constructor({
@@ -35,6 +36,11 @@ export default class Sentence {
     sound.play();
   }
 
+  async showSentenceTranslation() {
+    const sentenceTranslation = await getTranslation(this.textExample);
+    document.querySelector('.hints-sentence').textContent = sentenceTranslation;
+  }
+
   checkSentence() {
     const expectedSentence = this.textExample.split(' ');
     const actualSentence = getActualSentence();
@@ -60,6 +66,7 @@ export default class Sentence {
     sentenceArray.forEach((el) => {
       fragment.append(createWordElement(el));
     });
+    document.querySelector('.result__sentence').innerHTML = '';
     fragment.querySelectorAll('.data__word').forEach((el) => {
       document.querySelector('.result__sentence').append(el);
     });

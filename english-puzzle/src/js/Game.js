@@ -37,9 +37,6 @@ export default class Game {
       fragment.append(sentenceContainer);
     });
 
-    console.log(this.dataSentences);
-    console.log(fragment);
-
     document.querySelector('.results-container').append(fragment);
 
     this.bIsRoundInProgress = true;
@@ -57,26 +54,28 @@ export default class Game {
     const resultSentenceLength = document.querySelectorAll('.result__sentence.active>.data__word').length;
     const dataSentenceLength = this.dataSentencesObjects[this.iCurrentSentenceNumber].length;
     if (dataSentenceLength === resultSentenceLength) {
-      console.log('dataSentenceLength === resultSentenceLength');
       this.bIsSentenceBuild = true;
     } else {
-      console.log('dataSentenceLength !== resultSentenceLength');
       this.bIsSentenceBuild = false;
     }
 
+    const dontKnowButton = document.querySelector('.footer__buttons>.dontKnow');
+    const checkButton = document.querySelector('.footer__buttons>.check');
+    const continueButton = document.querySelector('.footer__buttons>.continue');
+
     if (this.bIsSentenceBuild === true && this.bIsSentenceCorrect === true) {
-      document.querySelector('.footer__buttons>.continue').classList.remove('hidden');
-      document.querySelector('.footer__buttons>.check').classList.add('hidden');
-      document.querySelector('.footer__buttons>.dontKnow').classList.add('hidden');
+      continueButton.classList.remove('hidden');
+      checkButton.classList.add('hidden');
+      dontKnowButton.classList.add('hidden');
     } else if (this.bIsSentenceBuild === true && this.bIsSentenceCorrect === false) {
-      document.querySelector('.footer__buttons>.dontKnow').classList.remove('hidden');
-      document.querySelector('.footer__buttons>.check').classList.remove('hidden');
-      document.querySelector('.footer__buttons>.continue').classList.add('hidden');
+      dontKnowButton.classList.remove('hidden');
+      checkButton.classList.remove('hidden');
+      continueButton.classList.add('hidden');
     } else if (this.bIsSentenceBuild === true) {
-      document.querySelector('.footer__buttons>.dontKnow').classList.add('hidden');
-      document.querySelector('.footer__buttons>.check').classList.remove('hidden');
+      dontKnowButton.classList.add('hidden');
+      checkButton.classList.remove('hidden');
     } else if (this.bIsSentenceBuild === false) {
-      document.querySelector('.footer__buttons>.check').classList.add('hidden');
+      checkButton.classList.add('hidden');
     }
   }
 
@@ -88,5 +87,15 @@ export default class Game {
     } else {
       this.bIsSentenceCorrect = false;
     }
+  }
+
+  translateCurrentSentence() {
+    const currentSentence = this.dataSentencesObjects[this.iCurrentSentenceNumber];
+    currentSentence.showSentenceTranslation();
+  }
+
+  buildCurrentSentence() {
+    const currentSentence = this.dataSentencesObjects[this.iCurrentSentenceNumber];
+    currentSentence.buildSentence();
   }
 }
