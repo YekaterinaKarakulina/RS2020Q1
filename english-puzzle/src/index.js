@@ -18,13 +18,17 @@ game.startGame(localStorage.getItem('level'), localStorage.getItem('round'));
 document.addEventListener('click', (event) => {
   if (event.target.closest('.data__sentence')) {
     console.log('data__sentence click');
-    document.querySelector('.result__sentence').append(event.target);
+    document.querySelector('.result__sentence.current').append(event.target);
   } else if (event.target.classList.contains('dontKnow')) {
     console.log('I don`t know');
     game.buildCurrentSentence();
   } else if (event.target.classList.contains('check')) {
     console.log('Check');
     game.checkCurrentSentence();
+  } else if (event.target.classList.contains('continue')) {
+    console.log('Continue');
+    game.showHintsAtEnd();
+    game.next();
   } else if (event.target.closest('.menu__button.auto-pronunciation')) {
     if (localStorage.getItem('autoPronunciation') === 'true') {
       localStorage.setItem('autoPronunciation', 'false');
@@ -49,11 +53,11 @@ document.addEventListener('click', (event) => {
     } else {
       localStorage.setItem('bckImage', 'true');
     }
+  } else if (event.target.classList.contains('icon__sound')) {
+    if (document.querySelector('.menu__button.sentence-pronunciation').classList.contains('active')) {
+      game.autoPronounceCurrentSentence();
+    }
   }
-  else if (event.target.classList.contains('icon__sound')) {
-    game.autoPronounceCurrentSentence();
-  }
-// game.translateCurrentSentence();
   game.checkGameStatus();
 });
 
@@ -74,10 +78,10 @@ document.ondragover = function onDragOver(event) {
 document.ondrop = function onDrop(event) {
   event.preventDefault();
   const data = event.dataTransfer.getData('text/plain');
-  if (event.target.classList.contains('result__sentence')) {
+  if (event.target.classList.contains('result__sentence.current')) {
     event.target.append(document.querySelector(`[data-word=${data}]`));
   } else if (event.target.classList.contains('word')) {
-    document.querySelector('.result__sentence').insertBefore(document.querySelector(`[data-word=${data}]`), event.target);
+    document.querySelector('.result__sentence.current').insertBefore(document.querySelector(`[data-word=${data}]`), event.target);
   }
   event.target.classList.remove('dragOver');
   game.checkGameStatus();

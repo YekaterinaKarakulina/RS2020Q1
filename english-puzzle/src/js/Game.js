@@ -2,7 +2,7 @@ import getData from './wordsAPI';
 import Sentence from './Sentence';
 
 export default class Game {
-  constructor(level, round, hints) {
+  constructor(level, round) {
     this.iLevel = level;
     this.iRound = round;
     this.bIsRoundInProgress = false;
@@ -12,11 +12,11 @@ export default class Game {
     this.dataSentencesObjects = [];
     this.dataSentences = [];
     this.resultSentences = [];
-    this.hints = hints;
   }
 
   async startGame() {
     this.bIsRoundInProgress = true;
+
     const data = await getData(0, 0);
     const roundData = [];
     const fragment = document.createDocumentFragment();
@@ -39,22 +39,32 @@ export default class Game {
     });
 
     document.querySelector('.results-container').append(fragment);
-
-    this.bIsRoundInProgress = true;
     document.querySelectorAll('.results-container>.result__sentence').forEach((el) => this.resultSentences.push(el));
 
-    const currentSentence = this.resultSentences[this.iCurrentSentenceNumber];
-    currentSentence.classList.add('active');
-
-    document.querySelector('.data-container').append(this.dataSentences[this.iCurrentSentenceNumber]);
-    this.checkGameStatus();
-    this.showHintsAtBegin();
+    this.next();
     return this.game;
   }
 
+  next() {
+    this.bIsSentenceBuild = false;
+    this.bIsSentenceCorrect = false;
+    const dataWords = document.querySelectorAll('.result__sentence.current>.data__word');
+    dataWords.forEach((el) => el.classList.remove('true'));
+    this.resultSentences.forEach((el) => el.classList.remove('current'));
+    this.currentDataSentence = this.dataSentences[this.iCurrentSentenceNumber];
+    this.currentResultSentence = this.resultSentences[this.iCurrentSentenceNumber];
+    this.currentDataSentenceObject = this.dataSentencesObjects[this.iCurrentSentenceNumber];
+    this.currentResultSentence.classList.add('active');
+    this.currentResultSentence.classList.add('current');
+
+    document.querySelector('.data-container').append(this.currentDataSentence);
+    this.checkGameStatus();
+    this.showHintsAtBegin();
+  }
+
   checkGameStatus() {
-    const resultSentenceLength = document.querySelectorAll('.result__sentence.active>.data__word').length;
-    const dataSentenceLength = this.dataSentencesObjects[this.iCurrentSentenceNumber].length;
+    const resultSentenceLength = document.querySelectorAll('.result__sentence.current>.data__word').length;
+    const dataSentenceLength = this.currentDataSentenceObject.length;
     if (dataSentenceLength === resultSentenceLength) {
       this.bIsSentenceBuild = true;
     } else {
@@ -69,6 +79,9 @@ export default class Game {
       continueButton.classList.remove('hidden');
       checkButton.classList.add('hidden');
       dontKnowButton.classList.add('hidden');
+      this.iCurrentSentenceNumber += 1;
+      console.log(this.iCurrentSentenceNumber);
+      console.log('next');
     } else if (this.bIsSentenceBuild === true && this.bIsSentenceCorrect === false) {
       dontKnowButton.classList.remove('hidden');
       checkButton.classList.remove('hidden');
@@ -104,8 +117,10 @@ export default class Game {
     const translationButton = document.querySelector('.menu__button.translation');
     if (localStorage.getItem('translation') === 'true') {
       translationButton.classList.add('active');
+      this.translateCurrentSentence();
     } else {
       translationButton.classList.remove('active');
+      document.querySelector('.hints-sentence').textContent = '';
     }
 
     const sentencePronunciationButton = document.querySelector('.menu__button.sentence-pronunciation');
@@ -124,8 +139,7 @@ export default class Game {
   }
 
   checkCurrentSentence() {
-    const currentSentence = this.dataSentencesObjects[this.iCurrentSentenceNumber];
-    const sentenceErrors = currentSentence.checkSentence();
+    const sentenceErrors = this.currentDataSentenceObject.checkSentence();
     if (sentenceErrors === 0) {
       this.bIsSentenceCorrect = true;
     } else {
@@ -134,18 +148,15 @@ export default class Game {
   }
 
   translateCurrentSentence() {
-    const currentSentence = this.dataSentencesObjects[this.iCurrentSentenceNumber];
-    currentSentence.showSentenceTranslation();
+    this.currentDataSentenceObject.showSentenceTranslation();
   }
 
   buildCurrentSentence() {
-    const currentSentence = this.dataSentencesObjects[this.iCurrentSentenceNumber];
-    currentSentence.buildSentence();
+    this.currentDataSentenceObject.buildSentence();
   }
 
   autoPronounceCurrentSentence() {
-    const currentSentence = this.dataSentencesObjects[this.iCurrentSentenceNumber];
-    currentSentence.playSentenceSound();
+    this.currentDataSentenceObject.playSentenceSound();
   }
 
   showHintsAtBegin() {
@@ -156,12 +167,13 @@ export default class Game {
       this.translateCurrentSentence();
     }
     if (localStorage.getItem('bckImage') === 'true') {
-      console.log('bckImage');
+      console.log('show bckImage');
     }
   }
 
   showHintsAtEnd() {
-
+    if (!this.currentDataSentenceObject.bIsTranslationHintUsed) {
+      this.translateCurrentSentence();
+    }
   }
-
 }

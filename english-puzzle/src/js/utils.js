@@ -8,7 +8,7 @@ function createWordElement(word) {
 }
 
 function getActualSentence() {
-  const dataWords = document.querySelectorAll('.result__sentence>.data__word');
+  const dataWords = document.querySelectorAll('.result__sentence.current>.data__word');
   const actualSentenceArray = [];
   dataWords.forEach((el) => {
     actualSentenceArray.push(el);

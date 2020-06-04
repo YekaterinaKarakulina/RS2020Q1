@@ -8,7 +8,9 @@ export default class Sentence {
     this.id = id;
     this.audioExample = audioExample;
     this.textExample = textExample;
-    this.length = 0;
+
+    this.bIsTranslationHintUsed = false; //
+    this.bIsBckImageHintUsed = false; //
   }
 
   createDataSentence() {
@@ -39,6 +41,7 @@ export default class Sentence {
   async showSentenceTranslation() {
     const sentenceTranslation = await getTranslation(this.textExample);
     document.querySelector('.hints-sentence').textContent = sentenceTranslation;
+    this.bIsTranslationHintUsed = true;
   }
 
   checkSentence() {
