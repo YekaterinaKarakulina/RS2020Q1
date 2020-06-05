@@ -60,6 +60,7 @@ export default class Sentence {
         errors += 1;
       }
     }
+    this.errors = errors;
     return errors;
   }
 

@@ -21,9 +21,16 @@ document.addEventListener('click', (event) => {
     console.log('Check');
     game.checkCurrentSentence();
   } else if (event.target.classList.contains('continue')) {
-    console.log('Continue');
-    game.showHintsAtEnd();
-    game.next();
+    if (game.iCurrentSentenceNumber < 1) {
+      console.log('Next sentence');
+      game.showHintsAtEnd();
+      game.next();
+    } else {
+      console.log('next round');
+      game.iRound += 1;
+      console.log(game);
+      game.startGame();
+    }
   } else if (event.target.closest('.menu__button.auto-pronunciation')) {
     if (localStorage.getItem('autoPronunciation') === 'true') {
       localStorage.setItem('autoPronunciation', 'false');

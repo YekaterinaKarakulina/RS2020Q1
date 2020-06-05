@@ -1,23 +1,30 @@
 import Sentence from './Sentence';
 import initData from './dataUtils';
 
+const dontKnowButton = document.querySelector('.footer__buttons>.dontKnow');
+const checkButton = document.querySelector('.footer__buttons>.check');
+const continueButton = document.querySelector('.footer__buttons>.continue');
+const resultsButton = document.querySelector('.footer__buttons>.results');
+
 export default class Game {
   constructor(level, round) {
     this.iLevel = level;
     this.iRound = round;
-    this.bIsRoundInProgress = false;
-    this.iCurrentSentenceNumber = 0;
-    this.bIsSentenceBuild = false;
-    this.bIsSentenceCorrect = false;
-    this.dataSentencesObjects = [];
-    this.dataSentences = [];
-    this.resultSentences = [];
   }
 
   async startGame() {
-    this.bIsRoundInProgress = true;
+    this.dataSentencesObjects = [];
+    this.dataSentences = [];
+    this.resultSentences = [];
+    this.iCurrentSentenceNumber = -1;
+    this.isSentenceCompleted = false;
+
+    checkButton.classList.add('hidden');
+    continueButton.classList.add('hidden');
+    resultsButton.classList.add('hidden');
     const fragment = document.createDocumentFragment();
     const roundData = await initData(this.iLevel, this.iRound);
+    console.log(roundData);
     roundData.forEach((el) => {
       let sentence = new Sentence(el);
       this.dataSentencesObjects.push(sentence);
@@ -30,64 +37,48 @@ export default class Game {
       fragment.append(sentenceContainer);
     });
 
+    document.querySelector('.results-container').innerHTML = '';
     document.querySelector('.results-container').append(fragment);
     document.querySelectorAll('.results-container>.result__sentence').forEach((el) => this.resultSentences.push(el));
 
     this.next();
-    return this.game;
   }
 
   next() {
-    if (this.iCurrentSentenceNumber <= 3) {
-      this.bIsSentenceBuild = false;
-      this.bIsSentenceCorrect = false;
-      const dataWords = document.querySelectorAll('.result__sentence.current>.data__word');
-      dataWords.forEach((el) => el.classList.remove('true'));
-      this.resultSentences.forEach((el) => el.classList.remove('current'));
-      this.currentDataSentence = this.dataSentences[this.iCurrentSentenceNumber];
-      this.currentResultSentence = this.resultSentences[this.iCurrentSentenceNumber];
-      this.currentDataSentenceObject = this.dataSentencesObjects[this.iCurrentSentenceNumber];
-      this.currentResultSentence.classList.add('active');
-      this.currentResultSentence.classList.add('current');
+    this.isSentenceCompleted = false;
+    this.iCurrentSentenceNumber += 1;
+    const dataWords = document.querySelectorAll('.result__sentence.current>.data__word');
+    dataWords.forEach((el) => el.classList.remove('true'));
+    this.resultSentences.forEach((el) => el.classList.remove('current'));
+    this.currentDataSentence = this.dataSentences[this.iCurrentSentenceNumber];
+    this.currentResultSentence = this.resultSentences[this.iCurrentSentenceNumber];
+    this.currentDataSentenceObject = this.dataSentencesObjects[this.iCurrentSentenceNumber];
+    this.currentResultSentence.classList.add('active');
+    this.currentResultSentence.classList.add('current');
 
-      document.querySelector('.data-container').append(this.currentDataSentence);
-      this.checkGameStatus();
-      this.showHintsAtBegin();
-    } else {
-      console.log('new round');
-    }
+    document.querySelector('.data-container').append(this.currentDataSentence);
+    this.checkGameStatus();
+    this.showHintsAtBegin();
   }
 
   checkGameStatus() {
     const resultSentenceLength = document.querySelectorAll('.result__sentence.current>.data__word').length;
     const dataSentenceLength = this.currentDataSentenceObject.length;
-    if (dataSentenceLength === resultSentenceLength) {
-      this.bIsSentenceBuild = true;
-    } else {
-      this.bIsSentenceBuild = false;
-    }
-
-    const dontKnowButton = document.querySelector('.footer__buttons>.dontKnow');
-    const checkButton = document.querySelector('.footer__buttons>.check');
-    const continueButton = document.querySelector('.footer__buttons>.continue');
-
-    if (this.bIsSentenceBuild === true && this.bIsSentenceCorrect === true) {
+    if (this.isSentenceCompleted === true) {
+      console.log('this.isSentenceCompleted');
       continueButton.classList.remove('hidden');
       checkButton.classList.add('hidden');
       dontKnowButton.classList.add('hidden');
-      this.iCurrentSentenceNumber += 1;
-      console.log(this.iCurrentSentenceNumber);
-      console.log('next');
-    } else if (this.bIsSentenceBuild === true && this.bIsSentenceCorrect === false) {
-      dontKnowButton.classList.remove('hidden');
+    } else if (dataSentenceLength === resultSentenceLength) {
       checkButton.classList.remove('hidden');
+      console.log('dataSentenceLength === resultSentenceLength');
+    } else if (dataSentenceLength !== resultSentenceLength) {
+      console.log('dataSentenceLength !== resultSentenceLength');
       continueButton.classList.add('hidden');
-    } else if (this.bIsSentenceBuild === true) {
-      dontKnowButton.classList.add('hidden');
-      checkButton.classList.remove('hidden');
-    } else if (this.bIsSentenceBuild === false) {
       checkButton.classList.add('hidden');
+      dontKnowButton.classList.remove('hidden');
     }
+
 
 
     if (localStorage.getItem('autoPronunciation') === null) {
@@ -137,9 +128,7 @@ export default class Game {
   checkCurrentSentence() {
     const sentenceErrors = this.currentDataSentenceObject.checkSentence();
     if (sentenceErrors === 0) {
-      this.bIsSentenceCorrect = true;
-    } else {
-      this.bIsSentenceCorrect = false;
+      this.isSentenceCompleted = true;
     }
   }
 
