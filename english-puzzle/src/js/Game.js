@@ -1,5 +1,5 @@
-import getData from './wordsAPI';
 import Sentence from './Sentence';
+import initData from './dataUtils';
 
 export default class Game {
   constructor(level, round) {
@@ -16,16 +16,8 @@ export default class Game {
 
   async startGame() {
     this.bIsRoundInProgress = true;
-
-    const data = await getData(0, 0);
-    const roundData = [];
     const fragment = document.createDocumentFragment();
-    Array.from(data).forEach((value, index) => {
-      if (index >= 0 && index <= 9) {
-        roundData.push(data[index]);
-      }
-    });
-
+    const roundData = await initData(this.iLevel, this.iRound);
     roundData.forEach((el) => {
       let sentence = new Sentence(el);
       this.dataSentencesObjects.push(sentence);
@@ -46,20 +38,24 @@ export default class Game {
   }
 
   next() {
-    this.bIsSentenceBuild = false;
-    this.bIsSentenceCorrect = false;
-    const dataWords = document.querySelectorAll('.result__sentence.current>.data__word');
-    dataWords.forEach((el) => el.classList.remove('true'));
-    this.resultSentences.forEach((el) => el.classList.remove('current'));
-    this.currentDataSentence = this.dataSentences[this.iCurrentSentenceNumber];
-    this.currentResultSentence = this.resultSentences[this.iCurrentSentenceNumber];
-    this.currentDataSentenceObject = this.dataSentencesObjects[this.iCurrentSentenceNumber];
-    this.currentResultSentence.classList.add('active');
-    this.currentResultSentence.classList.add('current');
+    if (this.iCurrentSentenceNumber <= 3) {
+      this.bIsSentenceBuild = false;
+      this.bIsSentenceCorrect = false;
+      const dataWords = document.querySelectorAll('.result__sentence.current>.data__word');
+      dataWords.forEach((el) => el.classList.remove('true'));
+      this.resultSentences.forEach((el) => el.classList.remove('current'));
+      this.currentDataSentence = this.dataSentences[this.iCurrentSentenceNumber];
+      this.currentResultSentence = this.resultSentences[this.iCurrentSentenceNumber];
+      this.currentDataSentenceObject = this.dataSentencesObjects[this.iCurrentSentenceNumber];
+      this.currentResultSentence.classList.add('active');
+      this.currentResultSentence.classList.add('current');
 
-    document.querySelector('.data-container').append(this.currentDataSentence);
-    this.checkGameStatus();
-    this.showHintsAtBegin();
+      document.querySelector('.data-container').append(this.currentDataSentence);
+      this.checkGameStatus();
+      this.showHintsAtBegin();
+    } else {
+      console.log('new round');
+    }
   }
 
   checkGameStatus() {

@@ -3,15 +3,10 @@ import 'babel-polyfill';
 
 import Game from './js/Game';
 
-// localStorage.setItem('level', '1');
-// localStorage.setItem('round', '1');
-// localStorage.setItem('autoPronunciation', 'false');
-// localStorage.setItem('translation', 'false');
-// localStorage.setItem('sentencePronunciation', 'false');
-// localStorage.setItem('bckImage', 'false');
-
-const game = new Game();
-game.startGame(localStorage.getItem('level'), localStorage.getItem('round'));
+const level = 1;
+const round = 1;
+const game = new Game(level, round);
+game.startGame();
 
 
 // click events
