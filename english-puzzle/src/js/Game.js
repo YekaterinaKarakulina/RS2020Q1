@@ -16,7 +16,7 @@ export default class Game {
     this.dataSentencesObjects = [];
     this.dataSentences = [];
     this.resultSentences = [];
-    this.iCurrentSentenceNumber = -1;
+    this.iCurrentSentenceNumber = 0;
     this.isSentenceCompleted = false;
 
     checkButton.classList.add('hidden');
@@ -45,8 +45,9 @@ export default class Game {
   }
 
   next() {
+    document.querySelector('.hints-sentence').textContent = '';
     this.isSentenceCompleted = false;
-    this.iCurrentSentenceNumber += 1;
+    // this.iCurrentSentenceNumber += 1;
     const dataWords = document.querySelectorAll('.result__sentence.current>.data__word');
     dataWords.forEach((el) => el.classList.remove('true'));
     this.resultSentences.forEach((el) => el.classList.remove('current'));
@@ -56,6 +57,7 @@ export default class Game {
     this.currentResultSentence.classList.add('active');
     this.currentResultSentence.classList.add('current');
 
+    document.querySelector('.data-container').innerHTML = '';
     document.querySelector('.data-container').append(this.currentDataSentence);
     this.checkGameStatus();
     this.showHintsAtBegin();
@@ -66,6 +68,7 @@ export default class Game {
     const dataSentenceLength = this.currentDataSentenceObject.length;
     if (this.isSentenceCompleted === true) {
       console.log('this.isSentenceCompleted');
+      this.showHintsAtEnd();
       continueButton.classList.remove('hidden');
       checkButton.classList.add('hidden');
       dontKnowButton.classList.add('hidden');
@@ -107,7 +110,6 @@ export default class Game {
       this.translateCurrentSentence();
     } else {
       translationButton.classList.remove('active');
-      document.querySelector('.hints-sentence').textContent = '';
     }
 
     const sentencePronunciationButton = document.querySelector('.menu__button.sentence-pronunciation');
@@ -140,25 +142,42 @@ export default class Game {
     this.currentDataSentenceObject.buildSentence();
   }
 
-  autoPronounceCurrentSentence() {
+  pronounceCurrentSentence() {
     this.currentDataSentenceObject.playSentenceSound();
   }
 
+  showCurrentBckImage() {
+    this.currentDataSentenceObject.showBckImage();
+  }
+
   showHintsAtBegin() {
-    if (localStorage.getItem('autoPronunciation') === 'true') {
-      this.autoPronounceCurrentSentence();
-    }
     if (localStorage.getItem('translation') === 'true') {
       this.translateCurrentSentence();
     }
+    if (localStorage.getItem('sentencePronunciation') === 'true') {
+      if ((localStorage.getItem('autoPronunciation') === 'true')) {
+        this.pronounceCurrentSentence();
+      }
+    }
     if (localStorage.getItem('bckImage') === 'true') {
-      console.log('show bckImage');
+      console.log('show bckImage hint before');
+      this.showCurrentBckImage();
     }
   }
 
   showHintsAtEnd() {
     if (!this.currentDataSentenceObject.bIsTranslationHintUsed) {
       this.translateCurrentSentence();
+    }
+
+    if (!this.currentDataSentenceObject.bIsPronunciationHintUsed) {
+      if ((localStorage.getItem('autoPronunciation') === 'true')) {
+        this.pronounceCurrentSentence();
+      }
+    }
+    if (!this.currentDataSentenceObject.bIsBckImageHintUsed) {
+      console.log('show bckImage hint after');
+      this.showCurrentBckImage();
     }
   }
 }

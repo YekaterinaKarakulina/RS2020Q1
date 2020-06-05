@@ -21,9 +21,10 @@ document.addEventListener('click', (event) => {
     console.log('Check');
     game.checkCurrentSentence();
   } else if (event.target.classList.contains('continue')) {
-    if (game.iCurrentSentenceNumber < 1) {
+    game.iCurrentSentenceNumber += 1;
+    console.log(game.iCurrentSentenceNumber );
+    if (game.iCurrentSentenceNumber <= 9) {
       console.log('Next sentence');
-      game.showHintsAtEnd();
       game.next();
     } else {
       console.log('next round');
@@ -57,7 +58,7 @@ document.addEventListener('click', (event) => {
     }
   } else if (event.target.classList.contains('icon__sound')) {
     if (document.querySelector('.menu__button.sentence-pronunciation').classList.contains('active')) {
-      game.autoPronounceCurrentSentence();
+      game.pronounceCurrentSentence();
     }
   }
   game.checkGameStatus();

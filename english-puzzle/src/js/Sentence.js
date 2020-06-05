@@ -9,8 +9,9 @@ export default class Sentence {
     this.audioExample = audioExample;
     this.textExample = textExample;
 
-    this.bIsTranslationHintUsed = false; //
-    this.bIsBckImageHintUsed = false; //
+    this.bIsTranslationHintUsed = false;
+    this.bIsBckImageHintUsed = false;
+    this.bIsPronunciationHintUsed = false;
   }
 
   createDataSentence() {
@@ -36,6 +37,12 @@ export default class Sentence {
   playSentenceSound() {
     const sound = new Audio(`https://raw.githubusercontent.com/yekaterinakarakulina/rslang-data/master/${this.audioExample}`);
     sound.play();
+    this.bIsPronunciationHintUsed = true;
+  }
+
+  showBckImage() {
+    console.log('showBckImage()');
+    this.bIsBckImageHintUsed = true;
   }
 
   async showSentenceTranslation() {
@@ -70,9 +77,9 @@ export default class Sentence {
     sentenceArray.forEach((el) => {
       fragment.append(createWordElement(el));
     });
-    document.querySelector('.result__sentence').innerHTML = '';
+    document.querySelector('.result__sentence.current').innerHTML = '';
     fragment.querySelectorAll('.data__word').forEach((el) => {
-      document.querySelector('.result__sentence').append(el);
+      document.querySelector('.result__sentence.current').append(el);
     });
     document.querySelectorAll('.data__sentence>.data__word').forEach((el) => el.remove());
   }
