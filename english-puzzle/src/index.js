@@ -6,30 +6,47 @@ import Game from './js/Game';
 
 import { createUser, loginUser } from './js/userAPI';
 
+function checkUserAuthorization() {
+  if (localStorage.getItem('userAuthorized') === 'true') {
+    console.log('start html');
+  } else {
+    console.log('login html');
+  }
+}
+
+checkUserAuthorization();
+
+
+
+function getFormData() {
+  const email = document.querySelector('#email').value;
+  const password = document.querySelector('#password').value;
+  return { email, password };
+}
+
+async function signIn(userData) {
+  const loginResult = await loginUser(userData);
+  console.log(loginResult.message);
+  if (loginResult.message === 'Authenticated') {
+    console.log('userAuthorized');
+    localStorage.setItem('userAuthorized', 'true');
+  }
+}
+
 document.addEventListener('click', (event) => {
-  if (event.target.classList.contains('signUp')) {
+  document.querySelector('.error-message').innerHTML = '';
+
+  if (event.target.classList.contains('button__signUp')) {
     event.preventDefault();
-    console.log('sign up');
-    const emailValue = document.querySelector('#email').value;
-    const passwordValue = document.querySelector('#password').value;
-    const userObj = {
-      email: emailValue,
-      password: passwordValue,
-    };
-    console.log(userObj);
-    createUser(userObj);
-  } else if (event.target.classList.contains('signIn')) {
+    const userData = getFormData();
+    createUser(userData);
+  } else if (event.target.classList.contains('button__signIn')) {
     event.preventDefault();
-    console.log('sign in');
-    const emailValue = document.querySelector('#email').value;
-    const passwordValue = document.querySelector('#password').value;
-    const userObj = {
-      email: emailValue,
-      password: passwordValue,
-    };
-    loginUser(userObj);
+    const userData = getFormData();
+    signIn(userData);
   }
 });
+
 
 
 // const level = 1;
@@ -39,7 +56,7 @@ document.addEventListener('click', (event) => {
 
 
 // click events
-/* document.addEventListener('click', (event) => {
+document.addEventListener('click', (event) => {
   if (event.target.closest('.data__sentence')) {
     console.log('data__sentence click');
     document.querySelector('.result__sentence.current').append(event.target);
@@ -117,7 +134,7 @@ document.ondrop = function onDrop(event) {
   }
   event.target.classList.remove('dragOver');
   game.checkGameStatus();
-}; */
+};
 
 
 // id: "5edb2270299adb0017fae8c1"

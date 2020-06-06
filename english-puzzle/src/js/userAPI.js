@@ -7,9 +7,20 @@ const createUser = async (user) => {
     },
     body: JSON.stringify(user),
   });
+  console.log(rawResponse.status);
+  if (rawResponse.status === 417) {
+    document.querySelector('.error-message').innerHTML = 'You are already registered! Please sign in!';
+    return undefined;
+  }
   const content = await rawResponse.json();
-
   console.log(content);
+  if (content.error !== undefined) {
+    let errorMessage = '';
+    Array.from(content.error.errors).forEach((element) => {
+      errorMessage += `${element.message} <br>`;
+    });
+    document.querySelector('.error-message').innerHTML = errorMessage;
+  }
 };
 
 const loginUser = async (user) => {
@@ -22,8 +33,8 @@ const loginUser = async (user) => {
     body: JSON.stringify(user),
   });
   const content = await rawResponse.json();
-
   console.log(content);
+  return content;
 };
 
 export { createUser, loginUser };

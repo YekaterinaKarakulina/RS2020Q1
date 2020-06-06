@@ -17,10 +17,19 @@
   margin: 0 auto;
 }
 
+.error-message {
+  width: fit-content;
+  height: 5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: $color-red;
+  margin: 3rem auto;
+}
+
 .login__main {
   width: 80%;
   margin: 0 auto;
-  margin-top: 10rem;
+  margin-top: 5rem;
 }
 
 .login__description {
