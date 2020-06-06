@@ -3,14 +3,43 @@ import 'babel-polyfill';
 
 import Game from './js/Game';
 
-const level = 1;
-const round = 1;
-const game = new Game(level, round);
-game.startGame();
+
+import { createUser, loginUser } from './js/userAPI';
+
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('signUp')) {
+    event.preventDefault();
+    console.log('sign up');
+    const emailValue = document.querySelector('#email').value;
+    const passwordValue = document.querySelector('#password').value;
+    const userObj = {
+      email: emailValue,
+      password: passwordValue,
+    };
+    console.log(userObj);
+    createUser(userObj);
+  } else if (event.target.classList.contains('signIn')) {
+    event.preventDefault();
+    console.log('sign in');
+    const emailValue = document.querySelector('#email').value;
+    const passwordValue = document.querySelector('#password').value;
+    const userObj = {
+      email: emailValue,
+      password: passwordValue,
+    };
+    loginUser(userObj);
+  }
+});
+
+
+// const level = 1;
+// const round = 1;
+// const game = new Game(level, round);
+// game.startGame();
 
 
 // click events
-document.addEventListener('click', (event) => {
+/* document.addEventListener('click', (event) => {
   if (event.target.closest('.data__sentence')) {
     console.log('data__sentence click');
     document.querySelector('.result__sentence.current').append(event.target);
@@ -88,4 +117,10 @@ document.ondrop = function onDrop(event) {
   }
   event.target.classList.remove('dragOver');
   game.checkGameStatus();
-};
+}; */
+
+
+// id: "5edb2270299adb0017fae8c1"
+// token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGIyMjcwMjk5YWRiMDAxN2ZhZThjMSIsImlhdCI6MTU5MTQxOTg1MSwiZXhwIjoxNTkxNDM0MjUxfQ.-ZLtHe8FAvmRz87r2v2Ea-gIfx1FlGR7T6zEvC7P0xU"
+
+
