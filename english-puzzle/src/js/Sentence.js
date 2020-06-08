@@ -1,13 +1,13 @@
 import { createWordElement, getActualSentence, mixArrayElements } from './utils';
-import getTranslation from './translationAPI';
 
 export default class Sentence {
   constructor({
-    id, audioExample, textExample,
+    id, audioExample, textExample, textExampleTranslate,
   }) {
     this.id = id;
     this.audioExample = audioExample;
     this.textExample = textExample;
+    this.textExampleTranslate = textExampleTranslate;
 
     this.bIsTranslationHintUsed = false;
     this.bIsBckImageHintUsed = false;
@@ -19,6 +19,7 @@ export default class Sentence {
     sentenceElement.className = 'sentence data__sentence';
     sentenceElement.dataset.audio = this.audioExample;
     sentenceElement.dataset.text = this.textExample;
+    sentenceElement.dataset.textTranslation = this.textExampleTranslate;
 
     const sentenceArray = this.textExample.split(' ');
     this.length = sentenceArray.length;
@@ -46,7 +47,7 @@ export default class Sentence {
   }
 
   async showSentenceTranslation() {
-    const sentenceTranslation = await getTranslation(this.textExample);
+    const sentenceTranslation = this.textExampleTranslate;
     document.querySelector('.hints-sentence').textContent = sentenceTranslation;
     this.bIsTranslationHintUsed = true;
   }

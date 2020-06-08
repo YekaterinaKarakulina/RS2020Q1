@@ -1,10 +1,10 @@
 import Sentence from './Sentence';
 import initData from './dataUtils';
 
-const dontKnowButton = document.querySelector('.footer__buttons>.dontKnow');
-const checkButton = document.querySelector('.footer__buttons>.check');
-const continueButton = document.querySelector('.footer__buttons>.continue');
-const resultsButton = document.querySelector('.footer__buttons>.results');
+const dontKnowButton = document.querySelector('.game__buttons>.dontKnow');
+const checkButton = document.querySelector('.game__buttons>.check');
+const continueButton = document.querySelector('.game__buttons>.continue');
+const resultsButton = document.querySelector('.game__buttons>.results');
 
 export default class Game {
   constructor(level, round) {
