@@ -1,3 +1,11 @@
+.login-page {
+  display: block;
+  height: 100%;
+  &.hidden {
+    display: none;
+  }
+}
+
 .error-message {
   width: fit-content;
   height: 5rem;
@@ -63,5 +71,5 @@
   align-items: center;
   justify-content: space-evenly;
   margin-top: 5rem;
-  margin-bottom: 10rem;
+  padding-bottom: 15rem;
 }

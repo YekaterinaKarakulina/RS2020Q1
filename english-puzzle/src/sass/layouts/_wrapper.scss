@@ -3,12 +3,9 @@
 }
 
 .header__wrapper {
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   height: 7rem;
   background-color: $color-violet;
-  // @include media-laptop {
-  //   padding: 1.5rem 0;
-  // }
 }
 
 .footer__wrapper {

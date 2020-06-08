@@ -1,0 +1,17 @@
+.start-page {
+  display: block;
+  height: 100%;
+  &.hidden {
+    display: none;
+  }
+}
+
+.game-rules {
+  padding: 10rem 0;
+  font-size: 2rem;
+  width: fit-content;
+  margin: 0 auto;
+  &>span {
+    display: block;
+  } 
+}

@@ -1,51 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>English Puzzle</title>
-</head>
-<body>
-  <header class="wrapper header__wrapper toolbar">
-    <h1 class="title">English puzzle</h1>
-    <div class="toolbar-container hidden">
-      <button class="button toolbar__button button__logOut">Log out</button>
-    </div> 
-    <div class="toolbar-hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </header>
-
-  <main class="wrapper">
-    <section class="login">
-      <div class="error-message"></div>
-      <div class="login__description">
-        <span class="signIn-description">Sign in to continue</span>
-        <span class="signUp-description">Sign up to register</span>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Puzzle</title>
+  </head>
+  <body>
+    <header class="wrapper header__wrapper">
+      <h1 class="title">English puzzle</h1>
+      <div class="toolbar-container hidden">
+        <button class="button toolbar__button button__logOut">Log out</button>
+      </div> 
+      <div class="toolbar-hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-      <form action="POST" class="login__form">
-        <div class="inputs">
-          <input type="text" name="email" id="email" class="email" placeholder="type email" maxlength="50">
-          <input type="text" name="password" id="password" class="password" placeholder="type password">
+    </header>
+
+    <main class="wrapper">
+      <section class="login-page">
+        <div class="error-message"></div>
+        <div class="login__description">
+          <span class="signIn-description">Sign in to continue</span>
+          <span class="signUp-description">Sign up to register</span>
         </div>
-        <div class="buttons login__buttons">
-          <button class="button login__button button__signIn">Sign in</button>
-          <button class="button login__button button__signUp">Sign up</button>
+        <form action="POST" class="login__form">
+          <div class="inputs">
+            <input type="text" name="email" id="email" class="email" placeholder="type email" maxlength="50">
+            <input type="text" name="password" id="password" class="password" placeholder="type password">
+          </div>
+          <div class="buttons login__buttons">
+            <button class="button login__button button__signIn">Sign in</button>
+            <button class="button login__button button__signUp">Sign up</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="start-page hidden">
+        <div class="game-rules">
+          <span>Click on words, collect phrases!</span>
+          <span>Words can be drag and drop. Select hints in the menu!</span>
         </div>
-      </form>
-    </section>
+        <button class="button start__button">Start</button>
+      </section>
 
-</main>
+      <section class="game-page hidden">
+        <div class="game-menu">
+          <div class="menu-left">
+            <div class="level menu__level">
+              <span class="level-title">Level</span>
+              <!-- https://codepen.io/raubaca/pen/VejpQP -->
+              <div class="select select__level">
+                <select name="slct" id="slct">
+                  <option value="1">1</option>
+                </select>
+              </div>
+            </div>
+            <div class="page menu__page">
+              <span class="page-title">Page</span>
+              <div class="select select__page">
+                <select name="slct" id="slct">
+                  <option value="1">1</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="menu-right">
+            <div class="buttons menu__buttons">
+              <button class="button menu__button auto-pronunciation">
+                <i class="icon icon__auto-pronunciation"></i>
+              </button>
+              <button class="button menu__button translation">
+                <i class="icon icon__translation"></i>
+              </button>
+              <button class="button menu__button sentence-pronunciation">
+                <i class="icon icon__sentence-pronunciation"></i>
+              </button>
+              <button class="button menu__button bck-image">
+                <i class="icon icon__bck-image"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="hints main__hints">
+          <span class="icon-container">
+            <i class="icon icon__sound"></i>
+          </span>
+          <div class="hints-sentence">Some sentence!</div>
+        </div>
+        <div class="results main__results">
+          <div class="results-container"></div>
+        </div>
+        <div class="data main__data">
+          <div class="data-container"></div>
+        </div>
+        <div class="buttons game__buttons">
+          <button class="button game__button dontKnow">I don`t know</button>
+          <button class="button game__button check">Check</button>
+          <button class="button game__button continue">Continue</button>
+          <button class="button game__button results">Results</button>
+        </div>
+      </section>
+    </main>
 
-<footer class="wrapper footer__wrapper">
-  <div class="github-info">
-    <span class="icon icon__github"></span>
-    <a class="github-account" href="https://github.com/">YekaterinaKarakulina</a>
-  </div>
-</footer>
-
-
-</body>
+    <footer class="wrapper footer__wrapper">
+      <div class="github-info">
+        <span class="icon icon__github"></span>
+        <a class="github-account" href="https://github.com/">YekaterinaKarakulina</a>
+      </div>
+    </footer>
+  </body>
 </html>

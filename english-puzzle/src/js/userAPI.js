@@ -21,6 +21,7 @@ const createUser = async (user) => {
     });
     document.querySelector('.error-message').innerHTML = errorMessage;
   }
+  return content;
 };
 
 const loginUser = async (user) => {
