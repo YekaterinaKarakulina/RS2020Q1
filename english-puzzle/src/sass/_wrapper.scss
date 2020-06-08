@@ -2,9 +2,18 @@
   width: 100%;
 }
 
-.header__wrapper,
-.main__wrapper,
+.header__wrapper {
+  padding: 1rem 0;
+  height: 7rem;
+  background-color: $color-violet;
+  // @include media-laptop {
+  //   padding: 1.5rem 0;
+  // }
+}
+
 .footer__wrapper {
-  width: 80%;
-  margin: 0 auto;
+  position: fixed;
+  bottom: 0;
+  background-color: $color-violet;
+  height: 5rem;
 }

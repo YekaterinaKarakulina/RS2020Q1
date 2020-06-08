@@ -3,30 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
+  <title>English Puzzle</title>
 </head>
 <body>
-  <header class="wrapper header__wrapper login__header">
-    <div class="login__title-container">
-      <h1 class="login__title">English puzzle</h1>
+  <header class="wrapper header__wrapper toolbar">
+    <h1 class="title">English puzzle</h1>
+    <div class="toolbar-container hidden">
+      <button class="button toolbar__button button__logOut">Log out</button>
+    </div> 
+    <div class="toolbar-hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
   </header>
-  <main class="wrapper login__main">
-    <div class="error-message"></div>
-    <div class="login__description">
-      <span class="signIn-description">Sign in to continue</span>
-      <span class="signUp-description">Sign up to register</span>
-    </div>
-    <form action="POST" class="login__form">
-      <div class="inputs">
-        <input type="text" name="email" id="email" class="email" placeholder="type email" maxlength="50">
-      <input type="text" name="password" id="password" class="password" placeholder="type password">
+
+  <main class="wrapper">
+    <section class="login">
+      <div class="error-message"></div>
+      <div class="login__description">
+        <span class="signIn-description">Sign in to continue</span>
+        <span class="signUp-description">Sign up to register</span>
       </div>
-      <div class="buttons login__buttons">
-        <button class="button login__button button__signIn">Sign in</button>
-      <button class="button login__button button__signUp">Sign up</button>
-      </div>
-    </form>
-  </main>
+      <form action="POST" class="login__form">
+        <div class="inputs">
+          <input type="text" name="email" id="email" class="email" placeholder="type email" maxlength="50">
+          <input type="text" name="password" id="password" class="password" placeholder="type password">
+        </div>
+        <div class="buttons login__buttons">
+          <button class="button login__button button__signIn">Sign in</button>
+          <button class="button login__button button__signUp">Sign up</button>
+        </div>
+      </form>
+    </section>
+
+</main>
+
+<footer class="wrapper footer__wrapper">
+  <div class="github-info">
+    <span class="icon icon__github"></span>
+    <a class="github-account" href="https://github.com/">YekaterinaKarakulina</a>
+  </div>
+</footer>
+
+
 </body>
 </html>

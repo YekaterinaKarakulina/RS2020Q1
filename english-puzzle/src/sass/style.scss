@@ -1,27 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap');
 
-@import './base';
-@import './constants';
-@import './mixins';
-
-@import './icons';
-
-@import './button';
-@import './select';
+@import './base/constants';
+@import './base/base';
+@import './base/mixins';
 
 @import './wrapper';
 
+@import './components/toolbar';
+@import './components/icons';
+@import './components/button';
+
 @import './login';
-
-
-@import './word';
-
-@import './hints';
-
-@import './results';
-
-@import './data';
-
 
 @import './header';
 @import './footer';
+
+
+
+// @import './select';
+
+// @import './word';
+// @import './hints';
+// @import './results';
+// @import './data';
+
+

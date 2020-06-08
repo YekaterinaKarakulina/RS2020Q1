@@ -2,6 +2,13 @@ html, body {
   height: 100%;
   font-size: 10px;
   font-weight: 400;
+  margin: 0;
+  padding: 0;
+  color: $color-primary;
+}
+
+.body {
+  position: relative;
 }
 
 header {

@@ -10,13 +10,14 @@ module.exports = (env, options) => {
     mode: isProduction ? 'production' : 'development',
     devtool: isProduction ? 'none' : 'source-map',
     watch: !isProduction,
-    entry: {
-      app: './src/index.js',
-      game: './src/game.js',
-    },
+    entry: './src/index.js',
+    // entry: {
+    //   app: './src/index.js',
+    //   game: './src/game.js',
+    // },
     output: {
       path: path.join(__dirname, '/dist'),
-      filename: '[name].bundle.js',
+      filename: 'bundle.js',
     },
     module: {
       rules: [
@@ -56,15 +57,18 @@ module.exports = (env, options) => {
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        filename: 'index.html',
         template: 'index.html',
-        chunks: ['app'],
       }),
-      new HtmlWebpackPlugin({
-        filename: 'game.html',
-        template: 'game.html',
-        chunks: ['game'],
-      }),
+      // new HtmlWebpackPlugin({
+      //   filename: 'index.html',
+      //   template: 'index.html',
+      //   chunks: ['app'],
+      // }),
+      // new HtmlWebpackPlugin({
+      //   filename: 'game.html',
+      //   template: 'game.html',
+      //   chunks: ['game'],
+      // }),
       new MiniCssExtractPlugin({
         filename: 'style.css',
       }),

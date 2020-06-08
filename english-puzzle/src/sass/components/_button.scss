@@ -10,6 +10,31 @@
     display: none;
   }
 
+  &:hover {
+    background-color: $color-violet;
+    background-color: darken($color: $color-violet, $amount: 15);
+  }
+
+  &.toolbar__button  {
+    width: 10rem;
+    height: 3.5rem;
+    position: absolute;
+    top: 20rem;
+    left: 5rem;
+    font-size: 2rem;
+  }
+
+  &.login__button {
+    width: 15rem;
+    height: 4rem;
+    font-size: 2rem;
+    @include media-mobile {
+      width: 10rem;
+      height: 4rem;
+      font-size: 1.5rem;
+    }
+  }
+
   &.menu__button {
     width: 3.5rem;
     height: 3.5rem;

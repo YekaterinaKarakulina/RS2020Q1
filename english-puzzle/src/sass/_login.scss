@@ -1,35 +1,17 @@
-.login__header {
-  font-size: 2.5rem;
-  font-weight: 400;
-  color: $color-light;
-  
-}
-
-.header__wrapper.login__header {
-  width: 100%;
-  background-color: $color-primary;
-  margin: 0;
-  padding: 2rem 0 2rem;
-}
-
-.login__title-container {
-  width: fit-content;
-  margin: 0 auto;
-}
-
 .error-message {
   width: fit-content;
   height: 5rem;
   font-size: 2rem;
   font-weight: 700;
   color: $color-red;
-  margin: 3rem auto;
-}
-
-.login__main {
-  width: 80%;
   margin: 0 auto;
-  margin-top: 5rem;
+  padding: 3rem 0;
+  @include media-tablet {
+    font-size: 1.25rem;
+  }
+  @include media-mobile {
+    font-size: 1rem;
+  }
 }
 
 .login__description {
@@ -46,42 +28,40 @@
 }
 
 .login__form {
-  margin: 2rem auto;
-  width: 50%;
+  margin: 5rem auto;
+  width: 45rem;
+  @include media-tablet {
+    width: 35rem;
+  }
+  @include media-mobile {
+    width: 25rem;
+  }
 }
 
 .inputs {
   display: flex;
   flex-direction: column;
-  width: 70%;
-  margin: 0 auto;
 }
 
 .email, 
 .password {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   height: 3rem;
   font-family: 'Quicksand', sans-serif;
   font-size: 2rem;
   padding-left: 1rem;
+  border: 3px solid $color-violet;
+  border-radius: 5px;
+  @include media-laptop {
+    font-size: 1.8rem;
+  }
 }
 
 .login__buttons {
   display: flex;
-  width: 70%;
-  margin: 0 auto;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  margin-top: 3rem;
-}
-
-.login__button {
-  width: 15rem;
-  height: 4rem;
-  font-size: 2rem;
-    &:hover {
-      background-color: $color-violet;
-      background-color: darken($color: $color-violet, $amount: 15);
-    }
+  margin-top: 5rem;
+  margin-bottom: 10rem;
 }
