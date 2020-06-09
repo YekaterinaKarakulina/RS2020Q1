@@ -4,8 +4,8 @@ import 'babel-polyfill';
 import { createUser, loginUser } from './js/userAPI';
 import Game from './js/Game';
 
-const level = 1;
-const round = 1;
+const level = 0;
+const round = 0;
 const game = new Game(level, round);
 
 const TOOLBARCONTAINER = document.querySelector('.toolbar-container');
@@ -13,6 +13,11 @@ const TOOLBARHAMBURGER = document.querySelector('.toolbar-hamburger');
 const LOGINSECTION = document.querySelector('.login-page');
 const STARTGAMESECTION = document.querySelector('.start-page');
 const GAMESECTION = document.querySelector('.game-page');
+
+if (localStorage.getItem('userAuthorized') === 'true') {
+  LOGINSECTION.classList.add('hidden');
+  STARTGAMESECTION.classList.remove('hidden');
+}
 
 TOOLBARHAMBURGER.addEventListener('click', () => {
   TOOLBARHAMBURGER.classList.toggle('open');
@@ -38,7 +43,14 @@ async function signIn(userData) {
 
 document.addEventListener('click', (event) => {
   document.querySelector('.error-message').innerHTML = '';
-  if (event.target.classList.contains('button__signUp')) {
+  if (event.target.classList.contains('button__logOut')) {
+    localStorage.setItem('userAuthorized', 'false');
+    LOGINSECTION.classList.remove('hidden');
+    STARTGAMESECTION.classList.add('hidden');
+    GAMESECTION.classList.add('hidden');
+    TOOLBARCONTAINER.classList.add('hidden');
+    TOOLBARHAMBURGER.classList.remove('open');
+  } else if (event.target.classList.contains('button__signUp')) {
     event.preventDefault();
     const userData = getFormData();
     createUser(userData);
@@ -53,11 +65,11 @@ document.addEventListener('click', (event) => {
   }
 });
 
+
 // click events
 document.querySelector('.game-page').addEventListener('click', (event) => {
-  if (event.target.closest('.data__sentence')) {
-    console.log('data__sentence click');
-    document.querySelector('.result__sentence.current').append(event.target);
+  if (event.target.closest('.data__sentence') && event.target.classList.contains('data__word')) {
+    document.querySelector('.result__sentence>.word-container:empty').append(event.target);
   } else if (event.target.classList.contains('dontKnow')) {
     console.log('I don`t know');
     game.buildCurrentSentence();
@@ -66,13 +78,13 @@ document.querySelector('.game-page').addEventListener('click', (event) => {
     game.checkCurrentSentence();
   } else if (event.target.classList.contains('continue')) {
     game.iCurrentSentenceNumber += 1;
-    console.log(game.iCurrentSentenceNumber );
+    console.log(game.iCurrentSentenceNumber);
     if (game.iCurrentSentenceNumber <= 9) {
       console.log('Next sentence');
       game.next();
     } else {
       console.log('next round');
-      game.iRound += 1;
+      game.iPage += 1;
       console.log(game);
       game.startGame();
     }
@@ -109,27 +121,35 @@ document.querySelector('.game-page').addEventListener('click', (event) => {
 });
 
 // drag events
-document.querySelector('.game-page').ondragstart = function onDragStart(event) {
+document.ondragstart = function onDragStart(event) {
   event.dataTransfer.setData('text/plain', event.target.dataset.word);
 };
 
-document.querySelector('.game-page').ondragover = function onDragOver(event) {
+document.ondragover = function onDragOver(event) {
   event.preventDefault();
-  const elements = document.querySelectorAll('.result__sentence>.data__word');
+  const elements = document.querySelectorAll('.result__sentence.current>.word-container');
   elements.forEach((el) => el.classList.remove('dragOver'));
-  if (event.target.classList.contains('word') && event.target.closest('.result__sentence')) {
+  if (event.target.classList.contains('word-container') && event.target.closest('.result__sentence.current')) {
     event.target.classList.add('dragOver');
+  } else if (event.target.classList.contains('data__word') && event.target.closest('.result__sentence.current')) {
+    event.target.parentElement.classList.add('dragOver');
   }
 };
 
-document.querySelector('.game-page').ondrop = function onDrop(event) {
+document.ondrop = function onDrop(event) {
   event.preventDefault();
   const data = event.dataTransfer.getData('text/plain');
-  if (event.target.classList.contains('result__sentence.current')) {
-    event.target.append(document.querySelector(`[data-word=${data}]`));
-  } else if (event.target.classList.contains('word')) {
-    document.querySelector('.result__sentence.current').insertBefore(document.querySelector(`[data-word=${data}]`), event.target);
+  const dropStartElement = document.querySelector(`[data-word=${data}]`);
+  const dropStartContainer = dropStartElement.parentElement;
+  const dropEndElement = event.target;
+  if (event.target.classList.contains('word-container')) {
+    dropEndElement.append(dropStartElement);
+    dropEndElement.classList.remove('dragOver');
+  } else if (event.target.classList.contains('data__word')) {
+    const dropEndContainer = dropEndElement.parentElement;
+    dropEndContainer.append(dropStartElement);
+    dropStartContainer.append(dropEndElement);
+    dropEndContainer.classList.remove('dragOver');
   }
-  event.target.classList.remove('dragOver');
   game.checkGameStatus();
 };

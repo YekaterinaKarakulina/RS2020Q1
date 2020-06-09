@@ -14,3 +14,14 @@
   background-color: $color-violet;
   height: 5rem;
 }
+
+.bck {
+  background-image: url('../assets/background.jpg');
+  position: absolute;
+  top: 5rem;
+  z-index: -1;
+  width: 100%;
+  background-size: cover;
+  height: 100%;
+  opacity: 0.2;
+}

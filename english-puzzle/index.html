@@ -6,6 +6,7 @@
     <title>English Puzzle</title>
   </head>
   <body>
+    <div class="bck"></div>
     <header class="wrapper header__wrapper">
       <h1 class="title">English puzzle</h1>
       <div class="toolbar-container hidden">
@@ -18,7 +19,7 @@
       </div>
     </header>
 
-    <main class="wrapper">
+    <main class="wrapper main__wrapper">
       <section class="login-page">
         <div class="error-message"></div>
         <div class="login__description">
@@ -54,6 +55,11 @@
               <div class="select select__level">
                 <select name="slct" id="slct">
                   <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
                 </select>
               </div>
             </div>
@@ -97,9 +103,9 @@
         </div>
         <div class="buttons game__buttons">
           <button class="button game__button dontKnow">I don`t know</button>
-          <button class="button game__button check hidden">Check</button>
-          <button class="button game__button continue hidden">Continue</button>
-          <button class="button game__button results hidden">Results</button>
+          <button class="button game__button check">Check</button>
+          <button class="button game__button continue">Continue</button>
+          <button class="button game__button results">Results</button>
         </div>
       </section>
     </main>

@@ -3,7 +3,7 @@
   width: 90%;
   height: 40rem;
   margin: 2rem auto;
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 400;
 }
 
@@ -15,14 +15,30 @@
   height: 100%;
 }
 
+.word-container {
+  display: flex;
+  min-width: 3rem;
+  min-height: 3rem;
+  margin-left: 1rem;
+  border: 2px solid $color-violet;
+  border-radius: 5px;
+  &.dragOver {
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+  &.true {
+    box-shadow: 0 0 20px rgba(0,255,127, 0.5);
+  }
+  &.false {
+    box-shadow: 0 0 20px rgba(255,69,0,0.5);
+  }
+}
+
 .sentence {
   display: flex;
-  width: 100%;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   height: 4rem;
-  border: 1px solid red;
   &.result__sentence {
     display: none;
     &.active {

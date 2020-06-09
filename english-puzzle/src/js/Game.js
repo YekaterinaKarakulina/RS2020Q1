@@ -1,5 +1,5 @@
 import Sentence from './Sentence';
-import initData from './dataUtils';
+import { getPageData, getPagesAmountInLevel } from './wordsAPI';
 
 const dontKnowButton = document.querySelector('.game__buttons>.dontKnow');
 const checkButton = document.querySelector('.game__buttons>.check');
@@ -7,9 +7,9 @@ const continueButton = document.querySelector('.game__buttons>.continue');
 const resultsButton = document.querySelector('.game__buttons>.results');
 
 export default class Game {
-  constructor(level, round) {
+  constructor(level, page) {
     this.iLevel = level;
-    this.iRound = round;
+    this.iPage = page;
   }
 
   async startGame() {
@@ -23,7 +23,21 @@ export default class Game {
     continueButton.classList.add('hidden');
     resultsButton.classList.add('hidden');
     const fragment = document.createDocumentFragment();
-    const roundData = await initData(this.iLevel, this.iRound);
+
+    const pagesAmountInLevel = await getPagesAmountInLevel(this.iLevel);
+    if (pagesAmountInLevel) {
+      console.log(pagesAmountInLevel);
+      const fr = document.createDocumentFragment();
+      for (let i = 2; i <= pagesAmountInLevel; i += 1) {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = i;
+        fr.append(opt);
+      }
+      document.querySelector('.select__page>select').append(fr);
+    }
+
+    const roundData = await getPageData(this.iLevel, this.iPage);
     console.log(roundData);
     roundData.forEach((el) => {
       let sentence = new Sentence(el);
@@ -34,6 +48,7 @@ export default class Game {
 
       const sentenceContainer = document.createElement('div');
       sentenceContainer.className = 'sentence result__sentence';
+
       fragment.append(sentenceContainer);
     });
 
@@ -47,8 +62,7 @@ export default class Game {
   next() {
     document.querySelector('.hints-sentence').textContent = '';
     this.isSentenceCompleted = false;
-    // this.iCurrentSentenceNumber += 1;
-    const dataWords = document.querySelectorAll('.result__sentence.current>.data__word');
+    const dataWords = document.querySelectorAll('.result__sentence.current>.word-container');
     dataWords.forEach((el) => el.classList.remove('true'));
     this.resultSentences.forEach((el) => el.classList.remove('current'));
     this.currentDataSentence = this.dataSentences[this.iCurrentSentenceNumber];
@@ -57,6 +71,11 @@ export default class Game {
     this.currentResultSentence.classList.add('active');
     this.currentResultSentence.classList.add('current');
 
+    for (let i = 0; i < this.currentDataSentenceObject.length; i += 1) {
+      const wordContainer = document.createElement('span');
+      wordContainer.className = 'word-container';
+      this.currentResultSentence.append(wordContainer);
+    }
     document.querySelector('.data-container').innerHTML = '';
     document.querySelector('.data-container').append(this.currentDataSentence);
     this.checkGameStatus();
@@ -64,7 +83,7 @@ export default class Game {
   }
 
   checkGameStatus() {
-    const resultSentenceLength = document.querySelectorAll('.result__sentence.current>.data__word').length;
+    const resultSentenceLength = document.querySelectorAll('.result__sentence.current>.word-container>.data__word').length;
     const dataSentenceLength = this.currentDataSentenceObject.length;
     if (this.isSentenceCompleted === true) {
       console.log('this.isSentenceCompleted');
@@ -81,8 +100,6 @@ export default class Game {
       checkButton.classList.add('hidden');
       dontKnowButton.classList.remove('hidden');
     }
-
-
 
     if (localStorage.getItem('autoPronunciation') === null) {
       localStorage.setItem('autoPronunciation', 'true');

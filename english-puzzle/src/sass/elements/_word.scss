@@ -1,20 +1,11 @@
 .word {
   display: inline-flex;
+  background-color: $color-word;
   width: 100%;
   align-items: center;
   justify-content: center;
   padding: 5px;
-  border: 1px solid black;
+  border: none;
   border-radius: 5px;
   cursor: grab;
-  &.dragOver {
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    margin-left: 2rem;
-  }
-  &.true {
-    box-shadow: 0 0 10px rgba(0,255,127, 0.5);
-  }
-  &.false {
-    box-shadow: 0 0 10px rgba(255,69,0,0.5);
-  }
 }

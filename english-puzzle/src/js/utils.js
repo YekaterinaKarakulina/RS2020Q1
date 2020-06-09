@@ -1,14 +1,17 @@
 function createWordElement(word) {
-  const element = document.createElement('span');
-  element.className = 'word data__word';
-  element.dataset.word = word.replace(/[.]/, '');
-  element.setAttribute('draggable', 'true');
-  element.textContent = word;
-  return element;
+  const wordContainer = document.createElement('span');
+  wordContainer.className = 'word-container';
+  const wordElement = document.createElement('span');
+  wordElement.className = 'word data__word';
+  wordElement.dataset.word = word.replace(/[.]/, '');
+  wordElement.setAttribute('draggable', 'true');
+  wordElement.textContent = word;
+  wordContainer.append(wordElement);
+  return wordContainer;
 }
 
 function getActualSentence() {
-  const dataWords = document.querySelectorAll('.result__sentence.current>.data__word');
+  const dataWords = document.querySelectorAll('.result__sentence.current>.word-container>.data__word');
   const actualSentenceArray = [];
   dataWords.forEach((el) => {
     actualSentenceArray.push(el);

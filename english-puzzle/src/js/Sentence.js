@@ -55,16 +55,17 @@ export default class Sentence {
   checkSentence() {
     const expectedSentence = this.textExample.split(' ');
     const actualSentence = getActualSentence();
+    console.log(actualSentence);
     let errors = 0;
     actualSentence.forEach((el) => {
-      el.classList.remove('true');
-      el.classList.remove('false');
+      el.parentElement.classList.remove('true');
+      el.parentElement.classList.remove('false');
     });
     for (let i = 0; i < expectedSentence.length; i += 1) {
       if (expectedSentence[i] === actualSentence[i].textContent) {
-        actualSentence[i].classList.add('true');
+        actualSentence[i].parentElement.classList.add('true');
       } else {
-        actualSentence[i].classList.add('false');
+        actualSentence[i].parentElement.classList.add('false');
         errors += 1;
       }
     }
@@ -79,9 +80,9 @@ export default class Sentence {
       fragment.append(createWordElement(el));
     });
     document.querySelector('.result__sentence.current').innerHTML = '';
-    fragment.querySelectorAll('.data__word').forEach((el) => {
+    fragment.querySelectorAll('.word-container').forEach((el) => {
       document.querySelector('.result__sentence.current').append(el);
     });
-    document.querySelectorAll('.data__sentence>.data__word').forEach((el) => el.remove());
+    document.querySelector('.data-container').innerHTML = '';
   }
 }
