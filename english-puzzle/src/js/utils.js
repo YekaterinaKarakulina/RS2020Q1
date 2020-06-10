@@ -31,6 +31,50 @@ function mixArrayElements(array) {
   return arrayMixed;
 }
 
+function checkActiveHintsBeforeGame() {
+  if (localStorage.getItem('autoPronunciation') === null) {
+    localStorage.setItem('autoPronunciation', 'true');
+  }
+  if (localStorage.getItem('translation') === null) {
+    localStorage.setItem('translation', 'true');
+  }
+  if (localStorage.getItem('sentencePronunciation') === null) {
+    localStorage.setItem('sentencePronunciation', 'true');
+  }
+  if (localStorage.getItem('bckImage') === null) {
+    localStorage.setItem('bckImage', 'false');
+  }
+
+  const autoPronunciationButton = document.querySelector('.menu__button.auto-pronunciation');
+  if (localStorage.getItem('autoPronunciation') === 'true') {
+    autoPronunciationButton.classList.add('active');
+  } else {
+    autoPronunciationButton.classList.remove('active');
+  }
+
+  const translationButton = document.querySelector('.menu__button.translation');
+  if (localStorage.getItem('translation') === 'true') {
+    translationButton.classList.add('active');
+    // this.translateCurrentSentence();
+  } else {
+    translationButton.classList.remove('active');
+  }
+
+  const sentencePronunciationButton = document.querySelector('.menu__button.sentence-pronunciation');
+  if (localStorage.getItem('sentencePronunciation') === 'true') {
+    sentencePronunciationButton.classList.add('active');
+  } else {
+    sentencePronunciationButton.classList.remove('active');
+  }
+
+  const bckImageButton = document.querySelector('.menu__button.bck-image');
+  if (localStorage.getItem('bckImage') === 'true') {
+    bckImageButton.classList.add('active');
+  } else {
+    bckImageButton.classList.remove('active');
+  }
+}
+
 export {
-  createWordElement, getActualSentence, mixArrayElements,
+  createWordElement, getActualSentence, mixArrayElements, checkActiveHintsBeforeGame,
 };

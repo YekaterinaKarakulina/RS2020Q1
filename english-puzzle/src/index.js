@@ -4,9 +4,9 @@ import 'babel-polyfill';
 import { createUser, loginUser } from './js/userAPI';
 import Game from './js/Game';
 
-const level = 0;
-const round = 0;
-const game = new Game(level, round);
+
+// const game = new Game(level, page);
+const game = new Game(0, 0);
 
 const TOOLBARCONTAINER = document.querySelector('.toolbar-container');
 const TOOLBARHAMBURGER = document.querySelector('.toolbar-hamburger');
@@ -32,9 +32,9 @@ function getFormData() {
 
 async function signIn(userData) {
   const loginResult = await loginUser(userData);
-  console.log(loginResult.message);
+  console.log(`signIn ${loginResult.message}`);
   if (loginResult.message === 'Authenticated') {
-    console.log('userAuthorized');
+    console.log('userAuthorized set true');
     localStorage.setItem('userAuthorized', 'true');
     LOGINSECTION.classList.add('hidden');
     STARTGAMESECTION.classList.remove('hidden');
@@ -61,7 +61,8 @@ document.addEventListener('click', (event) => {
   } else if (event.target.classList.contains('start__button')) {
     STARTGAMESECTION.classList.add('hidden');
     GAMESECTION.classList.remove('hidden');
-    game.startGame();
+    // game.startGame();
+    game.startNewLevelRound();
   }
 });
 
@@ -77,47 +78,94 @@ document.querySelector('.game-page').addEventListener('click', (event) => {
     console.log('Check');
     game.checkCurrentSentence();
   } else if (event.target.classList.contains('continue')) {
+    if (!game.isFinished) {
     game.iCurrentSentenceNumber += 1;
     console.log(game.iCurrentSentenceNumber);
-    if (game.iCurrentSentenceNumber <= 9) {
+    console.log(`level ${game.iLevel}, page ${game.iPage}`);
+    if (game.iCurrentSentenceNumber < 10) {
       console.log('Next sentence');
       game.next();
     } else {
       console.log('next round');
       game.iPage += 1;
-      console.log(game);
-      game.startGame();
+      console.log(`before comparicon ${game.iPage} ${game.pagesAmountInLevel}`);
+      if (game.iPage < game.pagesAmountInLevel) {
+        document.querySelector('.select__page>#slct').value = game.iPage + 1;
+        game.startCurrentLevelRound();
+      } else {
+        game.iLevel += 1;
+        game.iPage = 0;
+        if (game.iLevel <= 5) {
+          document.querySelector('.select__level>#slct').value = game.iLevel + 1;
+          document.querySelector('.select__page>#slct').value = game.iPage + 1;
+          game.startNewLevelRound();
+        } else {
+          console.log('LEVELS END!!!!!!!!!!');
+          game.isFinished = true;
+          // game.iLevel = 0;
+          // game.iPage = 0;
+          // game.startNewLevelRound();
+        }
+
+        // document.querySelector('.select__level>#slct').value = game.iLevel + 1;
+        // document.querySelector('.select__page>#slct').value = game.iPage + 1;
+        // game.startNewLevelRound();
+      }
+      // console.log(game);
+      // game.startGame();
     }
-  } else if (event.target.closest('.menu__button.auto-pronunciation')) {
-    if (localStorage.getItem('autoPronunciation') === 'true') {
-      localStorage.setItem('autoPronunciation', 'false');
-    } else {
-      localStorage.setItem('autoPronunciation', 'true');
+  }
+}
+
+
+  if (game.isSentenceCompleted) {
+    if (event.target.closest('.menu__button.auto-pronunciation')) {
+      if (localStorage.getItem('autoPronunciation') === 'true') {
+        localStorage.setItem('autoPronunciation', 'false');
+      } else {
+        localStorage.setItem('autoPronunciation', 'true');
+      }
+    } else if (event.target.closest('.menu__button.translation')) {
+      if (localStorage.getItem('translation') === 'true') {
+        localStorage.setItem('translation', 'false');
+      } else {
+        localStorage.setItem('translation', 'true');
+      }
+    } else if (event.target.closest('.menu__button.sentence-pronunciation')) {
+      if (localStorage.getItem('sentencePronunciation') === 'true') {
+        localStorage.setItem('sentencePronunciation', 'false');
+      } else {
+        localStorage.setItem('sentencePronunciation', 'true');
+      }
+    } else if (event.target.closest('.menu__button.bck-image')) {
+      if (localStorage.getItem('bckImage') === 'true') {
+        localStorage.setItem('bckImage', 'false');
+      } else {
+        localStorage.setItem('bckImage', 'true');
+      }
     }
-  } else if (event.target.closest('.menu__button.translation')) {
-    if (localStorage.getItem('translation') === 'true') {
-      localStorage.setItem('translation', 'false');
-    } else {
-      localStorage.setItem('translation', 'true');
-    }
-  } else if (event.target.closest('.menu__button.sentence-pronunciation')) {
-    if (localStorage.getItem('sentencePronunciation') === 'true') {
-      localStorage.setItem('sentencePronunciation', 'false');
-    } else {
-      localStorage.setItem('sentencePronunciation', 'true');
-    }
-  } else if (event.target.closest('.menu__button.bck-image')) {
-    if (localStorage.getItem('bckImage') === 'true') {
-      localStorage.setItem('bckImage', 'false');
-    } else {
-      localStorage.setItem('bckImage', 'true');
-    }
-  } else if (event.target.classList.contains('icon__sound')) {
+  } 
+  
+  if (event.target.classList.contains('icon__sound')) {
     if (document.querySelector('.menu__button.sentence-pronunciation').classList.contains('active')) {
       game.pronounceCurrentSentence();
     }
   }
+  
+  if (event.target.parentElement.classList.contains('select__page')) {
+    console.log('select page click');
+    game.iPage = document.querySelector('.select__page>#slct').value - 1;
+    game.startCurrentLevelRound();
+  }
+
+  if (event.target.parentElement.classList.contains('select__level')) {
+    console.log('select level click');
+    game.iLevel = document.querySelector('.select__level>#slct').value - 1;
+    game.iPage = 0;
+    game.startNewLevelRound();
+  }
   game.checkGameStatus();
+
 });
 
 // drag events

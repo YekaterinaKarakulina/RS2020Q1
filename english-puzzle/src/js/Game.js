@@ -1,5 +1,6 @@
 import Sentence from './Sentence';
 import { getPageData, getPagesAmountInLevel } from './wordsAPI';
+import { checkActiveHintsBeforeGame } from './utils';
 
 const dontKnowButton = document.querySelector('.game__buttons>.dontKnow');
 const checkButton = document.querySelector('.game__buttons>.check');
@@ -10,9 +11,48 @@ export default class Game {
   constructor(level, page) {
     this.iLevel = level;
     this.iPage = page;
+    this.isFinished = false;
   }
 
-  async startGame() {
+  async startLevel() {
+    const pagesAmountInLevel = await getPagesAmountInLevel(this.iLevel);
+    this.pagesAmountInLevel = pagesAmountInLevel;
+    console.log(this.iLevel, this.pagesAmountInLevel);
+    if (pagesAmountInLevel) {
+      // console.log(pagesAmountInLevel);
+      const fr = document.createDocumentFragment();
+      for (let i = 1; i <= pagesAmountInLevel; i += 1) {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = i;
+        fr.append(opt);
+      }
+      document.querySelector('.select__page>select').innerHTML = '';
+      document.querySelector('.select__page>select').append(fr);
+    }
+  }
+
+  async printRoundData() {
+    const fragment = document.createDocumentFragment();
+    const roundData = await getPageData(this.iLevel, this.iPage);
+    roundData.forEach((el) => {
+      let sentence = new Sentence(el);
+      this.dataSentencesObjects.push(sentence);
+      sentence.textExample = sentence.textExample.replace(/<b>/, '').replace(/<\/b>/, '');
+      sentence.status = 'iKnow';
+      sentence = sentence.createDataSentence();
+      this.dataSentences.push(sentence);
+      const sentenceContainer = document.createElement('div');
+      sentenceContainer.className = 'sentence result__sentence';
+      fragment.append(sentenceContainer);
+    });
+
+    document.querySelector('.results-container').innerHTML = '';
+    document.querySelector('.results-container').append(fragment);
+  }
+
+  async renderRoundData() {
+    console.log(`level ${this.iLevel}, page ${this.iPage}`);
     this.dataSentencesObjects = [];
     this.dataSentences = [];
     this.resultSentences = [];
@@ -22,41 +62,107 @@ export default class Game {
     checkButton.classList.add('hidden');
     continueButton.classList.add('hidden');
     resultsButton.classList.add('hidden');
-    const fragment = document.createDocumentFragment();
+    
+    await this.printRoundData();
+    // const fragment = document.createDocumentFragment();
 
-    const pagesAmountInLevel = await getPagesAmountInLevel(this.iLevel);
-    if (pagesAmountInLevel) {
-      console.log(pagesAmountInLevel);
-      const fr = document.createDocumentFragment();
-      for (let i = 2; i <= pagesAmountInLevel; i += 1) {
-        const opt = document.createElement('option');
-        opt.value = i;
-        opt.textContent = i;
-        fr.append(opt);
-      }
-      document.querySelector('.select__page>select').append(fr);
-    }
+    // const roundData = await getPageData(this.iLevel, this.iPage);
+    // console.log(roundData);
+    // roundData.forEach((el) => {
+    //   let sentence = new Sentence(el);
+    //   this.dataSentencesObjects.push(sentence);
+    //   sentence.textExample = sentence.textExample.replace(/<b>/, '').replace(/<\/b>/, '');
+    //   sentence.status = 'iKnow';
+    //   sentence = sentence.createDataSentence();
+    //   this.dataSentences.push(sentence);
+    //   const sentenceContainer = document.createElement('div');
+    //   sentenceContainer.className = 'sentence result__sentence';
+    //   fragment.append(sentenceContainer);
+    // });
 
-    const roundData = await getPageData(this.iLevel, this.iPage);
-    console.log(roundData);
-    roundData.forEach((el) => {
-      let sentence = new Sentence(el);
-      this.dataSentencesObjects.push(sentence);
-      sentence.textExample = sentence.textExample.replace(/<b>/, '').replace(/<\/b>/, '');
-      sentence = sentence.createDataSentence();
-      this.dataSentences.push(sentence);
+    console.log(this.dataSentencesObjects);
 
-      const sentenceContainer = document.createElement('div');
-      sentenceContainer.className = 'sentence result__sentence';
-
-      fragment.append(sentenceContainer);
-    });
-
-    document.querySelector('.results-container').innerHTML = '';
-    document.querySelector('.results-container').append(fragment);
+    // document.querySelector('.results-container').innerHTML = '';
+    // document.querySelector('.results-container').append(fragment);
     document.querySelectorAll('.results-container>.result__sentence').forEach((el) => this.resultSentences.push(el));
 
+    checkActiveHintsBeforeGame();
     this.next();
+  }
+
+  // async startGame() {
+    // console.log(`level ${this.iLevel}, page ${this.iPage}`);
+    // this.dataSentencesObjects = [];
+    // this.dataSentences = [];
+    // this.resultSentences = [];
+    // this.iCurrentSentenceNumber = 0;
+    // this.isSentenceCompleted = false;
+
+    // checkButton.classList.add('hidden');
+    // continueButton.classList.add('hidden');
+    // resultsButton.classList.add('hidden');
+
+    // const pagesAmountInLevel = await getPagesAmountInLevel(this.iLevel);
+    // this.pagesAmountInLevel = pagesAmountInLevel;
+    // if (pagesAmountInLevel) {
+    //   console.log(pagesAmountInLevel);
+    //   const fr = document.createDocumentFragment();
+    //   for (let i = 1; i <= pagesAmountInLevel; i += 1) {
+    //     const opt = document.createElement('option');
+    //     opt.value = i;
+    //     opt.textContent = i;
+    //     fr.append(opt);
+    //   }
+    //   document.querySelector('.select__page>select').innerHTML = '';
+    //   document.querySelector('.select__page>select').append(fr);
+    // }
+
+    // const fragment = document.createDocumentFragment();
+    // const roundData = await getPageData(this.iLevel, this.iPage);
+    // console.log(roundData);
+    // roundData.forEach((el) => {
+    //   let sentence = new Sentence(el);
+    //   this.dataSentencesObjects.push(sentence);
+    //   sentence.textExample = sentence.textExample.replace(/<b>/, '').replace(/<\/b>/, '');
+    //   sentence.status = 'iKnow';
+    //   sentence = sentence.createDataSentence();
+    //   this.dataSentences.push(sentence);
+    //   const sentenceContainer = document.createElement('div');
+    //   sentenceContainer.className = 'sentence result__sentence';
+    //   fragment.append(sentenceContainer);
+    // });
+
+    // console.log(this.dataSentencesObjects);
+
+    // document.querySelector('.results-container').innerHTML = '';
+    // document.querySelector('.results-container').append(fragment);
+    // document.querySelectorAll('.results-container>.result__sentence').forEach((el) => this.resultSentences.push(el));
+
+    // checkActiveHintsBeforeGame();
+    // this.next();
+  // }
+
+  startNewLevelRound() {
+    console.log('new level round');
+    this.startLevel();
+    this.renderRoundData();
+    // if (this.iLevel <= 5) {
+    //   this.startLevel();
+    //   this.renderRoundData();
+    // } else {
+    //   console.log('levels end!!!');
+    // }
+    
+  }
+
+  startCurrentLevelRound() {
+    console.log('cur level round');
+    this.renderRoundData();
+    // if (this.iPage < this.pagesAmountInLevel) {
+    //   this.renderRoundData();
+    // } else {
+    //   console.log('pages end!!!');
+    // }
   }
 
   next() {
@@ -80,14 +186,16 @@ export default class Game {
     document.querySelector('.data-container').append(this.currentDataSentence);
     this.checkGameStatus();
     this.showHintsAtBegin();
+    console.log(this.dataSentencesObjects);
   }
 
   checkGameStatus() {
     const resultSentenceLength = document.querySelectorAll('.result__sentence.current>.word-container>.data__word').length;
     const dataSentenceLength = this.currentDataSentenceObject.length;
     if (this.isSentenceCompleted === true) {
-      console.log('this.isSentenceCompleted');
+      console.log('this.isSentenceCompleted = true');
       this.showHintsAtEnd();
+      checkActiveHintsBeforeGame();
       continueButton.classList.remove('hidden');
       checkButton.classList.add('hidden');
       dontKnowButton.classList.add('hidden');
@@ -100,48 +208,12 @@ export default class Game {
       checkButton.classList.add('hidden');
       dontKnowButton.classList.remove('hidden');
     }
+    // console.log(this.isSentenceCompleted);
+    // console.log(`autoPronunciation ${localStorage.getItem('autoPronunciation')}`);
+    // console.log(`translation ${localStorage.getItem('translation')}`);
+    // console.log(`sentencePronunciation ${localStorage.getItem('sentencePronunciation')}`);
+    // console.log(`bckImage ${localStorage.getItem('bckImage')}`);
 
-    if (localStorage.getItem('autoPronunciation') === null) {
-      localStorage.setItem('autoPronunciation', 'true');
-    }
-    if (localStorage.getItem('translation') === null) {
-      localStorage.setItem('translation', 'true');
-    }
-    if (localStorage.getItem('sentencePronunciation') === null) {
-      localStorage.setItem('sentencePronunciation', 'true');
-    }
-    if (localStorage.getItem('bckImage') === null) {
-      localStorage.setItem('bckImage', 'true');
-    }
-
-    const autoPronunciationButton = document.querySelector('.menu__button.auto-pronunciation');
-    if (localStorage.getItem('autoPronunciation') === 'true') {
-      autoPronunciationButton.classList.add('active');
-    } else {
-      autoPronunciationButton.classList.remove('active');
-    }
-
-    const translationButton = document.querySelector('.menu__button.translation');
-    if (localStorage.getItem('translation') === 'true') {
-      translationButton.classList.add('active');
-      this.translateCurrentSentence();
-    } else {
-      translationButton.classList.remove('active');
-    }
-
-    const sentencePronunciationButton = document.querySelector('.menu__button.sentence-pronunciation');
-    if (localStorage.getItem('sentencePronunciation') === 'true') {
-      sentencePronunciationButton.classList.add('active');
-    } else {
-      sentencePronunciationButton.classList.remove('active');
-    }
-
-    const bckImageButton = document.querySelector('.menu__button.bck-image');
-    if (localStorage.getItem('bckImage') === 'true') {
-      bckImageButton.classList.add('active');
-    } else {
-      bckImageButton.classList.remove('active');
-    }
   }
 
   checkCurrentSentence() {
@@ -156,6 +228,7 @@ export default class Game {
   }
 
   buildCurrentSentence() {
+    this.currentDataSentenceObject.status = 'iDontKnow';
     this.currentDataSentenceObject.buildSentence();
   }
 

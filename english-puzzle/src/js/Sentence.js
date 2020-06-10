@@ -36,8 +36,14 @@ export default class Sentence {
   }
 
   playSentenceSound() {
-    const sound = new Audio(`https://raw.githubusercontent.com/yekaterinakarakulina/rslang-data/master/${this.audioExample}`);
+    const soundIcon = document.querySelector('.icon__sound');
+    const sound = new Audio();
+    sound.src = `https://raw.githubusercontent.com/yekaterinakarakulina/rslang-data/master/${this.audioExample}`;
     sound.play();
+    soundIcon.classList.add('active');
+    sound.onended = () => {
+      soundIcon.classList.remove('active');
+    };
     this.bIsPronunciationHintUsed = true;
   }
 
@@ -55,7 +61,6 @@ export default class Sentence {
   checkSentence() {
     const expectedSentence = this.textExample.split(' ');
     const actualSentence = getActualSentence();
-    console.log(actualSentence);
     let errors = 0;
     actualSentence.forEach((el) => {
       el.parentElement.classList.remove('true');
