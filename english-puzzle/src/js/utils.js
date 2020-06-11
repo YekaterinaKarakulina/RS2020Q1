@@ -1,3 +1,9 @@
+function getFormData() {
+  const email = document.querySelector('#email').value;
+  const password = document.querySelector('#password').value;
+  return { email, password };
+}
+
 function createWordElement(word) {
   const wordContainer = document.createElement('span');
   wordContainer.className = 'word-container';
@@ -55,7 +61,6 @@ function checkActiveHintsBeforeGame() {
   const translationButton = document.querySelector('.menu__button.translation');
   if (localStorage.getItem('translation') === 'true') {
     translationButton.classList.add('active');
-    // this.translateCurrentSentence();
   } else {
     translationButton.classList.remove('active');
   }
@@ -76,5 +81,5 @@ function checkActiveHintsBeforeGame() {
 }
 
 export {
-  createWordElement, getActualSentence, mixArrayElements, checkActiveHintsBeforeGame,
+  getFormData, createWordElement, getActualSentence, mixArrayElements, checkActiveHintsBeforeGame,
 };

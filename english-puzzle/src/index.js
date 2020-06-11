@@ -3,6 +3,7 @@ import 'babel-polyfill';
 
 import { createUser, loginUser } from './js/userAPI';
 import Game from './js/Game';
+import { getFormData } from './js/utils';
 
 
 // const game = new Game(level, page);
@@ -23,12 +24,6 @@ TOOLBARHAMBURGER.addEventListener('click', () => {
   TOOLBARHAMBURGER.classList.toggle('open');
   TOOLBARCONTAINER.classList.toggle('hidden');
 });
-
-function getFormData() {
-  const email = document.querySelector('#email').value;
-  const password = document.querySelector('#password').value;
-  return { email, password };
-}
 
 async function signIn(userData) {
   const loginResult = await loginUser(userData);
@@ -61,7 +56,6 @@ document.addEventListener('click', (event) => {
   } else if (event.target.classList.contains('start__button')) {
     STARTGAMESECTION.classList.add('hidden');
     GAMESECTION.classList.remove('hidden');
-    // game.startGame();
     game.startNewLevelRound();
   }
 });
@@ -72,50 +66,35 @@ document.querySelector('.game-page').addEventListener('click', (event) => {
   if (event.target.closest('.data__sentence') && event.target.classList.contains('data__word')) {
     document.querySelector('.result__sentence>.word-container:empty').append(event.target);
   } else if (event.target.classList.contains('dontKnow')) {
-    console.log('I don`t know');
     game.buildCurrentSentence();
   } else if (event.target.classList.contains('check')) {
-    console.log('Check');
     game.checkCurrentSentence();
   } else if (event.target.classList.contains('continue')) {
     if (!game.isFinished) {
-    game.iCurrentSentenceNumber += 1;
-    console.log(game.iCurrentSentenceNumber);
-    console.log(`level ${game.iLevel}, page ${game.iPage}`);
-    if (game.iCurrentSentenceNumber < 10) {
-      console.log('Next sentence');
-      game.next();
-    } else {
-      console.log('next round');
-      game.iPage += 1;
-      console.log(`before comparicon ${game.iPage} ${game.pagesAmountInLevel}`);
-      if (game.iPage < game.pagesAmountInLevel) {
-        document.querySelector('.select__page>#slct').value = game.iPage + 1;
-        game.startCurrentLevelRound();
+      game.iCurrentSentenceNumber += 1;
+      console.log(`level ${game.iLevel}, page ${game.iPage}, currentSentenceNumb ${game.iCurrentSentenceNumber}`);
+      if (game.iCurrentSentenceNumber < 10) {
+        game.startSentence();
       } else {
-        game.iLevel += 1;
-        game.iPage = 0;
-        if (game.iLevel <= 5) {
-          document.querySelector('.select__level>#slct').value = game.iLevel + 1;
+        game.iPage += 1;
+        console.log(`before comparicon ${game.iPage} ${game.pagesAmountInLevel}`);
+        if (game.iPage < game.pagesAmountInLevel) {
           document.querySelector('.select__page>#slct').value = game.iPage + 1;
-          game.startNewLevelRound();
+          game.startCurrentLevelRound();
         } else {
-          console.log('LEVELS END!!!!!!!!!!');
-          game.isFinished = true;
-          // game.iLevel = 0;
-          // game.iPage = 0;
-          // game.startNewLevelRound();
+          game.iLevel += 1;
+          game.iPage = 0;
+          if (game.iLevel <= 5) {
+            document.querySelector('.select__level>#slct').value = game.iLevel + 1;
+            document.querySelector('.select__page>#slct').value = game.iPage + 1;
+            game.startNewLevelRound();
+          } else {
+            game.isFinished = true;
+          }
         }
-
-        // document.querySelector('.select__level>#slct').value = game.iLevel + 1;
-        // document.querySelector('.select__page>#slct').value = game.iPage + 1;
-        // game.startNewLevelRound();
       }
-      // console.log(game);
-      // game.startGame();
     }
   }
-}
 
 
   if (game.isSentenceCompleted) {
