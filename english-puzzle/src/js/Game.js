@@ -8,7 +8,7 @@ const continueButton = document.querySelector('.game__buttons>.continue');
 const resultsButton = document.querySelector('.game__buttons>.results');
 
 export default class Game {
-  constructor(level, page) {
+  constructor({ level, page }) {
     this.iLevel = level;
     this.iPage = page;
     this.isFinished = false;
@@ -48,6 +48,7 @@ export default class Game {
   }
 
   async startRound() {
+    // setGameProgressToUserSetting(this.iLevel, this.iPage);
     this.dataSentencesObjects = [];
     this.dataSentences = [];
     this.resultSentences = [];

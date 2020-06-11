@@ -73,3 +73,11 @@
   margin-top: 5rem;
   padding-bottom: 15rem;
 }
+
+.load-page {
+  display: block;
+  height: 100%;
+  &.hidden {
+    display: none;
+  }
+}

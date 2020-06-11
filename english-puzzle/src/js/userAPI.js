@@ -34,8 +34,46 @@ const loginUser = async (user) => {
     body: JSON.stringify(user),
   });
   const content = await rawResponse.json();
-  console.log(content);
   return content;
 };
 
-export { createUser, loginUser };
+const setGameProgressToUserSetting = async ({ userId, userToken, gameProgress }) => {
+  const rawResponse = await fetch(`https://afternoon-falls-25894.herokuapp.com/users/${userId}/settings`, {
+    method: 'PUT',
+    withCredentials: true,
+    headers: {
+      'Authorization': `Bearer ${userToken}`,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(gameProgress),
+  });
+  const content = await rawResponse.json();
+  console.log('setGameProgressToUserSetting');
+  console.log(content);
+};
+
+
+const getGameProgressFromUserSetting = async ({ userId, userToken }) => {
+  const rawResponse = await fetch(`https://afternoon-falls-25894.herokuapp.com/users/${userId}/settings`, {
+    method: 'GET',
+    withCredentials: true,
+    headers: {
+      'Authorization': `Bearer ${userToken}`,
+      'Accept': 'application/json',
+    },
+  });
+  console.log(rawResponse);
+  if (rawResponse.status === 401) {
+    console.log('status 401');
+    return undefined;
+  }
+  const content = await rawResponse.json();
+  console.log('getGameProgressToUserSetting');
+  console.log(content.optional);
+  return content.optional;
+};
+
+export {
+  createUser, loginUser, setGameProgressToUserSetting, getGameProgressFromUserSetting
+};
