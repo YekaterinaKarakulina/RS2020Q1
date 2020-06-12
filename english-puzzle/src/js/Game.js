@@ -1,11 +1,11 @@
 import Sentence from './Sentence';
 import { getPageData, getPagesAmountInLevel } from './wordsAPI';
 import { checkActiveHintsBeforeGame } from './utils';
-
-const dontKnowButton = document.querySelector('.game__buttons>.dontKnow');
-const checkButton = document.querySelector('.game__buttons>.check');
-const continueButton = document.querySelector('.game__buttons>.continue');
-const resultsButton = document.querySelector('.game__buttons>.results');
+import { setGameProgressToUserSetting, getGameProgressFromUserSetting } from './userAPI';
+import {
+  IDONTKNOWBUTTON, CHECKBUTTON, CONTINUEBUTTON, RESULTBUTTON,
+  SELECTPAGECONTAINER, SELECTLEVELOPTION, SELECTPAGEOPTION,
+} from './constants';
 
 export default class Game {
   constructor({ level, page }) {
@@ -24,12 +24,37 @@ export default class Game {
       opt.textContent = i;
       fr.append(opt);
     }
-    document.querySelector('.select__page>select').innerHTML = '';
-    document.querySelector('.select__page>select').append(fr);
+    SELECTPAGECONTAINER.innerHTML = '';
+    SELECTPAGECONTAINER.append(fr);
   }
 
   async renderRoundData() {
     const fragment = document.createDocumentFragment();
+
+    const obj = {
+      userId: localStorage.getItem('userId'),
+      userToken: localStorage.getItem('userToken'),
+      gameProgress: {
+        wordsPerDay: 100,
+        optional: {
+          level: this.iLevel,
+          page: this.iPage,
+        },
+      },
+    };
+    await setGameProgressToUserSetting(obj);
+
+    const userObj = {
+      userId: localStorage.getItem('userId'),
+      userToken: localStorage.getItem('userToken'),
+    };
+    const gameProgress = await getGameProgressFromUserSetting(userObj);
+
+    this.iLevel = parseInt(gameProgress.level, 10);
+    this.iPage = parseInt(gameProgress.page, 10);
+    SELECTLEVELOPTION.value = this.iLevel;
+    SELECTPAGEOPTION.value = this.iPage;
+
     const roundData = await getPageData(this.iLevel, this.iPage);
     roundData.forEach((el) => {
       let sentence = new Sentence(el);
@@ -48,16 +73,15 @@ export default class Game {
   }
 
   async startRound() {
-    // setGameProgressToUserSetting(this.iLevel, this.iPage);
     this.dataSentencesObjects = [];
     this.dataSentences = [];
     this.resultSentences = [];
     this.iCurrentSentenceNumber = 0;
     this.isSentenceCompleted = false;
 
-    checkButton.classList.add('hidden');
-    continueButton.classList.add('hidden');
-    resultsButton.classList.add('hidden');
+    CHECKBUTTON.classList.add('hidden');
+    CONTINUEBUTTON.classList.add('hidden');
+    RESULTBUTTON.classList.add('hidden');
     await this.renderRoundData();
     document.querySelectorAll('.results-container>.result__sentence').forEach((el) => this.resultSentences.push(el));
     checkActiveHintsBeforeGame();
@@ -88,14 +112,12 @@ export default class Game {
     console.log(this.dataSentencesObjects);
   }
 
-  startNewLevelRound() {
-    console.log('new level round');
+  async startNewLevelRound() {
     this.startLevel();
     this.startRound();
   }
 
-  startCurrentLevelRound() {
-    console.log('current level round');
+  async startCurrentLevelRound() {
     this.startRound();
   }
 
@@ -103,20 +125,17 @@ export default class Game {
     const resultSentenceLength = document.querySelectorAll('.result__sentence.current>.word-container>.data__word').length;
     const dataSentenceLength = this.currentDataSentenceObject.length;
     if (this.isSentenceCompleted === true) {
-      console.log('this.isSentenceCompleted = true');
       this.showHintsAtEnd();
       checkActiveHintsBeforeGame();
-      continueButton.classList.remove('hidden');
-      checkButton.classList.add('hidden');
-      dontKnowButton.classList.add('hidden');
+      CONTINUEBUTTON.classList.remove('hidden');
+      CHECKBUTTON.classList.add('hidden');
+      IDONTKNOWBUTTON.classList.add('hidden');
     } else if (dataSentenceLength === resultSentenceLength) {
-      checkButton.classList.remove('hidden');
-      console.log('dataSentenceLength === resultSentenceLength');
+      CHECKBUTTON.classList.remove('hidden');
     } else if (dataSentenceLength !== resultSentenceLength) {
-      console.log('dataSentenceLength !== resultSentenceLength');
-      continueButton.classList.add('hidden');
-      checkButton.classList.add('hidden');
-      dontKnowButton.classList.remove('hidden');
+      CONTINUEBUTTON.classList.add('hidden');
+      CHECKBUTTON.classList.add('hidden');
+      IDONTKNOWBUTTON.classList.remove('hidden');
     }
   }
 
@@ -154,7 +173,6 @@ export default class Game {
       }
     }
     if (localStorage.getItem('bckImage') === 'true') {
-      console.log('show bckImage hint before');
       this.showCurrentBckImage();
     }
   }
@@ -170,7 +188,6 @@ export default class Game {
       }
     }
     if (!this.currentDataSentenceObject.bIsBckImageHintUsed) {
-      console.log('show bckImage hint after');
       this.showCurrentBckImage();
     }
   }

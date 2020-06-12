@@ -1,15 +1,17 @@
+import { MESSAGEFIELD } from './constants';
+
 const createUser = async (user) => {
   const rawResponse = await fetch('https://afternoon-falls-25894.herokuapp.com/users', {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(user),
   });
   console.log(rawResponse.status);
   if (rawResponse.status === 417) {
-    document.querySelector('.error-message').innerHTML = 'You are already registered! Please sign in!';
+    MESSAGEFIELD.innerHTML = 'You are already registered! Please sign in!';
     return undefined;
   }
   const content = await rawResponse.json();
@@ -19,7 +21,9 @@ const createUser = async (user) => {
     Array.from(content.error.errors).forEach((element) => {
       errorMessage += `${element.message} <br>`;
     });
-    document.querySelector('.error-message').innerHTML = errorMessage;
+    MESSAGEFIELD.innerHTML = errorMessage;
+  } else {
+    MESSAGEFIELD.innerHTML = 'Your account was successfully created! <br>Please sign in to continue.';
   }
   return content;
 };
@@ -28,7 +32,7 @@ const loginUser = async (user) => {
   const rawResponse = await fetch('https://afternoon-falls-25894.herokuapp.com/signin', {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(user),
@@ -42,8 +46,8 @@ const setGameProgressToUserSetting = async ({ userId, userToken, gameProgress })
     method: 'PUT',
     withCredentials: true,
     headers: {
-      'Authorization': `Bearer ${userToken}`,
-      'Accept': 'application/json',
+      Authorization: `Bearer ${userToken}`,
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(gameProgress),
@@ -59,21 +63,20 @@ const getGameProgressFromUserSetting = async ({ userId, userToken }) => {
     method: 'GET',
     withCredentials: true,
     headers: {
-      'Authorization': `Bearer ${userToken}`,
-      'Accept': 'application/json',
+      Authorization: `Bearer ${userToken}`,
+      Accept: 'application/json',
     },
   });
   console.log(rawResponse);
-  if (rawResponse.status === 401) {
-    console.log('status 401');
-    return undefined;
+  if (rawResponse.status === 200) {
+    const content = await rawResponse.json();
+    console.log('getGameProgressToUserSetting');
+    console.log(content.optional);
+    return content.optional;
   }
-  const content = await rawResponse.json();
-  console.log('getGameProgressToUserSetting');
-  console.log(content.optional);
-  return content.optional;
+  return { level: 1, page: 1 };
 };
 
 export {
-  createUser, loginUser, setGameProgressToUserSetting, getGameProgressFromUserSetting
+  createUser, loginUser, setGameProgressToUserSetting, getGameProgressFromUserSetting,
 };

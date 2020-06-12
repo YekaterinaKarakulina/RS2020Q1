@@ -1,17 +1,17 @@
 import Game from './Game';
 import { getGameProgressFromUserSetting } from './userAPI';
+import { SELECTPAGEOPTION, SELECTLEVELOPTION } from './constants';
 
-export default async function initGame() {
+let game;
+
+async function createGameInstance() {
   const userObj = {
     userId: localStorage.getItem('userId'),
-    // userToken: 'hbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGIyMjcwMjk5YWRiMDAxN2ZhZThjMSIsImlhdCI6MTU5MTg2MDAzNiwiZXhwIjoxNTkxODc0NDM2fQ.uUVhJupHMIoZj4ZxHeq7MccFr__dzjjAQfXv52ojvLI',
     userToken: localStorage.getItem('userToken'),
   };
   const gameProgress = await getGameProgressFromUserSetting(userObj);
-
-  const game = new Game(gameProgress);
-  console.log(game);
-  game.startNewLevelRound();
+  console.log(gameProgress);
+  const object = new Game(gameProgress);
 
   // click events
   document.querySelector('.game-page').addEventListener('click', (event) => {
@@ -29,16 +29,15 @@ export default async function initGame() {
           game.startSentence();
         } else {
           game.iPage += 1;
-          console.log(`before comparicon ${game.iPage} ${game.pagesAmountInLevel}`);
-          if (game.iPage < game.pagesAmountInLevel) {
-            document.querySelector('.select__page>#slct').value = game.iPage + 1;
+          if (game.iPage <= game.pagesAmountInLevel) {
+            SELECTPAGEOPTION.value = game.iPage;
             game.startCurrentLevelRound();
           } else {
             game.iLevel += 1;
-            game.iPage = 0;
-            if (game.iLevel <= 5) {
-              document.querySelector('.select__level>#slct').value = game.iLevel + 1;
-              document.querySelector('.select__page>#slct').value = game.iPage + 1;
+            game.iPage = 1;
+            if (game.iLevel <= 6) {
+              SELECTLEVELOPTION.value = game.iLevel;
+              SELECTPAGEOPTION.value = game.iPage;
               game.startNewLevelRound();
             } else {
               console.log('GAME FINISHED!');
@@ -48,8 +47,6 @@ export default async function initGame() {
         }
       }
     }
-
-
     if (game.isSentenceCompleted) {
       if (event.target.closest('.menu__button.auto-pronunciation')) {
         if (localStorage.getItem('autoPronunciation') === 'true') {
@@ -76,29 +73,24 @@ export default async function initGame() {
           localStorage.setItem('bckImage', 'true');
         }
       }
-    } 
-    
+    }
     if (event.target.classList.contains('icon__sound')) {
       if (document.querySelector('.menu__button.sentence-pronunciation').classList.contains('active')) {
         game.pronounceCurrentSentence();
       }
     }
-    
     if (event.target.parentElement.classList.contains('select__page')) {
-      console.log('select page click');
-      game.iPage = document.querySelector('.select__page>#slct').value - 1;
+      game.iPage = SELECTPAGEOPTION.value;
       game.startCurrentLevelRound();
     }
 
     if (event.target.parentElement.classList.contains('select__level')) {
-      console.log('select level click');
-      game.iLevel = document.querySelector('.select__level>#slct').value - 1;
-      game.iPage = 0;
+      game.iLevel = SELECTLEVELOPTION.value;
+      game.iPage = 1;
       game.startNewLevelRound();
     }
     game.checkGameStatus();
   });
-
 
   // drag events
   document.ondragstart = function onDragStart(event) {
@@ -133,4 +125,12 @@ export default async function initGame() {
     }
     game.checkGameStatus();
   };
+  return object;
+}
+
+export default async function initGame() {
+  if (!game) {
+    game = await createGameInstance();
+  }
+  game.startNewLevelRound();
 }

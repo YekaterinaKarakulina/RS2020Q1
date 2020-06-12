@@ -4,7 +4,7 @@ import 'babel-polyfill';
 import initGame from './js/gamePuzzle';
 import {
   LOADSECTION, LOGINSECTION, STARTGAMESECTION, GAMESECTION,
-  TOOLBARHAMBURGER, TOOLBARCONTAINER,
+  TOOLBARHAMBURGER, TOOLBARCONTAINER, HEADERWRAPPER,
 } from './js/constants';
 
 import signIn from './js/userUtils';
@@ -15,7 +15,6 @@ async function initApp() {
   if (localStorage.getItem('userId') && localStorage.getItem('userToken')) {
     const userObj = {
       userId: localStorage.getItem('userId'),
-      // userToken: 'hbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZGIyMjcwMjk5YWRiMDAxN2ZhZThjMSIsImlhdCI6MTU5MTg2MDAzNiwiZXhwIjoxNTkxODc0NDM2fQ.uUVhJupHMIoZj4ZxHeq7MccFr__dzjjAQfXv52ojvLI',
       userToken: localStorage.getItem('userToken'),
     };
     const gameProgress = await getGameProgressFromUserSetting(userObj);
@@ -37,13 +36,12 @@ async function initApp() {
 
 initApp();
 
-
 TOOLBARHAMBURGER.addEventListener('click', () => {
   TOOLBARHAMBURGER.classList.toggle('open');
   TOOLBARCONTAINER.classList.toggle('hidden');
 });
 
-document.querySelector('.header__wrapper').addEventListener('click', (event) => {
+HEADERWRAPPER.addEventListener('click', (event) => {
   if (event.target.classList.contains('button__logOut')) {
     LOGINSECTION.classList.remove('hidden');
     STARTGAMESECTION.classList.add('hidden');
