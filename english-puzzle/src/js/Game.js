@@ -15,7 +15,6 @@ export default class Game {
   }
 
   async startLevel(pagesAmountInLevel) {
-    // const pagesAmountInLevel = await getPagesAmountInLevel(this.iLevel);
     this.pagesAmountInLevel = pagesAmountInLevel;
     const fr = document.createDocumentFragment();
     for (let i = 1; i <= pagesAmountInLevel; i += 1) {

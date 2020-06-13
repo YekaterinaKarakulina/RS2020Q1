@@ -2,10 +2,28 @@ import Game from './Game';
 import { getGameProgressFromUserSetting } from './userAPI';
 import { createStatisticSentence } from './utils';
 import {
-  SELECTPAGEOPTION, SELECTLEVELOPTION, STATISTICSECTION, GAMESECTION,
+  SELECTPAGEOPTION, SELECTLEVELOPTION, STATISTICSECTION, GAMESECTION, FINISHPAGE,
 } from './constants';
 
 let game;
+
+function add() {
+  console.log(add);
+  FINISHPAGE.classList.add('hidden');
+  GAMESECTION.classList.remove('hidden');
+  STATISTICSECTION.classList.add('hidden');
+  game.iLevel = 1;
+  game.iPage = 1;
+  SELECTLEVELOPTION.value = game.iLevel;
+  SELECTPAGEOPTION.value = game.iPage;
+  game.startNewLevelRound();
+}
+
+function finish() {
+  console.log('remove');
+  FINISHPAGE.classList.remove('hidden');
+  setTimeout(add, 5000);
+}
 
 async function createGameInstance() {
   const userObj = {
@@ -43,11 +61,12 @@ async function createGameInstance() {
           game.startNewLevelRound();
         } else {
           console.log('GAME FINISHED! HERE!!!!');
+          finish();
           game.isFinished = true;
         }
       }
     } else if (event.target.classList.contains('results') && event.target.classList.contains('game__button')) {
-      if (!game.isFinished) {
+      // if (!game.isFinished) {
         console.log('click results');
 
         STATISTICSECTION.classList.remove('hidden');
@@ -86,9 +105,10 @@ async function createGameInstance() {
           game.updateUserSettings();
         } else {
           console.log('GAME FINISHED! HERE!!!!');
+          // finish();
           game.isFinished = true;
         }
-      }
+      // }
     }
 
     if (game.isSentenceCompleted) {
@@ -138,9 +158,16 @@ async function createGameInstance() {
 
   document.querySelector('.statistic-page').addEventListener('click', (event) => {
     if (event.target.classList.contains('continue')) {
-      GAMESECTION.classList.remove('hidden');
-      STATISTICSECTION.classList.add('hidden');
-      game.startNewLevelRound();
+      // GAMESECTION.classList.remove('hidden');
+      // STATISTICSECTION.classList.add('hidden');
+      // game.startNewLevelRound();
+      if (!game.isFinished) {
+        GAMESECTION.classList.remove('hidden');
+        STATISTICSECTION.classList.add('hidden');
+        game.startNewLevelRound();
+      } else {
+        finish();
+      }
     } else if (event.target.classList.contains('icon__sentence')) {
       console.log('play AUDIO');
       const soundElement = event.target;

@@ -6,6 +6,7 @@ export const LOGINSECTION = document.querySelector('.login-page');
 export const STARTGAMESECTION = document.querySelector('.start-page');
 export const GAMESECTION = document.querySelector('.game-page');
 export const STATISTICSECTION = document.querySelector('.statistic-page');
+export const FINISHPAGE = document.querySelector('.finish-page');
 
 export const MESSAGEFIELD = document.querySelector('.error-message');
 
