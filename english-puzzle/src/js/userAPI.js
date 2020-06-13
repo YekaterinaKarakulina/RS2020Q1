@@ -37,8 +37,13 @@ const loginUser = async (user) => {
     },
     body: JSON.stringify(user),
   });
-  const content = await rawResponse.json();
-  return content;
+  console.log(rawResponse);
+  if (rawResponse.status === 200) {
+    const content = await rawResponse.json();
+    return content;
+  }
+  MESSAGEFIELD.innerHTML = 'Invalid login or password!';
+  return undefined;
 };
 
 const setGameProgressToUserSetting = async ({ userId, userToken, gameProgress }) => {
