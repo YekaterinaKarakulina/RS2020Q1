@@ -57,7 +57,6 @@ const setGameProgressToUserSetting = async ({ userId, userToken, gameProgress })
   console.log(content);
 };
 
-
 const getGameProgressFromUserSetting = async ({ userId, userToken }) => {
   const rawResponse = await fetch(`https://afternoon-falls-25894.herokuapp.com/users/${userId}/settings`, {
     method: 'GET',
@@ -73,6 +72,9 @@ const getGameProgressFromUserSetting = async ({ userId, userToken }) => {
     console.log('getGameProgressToUserSetting');
     console.log(content.optional);
     return content.optional;
+  }
+  if (rawResponse.statusText === 'Unauthorized') {
+    return undefined;
   }
   return { level: 1, page: 1 };
 };

@@ -1,6 +1,9 @@
 import Game from './Game';
 import { getGameProgressFromUserSetting } from './userAPI';
-import { SELECTPAGEOPTION, SELECTLEVELOPTION } from './constants';
+import { createStatisticSentence } from './utils';
+import {
+  SELECTPAGEOPTION, SELECTLEVELOPTION, STATISTICSECTION, GAMESECTION,
+} from './constants';
 
 let game;
 
@@ -23,30 +26,71 @@ async function createGameInstance() {
       game.checkCurrentSentence();
     } else if (event.target.classList.contains('continue')) {
       if (!game.isFinished) {
-        game.iCurrentSentenceNumber += 1;
         console.log(`level ${game.iLevel}, page ${game.iPage}, currentSentenceNumb ${game.iCurrentSentenceNumber}`);
         if (game.iCurrentSentenceNumber < 10) {
           game.startSentence();
-        } else {
+        } else if (game.iPage < game.pagesAmountInLevel) {
+          console.log('game.iPage += 1;');
           game.iPage += 1;
-          if (game.iPage <= game.pagesAmountInLevel) {
-            SELECTPAGEOPTION.value = game.iPage;
-            game.startCurrentLevelRound();
-          } else {
-            game.iLevel += 1;
-            game.iPage = 1;
-            if (game.iLevel <= 6) {
-              SELECTLEVELOPTION.value = game.iLevel;
-              SELECTPAGEOPTION.value = game.iPage;
-              game.startNewLevelRound();
-            } else {
-              console.log('GAME FINISHED!');
-              game.isFinished = true;
-            }
+          SELECTPAGEOPTION.value = game.iPage;
+          game.startCurrentLevelRound();
+        } else if (game.iLevel < 6) {
+          console.log(' game.iLevel += 1, game.iPage = 1;');
+          game.iLevel += 1;
+          game.iPage = 1;
+          SELECTLEVELOPTION.value = game.iLevel;
+          SELECTPAGEOPTION.value = game.iPage;
+          game.startNewLevelRound();
+        } else {
+          console.log('GAME FINISHED! HERE!!!!');
+          game.isFinished = true;
+        }
+      }
+    } else if (event.target.classList.contains('results') && event.target.classList.contains('game__button')) {
+      if (!game.isFinished) {
+        console.log('click results');
+
+        STATISTICSECTION.classList.remove('hidden');
+        GAMESECTION.classList.add('hidden');
+        document.querySelector('.statistic-title').textContent = `Level ${game.iLevel} Page ${game.iPage}`;
+        const iDontKnowFragment = document.createDocumentFragment();
+        const iKnowFragment = document.createDocumentFragment();
+        game.dataSentencesObjects.forEach((el) => {
+          if (el.status === 'iDontKnow') {
+            const sentence = createStatisticSentence(el);
+            iDontKnowFragment.append(sentence);
           }
+          if (el.status === 'iKnow') {
+            const sentence = createStatisticSentence(el);
+            iKnowFragment.append(sentence);
+          }
+        });
+        document.querySelector('.iDontKnowSentences').innerHTML = '';
+        document.querySelector('.iDontKnowSentences').append(iDontKnowFragment);
+        document.querySelector('.iKnowSentences').innerHTML = '';
+        document.querySelector('.iKnowSentences').append(iKnowFragment);
+
+        console.log(`level ${game.iLevel}, page ${game.iPage}, pagesAmountInLevel ${game.pagesAmountInLevel}`);
+        if (game.iPage < game.pagesAmountInLevel) {
+          console.log('game.iPage += 1;');
+          game.iPage += 1;
+          SELECTLEVELOPTION.value = game.iLevel;
+          SELECTPAGEOPTION.value = game.iPage;
+          game.updateUserSettings();
+        } else if (game.iLevel < 6) {
+          console.log(' game.iLevel += 1, game.iPage = 1;');
+          game.iLevel += 1;
+          game.iPage = 1;
+          SELECTLEVELOPTION.value = game.iLevel;
+          SELECTPAGEOPTION.value = game.iPage;
+          game.updateUserSettings();
+        } else {
+          console.log('GAME FINISHED! HERE!!!!');
+          game.isFinished = true;
         }
       }
     }
+
     if (game.isSentenceCompleted) {
       if (event.target.closest('.menu__button.auto-pronunciation')) {
         if (localStorage.getItem('autoPronunciation') === 'true') {
@@ -90,6 +134,25 @@ async function createGameInstance() {
       game.startNewLevelRound();
     }
     game.checkGameStatus();
+  });
+
+  document.querySelector('.statistic-page').addEventListener('click', (event) => {
+    if (event.target.classList.contains('continue')) {
+      GAMESECTION.classList.remove('hidden');
+      STATISTICSECTION.classList.add('hidden');
+      game.startNewLevelRound();
+    } else if (event.target.classList.contains('icon__sentence')) {
+      console.log('play AUDIO');
+      const soundElement = event.target;
+      console.log(soundElement.dataset.audio);
+      const sound = new Audio();
+      sound.src = `https://raw.githubusercontent.com/yekaterinakarakulina/rslang-data/master/${soundElement.dataset.audio}`;
+      sound.play();
+      soundElement.classList.add('active');
+      sound.onended = () => {
+        soundElement.classList.remove('active');
+      };
+    }
   });
 
   // drag events

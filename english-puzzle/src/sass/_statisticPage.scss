@@ -1,0 +1,47 @@
+.statistic-page {
+  display: block;
+  height: 100%;
+  &.hidden {
+    display: none;
+  }
+}
+
+.statistic-title {
+  margin-top: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+.statistic-level {
+  margin-right: 2rem;
+}
+
+.statistic-container {
+  display: block;
+  width: 60%;
+  margin: 3rem auto;
+  font-size: 1.5rem;;
+  font-weight: 400;
+}
+
+.iDontKnowSentences-title,
+.iKnowSentences-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.statistic-sentence {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.statistic__buttons {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 5rem
+}

@@ -20,7 +20,7 @@
     </header>
 
     <main class="wrapper main__wrapper">
-      <section class="load-page">
+      <section class="load-page hidden">
         <div class="lds-roller">
           <div></div>
           <div></div>
@@ -106,7 +106,7 @@
           <span class="icon-container">
             <i class="icon icon__sound"></i>
           </span>
-          <div class="hints-sentence">Some sentence!</div>
+          <div class="hints-sentence"></div>
         </div>
         <div class="results main__results">
           <div class="results-container"></div>
@@ -119,6 +119,28 @@
           <button class="button game__button check">Check</button>
           <button class="button game__button continue">Continue</button>
           <button class="button game__button results">Results</button>
+        </div>
+      </section>
+
+      <section class="statistic-page">
+        <div class="statistic-title"></div>
+
+        <div class="statistic-container">
+
+          <div class="iDontKnowSentences-title">I don`t know
+            <span></span>
+          </div>
+          <div class="iDontKnowSentences"></div>
+
+          <div class="iKnowSentences-title">I know</div>
+          <div class="iKnowSentences">
+        
+          </div>
+        </div>
+
+        <div class="buttons statistic__buttons">
+          <button class="button game__button continue">Continue</button>
+          <button class="button game__button statistic">Statistic</button>
         </div>
       </section>
     </main>

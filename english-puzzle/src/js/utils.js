@@ -80,6 +80,28 @@ function checkActiveHintsBeforeGame() {
   }
 }
 
+function createStatisticSentence(sentenceObj) {
+  const sentence = document.createElement('div');
+  sentence.className = 'statistic-sentence';
+
+  const icon = document.createElement('i');
+  icon.className = 'icon icon__sentence';
+  icon.dataset.audio = sentenceObj.audioExample;
+
+  const iconContainer = document.createElement('span');
+  iconContainer.className = 'icon-container';
+  iconContainer.append(icon);
+
+  const sentenceContent = document.createElement('div');
+  sentenceContent.className = 'sentence-content';
+  sentenceContent.textContent = sentenceObj.textExample;
+
+  sentence.append(iconContainer);
+  sentence.append(sentenceContent);
+  return sentence;
+}
+
 export {
-  getFormData, createWordElement, getActualSentence, mixArrayElements, checkActiveHintsBeforeGame,
+  getFormData, createWordElement, getActualSentence, mixArrayElements,
+  checkActiveHintsBeforeGame, createStatisticSentence,
 };

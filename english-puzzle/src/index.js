@@ -3,7 +3,7 @@ import 'babel-polyfill';
 
 import initGame from './js/gamePuzzle';
 import {
-  LOADSECTION, LOGINSECTION, STARTGAMESECTION, GAMESECTION,
+  LOADSECTION, LOGINSECTION, STARTGAMESECTION, GAMESECTION, STATISTICSECTION,
   TOOLBARHAMBURGER, TOOLBARCONTAINER, HEADERWRAPPER,
 } from './js/constants';
 
@@ -12,6 +12,7 @@ import { createUser, getGameProgressFromUserSetting } from './js/userAPI';
 import { getFormData } from './js/utils';
 
 async function initApp() {
+  STATISTICSECTION.classList.add('hidden');
   if (localStorage.getItem('userId') && localStorage.getItem('userToken')) {
     const userObj = {
       userId: localStorage.getItem('userId'),

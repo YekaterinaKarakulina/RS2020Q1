@@ -1,7 +1,7 @@
 import Sentence from './Sentence';
 import { getPageData, getPagesAmountInLevel } from './wordsAPI';
 import { checkActiveHintsBeforeGame } from './utils';
-import { setGameProgressToUserSetting, getGameProgressFromUserSetting } from './userAPI';
+import { getGameProgressFromUserSetting, setGameProgressToUserSetting } from './userAPI';
 import {
   IDONTKNOWBUTTON, CHECKBUTTON, CONTINUEBUTTON, RESULTBUTTON,
   SELECTPAGECONTAINER, SELECTLEVELOPTION, SELECTPAGEOPTION,
@@ -14,8 +14,8 @@ export default class Game {
     this.isFinished = false;
   }
 
-  async startLevel() {
-    const pagesAmountInLevel = await getPagesAmountInLevel(this.iLevel);
+  async startLevel(pagesAmountInLevel) {
+    // const pagesAmountInLevel = await getPagesAmountInLevel(this.iLevel);
     this.pagesAmountInLevel = pagesAmountInLevel;
     const fr = document.createDocumentFragment();
     for (let i = 1; i <= pagesAmountInLevel; i += 1) {
@@ -31,19 +31,6 @@ export default class Game {
   async renderRoundData() {
     const fragment = document.createDocumentFragment();
 
-    const obj = {
-      userId: localStorage.getItem('userId'),
-      userToken: localStorage.getItem('userToken'),
-      gameProgress: {
-        wordsPerDay: 100,
-        optional: {
-          level: this.iLevel,
-          page: this.iPage,
-        },
-      },
-    };
-    await setGameProgressToUserSetting(obj);
-
     const userObj = {
       userId: localStorage.getItem('userId'),
       userToken: localStorage.getItem('userToken'),
@@ -54,6 +41,7 @@ export default class Game {
     this.iPage = parseInt(gameProgress.page, 10);
     SELECTLEVELOPTION.value = this.iLevel;
     SELECTPAGEOPTION.value = this.iPage;
+
 
     const roundData = await getPageData(this.iLevel, this.iPage);
     roundData.forEach((el) => {
@@ -113,12 +101,34 @@ export default class Game {
   }
 
   async startNewLevelRound() {
-    this.startLevel();
+    console.log('new level');
+    this.isFinished = false;
+    await this.updateUserSettings();
+    const pagesAmountInLevel = await getPagesAmountInLevel(this.iLevel);
+    await this.startLevel(pagesAmountInLevel);
     this.startRound();
   }
 
   async startCurrentLevelRound() {
+    console.log('current level');
+    this.isFinished = false;
+    await this.updateUserSettings();
     this.startRound();
+  }
+
+  async updateUserSettings() {
+    const obj = {
+      userId: localStorage.getItem('userId'),
+      userToken: localStorage.getItem('userToken'),
+      gameProgress: {
+        wordsPerDay: 100,
+        optional: {
+          level: this.iLevel,
+          page: this.iPage,
+        },
+      },
+    };
+    await setGameProgressToUserSetting(obj);
   }
 
   checkGameStatus() {
@@ -143,6 +153,10 @@ export default class Game {
     const sentenceErrors = this.currentDataSentenceObject.checkSentence();
     if (sentenceErrors === 0) {
       this.isSentenceCompleted = true;
+      this.iCurrentSentenceNumber += 1;
+    }
+    if (this.iCurrentSentenceNumber === 10) {
+      RESULTBUTTON.classList.remove('hidden');
     }
   }
 
