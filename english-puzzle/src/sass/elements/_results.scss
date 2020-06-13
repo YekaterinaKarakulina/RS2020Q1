@@ -5,6 +5,19 @@
   margin: 2rem auto;
   font-size: 2rem;
   font-weight: 400;
+  @include media-laptop {
+    width: 100%;
+    font-size: 1.75rem;
+    height: 35rem;
+  }
+  @include media-tablet {
+    font-size: 1.2rem;
+    height: 30rem;
+  }
+  @include media-mobile {
+    font-size: 0.9rem;
+    height: 25rem;
+  }
 }
 
 .results-container {
@@ -31,6 +44,22 @@
   &.false {
     box-shadow: 0 0 20px rgba(255,69,0,0.5);
   }
+  @include media-laptop {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    margin-left: 0.5rem;
+  }
+  @include media-tablet {
+    min-width: 2rem;
+    min-height: 2rem;
+    margin-left: 0.25rem;
+    border: 1px solid $color-violet;
+  }
+  @include media-mobile {
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    margin-left: 0.1rem;
+  }
 }
 
 .sentence {
@@ -44,5 +73,14 @@
     &.active {
       display: flex;
     }
+  }
+  @include media-laptop {
+    height: 3.5rem;
+  }
+  @include media-tablet {
+    height: 3rem;
+  }
+  @include media-mobile {
+    height: 2.5rem;
   }
 }

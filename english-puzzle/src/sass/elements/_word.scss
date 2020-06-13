@@ -8,4 +8,10 @@
   border: none;
   border-radius: 5px;
   cursor: grab;
+  @include media-tablet {
+    padding: 3px 1px;
+  }
+  @include media-tablet {
+    padding: 2px 0.5px;
+  }
 }

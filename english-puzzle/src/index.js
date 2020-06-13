@@ -4,7 +4,7 @@ import 'babel-polyfill';
 import initGame from './js/gamePuzzle';
 import {
   LOADSECTION, LOGINSECTION, STARTGAMESECTION, GAMESECTION, STATISTICSECTION,
-  TOOLBARHAMBURGER, TOOLBARCONTAINER, HEADERWRAPPER,
+  TOOLBARHAMBURGER, TOOLBARCONTAINER, HEADERWRAPPER, FINISHPAGE,
 } from './js/constants';
 
 import signIn from './js/userUtils';
@@ -47,6 +47,7 @@ HEADERWRAPPER.addEventListener('click', (event) => {
     LOGINSECTION.classList.remove('hidden');
     STARTGAMESECTION.classList.add('hidden');
     GAMESECTION.classList.add('hidden');
+    FINISHPAGE.classList.add('hidden');
     TOOLBARCONTAINER.classList.add('hidden');
     TOOLBARHAMBURGER.classList.remove('open');
   }

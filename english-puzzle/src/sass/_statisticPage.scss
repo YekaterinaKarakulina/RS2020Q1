@@ -13,6 +13,12 @@
   justify-content: center;
   font-size: 4rem;
   font-weight: 700;
+  @include media-tablet {
+    font-size: 2.5rem;
+  }
+  @include media-mobile {
+    font-size: 1.75rem;
+  }
 }
 
 .statistic-level {
@@ -23,8 +29,15 @@
   display: block;
   width: 60%;
   margin: 3rem auto;
-  font-size: 1.5rem;;
+  font-size: 1.5rem;
   font-weight: 400;
+  @include media-tablet {
+    width: 80%;
+    font-size: 1.25rem;
+  }
+  @include media-mobile {
+    font-size: 1rem;
+  }
 }
 
 .iDontKnowSentences-title,
@@ -32,16 +45,29 @@
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1rem;
+  @include media-tablet {
+    font-size: 1.5rem;
+  }
+  @include media-mobile {
+    font-size: 1.25rem;
+  }
 }
 
 .statistic-sentence {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 1rem;
+  @include media-tablet {
+    margin-bottom: 0.75rem;
+  }
+  @include media-mobile {
+    margin-bottom: 0.5rem;
+  }
 }
 
 .statistic__buttons {
   display: flex;
   justify-content: center;
-  padding-bottom: 5rem
+  padding-bottom: 15rem;
 }
