@@ -41,7 +41,6 @@ export default class Game {
     SELECTLEVELOPTION.value = this.iLevel;
     SELECTPAGEOPTION.value = this.iPage;
 
-
     const roundData = await getPageData(this.iLevel, this.iPage);
     roundData.forEach((el) => {
       let sentence = new Sentence(el);
@@ -96,11 +95,9 @@ export default class Game {
     document.querySelector('.data-container').append(this.currentDataSentence);
     this.checkGameStatus();
     this.showHintsAtBegin();
-    console.log(this.dataSentencesObjects);
   }
 
   async startNewLevelRound() {
-    console.log('new level');
     this.isFinished = false;
     await this.updateUserSettings();
     const pagesAmountInLevel = await getPagesAmountInLevel(this.iLevel);
@@ -109,7 +106,6 @@ export default class Game {
   }
 
   async startCurrentLevelRound() {
-    console.log('current level');
     this.isFinished = false;
     await this.updateUserSettings();
     this.startRound();

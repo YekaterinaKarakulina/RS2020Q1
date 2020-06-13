@@ -20,16 +20,13 @@ async function initApp() {
     };
     const gameProgress = await getGameProgressFromUserSetting(userObj);
     if (gameProgress === undefined) {
-      console.log('NEED TO AUTHORIZE');
       LOADSECTION.classList.add('hidden');
       LOGINSECTION.classList.remove('hidden');
     } else {
-      console.log('userID and userTOKEN OK!');
       LOADSECTION.classList.add('hidden');
       STARTGAMESECTION.classList.remove('hidden');
     }
   } else {
-    console.log('NEW USER! NEED TO AUTHORIZE');
     LOADSECTION.classList.add('hidden');
     LOGINSECTION.classList.remove('hidden');
   }
@@ -56,12 +53,10 @@ HEADERWRAPPER.addEventListener('click', (event) => {
 LOGINSECTION.addEventListener('click', (event) => {
   document.querySelector('.error-message').innerHTML = '';
   if (event.target.classList.contains('button__signUp')) {
-    console.log('button__signUp');
     event.preventDefault();
     const userData = getFormData();
     createUser(userData);
   } else if (event.target.classList.contains('button__signIn')) {
-    console.log('button__signIn');
     event.preventDefault();
     const userData = getFormData();
     signIn(userData);

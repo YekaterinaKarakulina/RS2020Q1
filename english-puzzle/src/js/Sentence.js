@@ -48,7 +48,6 @@ export default class Sentence {
   }
 
   showBckImage() {
-    console.log('showBckImage()');
     this.bIsBckImageHintUsed = true;
   }
 

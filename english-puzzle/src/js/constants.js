@@ -18,3 +18,6 @@ export const RESULTBUTTON = document.querySelector('.game__buttons>.results');
 export const SELECTPAGECONTAINER = document.querySelector('.select__page>select');
 export const SELECTLEVELOPTION = document.querySelector('.select__level>#slct');
 export const SELECTPAGEOPTION = document.querySelector('.select__page>#slct');
+
+export const IDONTKNOWSENTENCES = document.querySelector('.iDontKnowSentences');
+export const IKNOWSENTENCES = document.querySelector('.iKnowSentences');

@@ -5,11 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "eslint": "eslint ./src/js ./src/index.js",
-    "eslint:fix": "eslint ./src/js ./src/index.js --fix",
+    "eslint": "eslint ./src",
+    "eslint:fix": "eslint ./src --fix",
     "dev": "webpack --mode development",
     "prod": "webpack --mode production",
-    "test": "jest",
     "style": "sass --watch src/sass/style.scss src/sass/style.css"
   },
   "dependencies": {
