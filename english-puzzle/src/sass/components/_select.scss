@@ -1,4 +1,3 @@
-/* Reset Select */
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -11,11 +10,10 @@ select {
   background-image: none;
 }
 
-/* Remove IE arrow */
 select::-ms-expand {
   display: none;
 }
-/* Custom Select */
+
 .select {
   position: relative;
   display: inline-flex;
@@ -34,7 +32,6 @@ select {
   cursor: pointer;
 }
 
-/* Arrow */
 .select::after {
   content: '\25BC';
   position: absolute;
@@ -49,7 +46,6 @@ select {
   transition: .25s all ease;
 }
 
-/* Transition */
 .select:hover::after {
   color: lighten($color: $color-violet, $amount: 25);
 }
