@@ -1,0 +1,37 @@
+.threeDaysWeather {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+  @include media-laptop {
+    width: 25rem; 
+  }
+  @include media-tablet {
+    position: absolute;
+    left: calc(50% - 11rem);
+    margin-top: 1rem;
+    width: 20rem;
+  }
+  @include media-mobile {
+    left: calc(50% - 8rem);
+    width: 15rem;
+  }
+}
+
+.day {
+  font-size: 1rem;
+  position: relative;
+  @include media-mobile {
+    font-size: 0.8rem;
+  }
+}
+
+.dayTemperature {
+  font-size: 3rem;
+  @include media-tablet {
+    font-size: 2rem;
+  }
+  @include media-mobile {
+    font-size: 1.5rem;
+  }
+}

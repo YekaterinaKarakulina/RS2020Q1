@@ -1,0 +1,8 @@
+.header__parameters {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  @include media-laptop {
+    margin-bottom: 2rem;
+  }
+}

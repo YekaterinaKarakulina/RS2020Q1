@@ -1,0 +1,59 @@
+{
+    "placeholder": "Увядзіце назву горада",
+    "searchButton": "Пошук",
+    "realFeel": "Адчуванне",
+    "windSpeed": "Вуцер",
+    "humidity": "Вільготнасць",
+    "latitude": "Шырата",
+    "longitude": "Даўгата",
+    "weekDaysFull": {
+        "sunday": "Нядзеля",
+        "monday": "Панядзелак",
+        "tuesday": "Аўторак",
+        "wednesday": "Серада",
+        "thursday": "Чацвер",
+        "friday": "Пятніца",
+        "saturday": "Субота"
+    },
+    "weekDaysShort": {
+        "sun": "Нд",
+        "mon": "Пн",
+        "tue": "Аўт",
+        "wed": "Ср",
+        "thu": "Чц",
+        "fri": "Пт",
+        "sat": "Сб"
+    },
+    "months": {
+        "january": "Студзеня",
+        "february": "Лютага",
+        "march": "Сакавіка",
+        "april": "Красавіка",
+        "may": "Мая",
+        "june": "Чэрвеня",
+        "july": "Ліпеня",
+        "august": "Жніўня",
+        "september": "Верасня",
+        "october": "Кастрычніка",
+        "november": "Лістапада",
+        "december": "Снежня"
+    },
+    "weatherCodes": {
+        "cloudy": "воблачна",
+        "mostly_cloudy": "высокая воблачнасць",
+        "partly_cloudy": "нізкая воблачнасць",
+        "clear": "ясна",
+        "mostly_clear": "ясна",
+        "partly_clear": "нізкая воблачнасць",
+        "sunny": "сонечна",
+        "rain": "дажджліва",
+        "rain_light": "лёгкі дождж",
+        "drizzle": "кроплі дажджу",
+        "windy": "ветрана",
+        "fog": "туман",
+        "snow": "снегапад",
+        "rainbow": "вясёлка",
+        "thunderstorm": "гром",
+        "lightning": "маланка"
+    }
+}

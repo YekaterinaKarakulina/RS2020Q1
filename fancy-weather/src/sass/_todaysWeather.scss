@@ -1,0 +1,70 @@
+.weatherInfo {
+  display: inline-block;
+  width: 30rem;
+  color: $color-light;
+  font-weight: 700;
+  @include media-laptop {
+    width: 22rem;
+  }
+  @include media-tablet {
+    position: relative;
+  }
+  @include media-mobile {
+    width: 17rem;
+  }
+}
+
+.todaysWeather {
+  position: relative;
+}
+
+.location {
+  width: 100%;
+  height: 8rem; 
+  font-size: 2.25rem;
+  overflow: hidden;
+  @include media-laptop {
+    font-size: 1.5rem;
+    height: 4.8rem;
+  }
+  @include media-tablet {
+    font-size: 1.25rem;
+    height: 4rem;
+  }
+  @include media-mobile {
+    font-size: 1rem;
+    height: 3.2rem;
+  }
+}
+
+.currentDate, 
+.summaryContainer {
+  font-size: 1rem;
+  @include media-mobile {
+    font-size: 0.8rem;
+  }
+}
+
+.summaryContainer {
+  margin-left: 1rem;
+}
+
+.currentTemperature {
+  font-size: 10rem;
+  @include media-laptop {
+    font-size: 7rem;
+  }
+  @include media-mobile {
+    font-size: 5rem;
+  }
+}
+
+.weatherContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.weatherDescription {
+  text-transform: uppercase;
+}

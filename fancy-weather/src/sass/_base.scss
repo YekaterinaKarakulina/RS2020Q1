@@ -1,0 +1,61 @@
+html, body {
+  position: relative;
+  height: 100%;
+  color: $color-light;
+}
+
+body {
+  font-size: 10px;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', Verdana, sans-serif;
+  font-weight: 400;
+}
+
+label,
+form {
+  margin: 0;
+}
+
+.imgContainer {
+  background-size: cover;
+  background-position: center;
+  -webkit-transition-property: background;
+  -webkit-transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease;
+}
+
+.temperature {
+  &:after {
+    content: '°';
+  }
+}
+
+.time,
+.realFeelTempValue,
+.windSpeedValue, 
+.humidityValue {
+  &:before {
+    content: ' ';
+  }
+}
+
+.latitudeValue,
+.longitudeValue {
+  &:before {
+    content: ': ';
+  }
+}
+
+.windSpeedValue {
+  &:after {
+    content: ' m/s';
+  }
+}
+
+.humidityValue {
+  &:after {
+    content: ' %';
+  }
+}
+

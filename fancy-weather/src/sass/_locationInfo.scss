@@ -1,0 +1,60 @@
+.locationInfo {
+  display: inline-block;
+  width: 25rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: $color-light;
+  @include media-laptop {
+    width: 15rem;
+  }
+  @include media-tablet {
+    margin-top: 7.5rem;
+  }
+  @include media-mobile {
+    margin-top: 5rem;
+  }
+}
+
+.coordinates {
+  padding-top: 1.5rem;
+  float: right;
+}
+
+#map { 
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  border-radius: 1rem;
+}
+
+.mapContainer {
+  width: 25rem;
+  height: 25rem;
+  border: 1px solid $color-light;
+  border-radius: 1rem;
+  position: relative;
+  @include media-laptop {
+    width: 15rem;
+    height: 15rem;
+  }
+ }
+
+ .mapContainer::before, .block::after {
+  content: ''; 
+  position: absolute;
+  left: 20rem; 
+  bottom: -1.9rem;
+  border: 0.625rem solid transparent;
+  border-top: 1.25rem solid $color-light;
+  @include media-laptop {
+    left: 11rem; 
+    bottom: -1.5rem;
+    border: 0.5rem solid transparent;
+    border-top: 1rem solid $color-light;
+  }
+ }
+
+ .mapContainer::after {
+  border-top: 0.625rem solid $color-light;
+  bottom: -1.2rem; 
+ }

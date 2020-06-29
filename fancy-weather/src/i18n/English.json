@@ -1,0 +1,59 @@
+{
+    "placeholder": "Type city name",
+    "searchButton": "Search",
+    "realFeel": "Realfeel",
+    "windSpeed": "Wind",
+    "humidity": "Humidity",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "weekDaysFull": {
+        "sunday": "Sunday",
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday"
+    },
+    "weekDaysShort": {
+        "sun": "Sun",
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat"
+    },
+    "months": {
+        "january": "January",
+        "february": "February",
+        "march": "March",
+        "april": "April",
+        "may": "May",
+        "june": "June",
+        "july": "July",
+        "august": "August",
+        "september": "September",
+        "october": "October",
+        "november": "November",
+        "december": "December"
+    },
+    "weatherCodes": {
+        "cloudy": "cloudy",
+        "mostly_cloudy": "mostly clear",
+        "partly_cloudy": "partly cloudy",
+        "clear": "clear",
+        "mostly_clear": "mostly clear",
+        "partly_clear": "partly clear",
+        "sunny": "sunny",
+        "rain": "rain",
+        "rain_light": "rain light",
+        "drizzle": "drizzle",
+        "windy": "windy",
+        "fog": "fog",
+        "snow": "snow",
+        "rainbow": "rainbow",
+        "thunderstorm": "thunderstorm",
+        "lightning": "lightning"
+    }
+}

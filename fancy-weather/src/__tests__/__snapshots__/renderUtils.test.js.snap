@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createDomElement Should return DOM element with className 1`] = `
+<div
+  class="className"
+/>
+`;
+
+exports[`createDomElement Should return DOM element with data attribute 1`] = `
+<div
+  class="className"
+  data-i18n="temp"
+/>
+`;

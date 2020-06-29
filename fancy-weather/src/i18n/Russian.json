@@ -1,0 +1,59 @@
+{
+    "placeholder": "Введите название города",
+    "searchButton": "Поиск",
+    "realFeel": "Ощущение",
+    "windSpeed": "Ветер",
+    "humidity": "Влажность",
+    "latitude": "Широта",
+    "longitude": "Долгота",
+    "weekDaysFull": {
+        "sunday": "Воскресенье",
+        "monday": "Понедельник",
+        "tuesday": "Вторник",
+        "wednesday": "Среда",
+        "thursday": "Четверг",
+        "friday": "Пятница",
+        "saturday": "Суббота"
+    },
+    "weekDaysShort": {
+        "sun": "Вс",
+        "mon": "Пн",
+        "tue": "Вт",
+        "wed": "Ср",
+        "thu": "Чт",
+        "fri": "Пт",
+        "sat": "Сб"
+    },
+    "months": {
+        "january": "Января",
+        "february": "Февраля",
+        "march": "Марта",
+        "april": "Апреля",
+        "may": "Мая",
+        "june": "Июня",
+        "july": "Июня",
+        "august": "Августа",
+        "september": "Сентября",
+        "october": "Октября",
+        "november": "Ноября",
+        "december": "Декабря"
+    },
+    "weatherCodes": {
+        "cloudy": "облачно",
+        "mostly_cloudy": "высокая облачность",
+        "partly_cloudy": "низкая облачность",
+        "clear": "ясно",
+        "mostly_clear": "ясно",
+        "partly_clear": "низкая облачность",
+        "sunny": "солнечно",
+        "rain": "дождливо",
+        "rain_light": "легкий дождь",
+        "drizzle": "капли дождя",
+        "windy": "ветренно",
+        "fog": "туман",
+        "snow": "снегопад",
+        "rainbow": "радуга",
+        "thunderstorm": "гром",
+        "lightning": "молния"
+    }
+}
