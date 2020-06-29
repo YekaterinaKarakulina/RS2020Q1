@@ -1,0 +1,61 @@
+.keyboard__keys {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  &.hidden {
+    display: none;
+  }
+}
+
+.keyboard__key {
+  height: 2.8rem;
+  width: 6%;
+  max-width: 2.8rem;
+  margin: 3px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: top;
+  position: relative;
+  background-color: $color-primary;
+  color: $color-light;
+  &.keyboard__key_extra-wide {
+    width: 26%; 
+    max-width: 31rem;
+  }
+  &.keyboard__key_wide {
+    width: 12%;
+    max-width: 5.6rem;
+  }
+  &.keyboard__key_activatable::after {
+    content: '';
+    top: 5px;
+    right: 5px;
+    position: absolute;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: $color-red;
+    border-radius: 50%;
+  }
+  &.active::after {
+    content: '';
+    top: 5px;
+    right: 5px;
+    position: absolute;
+    width: 0.5rem;
+    height: 0.5rem;        
+    border-radius: 50%;
+    background: $color-green;
+  }
+  &:hover {
+    background-color: $color-dark;
+    cursor: pointer;
+  } 
+}
+
+.pressed {
+  background-color: $color-dark;
+  box-shadow: 0 1px $color-shadow;
+  transform: translateY(2px);
+}

@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>movie-search</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="wrapper wrapper__header">
+        <h1 class="header__title">Movie Search</h1>
+    </header>
+
+    <main class="wrapper">
+        <section class="search">
+            <div class="search__container">
+                <span class="icon icon__search"></span>
+                <input type="text" class="search__inputField" placeholder="Search ..." maxlength="50">
+                <span class="icon icon__keyboard"></span>
+                <span class="icon icon__delete"></span>
+            </div>
+                <button class="search__button">Search</button>
+        </section>
+
+        <section class="keyboard__keys hidden"></section>
+
+        <section class="search__results">
+            <span class="search__resultsTitle"></span>
+            <span class="search__resultsMessage"></span>
+            <span class="search__errorMessage"></span>
+            <div class="spinner">
+                <div class="lds-roller">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="swiper-container">
+            <div class="swiper-wrapper"></div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </section>
+    </main>
+
+    <footer class="wrapper wrapper__footer">
+        <div class="schoolInfo">
+            <span class="icon icon__school"></span>
+            <a class="schoolName" href="https://rs.school/">RS School 2020q1</a>
+        </div>
+        
+        <div class="githubInfo">
+            <span class="icon icon__github"></span>
+            <a class="githubAccount" href="https://github.com/">YekaterinaKarakulina</a>
+        </div>
+    </footer>
+    
+</body>
+</html>
