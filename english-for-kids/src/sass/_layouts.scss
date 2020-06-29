@@ -1,0 +1,69 @@
+.section-cards,
+.train-cards,
+.play-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 0 1.25rem 0 1.25rem;
+}
+
+.modal {
+    width: 100%;
+    height: 100%;
+    background: $color-light;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    &.hidden {
+        display: none;
+    }
+}
+
+.errors-element {
+    font-size: 2rem;
+    position: absolute;
+    left: calc(50% - 4rem);
+    top: 3rem;
+}
+
+.modalImg {
+    background: #0008;
+    background-size: cover;
+    height: 25rem;
+    z-index: 100;
+    position: absolute;
+    top: 7.5rem;
+    left: calc(50% - 12.5rem);
+    &.failure {
+        width: 25rem;
+        @media (max-width: 768px) {
+            height: 20rem;
+            width: 20rem;
+            left: calc(50% - 10rem);
+        }
+        @media (max-width: 414px) {
+            height: 15rem;
+            width: 15rem;
+            left: calc(50% - 7.5rem);
+        }
+    }
+    &.success {
+        width: 30.5rem;
+        @media (max-width: 768px) {
+            height: 20rem;
+            width: 24.4rem;
+        }
+        @media (max-width: 414px) {
+            height: 15rem;
+            width: 18.3rem;
+        }
+    }
+}
+
+.stars-container {
+    height: 4.375rem;
+    justify-content: flex-end;
+    display: flex;
+    overflow: hidden;
+}
