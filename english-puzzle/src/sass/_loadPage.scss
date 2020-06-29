@@ -1,0 +1,7 @@
+.load-page {
+  display: block;
+  height: 100%;
+  &.hidden {
+    display: none;
+  }
+}

@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap');
+
+@import './base/constants';
+@import './base/base';
+@import './base/mixins';
+
+@import './components/toolbar';
+@import './components/icons';
+@import './components/button';
+@import './components/select';
+@import './components/spinner';
+
+@import './elements/data';
+@import './elements/results';
+@import './elements/word';
+
+@import './layouts/wrapper';
+@import './layouts/header';
+@import './layouts/footer';
+
+@import './loadPage';
+@import './loginPage';
+@import './startPage';
+@import './gamePage';
+@import './statisticPage';
+@import './finishPage';

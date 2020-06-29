@@ -1,0 +1,27 @@
+.finish-page {
+  display: block;
+  position: absolute;
+  width: fit-content;
+  top: 10rem;
+  left: calc( 50% - 20rem);
+  padding: 2.5rem;
+  margin: 15rem auto;
+  background-color: $color-violet;
+  border: none;
+  border-radius: 5px;
+  &.hidden {
+    display: none;
+  }
+}
+
+.finish-container {
+  display: block;
+  width: fit-content;
+  font-size: 5rem;
+  font-weight: 700;
+  margin: 2rem auto;
+}
+
+.finish-text {
+  font-size: 3rem;
+}

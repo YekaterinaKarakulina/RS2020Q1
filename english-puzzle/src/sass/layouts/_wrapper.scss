@@ -1,0 +1,31 @@
+.wrapper {
+  width: 100%;
+}
+
+.header__wrapper {
+  padding: 0.5rem 0;
+  height: 7rem;
+  background-color: $color-violet;
+}
+
+.footer__wrapper {
+  position: fixed;
+  bottom: 0;
+  background-color: $color-violet;
+  height: 5rem;
+}
+
+.bck {
+  background-image: url('../assets/background.jpg');
+  position: absolute;
+  top: 5rem;
+  z-index: -1;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  min-height: 100%;
+  height: fit-content;
+  min-width: 100%;
+  width: fit-content;
+  opacity: 0.2;
+}
